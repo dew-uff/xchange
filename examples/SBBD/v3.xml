@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<company> 
+   <employee>
+      <ssn>"146-02-6844"</ssn>
+      <name>Anna</name>
+      <phone>"351-888-9867"</phone>
+      <father>Philip</father>
+      <mother>Tracy</mother>
+      <salary>3900</salary>
+      <job>Seller</job>
+      <department>Sales</department>
+      <branch>Chicago</branch>
+   </employee>
+   <employee>
+      <ssn>"123-54-4410"</ssn>
+      <name>John</name>
+      <phone>"591-888-1234"</phone>
+      <father>Darrell</father>
+      <mother>Eleanor</mother>
+      <salary>2500</salary>
+      <job>System Analyst</job>
+      <department>IT</department>
+      <branch>Washington</branch>
+   </employee>
+   <employee>
+      <ssn>"567-80-2314"</ssn>
+      <name>Harry</name>
+      <phone>"531-888-8934"</phone>
+      <father>Dick</father>
+      <mother>Glenda</mother>
+      <salary>1900</salary>
+      <job>Support Help Desk</job>
+      <department>IT</department>
+      <branch>New York</branch>
+   </employee>
+   <employee>
+      <ssn>"234-65-6524"</ssn>
+      <name>Paul</name>
+      <phone>"531-888-6734"</phone>
+      <father>Clark</father>
+      <mother>Evelyn</mother>
+      <salary>2000</salary>
+      <job>Developer</job>
+      <department>IT</department>
+      <branch>New York</branch>
+   </employee>
+   <employee>
+      <ssn>"456-98-4734"</ssn>
+      <name>Elizabeth</name>
+      <phone>"431-888-6124"</phone>
+      <father>Nathaniel</father>
+      <mother>Fiona</mother>
+      <salary>3900</salary>
+      <job>Manager</job>
+      <department>Marketing</department>
+      <branch>Los Angeles</branch>
+   </employee>
+   <employee>
+      <ssn>"086-31-5948"</ssn>
+      <name>William</name>
+      <phone>"431-888-6119"</phone>
+      <father>Norman</father>
+      <mother>Violet</mother>
+      <salary>4800</salary>
+      <job>Manager</job>
+      <department>Sales</department>
+      <branch>Dallas</branch>
+   </employee>
+   <employee>
+      <ssn>"076-42-1181"</ssn>
+      <name>Leonard</name>
+      <phone>"271-888-9127"</phone>
+      <father>Simon</father>
+      <mother>Ursula</mother>
+      <salary>1450</salary>
+      <job>Seller</job>
+      <department>Sales</department>
+      <branch>Dallas</branch>
+   </employee>
+</company>

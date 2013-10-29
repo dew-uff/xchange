@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<company> 
+  <employee>
+      <ssn>"146-02-6844"</ssn>
+      <name>Anna</name>
+      <phone>"351-888-9867"</phone>
+      <father>Philip</father>
+      <mother>Tracy</mother>
+      <salary>3000</salary>
+      <job>Seller</job>
+      <department>Sales</department>
+      <branch>Chicago</branch>
+   </employee>
+   <employee>
+      <ssn>"123-54-4410"</ssn>
+      <name>John</name>
+      <phone>"591-888-1234"</phone>
+      <father>Darrell</father>
+      <mother>Eleanor</mother>
+      <salary>1600</salary>
+      <job>Programmer</job>
+      <department>IT</department>
+      <branch>Washington</branch>
+   </employee>
+   <employee>
+      <ssn>"567-80-2314"</ssn>
+      <name>Harry</name>
+      <phone>"591-888-4334"</phone>
+      <father>Dick</father>
+      <mother>Glenda</mother>
+      <salary>1900</salary>
+      <job>Support Help Desk</job>
+      <department>IT</department>
+      <branch>Washington</branch>
+   </employee>
+   <employee>
+      <ssn>"234-65-6524"</ssn>
+      <name>Paul</name>
+      <phone>"531-888-6734"</phone>
+      <father>Clark</father>
+      <mother>Evelyn</mother>
+      <salary>2000</salary>
+      <job>Programmer</job>
+      <department>IT</department>
+      <branch>New York</branch>
+   </employee>
+   <employee>
+      <ssn>"456-98-4734"</ssn>
+      <name>Elizabeth</name>
+      <phone>"431-888-6124"</phone>
+      <father>Nathaniel</father>
+      <mother>Fiona</mother>
+      <salary>3900</salary>
+      <job>Manager</job>
+      <department>Sales</department>
+      <branch>Los Angeles</branch>
+   </employee>
+   <employee>
+      <ssn>"086-31-5948"</ssn>
+      <name>William</name>
+      <phone>"351-888-2217"</phone>
+      <father>Norman</father>
+      <mother>Violet</mother>
+      <salary>3000</salary>
+      <job>Seller</job>
+      <department>Sales</department>
+      <branch>Chicago</branch>
+   </employee>
+   <employee>
+      <ssn>"346-54-8921"</ssn>
+      <name>Jessica</name>
+      <phone>"351-888-2347"</phone>
+      <father>Dean</father>
+      <mother>Wendy</mother>
+      <salary>2800</salary>
+      <job>System Analyst</job>
+      <department>IT</department>
+      <branch>Chicago</branch>
+   </employee>
+   <employee>
+      <ssn>"111-25-4811"</ssn>
+      <name>Morris</name>
+      <phone>"431-888-7125"</phone>
+      <father>Raymond</father>
+      <mother>Zoe</mother>
+      <salary>3200</salary>
+      <job>Analyst</job>
+      <department>IT</department>
+      <branch>Los Angeles</branch>
+   </employee>
+   <employee>
+      <ssn>"149-74-3018"</ssn>
+      <name>Bradley</name>
+      <phone>"351-888-3288"</phone>
+      <father>Nicholas</father>
+      <mother>Susanna</mother>
+      <salary>3000</salary>
+      <job>Test Analyst</job>
+      <department>IT</department>
+      <branch>Chicago</branch>
+   </employee>
+</company>
