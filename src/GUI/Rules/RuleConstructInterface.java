@@ -61,6 +61,8 @@ public class RuleConstructInterface extends JDialog implements ActionListener{
     //Lista que contém todas as linhas de regra
     ArrayList<LineRule> linerules;  
     
+    private JButton btnMiningRules;
+    
     /**
      * Exibe a janela para construção das regras.
      * @param manager
@@ -91,6 +93,8 @@ public class RuleConstructInterface extends JDialog implements ActionListener{
         btnFinish.addActionListener(this);        
         btnAddRule = new JButton();  
         btnAddRule.addActionListener(this);
+        btnMiningRules = new JButton();  
+        btnMiningRules.addActionListener(this);        
         pnlUp.add(btnAtributs);
         pnlUp.add(lblChoiceKey);
         pnBotton.add(btnNext);
@@ -255,6 +259,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener{
                     nameRule.setText("");
 
                     btnAddRule.setEnabled(true);
+                    btnMiningRules.setEnabled(true);
                     pnlRules.removeAll();
                     linerules.clear();
                     LineRule aux=new LineRule();
@@ -332,7 +337,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener{
      */
     private void setPanelTerminal() {
         JPanel allPane = new JPanel();
-        this.setMinimumSize(new Dimension(600,300));
+        this.setMinimumSize(new Dimension(900,300));
         this.setSize(this.getMinimumSize());
         
         this.setContentPane(allPane);
@@ -360,21 +365,30 @@ public class RuleConstructInterface extends JDialog implements ActionListener{
         
         JPanel pnlBottom = new JPanel();
         
+        JPanel pnlWest = new JPanel();
+        pnlWest.setBorder(javax.swing.BorderFactory.createTitledBorder("Rules Association:"));
+        
         //adiciona os paineis à janela de construção de regras
-        LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1);
+        LayoutConstraints.setConstraints(constraints, 1, 0, 1, 1, 1, 1);
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.anchor = GridBagConstraints.NORTH;
         allPane.add(pnlTop, constraints);
         
-        LayoutConstraints.setConstraints(constraints, 0, 1, 1, 1, 1000, 1000);
+        LayoutConstraints.setConstraints(constraints, 1, 1, 1, 1, 1000, 1000);
         constraints.fill = GridBagConstraints.BOTH;
         constraints.anchor = GridBagConstraints.NORTHWEST;
         allPane.add(pnlMiddle, constraints);
         
-        LayoutConstraints.setConstraints(constraints, 0, 2, 1, 1, 1, 1);
+        LayoutConstraints.setConstraints(constraints, 1, 2, 1, 1, 1, 1);
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.anchor = GridBagConstraints.SOUTH;
         allPane.add(pnlBottom, constraints);
+        
+        LayoutConstraints.setConstraints(constraints, 0, 0, 1, 2, 1000, 1000);
+        constraints.fill = GridBagConstraints.VERTICAL;
+        constraints.anchor = GridBagConstraints.WEST;
+        allPane.add(pnlWest, constraints);
+        
         
         //declara objetos de controle do layout do painel do topo
         GridBagLayout gridBagTop = new GridBagLayout();
@@ -393,6 +407,15 @@ public class RuleConstructInterface extends JDialog implements ActionListener{
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.anchor = GridBagConstraints.NORTH;
         pnlTop.add(ruleOutputPnl, constraints);
+        
+        //Layout para painel de geração de regras de associação
+        btnMiningRules.setText("Mining Rule");
+        btnMiningRules.setSize(btnFinish.getSize());
+        btnMiningRules.setMinimumSize(btnFinish.getSize());
+        LayoutConstraints.setConstraints(constraints, 1, 0, 1, 1, 1, 1);
+        constraints.anchor = GridBagConstraints.WEST;
+        constraints.fill = GridBagConstraints.NONE;
+        pnlWest.add(btnMiningRules, constraints);
         
         
         //layout para painel com o label e a area de texto para o nome de regra
