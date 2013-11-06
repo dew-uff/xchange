@@ -19,11 +19,12 @@ import javax.swing.JPanel;
  *
  * @author Marcio Tadeu de Oliveira Júnior
  *
- * Esta classe tem por objetivo criar o conteudo da aba "Documents", com suas
- * areas de texto e os ComboBoxes que servirão para selecionar qual arquivo XML
- * será mostrado em cada Text Area definidas em DocumentsPane
+ * Esta classe tem por objetivo criar o conteudo da aba "Prolog Facts", com suas
+ * areas de texto e os ComboBoxes que servirão para selecionar qual fato prolog
+ * dedeterminado arquivo XML será mostrado em cada Text Area definidas em
+ * DocumentsPane
  */
-public class DocumentsTab extends JPanel implements ActionListener {
+public class PrologFactsTab extends JPanel implements ActionListener {
 
     private DocumentsPane docPane;
     private JComboBox leftCB, rightCB;
@@ -36,7 +37,7 @@ public class DocumentsTab extends JPanel implements ActionListener {
      *
      * @param manager
      */
-    public DocumentsTab(Manager manager, MainInterface main) {
+    public PrologFactsTab(Manager manager, MainInterface main) {
         super();
         this.main = main;
 
@@ -159,19 +160,20 @@ public class DocumentsTab extends JPanel implements ActionListener {
             rightCB.setSelectedIndex(1);
         }
 
-        if (documents.getSize() == 0) {//se não há documentos limpa as areas de texto
+        if (documents.getSize() < 2) {//se não há documentos limpa as areas de texto
             setRightText("");
             setLeftText("");
-        } else if (documents.getSize() == 1) {//se há apenas um documento só o mostra no lado esquerdo
-            leftCB.setSelectedIndex(0);
-
-            this.setLeftText(documents.getContent(leftCB.getSelectedIndex()));
-
         } else if (documents.getSize() >= 2) {//se há mais de dois documentos permanecem os que estavam em exibição
-
-            this.setLeftText(documents.getContent(leftCBIndex));
-            this.setRightText(documents.getContent(rightCBIndex));
-
+            if (!this.main.getSimilarity()) {
+                if(this.manager.getContextKey()!=null && this.manager.getContextKey().size()>=2){
+                    this.setLeftText(this.manager.getContextKey().get(0).getFacts());
+                    this.setRightText(this.manager.getContextKey().get(1).getFacts());
+                }
+            } else {
+                showSimilarityFacts(leftCBIndex, rightCBIndex);
+                rightCBIndex = rightCB.getSelectedIndex();
+                leftCBIndex = leftCB.getSelectedIndex();
+            }
             leftCB.setSelectedIndex(leftCBIndex);
             rightCB.setSelectedIndex(rightCBIndex);
         }
@@ -192,23 +194,58 @@ public class DocumentsTab extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(leftCB)) {//muda o texto esquerdo de acordo com o combobox esquerdo
-
-            this.setLeftText(documents.getContent(leftCB.getSelectedIndex()));
+            if (!this.main.getSimilarity()) {
+                this.setLeftText(this.manager.getContextKey().get(this.leftCB.getSelectedIndex()).getFacts());
+            } else {
+                showSimilarityFacts(leftCB.getSelectedIndex(), rightCB.getSelectedIndex());
+            }
         }
         if (e.getSource().equals(rightCB)) {//muda o texto direito de acordo com o combobox direito
-            if (rightCB.getSelectedIndex() < rightCB.getItemCount() && rightCB.getItemCount()==2) {
-
-                this.setRightText(documents.getContent(rightCB.getSelectedIndex()));
-
+            if (rightCB.getSelectedIndex() < rightCB.getItemCount()) {
+                if (!this.main.getSimilarity()) {
+                    this.setRightText(this.manager.getContextKey().get(this.rightCB.getSelectedIndex()).getFacts());
+                } else {
+                    showSimilarityFacts(leftCB.getSelectedIndex(), rightCB.getSelectedIndex());
+                }
             }
         }
     }
-    
-    public int getLeftCBIndex(){
-        return this.leftCB.getSelectedIndex();
+
+    private void showSimilarityFacts(int leftCBIndex, int rightCBIndex) {
+        TranslateModule.reset();
+        Similarity sim = new Similarity(this.documents.getPathWays().get(leftCBIndex));
+        if (rightCBIndex == leftCBIndex) {
+            setLeftText("The documents are the same");
+            setRightText("The documents are the same");
+        } else {
+
+
+            if (rightCBIndex > leftCBIndex) {
+                sim.documentsWithIDs(documents.getFile(leftCBIndex).getAbsolutePath(), documents.getFile(rightCBIndex).getAbsolutePath(), manager.getSimilarityRate());
+            } else if (leftCBIndex > rightCBIndex) {
+                sim.documentsWithIDs(documents.getFile(rightCBIndex).getAbsolutePath(), documents.getFile(leftCBIndex).getAbsolutePath(), manager.getSimilarityRate());
+                leftCB.setSelectedIndex(rightCBIndex);
+                rightCB.setSelectedIndex(leftCBIndex);
+            }
+            sim.translateFactsID(new File("temp1.xml"));
+            setLeftText(sim.getFacts());
+
+            sim.translateFactsID(new File("temp2.xml"));
+            setRightText(sim.getFacts());
+
+
+        }
     }
     
-    public int getRightCBIndex(){
-        return this.rightCB.getSelectedIndex();
+    public void setLeftCB(int i){
+        this.leftCB.setSelectedIndex(i);
+    }
+    
+    public void setRightCB(int i){
+        this.rightCB.setSelectedIndex(i);
+    }
+    
+    public boolean alreadySet(){
+        return (this.leftCB.getSelectedIndex()==-1|| this.rightCB.getSelectedIndex()==-1);
     }
 }

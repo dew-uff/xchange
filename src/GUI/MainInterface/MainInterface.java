@@ -2,12 +2,14 @@ package GUI.MainInterface;
 import Documents.Documents;
 import GUI.About.*;
 import GUI.FileManager.MultiDiffSaver;
-import GUI.FileManager.NoSelectedFileException;
+import Exception.NoSelectedFileException;
 import GUI.FileManager.ProjectLoader;
 import GUI.FileManager.ProjectSaver;
 import GUI.FileManager.XMLLoader;
 import GUI.Layout.LayoutConstraints;
 import GUI.Rules.RuleMainInterface;
+import GUI.Util.ProgressBar;
+import GUI.Util.ProgressHandler;
 import Manager.Manager;
 import Merge.MergeShow;
 import gems.ic.uff.br.newView.MergeThreeWayPanel;
@@ -29,12 +31,13 @@ import javax.swing.event.ChangeListener;
 public class MainInterface extends JFrame implements ActionListener{
     private JMenuBar menuBar;
     private JMenu mFile,mTools, mAbout;
-    private JMenuItem miNew,miOpen,miSave,miContext,miSimilarity, miAdd, miAboutGET, miAboutXChange, miHowToUse,miManager,miShowFacts, miMerge, miInference, miSettings;
+    private JMenuItem miNew,miOpen,miSave,miContext,miSimilarity, miAdd, miAboutGET, miAboutXChange, miHowToUse,miManager,miMerge, miInference;
     private ResultsTab resultsTab;
     private DocumentsTab documentsTab;
+    private PrologFactsTab prologFactsTab;
     private JTabbedPane tabbedPane, tabbedPaneMerge;
     private Documents documents;
-    private JButton newBtn,openBtn,addBtn,saveBtn,contextBtn,similarityBtn,managerBtn, mergeBtn, showFactsBtn, saveXMLDiffBtn;
+    private JButton newBtn,openBtn,addBtn,saveBtn,contextBtn,similarityBtn,managerBtn, mergeBtn, saveXMLDiffBtn;
     private static JButton applyChoicesBtn, writeBtn, cancelBtn;
     private boolean isSimilarity;
     private float similarityRate;
@@ -45,6 +48,7 @@ public class MainInterface extends JFrame implements ActionListener{
     private SintaticDiffTree sintaticDiff;
     private XMLDiffTab xmldifftab;
     private static JFrame jFrame;
+    private ProgressBar pBar;
     
     public MainInterface(Manager manager){//define caracteriscas da janela, tais como tamanho e redimensionamento
         super("XChange");//contrutor, nomeia a janela
@@ -124,11 +128,6 @@ public class MainInterface extends JFrame implements ActionListener{
             miSimilarity.setMnemonic('s');
             mTools.add(miSimilarity);
             miSimilarity.addActionListener(this);
-
-            miShowFacts = new JMenuItem("Show Facts/XML");
-            miSimilarity.setMnemonic('w');
-            mTools.add(miShowFacts);
-            miShowFacts.addActionListener(this);
            
             miMerge = new JMenuItem("Merge");
             miMerge.setMnemonic('g');
@@ -142,12 +141,6 @@ public class MainInterface extends JFrame implements ActionListener{
             miInference.addActionListener(this);
             
             mTools.addSeparator();
-            
-            miSettings = new JMenuItem("Settings");
-            miSettings.setMnemonic('t');
-            miSettings.setVisible(true);
-            mTools.add(miSettings);
-            miSettings.addActionListener(this);
             
         //Cria o menu "About" e seus itens
         mAbout = new JMenu("About");
@@ -175,8 +168,8 @@ public class MainInterface extends JFrame implements ActionListener{
         JToolBar tBar = new JToolBar();
         
         //Cria o painel que contem  a barra de ferramentas
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        JPanel buttonsPane = new JPanel();
+        buttonsPane.setLayout(new BoxLayout(buttonsPane, BoxLayout.Y_AXIS));
         
         //Define os icones que serão usados nos botões
         ImageIcon newIcon = new ImageIcon(getClass().getResource("/GUI/icons/new.png"));
@@ -247,11 +240,6 @@ public class MainInterface extends JFrame implements ActionListener{
         cancelBtn.setEnabled(false);
         cancelBtn.setVisible(false);
         
-        showFactsBtn = new JButton(showFactsIcon);
-        showFactsBtn.setToolTipText("Show Facts/XML");
-        showFactsBtn.addActionListener(this);
-        showFactsBtn.setEnabled(false);
-        
         saveXMLDiffBtn = new JButton(saveXMLDiffIcon);
         saveXMLDiffBtn.setToolTipText("Save XML Diff");
         saveXMLDiffBtn.addActionListener(this);
@@ -269,54 +257,70 @@ public class MainInterface extends JFrame implements ActionListener{
         tBar.add(applyChoicesBtn);
         tBar.add(writeBtn);
         tBar.add(cancelBtn);
-        tBar.add(showFactsBtn);
         tBar.add(saveXMLDiffBtn);
         tBar.setAlignmentX(0);
         
         tBar.setFloatable(false); //Fixa a barra de ferramentas à sua posição
         
         //Adiciona a barra de ferramentas ao seu painel
-        panel.add(tBar);
+        buttonsPane.add(tBar);
         
         //Adiciona o painel da barra de ferramentas à interface gráfica
-        this.add(panel);
+        this.add(buttonsPane);
         
         //indica a posição e layout da barra de ferramentas
         LayoutConstraints.setConstraints(constraints,0,0,1,1,100,1);
         constraints.insets=new Insets(0,0,0,0);
         constraints.fill=GridBagConstraints.HORIZONTAL;
         constraints.anchor=GridBagConstraints.NORTHWEST;
-        gridBag.setConstraints(panel,constraints);       
+        gridBag.setConstraints(buttonsPane,constraints);       
                    
         //cria a aba de resultados
         resultsTab = new ResultsTab();
         
         //cria a aba de documentos
         documentsTab = new DocumentsTab(manager,this);
+        
+        //cria a aba de documentos
+        prologFactsTab = new PrologFactsTab(manager,this);
             
         //cria o gerenciador de abas adicionando as abas de resultados e documentos
         tabbedPane = new JTabbedPane();
         tabbedPane.add(documentsTab,"Documents");//adiciona a aba de documentos
-        tabbedPane.add(resultsTab,"Results");//adiciona a aba de resultados
+        tabbedPane.setEnabledAt(0, true);
+        tabbedPane.setVisible(true);
+        
+        //cria o gerenciador de abas adicionando as abas de resultados e documentos
+        tabbedPane.add(prologFactsTab,"Prolog Facts");//adiciona a aba de fatosprolog
         tabbedPane.setEnabledAt(1, false);
+        tabbedPane.setVisible(true);
+        
+        //cria o gerenciador de abas adicionando as abas de resultados e documentos
+        tabbedPane.add(resultsTab,"Results");//adiciona a aba de resultados
+        tabbedPane.setEnabledAt(2, false);
         tabbedPane.setVisible(true);
        
         sintaticDiff = new SintaticDiffTree(documents); 
         tabbedPane.add(sintaticDiff, "Sintatic Diff Tree"); //adiciona de arvores (Diff Sintatico)
-        tabbedPane.setEnabledAt(2, false);
+        tabbedPane.setEnabledAt(3, false);
         sintaticDiff.setVisible(true);
         
         xmldifftab = new XMLDiffTab();
         tabbedPane.add(xmldifftab, "XML Diff");
-        tabbedPane.setEnabledAt(3,false);
+        tabbedPane.setEnabledAt(4,false);
         xmldifftab.setVisible(true);
         
         // Adiciona um evento para mudança de aba
         tabbedPane.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
-                if(tabbedPane.getSelectedIndex()==2)
+                if(tabbedPane.getSelectedIndex()==1 && !prologFactsTab.alreadySet()){
+                    prologFactsTab.setLeftCB(documentsTab.getLeftCBIndex());
+                    prologFactsTab.setRightCB(documentsTab.getRightCBIndex());
+                }else
+                if(tabbedPane.getSelectedIndex()==3)
                     sintaticDiff.plotTree();
-                if(tabbedPane.getSelectedIndex()==3){
+                else
+                if(tabbedPane.getSelectedIndex()==4){
                     sintaticDiff.setVisible(false);
                     xmldifftab.showXMLDiff();
                 }
@@ -356,6 +360,24 @@ public class MainInterface extends JFrame implements ActionListener{
         
         //adiciona o gerenciador de abas à interface grafica
         this.add(tabbedPane);
+        
+        LayoutConstraints.setConstraints(constraints,0,1,1,1,100,100);
+        constraints.insets=new Insets(0,10,0,10);        
+        constraints.fill=GridBagConstraints.BOTH;
+        constraints.anchor=GridBagConstraints.NORTHWEST;
+        gridBag.setConstraints(tabbedPane,constraints);
+        gridBag.setConstraints(tabbedPaneMerge,constraints);
+        
+        pBar = ProgressHandler.makeNew(100, "Ready: Waiting for User");
+        ProgressHandler.stop();
+        
+        LayoutConstraints.setConstraints(constraints,0,2,1,1,1,1);
+        constraints.insets=new Insets(0,0,0,0);        
+        constraints.fill=GridBagConstraints.BOTH;
+        constraints.anchor=GridBagConstraints.NORTHWEST;
+        gridBag.setConstraints(pBar,constraints);
+        
+        this.add(pBar);
        
         //inicia o programa zerado
         this.refresh(this.documents);
@@ -365,7 +387,7 @@ public class MainInterface extends JFrame implements ActionListener{
         
         this.revalidate();
         this.repaint();
-    }
+ }
     
     /**
      * Atualiza as informações na tela inclusive seus subcomponentes
@@ -383,6 +405,7 @@ public class MainInterface extends JFrame implements ActionListener{
             documentsTab.refresh(documents);
             sintaticDiff.refresh(documents);
             xmldifftab.refresh(documents);
+            prologFactsTab.refresh(documents);
             if(documents.getSize()>=2){
                 miContext.setEnabled(true);
                 contextBtn.setEnabled(true);
@@ -396,7 +419,6 @@ public class MainInterface extends JFrame implements ActionListener{
                 miSave.setEnabled(false);
                 saveBtn.setEnabled(false);
                 miSimilarity.setEnabled(false);
-                miShowFacts.setEnabled(false);
                 similarityBtn.setEnabled(false);
             }
         }
@@ -415,18 +437,15 @@ public class MainInterface extends JFrame implements ActionListener{
         if(e.getSource().equals(miAdd)||e.getSource().equals(addBtn)){//ação "ADICIONAR"
             addXMLFile();
         }else
-        if(e.getSource().equals(miShowFacts)||e.getSource().equals(showFactsBtn)){//mostrar os fatos ou XML
-            documentsTab.setFacts();
-            documentsTab.refresh(documents);
-            tabbedPane.setSelectedIndex(0);
-        }
-        else
         if(e.getSource().equals(similarityBtn)||e.getSource().equals(miSimilarity)){//ação "SIMILARIDADE"
             similarity();
+            tabbedPane.setEnabledAt(1, true);
+            this.repaint();
         }else
             
         if(e.getSource().equals(contextBtn)||e.getSource().equals(miContext)){//ação "CHAVE DE CONTEXTO"
             contextKey();
+            tabbedPane.setEnabledAt(1, true);
         }else
             
         if(e.getSource().equals(newBtn)||e.getSource().equals(miNew)){//ação "NOVO"
@@ -454,7 +473,7 @@ public class MainInterface extends JFrame implements ActionListener{
             
         if(e.getSource().equals(managerBtn)||e.getSource().equals(miManager)){//ação "MANAGER"
             callManager();
-            tabbedPane.setEnabledAt(1, true);
+            tabbedPane.setEnabledAt(2, true);
         }
         
         else if(e.getSource().equals(miHowToUse)){//Abre o canal do youtube que contem os tutoriais do XChange
@@ -498,11 +517,6 @@ public class MainInterface extends JFrame implements ActionListener{
             merge();
         }
         
-        else if(e.getSource().equals(miSettings)){//ação "Settings"
-            SettingsDialog settingsFrame = new SettingsDialog(this);
-            settingsFrame.show();
-        }
-        
         else if(e.getSource().equals(saveXMLDiffBtn)){//ação "Save XML Diff"
             try {  
                 MultiDiffSaver.save(documents);
@@ -521,14 +535,12 @@ public class MainInterface extends JFrame implements ActionListener{
         miManager.setVisible(true);
         miContext.setVisible(true);
         miSimilarity.setVisible(true);
-        miShowFacts.setVisible(true);
         miInference.setVisible(false);
         tabbedPaneMerge.setVisible(false);
         tabbedPane.setVisible(true);
         contextBtn.setVisible(true);
         similarityBtn.setVisible(true);
         managerBtn.setVisible(true);
-        showFactsBtn.setVisible(true);
         mergeBtn.setEnabled(false);
         mergeBtn.setVisible(false);
         applyChoicesBtn.setEnabled(false);
@@ -549,14 +561,12 @@ public class MainInterface extends JFrame implements ActionListener{
         miManager.setVisible(false);
         miContext.setVisible(false);
         miSimilarity.setVisible(false);
-        miShowFacts.setVisible(false);
         miInference.setVisible(true);
         tabbedPane.setVisible(false);
         tabbedPaneMerge.setVisible(true);
         similarityBtn.setVisible(false);
         contextBtn.setVisible(false);
         managerBtn.setVisible(false);
-        showFactsBtn.setVisible(false);
         mergeBtn.setVisible(true);
         applyChoicesBtn.setEnabled(false);
         applyChoicesBtn.setVisible(true);
@@ -651,10 +661,10 @@ public class MainInterface extends JFrame implements ActionListener{
             if(!isSimilarity){ //Se o metodo utilizado for o "Context Key"
                 manager.startResultsInferenciaContextKey();
             } else{ //Se o metodo utilizado for o "Similarity"
-                manager.startResultsInferenciaSimilarity(documents, similarityRate);
+                manager.startResultsInferenciaSimilarity(documents);
             }
             resultsTab.refresh(documents,manager);
-            this.tabbedPane.setSelectedIndex(1);
+            tabbedPane.setSelectedIndex(2);
         } else{ //Se nenhum metodo estiver ativo
             JOptionPane.showMessageDialog(this, "No method started!", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -679,7 +689,6 @@ public class MainInterface extends JFrame implements ActionListener{
      */
     private void newProject() {
         documents = new Documents();
-        documentsTab.setFacts(false);
         if(isMerge){
             tabbedPaneMerge.setEnabledAt(1, false);
             tabbedPaneMerge.setEnabledAt(2, false);
@@ -687,8 +696,9 @@ public class MainInterface extends JFrame implements ActionListener{
             tabbedPaneMerge.setEnabledAt(4, false);
             tabbedPaneMerge.setSelectedIndex(0);
             tabbedPane.setEnabledAt(1,false);
-            tabbedPane.setEnabledAt(2, false);
+            tabbedPane.setEnabledAt(2,false);
             tabbedPane.setEnabledAt(3, false);
+            tabbedPane.setEnabledAt(4, false);
             tabbedPane.setSelectedIndex(0);
             conflictsTabMerge.removeAll();
             resultsTabMerge.removeAll();
@@ -701,20 +711,17 @@ public class MainInterface extends JFrame implements ActionListener{
             manager.refreshFullManager();
             miManager.setEnabled(false);
             managerBtn.setEnabled(false);
-            miShowFacts.setEnabled(false);
-            showFactsBtn.setEnabled(false);
             saveXMLDiffBtn.setEnabled(false);
         }
         else{              
             tabbedPane.setSelectedIndex(0);
-            tabbedPane.setEnabledAt(1, false);
-            tabbedPane.setEnabledAt(2, false);
+            tabbedPane.setEnabledAt(1,false);
+            tabbedPane.setEnabledAt(2,false);
             tabbedPane.setEnabledAt(3, false);
+            tabbedPane.setEnabledAt(4, false);
             manager.refreshFullManager();
             miManager.setEnabled(false);
             managerBtn.setEnabled(false);
-            showFactsBtn.setEnabled(false);
-            miShowFacts.setEnabled(false);
             saveXMLDiffBtn.setEnabled(false);
         }            
         this.refresh(documents);
@@ -730,9 +737,8 @@ public class MainInterface extends JFrame implements ActionListener{
             manager.startContextKey(documents); //Inicia arquivos como ContextKey
             JOptionPane.showMessageDialog(this, "Context Key successfully started!", "Success", JOptionPane.INFORMATION_MESSAGE);
             managerBtn.setEnabled(true);
-            showFactsBtn.setEnabled(true);
             miManager.setEnabled(true);
-            miShowFacts.setEnabled(true);
+            this.refresh(documents);
         } else{   
             JOptionPane.showMessageDialog(this, "There must be at least two XML documents loaded!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -744,17 +750,18 @@ public class MainInterface extends JFrame implements ActionListener{
     private void similarity() {
         if(documents.getSize() >= 2){
             try{
+                SettingsDialog settingsFrame = new SettingsDialog(this);
+                settingsFrame.show();
                 this.similarityRate = Float.parseFloat(JOptionPane.showInputDialog("Similarity Rate:"));
                 this.isSimilarity=true;
                 manager.getContextKey().clear();
                 manager.startSimilarity(documents);
                 JOptionPane.showMessageDialog(this, "Similarity successfully started!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 managerBtn.setEnabled(true);
-                showFactsBtn.setEnabled(true);
                 miManager.setEnabled(true);
-                miShowFacts.setEnabled(true);
                 saveXMLDiffBtn.setEnabled(true);
-                tabbedPane.setEnabledAt(3, true);
+                tabbedPane.setEnabledAt(4, true);
+                xmldifftab.revalidate();
             }catch(Exception a){  
             }
         } else{
@@ -776,13 +783,17 @@ public class MainInterface extends JFrame implements ActionListener{
                     tabbedPaneMerge.setSelectedIndex(0);
                 }
                 else{
-                    if(tabbedPane.getSelectedIndex()==1) {
-                        tabbedPane.setSelectedIndex(0);
-                    }
                     if(documents.getSize()>=2){
-                        tabbedPane.setEnabledAt(2, true);
-                    }
-                    tabbedPane.setEnabledAt(1, false);
+                        tabbedPane.setEnabledAt(1, false);
+                        tabbedPane.setEnabledAt(2, false);
+                        tabbedPane.setEnabledAt(3, true);
+                        tabbedPane.setEnabledAt(4, true);
+                    } else {
+                        tabbedPane.setEnabledAt(1, false);
+                        tabbedPane.setEnabledAt(2, false);
+                        tabbedPane.setEnabledAt(3, false);
+                        tabbedPane.setEnabledAt(4, false);
+                    }                        
                 }
                 this.refresh(documents);
                 managerBtn.setEnabled(false);
@@ -830,5 +841,9 @@ public class MainInterface extends JFrame implements ActionListener{
     public static double getWidthJFrame (){
        return jFrame.getSize().getWidth();
    }
+    
+    public float getSimilarityRate(){
+        return this.similarityRate;
+    }
     
 }

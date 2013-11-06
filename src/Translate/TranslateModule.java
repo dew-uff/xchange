@@ -1,5 +1,4 @@
 package Translate;
-import GUI.Util.ProgressHandler;
 import br.ufrj.ppgi.parser.XMLParser;
 import gems.ic.uff.br.modelo.XML;
 import java.io.BufferedReader;
@@ -61,7 +60,6 @@ public abstract class TranslateModule {
      * Documento XML que se deseja traduzir.
      */
     public void translateFacts(File fileTranslate) {
-        ProgressHandler.setLabel("Translating "+ fileTranslate.getName() +" into Prolog facts");
         XMLParser parser = new XMLParser();
         HashMap file=new HashMap();
         file.put("0",fileTranslate);//adciona o arquivo a se traduzir no hashmap com chave "0", a biblioteca só aceita HashMap
@@ -94,7 +92,6 @@ public abstract class TranslateModule {
             this.setElementName(fileTranslate);//Inicializa o valor da tag principal do xml
             TranslateModule.reset=!TranslateModule.reset;
         }
-        ProgressHandler.increase();
     }
 
     /**

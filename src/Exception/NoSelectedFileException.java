@@ -1,4 +1,4 @@
-package GUI.FileManager;
+package Exception;
 
 /**
  * Excessão associada a não seleção de arquivos durante a solicitação de abertura.

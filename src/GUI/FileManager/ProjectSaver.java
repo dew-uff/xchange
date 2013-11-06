@@ -1,5 +1,6 @@
 package GUI.FileManager;
 
+import Exception.NoSelectedFileException;
 import Documents.Documents;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
