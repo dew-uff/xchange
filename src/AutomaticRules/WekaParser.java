@@ -108,9 +108,7 @@ public class WekaParser {
             br.write(arff.toString());  
             br.close(); 
 
-            String fileArff2 = "/Users/Matheus/Desktop/arff.arff";
-
-            InputStream isArff = new FileInputStream(fileArff2);
+            InputStream isArff = new FileInputStream(fileArff);
 
             Instances data = ConverterUtils.DataSource.read(isArff);
             data.setClassIndex(data.numAttributes() - 1);
@@ -119,7 +117,7 @@ public class WekaParser {
             Apriori apriori = new Apriori();        
             apriori.setClassIndex(data.classIndex());
             apriori.setNumRules(1000);
-            apriori.setMinMetric(0.0);
+            apriori.setMinMetric(0);
             apriori.setLowerBoundMinSupport(0.0);
             apriori.buildAssociations(data);
             apriori.getAssociationRules();
