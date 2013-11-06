@@ -2183,37 +2183,4 @@ public class XDiff
 			_needNewLine = false;
 		}
 	}
-
-	/**
-	  * Construct the text node -- to handle the possible CDATA sections.
-	  */
-	private String constructText(XTree xtree, int eid)
-	{
-		String	text = xtree.getText(eid);
-		Vector	cdatalist = xtree.getCDATA(eid);
-		if (cdatalist == null)
-			return text;
-
-		StringBuffer	buf = new StringBuffer();
-		int		count = cdatalist.size();
-		int		lastEnd = 0;
-		for (int i = 0; i < count; i += 2)
-		{
-			int	cdataStart =
-				((Integer)cdatalist.elementAt(i)).intValue();
-			int	cdataEnd =
-				((Integer)cdatalist.elementAt(i+1)).intValue();
-
-			if (cdataStart > lastEnd)
-				buf.append(text.substring(lastEnd, cdataStart));
-			buf.append("<![CDATA[" +
-				   text.substring(cdataStart, cdataEnd) +
-				   "]]>");
-			lastEnd = cdataEnd;
-		}
-		if (lastEnd < text.length())
-			buf.append(text.substring(lastEnd));
-
-		return buf.toString();
-	}
 }

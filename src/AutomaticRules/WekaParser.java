@@ -29,10 +29,10 @@ public class WekaParser {
     
     public static List<Set> gerarRegras(String args[]) {
         try {
-            String file1 = "C:\\Users\\samuel.vieira\\Documents\\NetBeansProjects\\XChange\\get_gc_xchange\\examples\\Employee\\v9.xml";
-            String file2 = "C:\\Users\\samuel.vieira\\Documents\\NetBeansProjects\\XChange\\get_gc_xchange\\examples\\Employee\\v10.xml";
-            String fileDiff = "C:\\Users\\samuel.vieira\\Documents\\NetBeansProjects\\XChange\\get_gc_xchange\\examples\\Employee\\diff.xml";
-            String fileArff = "C:\\Users\\samuel.vieira\\Documents\\NetBeansProjects\\XChange\\get_gc_xchange\\examples\\Employee\\arff.arff";
+            String file1 = "/Users/Matheus/Desktop/v1.xml";
+            String file2 = "/Users/Matheus/Desktop/v2.xml";
+            String fileDiff = "/Users/Matheus/Desktop/diff.xml";
+            String fileArff = "/Users/Matheus/Desktop/arff.arff";
             XDiff diff = new XDiff(file1, file2, fileDiff);
 
             List<List> mapeamentoDiff = new ArrayList<List>();
@@ -108,7 +108,7 @@ public class WekaParser {
             br.write(arff.toString());  
             br.close(); 
 
-            String fileArff2 = "C:\\Users\\samuel.vieira\\Documents\\NetBeansProjects\\XChange\\get_gc_xchange\\examples\\Employee\\employee_v1-v10.arff";
+            String fileArff2 = "/Users/Matheus/Desktop/arff.arff";
 
             InputStream isArff = new FileInputStream(fileArff2);
 
@@ -119,7 +119,8 @@ public class WekaParser {
             Apriori apriori = new Apriori();        
             apriori.setClassIndex(data.classIndex());
             apriori.setNumRules(1000);
-            apriori.setMinMetric(0.1);
+            apriori.setMinMetric(0.0);
+            apriori.setLowerBoundMinSupport(0.0);
             apriori.buildAssociations(data);
             apriori.getAssociationRules();
 
