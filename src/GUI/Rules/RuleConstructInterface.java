@@ -3,6 +3,7 @@ package GUI.Rules;
 import GUI.Layout.LayoutConstraints;
 import Manager.Manager;
 import Rules.RulesModule;
+import AutomaticRules.WekaParser;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
@@ -62,6 +65,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener{
     ArrayList<LineRule> linerules;  
     
     private JButton btnMiningRules;
+    private JLabel textoRegras;
     
     /**
      * Exibe a janela para construção das regras.
@@ -94,7 +98,8 @@ public class RuleConstructInterface extends JDialog implements ActionListener{
         btnAddRule = new JButton();  
         btnAddRule.addActionListener(this);
         btnMiningRules = new JButton();  
-        btnMiningRules.addActionListener(this);        
+        btnMiningRules.addActionListener(this);  
+        textoRegras = new JLabel();
         pnlUp.add(btnAtributs);
         pnlUp.add(lblChoiceKey);
         pnBotton.add(btnNext);
@@ -269,7 +274,10 @@ public class RuleConstructInterface extends JDialog implements ActionListener{
                     pnlRules.revalidate();
           }
         }
-      }
+      }else if(e.getSource() == btnMiningRules){ //Mineração de regras de associação
+            List<Set> listRules = WekaParser.gerarRegras(null);
+            textoRegras.setText(listRules.toString());          
+        }
     }
     
     /**
@@ -366,7 +374,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener{
         JPanel pnlBottom = new JPanel();
         
         JPanel pnlWest = new JPanel();
-        pnlWest.setBorder(javax.swing.BorderFactory.createTitledBorder("Rules Association:"));
+        pnlWest.setBorder(javax.swing.BorderFactory.createTitledBorder("Association Rules:"));
         
         //adiciona os paineis à janela de construção de regras
         LayoutConstraints.setConstraints(constraints, 1, 0, 1, 1, 1, 1);
@@ -412,11 +420,16 @@ public class RuleConstructInterface extends JDialog implements ActionListener{
         btnMiningRules.setText("Mining Rule");
         btnMiningRules.setSize(btnFinish.getSize());
         btnMiningRules.setMinimumSize(btnFinish.getSize());
-        LayoutConstraints.setConstraints(constraints, 1, 0, 1, 1, 1, 1);
+        LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1);
         constraints.anchor = GridBagConstraints.WEST;
         constraints.fill = GridBagConstraints.NONE;
-        pnlWest.add(btnMiningRules, constraints);
+        pnlWest.add(btnMiningRules, constraints);        
         
+        LayoutConstraints.setConstraints(constraints, 1, 0, 1, 1, 1, 1);
+        constraints.anchor = GridBagConstraints.CENTER;
+        constraints.fill = GridBagConstraints.NONE;
+        pnlWest.add(textoRegras, constraints);
+        pnlWest.add(textoRegras, constraints);        
         
         //layout para painel com o label e a area de texto para o nome de regra
         GridBagLayout gridBagRuleName = new GridBagLayout();
