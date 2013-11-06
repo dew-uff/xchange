@@ -129,10 +129,10 @@ public class WekaParser {
             for (AssociationRule rule : apriori.getAssociationRules().getRules()) {
                 Set<String> currentRule = new HashSet<String>();
 
-                Collection<Item> teste = rule.getPremise();
-                ArrayList<Item> teste2 = new ArrayList<Item>(teste);
-                String tag = teste2.get(0).getAttribute().name();
-                currentRule.add(tag);
+                Collection<Item> allTags = rule.getPremise();
+                allTags.addAll(rule.getConsequence());
+                for (Item tag : allTags)
+                    currentRule.add(tag.getAttribute().name());
 
                 if(!listRules.contains(currentRule)) {
                     listRules.add(currentRule);
