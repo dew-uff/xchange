@@ -65,7 +65,7 @@ public class Manager {
     public ArrayList<Results> getResultsInference() {
         return resultsInference;
     }
-
+    
     /**
      * Apaga as informações contidas em todas as variáveis desta classe.
      */
@@ -109,7 +109,7 @@ public class Manager {
         
         float currentSimilarityRate = main.getSimilarityRate();
         
-        if(similarityFacts==null||similarityFacts.isEmpty()||this.similarityRate!=currentSimilarityRate||PhoenixSettings.hasChange()){
+        if(getSimilarityFacts()==null||getSimilarityFacts().isEmpty()||this.similarityRate!=currentSimilarityRate||PhoenixSettings.hasChange()){
             similarityFacts = new ArrayList<ArrayList<ArrayList<String>>>();
         }else if(documentsSize==documents.getSize()){
             return;
@@ -134,27 +134,27 @@ public class Manager {
         ProgressHandler.restart(iterations, "Translating XML files using Similarity");
         try{
             for (int i = 0; i < (getSimilarity().size() - 1); i++) {
-                if(i > similarityFacts.size()-1) {
-                    similarityFacts.add(new ArrayList<ArrayList<String>>());
+                if(i > getSimilarityFacts().size()-1) {
+                    getSimilarityFacts().add(new ArrayList<ArrayList<String>>());
                 }
                 for (int j = i + 1; j < getSimilarity().size(); j++) {
                     if (i != j) {
 
                         ProgressHandler.setLabel("Getting the similarity between "+documents.getFile(i).getName()+" and "+documents.getFile(j).getName());
 
-                        if(documents.getSize()-i-1 > similarityFacts.get(i).size()){
+                        if(documents.getSize()-i-1 > getSimilarityFacts().get(i).size()){
 
-                            similarityFacts.get(i).add(new ArrayList<String>());
+                            getSimilarityFacts().get(i).add(new ArrayList<String>());
 
                             getSimilarity().get(i).documentsWithIDs(documents.getDocuments().get(i).getPathWay(), documents.getDocuments().get(j).getPathWay(), this.similarityRate);
 
                             ProgressHandler.setLabel("Translating Temporary Files into Prolog facts");
                             getSimilarity().get(i).translateFactsID(new File(getSimilarity().get(i).getPathID1())); //Gera os fatos do primeiro documento
-                            similarityFacts.get(i).get(j-i-1).add(getSimilarity().get(i).getFactsSimilarityID());
+                            getSimilarityFacts().get(i).get(j-i-1).add(getSimilarity().get(i).getFactsSimilarityID());
                             ProgressHandler.increase();
 
                             getSimilarity().get(i).translateFactsID(new File(getSimilarity().get(i).getPathID2())); //Gera os fatos do segundo documento
-                            similarityFacts.get(i).get(j-i-1).add(getSimilarity().get(i).getFactsSimilarityID());
+                            getSimilarityFacts().get(i).get(j-i-1).add(getSimilarity().get(i).getFactsSimilarityID());
                             ProgressHandler.increase();                       
 
                         }else{
@@ -215,7 +215,7 @@ public class Manager {
      */
     public void startResultsInferenciaSimilarity(Documents documents) {
 
-        if(similarityFacts==null||similarityFacts.isEmpty()||this.similarityRate!=main.getSimilarityRate()||PhoenixSettings.hasChange()){
+        if(getSimilarityFacts()==null||getSimilarityFacts().isEmpty()||this.similarityRate!=main.getSimilarityRate()||PhoenixSettings.hasChange()){
             similarityFacts = new ArrayList<ArrayList<ArrayList<String>>>();
         }
         
@@ -231,8 +231,8 @@ public class Manager {
         
         //Gera resultados para todos os pares de documentos
         for (int i = 0; i < (getSimilarity().size() - 1); i++) {
-            if(i > similarityFacts.size()-1) {
-                similarityFacts.add(new ArrayList<ArrayList<String>>());
+            if(i > getSimilarityFacts().size()-1) {
+                getSimilarityFacts().add(new ArrayList<ArrayList<String>>());
             }
             for (int j = i + 1; j < getSimilarity().size(); j++) {
                 if (i != j) {      
@@ -240,7 +240,7 @@ public class Manager {
                     ProgressHandler.setLabel("Performing inference");
                     
                     //Concatena e normaliza os fatos pertencentes a dois documentos
-                    factsInference = Similarity.setStandardFacts(similarityFacts.get(i).get(j-i-1).get(0), similarityFacts.get(i).get(j-i-1).get(1));
+                    factsInference = Similarity.setStandardFacts(getSimilarityFacts().get(i).get(j-i-1).get(0), getSimilarityFacts().get(i).get(j-i-1).get(1));
                     finishResult = getInferenceModule().performInference(factsInference, getRulesModule()); //Realiza a inferência
                     getResultsInference().add(new Results(i + 1, j + 1, finishResult)); //Armazena os resultados referentes aos dois documentos utilizados
                     
@@ -256,7 +256,7 @@ public class Manager {
     }
     
     public void reset(){
-        similarityFacts.clear();
+        getSimilarityFacts().clear();
         documentsSize=0;
     }
 
@@ -268,5 +268,12 @@ public class Manager {
     public static void main(String[] args) {
         Manager manager = new Manager();
         main = new MainInterface(manager); //Invoca o construtor da interface principal
+    }
+
+    /**
+     * @return Os fatos do módulo de similaridade
+     */
+    public ArrayList<ArrayList<ArrayList<String>>> getSimilarityFacts() {
+        return similarityFacts;
     }
 }

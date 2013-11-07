@@ -89,38 +89,14 @@ public class Document {
     public String getContent() {
         String content = "";
 
-        if (!ProgressHandler.isInUse()) {
-            int i = 0;
-            try {
-                BufferedReader countBuff = new BufferedReader(new FileReader(this.document));
-                for (i = 0; countBuff.ready(); i++) {
-                    countBuff.readLine();
-                }
-            } catch (Exception ex) {
-                Logger.getLogger(Document.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            ProgressHandler.restart(i, "Reading XML File");
-        } else {
-            ProgressHandler.setLabel("Reading XML");
-        }
-        
-        boolean reading = ProgressHandler.getLabel().equals("Reading XML File");
-
         BufferedReader br;
         try {
             br = new BufferedReader(new FileReader(this.document));
             while (br.ready()) {
-                if (reading) {
-                    ProgressHandler.increase();
-                }
                 content += br.readLine();
             }
         } catch (Exception ex) {
             Logger.getLogger(Document.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            if (reading) {
-                ProgressHandler.stop();
-            }
         }
         return XMLFormatter.format(content);
     }

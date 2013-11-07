@@ -126,7 +126,7 @@ public class ProgressBar extends JPanel implements Runnable{
      */
     public void setLabel(String legend) {
         text=legend;
-        label.setText(text+marker+" "+getValue());
+        label.setText(text+marker);
         label.setVisible(true);
     }
     
@@ -136,6 +136,7 @@ public class ProgressBar extends JPanel implements Runnable{
     
     public void stop(){
         setLabel("Ready: Waiting for User");
+        label.setText(text);
         threadFlag=true;
         pBar.setVisible(true);
         pBar.setValue(0);
@@ -181,7 +182,7 @@ public class ProgressBar extends JPanel implements Runnable{
                 marker="..·";
             }
             i++;
-            label.setText(text+marker+" "+getValue());
+            label.setText(text+marker+" ");
         }
         if(!getLabel().equals("Ready: Waiting for User")) {
             setLabel("Finish");

@@ -213,27 +213,16 @@ public class PrologFactsTab extends JPanel implements ActionListener {
 
     private void showSimilarityFacts(int leftCBIndex, int rightCBIndex) {
         TranslateModule.reset();
-        Similarity sim = new Similarity(this.documents.getPathWays().get(leftCBIndex));
         if (rightCBIndex == leftCBIndex) {
             setLeftText("The documents are the same");
             setRightText("The documents are the same");
         } else {
-
-
-            if (rightCBIndex > leftCBIndex) {
-                sim.documentsWithIDs(documents.getFile(leftCBIndex).getAbsolutePath(), documents.getFile(rightCBIndex).getAbsolutePath(), manager.getSimilarityRate());
-            } else if (leftCBIndex > rightCBIndex) {
-                sim.documentsWithIDs(documents.getFile(rightCBIndex).getAbsolutePath(), documents.getFile(leftCBIndex).getAbsolutePath(), manager.getSimilarityRate());
+            if (leftCBIndex > rightCBIndex) {
                 leftCB.setSelectedIndex(rightCBIndex);
                 rightCB.setSelectedIndex(leftCBIndex);
             }
-            sim.translateFactsID(new File("temp1.xml"));
-            setLeftText(sim.getFacts());
-
-            sim.translateFactsID(new File("temp2.xml"));
-            setRightText(sim.getFacts());
-
-
+            setLeftText(manager.getSimilarityFacts().get(leftCBIndex).get(documents.getSize()-rightCBIndex-1).get(0));
+            setRightText(manager.getSimilarityFacts().get(leftCBIndex).get(documents.getSize()-rightCBIndex-1).get(1));
         }
     }
     
