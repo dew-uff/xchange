@@ -29,10 +29,10 @@ public class WekaParser {
     
     public static List<Set> gerarRegras(String args[]) {
         try {
-            String file1 = "/Users/Matheus/Desktop/v1.xml";
-            String file2 = "/Users/Matheus/Desktop/v2.xml";
-            String fileDiff = "/Users/Matheus/Desktop/diff.xml";
-            String fileArff = "/Users/Matheus/Desktop/arff.arff";
+            String file1 = "E:\\XChange\\get_gc_xchange_automatic_rules\\examples\\SBBD\\v1.xml";
+            String file2 = "E:\\XChange\\get_gc_xchange_automatic_rules\\examples\\SBBD\\v2.xml";
+            String fileDiff = "E:\\XChange\\get_gc_xchange_automatic_rules\\examples\\SBBD\\diff.xml";
+            String fileArff = "E:\\XChange\\get_gc_xchange_automatic_rules\\examples\\SBBD\\arff.arff";
             XDiff diff = new XDiff(file1, file2, fileDiff);
 
             List<List> mapeamentoDiff = new ArrayList<List>();
@@ -129,8 +129,9 @@ public class WekaParser {
 
                 Collection<Item> allTags = rule.getPremise();
                 allTags.addAll(rule.getConsequence());
-                for (Item tag : allTags)
+                for (Item tag : allTags) {
                     currentRule.add(tag.getAttribute().name());
+                }
 
                 if(!listRules.contains(currentRule)) {
                     listRules.add(currentRule);
