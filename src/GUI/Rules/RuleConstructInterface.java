@@ -4,6 +4,7 @@ import GUI.Layout.LayoutConstraints;
 import Manager.Manager;
 import Rules.RulesModule;
 import AutomaticRules.WekaParser;
+import GUI.MainInterface.MainInterface;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -41,7 +42,7 @@ import weka.associations.Item;
  * Junior
  */
 public class RuleConstructInterface extends JDialog implements ActionListener {
-
+     
     //Variáveis utilizadas
     private RulesModule rulesModule;
     private JButton btnAtributs;
@@ -75,6 +76,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     private static JPanel pnlWest;
     private JScrollPane pnWestScroll;
 
+    
     /**
      * Exibe a janela para construção das regras.
      *
@@ -96,7 +98,6 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         pnBotton = new JPanel(new FlowLayout());
         pnlUp = new JPanel(new FlowLayout());
         pnlCenter = new JPanel(new FlowLayout());
-        pnlWest = new JPanel(new FlowLayout());
         pnlRules = new JPanel(new FlowLayout());
         lblChoiceKey = new JLabel("Select the Key Attribute:");
 
@@ -113,12 +114,9 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         pnBotton.add(btnNext);
         btnNext.setVisible(false);
         pn = new JScrollPane(pnlCenter, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        pn.setPreferredSize(new Dimension(250, 300));
-        pnWestScroll = new JScrollPane(pnlWest, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        pnWestScroll.setPreferredSize(new Dimension(250, 300));
+        pn.setPreferredSize(new Dimension(250, 300));                
         pnlAll.add(pnlUp, BorderLayout.NORTH);
-        pnlAll.add(pn, BorderLayout.CENTER);
-        pnlAll.add(pn, BorderLayout.WEST);
+        pnlAll.add(pn, BorderLayout.CENTER);        
         pnlAll.add(pnBotton, BorderLayout.SOUTH);
 
         this.add(pnlAll, "Center");
@@ -353,7 +351,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
      */
     private void setPanelTerminal() {
         JPanel allPane = new JPanel();
-        this.setMinimumSize(new Dimension(900, 300));
+        this.setMinimumSize(new Dimension(1100, 600));
         this.setSize(this.getMinimumSize());
 
         this.setContentPane(allPane);
@@ -370,6 +368,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         GridBagConstraints constraints = new GridBagConstraints();
         allPane.setLayout(gridBag);
 
+        
         //paineis da janela de criação de regras
         JPanel pnlTop = new JPanel();
         pnlTop.setBorder(javax.swing.BorderFactory.createTitledBorder("Output:"));
@@ -377,10 +376,12 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         JPanel pnlMiddle = new JPanel();
         pnlMiddle.setBorder(javax.swing.BorderFactory.createTitledBorder("Conditions:"));
 
-        JPanel pnlBottom = new JPanel();
-
-        pnlWest.setBorder(javax.swing.BorderFactory.createTitledBorder("Association Rules:"));
-
+        JPanel pnlLeft = new JPanel();
+        pnlLeft.setBorder(javax.swing.BorderFactory.createTitledBorder("Association Rules:"));        
+                
+        JPanel pnlBottom = new JPanel();                
+        
+                
         //adiciona os paineis à janela de construção de regras
         LayoutConstraints.setConstraints(constraints, 1, 0, 1, 1, 1, 1);
         constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -397,10 +398,11 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         constraints.anchor = GridBagConstraints.SOUTH;
         allPane.add(pnlBottom, constraints);
 
-        LayoutConstraints.setConstraints(constraints, 0, 0, 1, 2, 1000, 1000);
-        constraints.fill = GridBagConstraints.VERTICAL;
+        LayoutConstraints.setConstraints(constraints, 0, 0, 1, 2, 600, 1);
+        constraints.fill = GridBagConstraints.BOTH;
         constraints.anchor = GridBagConstraints.WEST;
-        allPane.add(pnlWest, constraints);
+        allPane.add(pnlLeft, constraints);
+        
 
         //declara objetos de controle do layout do painel do topo
         GridBagLayout gridBagTop = new GridBagLayout();
@@ -419,16 +421,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.anchor = GridBagConstraints.NORTH;
         pnlTop.add(ruleOutputPnl, constraints);
-
-        //Layout para painel de geração de regras de associação
-        btnMiningRules.setText("Mining Rule");
-        btnMiningRules.setSize(btnFinish.getSize());
-        btnMiningRules.setMinimumSize(btnFinish.getSize());
-        LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1);
-        constraints.anchor = GridBagConstraints.WEST;
-        constraints.fill = GridBagConstraints.NONE;
-        pnlWest.add(btnMiningRules, constraints);
-
+        
         //layout para painel com o label e a area de texto para o nome de regra
         GridBagLayout gridBagRuleName = new GridBagLayout();
         ruleNamePnl.setLayout(gridBagRuleName);
@@ -464,7 +457,9 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         constraints.anchor = GridBagConstraints.NORTHWEST;
         ruleOutputPnl.add(comboExit, constraints);
 
-        //declara objetos de controle do layout do painel do topo
+        
+        
+        //declara objetos de controle do layout do painel central
         GridBagLayout gridBagMid = new GridBagLayout();
         pnlMiddle.setLayout(gridBagMid);
 
@@ -486,7 +481,9 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         LineRule.setPnlRules(pnlRules);
         linerules.add(firstLineRule);
 
-        //declara objetos de controle do layout do painel do topo
+        
+        
+        //declara objetos de controle do layout do painel de baixo (botões)
         GridBagLayout gridBagBottom = new GridBagLayout();
         pnlBottom.setLayout(gridBagBottom);
         constraints = new GridBagConstraints();
@@ -508,6 +505,33 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         constraints.fill = GridBagConstraints.NONE;
         pnlBottom.add(btnAddRule, constraints);
 
+        
+        
+        //declara objetos de controle do layout do painel da esquerda (regras de associação)
+        pnlWest = new JPanel();
+        GridBagLayout gridBagLeft = new GridBagLayout();        
+        pnlLeft.setLayout(gridBagLeft);
+        
+        JScrollPane jsPaneWest = new JScrollPane(pnlWest);
+        jsPaneWest.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jsPaneWest.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        
+        JPanel pnBtnMining = new JPanel();
+        pnBtnMining.add(btnMiningRules);
+        btnMiningRules.setText("Mining Rule");
+        
+//        pnlWest.add(btnMiningRules);
+        
+        LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1);
+        constraints.fill = GridBagConstraints.VERTICAL;
+        constraints.anchor = GridBagConstraints.WEST;
+        pnlLeft.add(pnBtnMining, constraints);
+        
+        LayoutConstraints.setConstraints(constraints, 0, 1, 1, 1, 1, 1000);
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.anchor = GridBagConstraints.WEST;
+        pnlLeft.add(jsPaneWest, constraints);
+        
         pnlCenter.validate();
         pnlCenter.setVisible(true);
         setVisible(true);
@@ -655,13 +679,16 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
     private void createListRules(List<Set> listRules) {
 
-        pnlWest.setLayout(new BoxLayout(pnlWest, WIDTH));
+        pnlWest.setLayout(new BoxLayout(pnlWest, BoxLayout.PAGE_AXIS));
+        pnlWest.setAutoscrolls(true);
+        
         int i = 1;
 
         for (final Set<String> rules : listRules) {
-
             JPanel painel = new JPanel();
-            painel.setLayout(new FlowLayout());
+            FlowLayout flow = new FlowLayout();
+            flow.setAlignment(FlowLayout.LEFT);
+            painel.setLayout(flow);
             painel.setAlignmentX(LEFT_ALIGNMENT);
 
             JLabel label = new JLabel("label" + i);
@@ -676,29 +703,19 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             button.setHorizontalTextPosition(SwingConstants.LEFT);
             button.setVerticalTextPosition(SwingConstants.TOP);
             button.setMargin(new Insets(1, 1, 1, 1));
-
             button.setName("button" + 1);
-
-//                GridBagConstraints constraints = new GridBagConstraints();       
-//                LayoutConstraints.setConstraints(constraints, 1, 0, 1, 1, 1, 1);
-//                constraints.anchor = GridBagConstraints.CENTER;
-//                constraints.fill = GridBagConstraints.NONE;                
-//                
-//                pnlWest.add(label, constraints);
-//                pnlWest.add(button, constraints);                    
+            
             button.addActionListener(new ActionListener() {
-                /**
-                 * evento do botão adicionar regras mineradas
-                 */
+                
                 public void actionPerformed(ActionEvent e) {
-
-                    button.setEnabled(false);                    
+                    pnlRules.removeAll();
+                    pnlRules.updateUI();
+                    linerules.removeAll(linerules);
+                    pnlRules.revalidate();
+                    pnlRules.updateUI();
                     
                     for(String rule : rules) {
-                        
                         LineRule aux = new LineRule();
-                        linerules.add(aux);
-                        LineRule.setLinerules(linerules);
                         pnlRules.add(aux);
 
                         aux.getComboOperator().setSelectedItem("!=");
@@ -713,17 +730,23 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                         aux.getBtnAddCondition().setEnabled(false);
                         aux.getComboTerm1().requestFocus();
                         
-                        linerules.remove(0);                                
+                        linerules.add(aux);
+                        LineRule.setLinerules(linerules);
                         pnlRules.revalidate();
                     }
+                    
+                    LineRule aux = new LineRule();
+                    linerules.add(aux);
+                    pnlRules.add(aux);
+                    aux.getComboTerm1().requestFocus();
+                    LineRule.setPnlRules(pnlRules);
+                    pnlRules.revalidate();                    
                 }
             });
 
             painel.add(button);
             painel.add(label);
-
-//            pnlWest.add(label);
-//            pnlWest.add(button);
+            
             pnlWest.add(painel);
             pnlWest.updateUI();
             i++;
