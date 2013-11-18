@@ -29,10 +29,11 @@ public class WekaParser {
     
     public static List<Set> gerarRegras(String args[]) {
         try {
-            String file1 = "E:\\XChange\\get_gc_xchange_automatic_rules\\examples\\SBBD\\v1.xml";
-            String file2 = "E:\\XChange\\get_gc_xchange_automatic_rules\\examples\\SBBD\\v2.xml";
-            String fileDiff = "E:\\XChange\\get_gc_xchange_automatic_rules\\examples\\SBBD\\diff.xml";
-            String fileArff = "E:\\XChange\\get_gc_xchange_automatic_rules\\examples\\SBBD\\arff.arff";
+            String file1 = "/Users/Matheus/Desenvolvimento/get_gc_xchange/examples/Employee/original_dataset/v9.xml";
+            String file2 = "/Users/Matheus/Desenvolvimento/get_gc_xchange/examples/Employee/original_dataset/v10.xml";
+            String fileDiff = "/Users/Matheus/Desktop/diff.xml";
+            String fileArff = "/Users/Matheus/Desktop/arff.arff";
+            String unchangedTag = "empno";
             XDiff diff = new XDiff(file1, file2, fileDiff);
 
             List<List> mapeamentoDiff = new ArrayList<List>();
@@ -92,6 +93,8 @@ public class WekaParser {
             arff.append("@data\n");
 
             for (i = 0; i < mapeamentoDiff.size(); i++) {
+                if(mapeamentoDiff.get(i).contains(unchangedTag))
+                    continue;
                 for (int j = 0; j < mapeamentoTags.size(); j++) {
                     if (j != 0) {
                         arff.append(',');
