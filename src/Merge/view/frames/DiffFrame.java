@@ -2,6 +2,7 @@ package Merge.view.frames;
 
 import GUI.Layout.LayoutConstraints;
 import GUI.MainInterface.MainInterface;
+import GUI.Util.MainInterfaceHandler;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -37,6 +38,7 @@ import Merge.view.dndtree.NodeMoveTransferHandler;
 import Merge.view.dndtree.TreeDropTarget;
 import java.awt.event.ActionListener;
 import javax.swing.JFileChooser;
+import javax.swing.JMenuItem;
 
 public class DiffFrame extends JPanel {
 
@@ -536,46 +538,82 @@ public class DiffFrame extends JPanel {
       * 
       * @return javax.swing.JButton
       */
-     private void setJButtonAplicar() {
-               jButtonAplicar = MainInterface.getWriteMerged();
-               for(ActionListener actionListener : jButtonAplicar.getActionListeners()){
-                  jButtonAplicar.removeActionListener(actionListener);
-               }
-               jButtonAplicar.addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent e) {
-                        if(e.getSource() == jButtonAplicar){
-                            JFileChooser chooser = new JFileChooser();
-                            String pathWay = "";
-                            int openedFile = chooser.showSaveDialog(null);
-                            if (openedFile==JFileChooser.APPROVE_OPTION){
-                                pathWay = chooser.getSelectedFile().getAbsolutePath();  // o getSelectedFile pega o arquivo e o getAbsolutePath retorna uma string contendo o endereço.
-                            }
-                            if(!pathWay.equals("")){
-                                String name = pathWay;
-                                if(!name.toLowerCase().endsWith(".xml")) {
-                                    name+=".xml";
-                                }
-                                saidaFileName = name;
-                            }
-                            TreeNodeExporter.getInstance().printTreeNode((DefaultMutableTreeNode) jTree.getModel().getRoot(), saidaFileName);
-                        }
+    private void setJButtonAplicar() {
+        jButtonAplicar = MainInterfaceHandler.getMainInterface().getWriteMergedBtn();
+        JMenuItem miWriteMerged = MainInterfaceHandler.getMainInterface().getMiWriteMerged();
+               
+        for(ActionListener actionListener : jButtonAplicar.getActionListeners()){
+            jButtonAplicar.removeActionListener(actionListener);
+        }
+        
+        for(ActionListener actionListener : miWriteMerged.getActionListeners()){
+            miWriteMerged.removeActionListener(actionListener);
+        }
+               
+        jButtonAplicar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                if(e.getSource() == jButtonAplicar){
+                    JFileChooser chooser = new JFileChooser();
+                    String pathWay = "";
+                    int openedFile = chooser.showSaveDialog(null);
+                    if (openedFile==JFileChooser.APPROVE_OPTION){
+                        pathWay = chooser.getSelectedFile().getAbsolutePath();  // o getSelectedFile pega o arquivo e o getAbsolutePath retorna uma string contendo o endereço.
                     }
-               }); 
-     }
+                    if(!pathWay.equals("")){
+                        String name = pathWay;
+                        if(!name.toLowerCase().endsWith(".xml")) {
+                            name+=".xml";
+                        }
+                        saidaFileName = name;
+                    }
+                    TreeNodeExporter.getInstance().printTreeNode((DefaultMutableTreeNode) jTree.getModel().getRoot(), saidaFileName);
+                }
+            }
+        });
+               
+        miWriteMerged.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser chooser = new JFileChooser();
+                String pathWay = "";
+                int openedFile = chooser.showSaveDialog(null);
+                if (openedFile==JFileChooser.APPROVE_OPTION){
+                    pathWay = chooser.getSelectedFile().getAbsolutePath();  // o getSelectedFile pega o arquivo e o getAbsolutePath retorna uma string contendo o endereço.
+                }
+                if(!pathWay.equals("")){
+                    String name = pathWay;
+                    if(!name.toLowerCase().endsWith(".xml")) {
+                        name+=".xml";
+                    }
+                    saidaFileName = name;
+                }
+                TreeNodeExporter.getInstance().printTreeNode((DefaultMutableTreeNode) jTree.getModel().getRoot(), saidaFileName);
+            }
+        });
+    }
 
      /**
       * This method initializes jButtonCancelar
       * 
       * @return javax.swing.JButton
       */
-     private void setJButtonCancel(){
-               jButtonCancelar = MainInterface.getCancelBtn();
-               jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent e) {
-                         //System.exit(1);
-                    	jPanel.setVisible(false);
-                    }
-               });
+    private void setJButtonCancel(){
+        jButtonCancelar = MainInterfaceHandler.getMainInterface().getCancelBtn();
+        JMenuItem miMergeCancel = MainInterfaceHandler.getMainInterface().getMiMergeCancel();
+        
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                //System.exit(1);
+                jPanel.setVisible(false);
+            }
+        });
+        
+        miMergeCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                jPanel.setVisible(false);
+            }
+        });
+        
+        
      }
 
      /**

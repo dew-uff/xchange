@@ -3,7 +3,6 @@ package GUI.MainInterface;
 import Documents.Documents;
 import GUI.Layout.LayoutConstraints;
 import Manager.Manager;
-import Translate.Similarity;
 import Translate.TranslateModule;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -11,7 +10,6 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
@@ -136,7 +134,7 @@ public class PrologFactsTab extends JPanel implements ActionListener {
      *
      * @param documents
      */
-    public void refresh(Documents documents) {
+    public void refresh(Documents documents){
 
         //Variaveis que indicam o indice do XML aberto em cada area de texto
         int leftCBIndex = leftCB.getSelectedIndex();
@@ -155,15 +153,15 @@ public class PrologFactsTab extends JPanel implements ActionListener {
             leftCB.addItem(s);
             rightCB.addItem(s);
         }
-        if (documents.docsIds().size() == 1) {
-            rightCB.addItem("");
-            rightCB.setSelectedIndex(1);
-        }
 
         if (documents.getSize() < 2) {//se não há documentos limpa as areas de texto
             setRightText("");
             setLeftText("");
         } else if (documents.getSize() >= 2) {//se há mais de dois documentos permanecem os que estavam em exibição
+            if(leftCBIndex == -1 && rightCBIndex == -1){//Quando se está em algum modulo (ex: Syntatic Diff) e troca para outro modulo (ex: Semantic Diff), ou vice e versa, esses valores ficam igual a -1. O mesmo ocorre quando se abre um projeto
+                leftCBIndex = 0;
+                rightCBIndex = 1;
+            }
             if (!this.main.getSimilarity()) {
                 if(this.manager.getContextKey()!=null && this.manager.getContextKey().size()>=2){
                     this.setLeftText(this.manager.getContextKey().get(0).getFacts());

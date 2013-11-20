@@ -1,7 +1,9 @@
 package GUI.MainInterface;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
@@ -80,5 +82,25 @@ public class DocumentsPane extends JSplitPane{
         this.right.setText(s);
         this.right.setCaretPosition(0);
     }
-
+    
+    
+    /**
+     * Redefine a posição dos SplitPane's de acordo com a quantidade de documentos abertos
+     * @param docSize 
+    */
+    public void resizeSplitPane(int docSize){
+        double dimJFrame = MainInterface.getWidthJFrame(); // Obtém o Tamanho Atual da Janela do XChange
+        
+        Toolkit tk = Toolkit.getDefaultToolkit();//objeto para pegar as dimensoes da tela
+        Dimension dimension = tk.getDefaultToolkit().getScreenSize();//funçao para pegar as dimensoes da tela
+        double dimPC = ((dimension.getSize().getWidth())); // Obtem a Largura da Tela do Computador
+        double inicial = (7*(int)dimPC/8); // Tamanho da Tela Inicialmente
+        
+        double diferenca = ((dimPC-inicial)/3); // Diferença da Tela do Computador e da Tela Inicial do XChange divido por 3
+        int divider = (int)((dimJFrame-diferenca)/2)+1; // Calcula a localização do SplitPane Geral
+        
+        if(docSize==1 || docSize>=2){
+            this.setDividerLocation(divider);
+        }
+    }
 }

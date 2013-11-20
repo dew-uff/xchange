@@ -13,11 +13,8 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -152,7 +149,11 @@ public class XMLDiffTab extends JPanel implements ActionListener{
         if(documents.getSize()==2){
             leftCB.setSelectedIndex(0);
             rightCB.setSelectedIndex(1);
-        }else if(documents.getSize()>=2){
+        }else if(documents.getSize()>2){
+            if(leftCBIndex == -1 && rigthCBIndex == -1){//Quando se está em algum modulo (ex: Syntatic Diff) e troca para outro modulo (ex: Semantic Diff), ou vice e versa, esses valores ficam igual a -1. O mesmo ocorre quando se abre um projeto
+                leftCBIndex = 0;
+                rigthCBIndex = 1;
+            }
             leftCB.setSelectedIndex(leftCBIndex);
             rightCB.setSelectedIndex(rigthCBIndex);
         }else if(documents.getSize()==1){

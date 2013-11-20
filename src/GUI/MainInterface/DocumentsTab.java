@@ -3,15 +3,12 @@ package GUI.MainInterface;
 import Documents.Documents;
 import GUI.Layout.LayoutConstraints;
 import Manager.Manager;
-import Translate.Similarity;
-import Translate.TranslateModule;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
@@ -154,21 +151,20 @@ public class DocumentsTab extends JPanel implements ActionListener {
             leftCB.addItem(s);
             rightCB.addItem(s);
         }
-        if (documents.docsIds().size() == 1) {
-            rightCB.addItem("");
-            rightCB.setSelectedIndex(1);
-        }
-
+        
         if (documents.getSize() == 0) {//se não há documentos limpa as areas de texto
             setRightText("");
             setLeftText("");
         } else if (documents.getSize() == 1) {//se há apenas um documento só o mostra no lado esquerdo
             leftCB.setSelectedIndex(0);
-
             this.setLeftText(documents.getContent(leftCB.getSelectedIndex()));
-
+            rightCB.addItem("");
+            rightCB.setSelectedIndex(1);
         } else if (documents.getSize() >= 2) {//se há mais de dois documentos permanecem os que estavam em exibição
-
+            if(leftCBIndex == -1 && rightCBIndex == -1){//Quando se está em algum modulo (ex: Syntatic Diff) e troca para outro modulo (ex: Semantic Diff), ou vice e versa, esses valores ficam igual a -1. O mesmo ocorre quando se abre um projeto
+                leftCBIndex = 0;
+                rightCBIndex = 1;
+            }
             this.setLeftText(documents.getContent(leftCBIndex));
             this.setRightText(documents.getContent(rightCBIndex));
 
@@ -179,11 +175,14 @@ public class DocumentsTab extends JPanel implements ActionListener {
         //adiciona novamente os eventos
         leftCB.addActionListener(this);
         rightCB.addActionListener(this);
+        
+        //Redefine a posição dos SplitPane's de acordo com a quantidade de documentos abertos
+        this.docPane.resizeSplitPane(documents.getSize());
 
         //define a nova lista de documentos da classe
         this.documents = documents;
     }
-
+    
     /**
      * Trata os eventos da classe.
      *
@@ -192,14 +191,11 @@ public class DocumentsTab extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(leftCB)) {//muda o texto esquerdo de acordo com o combobox esquerdo
-
             this.setLeftText(documents.getContent(leftCB.getSelectedIndex()));
         }
         if (e.getSource().equals(rightCB)) {//muda o texto direito de acordo com o combobox direito
             if (rightCB.getSelectedIndex() < rightCB.getItemCount() && rightCB.getItemCount()==2) {
-
                 this.setRightText(documents.getContent(rightCB.getSelectedIndex()));
-
             }
         }
     }
