@@ -4,32 +4,38 @@
  */
 package GUI.Util;
 
+import GUI.Layout.LayoutConstraints;
 import Manager.Manager;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 /**
  *
  * @author Marcio Tadeu de Oliveira Jr
  */
-public class ProgressBar extends JFrame implements Runnable{
+public class ProgressBar extends JPanel implements Runnable{
 
     private int current;
     private JProgressBar pBar;
-    private int height = 60, width = 300;
-    private String label;
+    private String text;
+    private JLabel label;
     private Thread running;
-    private boolean threadFlag=false;
+    private boolean threadFlag;
+    private String marker="...";
 
     /**
      * Constrói uma janela com barra de progresso.
      * @param m Número de passos máximo que a barra fará
-     * @param title Título da janela
+     * @param legend Título da janela
      */
-    public ProgressBar(int m, String title) {
-        super(title);
+    public ProgressBar(int m, String legend) {
+        super();
         
         try {
             Thread.sleep(1000);
@@ -37,31 +43,72 @@ public class ProgressBar extends JFrame implements Runnable{
             Logger.getLogger(Manager.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//função ao clicar no botão fechar
-        this.setLocationRelativeTo(null);
-
-        this.setSize(width, height);
-
-        this.setResizable(false);
-
+        //declara objetos de controle do layout
+        GridBagLayout gridBag = new GridBagLayout();
+        GridBagConstraints constraints = new GridBagConstraints();        
+        this.setLayout(gridBag);
+        
         pBar = new JProgressBar();
         pBar.setStringPainted(true);
         pBar.setVisible(true);
         pBar.setMaximum(m);
         pBar.setValue(0);
         
-        this.label=title;
+        JPanel pBarPane = new JPanel();
+        
+        GridBagLayout pBarGridBag = new GridBagLayout();
+        pBarPane.setLayout(pBarGridBag);
+        
+        LayoutConstraints.setConstraints(constraints,0,0,1,1,1,1);
+        constraints.insets=new Insets(5,0,0,9);
+        constraints.fill=GridBagConstraints.HORIZONTAL;
+        constraints.anchor=GridBagConstraints.NORTHWEST;
+        pBarGridBag.setConstraints(pBar,constraints); 
+        
+        
+        pBarPane.add(pBar);
+        
+        this.add(pBarPane);
+        
+        LayoutConstraints.setConstraints(constraints,1,0,1,1,25,1);
+        constraints.insets=new Insets(0,0,0,0);
+        constraints.fill=GridBagConstraints.HORIZONTAL;
+        constraints.anchor=GridBagConstraints.NORTHWEST;
+        gridBag.setConstraints(pBarPane,constraints);   
+        
+        label = new JLabel(legend);
+        setLabel(legend);
+        label.setVisible(true);
+        
+        JPanel labelPane = new JPanel();
+        
+        GridBagLayout labelGridBag = new GridBagLayout();
+        labelPane.setLayout(labelGridBag);
+        
+        LayoutConstraints.setConstraints(constraints,0,0,1,1,1,1);
+        constraints.insets=new Insets(0,9,0,0);
+        constraints.fill=GridBagConstraints.BOTH;
+        constraints.anchor=GridBagConstraints.WEST;
+        labelGridBag.setConstraints(label,constraints); 
+        
+        labelPane.add(label);
+        
+        this.add(labelPane);
+        
+        LayoutConstraints.setConstraints(constraints,0,0,1,1,100,1);
+        constraints.insets=new Insets(0,0,0,0);
+        constraints.fill=GridBagConstraints.HORIZONTAL;
+        constraints.anchor=GridBagConstraints.WEST;
+        gridBag.setConstraints(labelPane,constraints); 
 
-        current = 0;
-
-        this.add(pBar);
+        current = 50;
 
         this.setVisible(true);
 
         pBar.paintImmediately(pBar.getBounds());
         
-        running = new Thread(this); 
-        running.start();
+        this.repaint();
+        this.revalidate();
     }
 
     /**
@@ -75,53 +122,80 @@ public class ProgressBar extends JFrame implements Runnable{
 
     /**
      * Muda o valor da legenda.
-     * @param label Novo valor da legenda.
+     * @param legend Novo valor da legenda.
      */
-    public void setLabel(String label) {
-        this.label = label; 
+    public void setLabel(String legend) {
+        text=legend;
+        label.setText(text+marker);
+        label.setVisible(true);
     }
+    
+    public String getLabel(){
+        return text;
+    }
+    
+    public void stop(){
+        setLabel("Ready: Waiting for User");
+        label.setText(text);
+        threadFlag=true;
+        pBar.setVisible(true);
+        pBar.setValue(0);
+        pBar.paintImmediately(pBar.getBounds());
+        current=0;
+    }
+    
+    public void restart(int m, String legend){
+        pBar.setStringPainted(true);
+        pBar.setVisible(true);
+        pBar.setMaximum(m);
+        pBar.setValue(0);
+        pBar.paintImmediately(pBar.getBounds());
+        
+        threadFlag=false;
+        
+        setLabel(legend);
 
-    @Override
-    public void dispose() {
-        this.threadFlag=true;
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Manager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        super.dispose();
+        running = new Thread(this); 
+        running.start();
     }
+    
 
     /**
-     * Executa as ações cnstantes de mudança na interface de progresso.
+     * Executa as ações constantes na barra de progresso.
      */
     public void run() {
         int i=0;
         while(!threadFlag){
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Manager.class.getName()).log(Level.SEVERE, null, ex);
             }
-            String marker="";
             int a = i%4;
             if(a==0){
-//                marker="|";
                 marker="...";
             }else if(a==1){
-//                 marker="/";
                 marker="·..";
             } else if(a==2){
-//                 marker="-";
                 marker=".·.";
             } else if(a==3){
                 marker="..·";
-//                 marker="\\";
-            } //else if(a==4){
-//                 marker="|";
-//            }
+            }
             i++;
-            this.setTitle(marker+" "+this.label);                    
+            label.setText(text+marker+" ");
         }
+        if(!getLabel().equals("Ready: Waiting for User")) {
+            setLabel("Finish");
+        }
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Manager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        setLabel("Ready: Waiting for User");
+    }
+    
+    public int getValue(){
+        return current;
     }
 }

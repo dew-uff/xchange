@@ -6,6 +6,7 @@ package GUI.MainInterface;
 
 import Documents.Documents;
 import GUI.Layout.LayoutConstraints;
+import gems.ic.uff.br.newView.DiffTreePanel;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -14,7 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
-import gems.ic.uff.br.newView.DiffTreePanel;
 
 /**
  * @author Carlos Roberto Carvalho Oliveira
@@ -108,7 +108,7 @@ public class SintaticDiffTree extends JPanel implements ActionListener{
 
         //Variaveis que indicam o indice do XML aberto em cada area de texto
         int leftCBIndex = leftCB.getSelectedIndex();
-        int rigthCBIndex = rightCB.getSelectedIndex();
+        int rightCBIndex = rightCB.getSelectedIndex();
 
         //remove os eventos relacionados aos comboboxes
         leftCB.removeActionListener(this);
@@ -127,9 +127,13 @@ public class SintaticDiffTree extends JPanel implements ActionListener{
         if(documents.getSize()==2){
             leftCB.setSelectedIndex(0);
             rightCB.setSelectedIndex(1);
-        }else if(documents.getSize()>=2){
+        }else if(documents.getSize() > 2){
+            if(leftCBIndex == -1 && rightCBIndex == -1){//Quando se está em algum modulo (ex: Syntatic Diff) e troca para outro modulo (ex: Semantic Diff), ou vice e versa, esses valores ficam igual a -1. O mesmo ocorre quando se abre um projeto
+                leftCBIndex = 0;
+                rightCBIndex = 1;
+            }
             leftCB.setSelectedIndex(leftCBIndex);
-            rightCB.setSelectedIndex(rigthCBIndex);
+            rightCB.setSelectedIndex(rightCBIndex);
         }else if(documents.getSize()==1){
             leftCB.setSelectedIndex(0);
             rightCB.setSelectedIndex(0);

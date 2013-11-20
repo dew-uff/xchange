@@ -2,17 +2,13 @@ package GUI.MainInterface;
 
 import Documents.Documents;
 import GUI.Layout.LayoutConstraints;
-import GUI.Util.ProgressHandler;
 import Manager.Manager;
-import Translate.Similarity;
-import Translate.TranslateModule;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
@@ -30,7 +26,6 @@ public class DocumentsTab extends JPanel implements ActionListener {
     private JComboBox leftCB, rightCB;
     private Documents documents;
     private Manager manager;
-    private boolean showFacts = false;
     private MainInterface main;
 
     /**
@@ -110,26 +105,13 @@ public class DocumentsTab extends JPanel implements ActionListener {
         docPane.setVisible(true);
 
         this.add(docPane);
-        this.manager = manager;        
-    }
-    
-    /**
-     * Alterna a visualização entre documentos XML e fatos prolog de acordo com o parametro informado
-     */
-    public void setFacts(boolean facts){
-        this.showFacts=facts;
-    }
-
-    /**
-     * Alterna a visualização entre documentos XML e fatos prolog
-     */
-    public void setFacts() {
-        this.showFacts = !this.showFacts;
+        this.manager = manager;
     }
 
     /**
      * modifica o texto da TextArea esquerda para o texto no parametro s
-     * @param s 
+     *
+     * @param s
      */
     void setLeftText(String s) {
         this.docPane.setLeftText(s);
@@ -137,6 +119,7 @@ public class DocumentsTab extends JPanel implements ActionListener {
 
     /**
      * modifica o texto da TextArea direita para o texto no parametro s
+     *
      * @param s
      */
     void setRightText(String s) {
@@ -144,8 +127,10 @@ public class DocumentsTab extends JPanel implements ActionListener {
     }
 
     /**
-     * Atualiza os componentes graficos de acordo com a lista de documentos passada como parametros
-     * @param documents 
+     * Atualiza os componentes graficos de acordo com a lista de documentos
+     * passada como parametros
+     *
+     * @param documents
      */
     public void refresh(Documents documents) {
 
@@ -166,38 +151,23 @@ public class DocumentsTab extends JPanel implements ActionListener {
             leftCB.addItem(s);
             rightCB.addItem(s);
         }
-        if (documents.docsIds().size() == 1) {
-            rightCB.addItem("");
-            rightCB.setSelectedIndex(1);
-        }
-
+        
         if (documents.getSize() == 0) {//se não há documentos limpa as areas de texto
             setRightText("");
             setLeftText("");
         } else if (documents.getSize() == 1) {//se há apenas um documento só o mostra no lado esquerdo
             leftCB.setSelectedIndex(0);
-            if (showFacts) {
-                if(!this.main.getSimilarity())
-                    this.setLeftText(this.manager.getContextKey().get(0).getFacts());
-                else
-                    this.setLeftText(this.manager.getSimilarity().get(0).getFacts());
-            } else {
-                this.setLeftText(documents.getContent(leftCB.getSelectedIndex()));
-            }
+            this.setLeftText(documents.getContent(leftCB.getSelectedIndex()));
+            rightCB.addItem("");
+            rightCB.setSelectedIndex(1);
         } else if (documents.getSize() >= 2) {//se há mais de dois documentos permanecem os que estavam em exibição
-            if (showFacts) {
-                if(!this.main.getSimilarity()){
-                    this.setLeftText(this.manager.getContextKey().get(0).getFacts());
-                    this.setRightText(this.manager.getContextKey().get(1).getFacts());
-                }else{
-                    showSimilarityFacts(leftCBIndex,rightCBIndex);
-                    rightCBIndex=rightCB.getSelectedIndex();
-                    leftCBIndex=leftCB.getSelectedIndex();
-                }
-            } else {
-                this.setLeftText(documents.getContent(leftCBIndex));
-                this.setRightText(documents.getContent(rightCBIndex));
+            if(leftCBIndex == -1 && rightCBIndex == -1){//Quando se está em algum modulo (ex: Syntatic Diff) e troca para outro modulo (ex: Semantic Diff), ou vice e versa, esses valores ficam igual a -1. O mesmo ocorre quando se abre um projeto
+                leftCBIndex = 0;
+                rightCBIndex = 1;
             }
+            this.setLeftText(documents.getContent(leftCBIndex));
+            this.setRightText(documents.getContent(rightCBIndex));
+
             leftCB.setSelectedIndex(leftCBIndex);
             rightCB.setSelectedIndex(rightCBIndex);
         }
@@ -205,70 +175,36 @@ public class DocumentsTab extends JPanel implements ActionListener {
         //adiciona novamente os eventos
         leftCB.addActionListener(this);
         rightCB.addActionListener(this);
+        
+        //Redefine a posição dos SplitPane's de acordo com a quantidade de documentos abertos
+        this.docPane.resizeSplitPane(documents.getSize());
 
         //define a nova lista de documentos da classe
         this.documents = documents;
     }
-
+    
     /**
      * Trata os eventos da classe.
+     *
      * @param e
      */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(leftCB)) {//muda o texto esquerdo de acordo com o combobox esquerdo
-            if (showFacts) {
-                if(!this.main.getSimilarity())
-                    this.setLeftText(this.manager.getContextKey().get(this.leftCB.getSelectedIndex()).getFacts());
-                else{
-                    showSimilarityFacts(leftCB.getSelectedIndex(),rightCB.getSelectedIndex());
-                }
-            } else {
-                this.setLeftText(documents.getContent(leftCB.getSelectedIndex()));
-            }
+            this.setLeftText(documents.getContent(leftCB.getSelectedIndex()));
         }
         if (e.getSource().equals(rightCB)) {//muda o texto direito de acordo com o combobox direito
-            if (rightCB.getSelectedIndex() < rightCB.getItemCount()) {
-                if (showFacts) {
-                    if(!this.main.getSimilarity())
-                        this.setRightText(this.manager.getContextKey().get(this.rightCB.getSelectedIndex()).getFacts());
-                    else
-                        showSimilarityFacts(leftCB.getSelectedIndex(),rightCB.getSelectedIndex());
-                } else {
-                    this.setRightText(documents.getContent(rightCB.getSelectedIndex()));
-                }
+            if (rightCB.getSelectedIndex() < rightCB.getItemCount() && rightCB.getItemCount()==2) {
+                this.setRightText(documents.getContent(rightCB.getSelectedIndex()));
             }
         }
     }
-
-    private void showSimilarityFacts(int leftCBIndex, int rightCBIndex) {
-      
-        TranslateModule.reset();
-        Similarity sim = new Similarity(this.documents.getPathWays().get(leftCBIndex));
-        if (rightCBIndex == leftCBIndex) {
-            setLeftText("The documents are the same");
-            setRightText("The documents are the same");
-        } else {
-            
-            ProgressHandler.makeNew(8, "Geeting Facts");//cria uma barra de progresso, com tamanho 8, 6 para documentsWithIDs, 2 para colocar os fatos no text area esquerdo e direito
-            
-            if (rightCBIndex > leftCBIndex) {
-                sim.documentsWithIDs(documents.getFile(leftCBIndex).getAbsolutePath(), documents.getFile(rightCBIndex).getAbsolutePath(), manager.getSimilarityRate());
-            } else if (leftCBIndex > rightCBIndex) {
-                sim.documentsWithIDs(documents.getFile(rightCBIndex).getAbsolutePath(), documents.getFile(leftCBIndex).getAbsolutePath(), manager.getSimilarityRate());
-                leftCB.setSelectedIndex(rightCBIndex);
-                rightCB.setSelectedIndex(leftCBIndex);
-            }
-            ProgressHandler.setLabel("Getting \"BEFORE\" facts");//muda o texto de loading
-            sim.translateFactsID(new File("temp1.xml"));
-            setLeftText(sim.getFacts());
-            
-            ProgressHandler.setLabel("Getting \"AFTER\" facts");//muda o texto de loading
-            sim.translateFactsID(new File("temp2.xml"));
-            setRightText(sim.getFacts());
-            
-            ProgressHandler.dispose();
-            
-        }
+    
+    public int getLeftCBIndex(){
+        return this.leftCB.getSelectedIndex();
+    }
+    
+    public int getRightCBIndex(){
+        return this.rightCB.getSelectedIndex();
     }
 }
