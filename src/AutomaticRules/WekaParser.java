@@ -33,18 +33,52 @@ public class WekaParser {
             String file2 = "/Users/Matheus/Desenvolvimento/get_gc_xchange/examples/Employee/original_dataset/v10.xml";
             String fileDiff = "/Users/Matheus/Desktop/diff.xml";
             String fileArff = "/Users/Matheus/Desktop/arff.arff";
-            String unchangedTag = "empno";
-            XDiff diff = new XDiff(file1, file2, fileDiff);
-
-            List<List> mapeamentoDiff = new ArrayList<List>();
-            int i = 0;
-
+            
+            //Lendo todas as tags do <emp> baseado na segunda versão
             XMLInputFactory factory = XMLInputFactory.newInstance();
-            InputStream is = new FileInputStream(fileDiff);
+            InputStream is = new FileInputStream(file2);
             XMLStreamReader reader = factory.createXMLStreamReader(is);
+            List<String> mapeamentoTags = new ArrayList<String>();
 
             String root = null;
             String each = null;
+            while (reader.hasNext()) {
+                int event = reader.next();
+                if (event == XMLStreamConstants.START_ELEMENT) {
+                    if (root == null) {
+                        root = reader.getLocalName();
+                    } else if (each == null) {
+                        each = reader.getLocalName();
+                    } else if (reader.getLocalName().equalsIgnoreCase(each)) {
+                        break;
+                    } else {
+                        mapeamentoTags.add(reader.getLocalName());
+                    }
+                }
+            }
+            is.close();
+            
+            //Selecionando a tag chave primaria
+            String unchangedTag = "empno";
+            //Selecionando tags a não serem consideradas
+            List<String> removeTags = new ArrayList<String>();
+            removeTags.add("deptno");
+            removeTags.add("hiredate");
+            
+            //Removendo tags selecionadas do mapeamento de Tags
+            mapeamentoTags.removeAll(removeTags);
+            
+            //Gerando o Diff
+            XDiff diff = new XDiff(file1, file2, fileDiff);
+            //Mepeando o Diff em Lists
+            List<List> mapeamentoDiff = new ArrayList<List>();
+            int i = 0;
+            
+            is = new FileInputStream(fileDiff);
+            reader = factory.createXMLStreamReader(is);
+
+            root = null;
+            each = null;
             while (reader.hasNext()) {
                 int event = reader.next();
                 if (event == XMLStreamConstants.START_ELEMENT) {
@@ -62,39 +96,21 @@ public class WekaParser {
                 }
             }
             is.close();
-
-            is = new FileInputStream(file2);
-            reader = factory.createXMLStreamReader(is);
-            List<String> mapeamentoTags = new ArrayList<String>();
-
-            root = null;
-            each = null;
-            while (reader.hasNext()) {
-                int event = reader.next();
-                if (event == XMLStreamConstants.START_ELEMENT) {
-                    if (root == null) {
-                        root = reader.getLocalName();
-                    } else if (each == null) {
-                        each = reader.getLocalName();
-                    } else if (reader.getLocalName().equalsIgnoreCase(each)) {
-                        break;
-                    } else {
-                        mapeamentoTags.add(reader.getLocalName());
-                    }
-                }
-            }
-            is.close();
-
+            
+            
+            //Gerando ARFF baseado nas tags que você quer
             StringBuilder arff = new StringBuilder();
             arff.append("@relation ").append(root).append('\n');
             for (i = 0; i < mapeamentoTags.size(); i++) {
-                arff.append("@attribute '").append(mapeamentoTags.get(i)).append("' {y}\n");
+                    arff.append("@attribute '").append(mapeamentoTags.get(i)).append("' {y}\n");
             }
             arff.append("@data\n");
 
             for (i = 0; i < mapeamentoDiff.size(); i++) {
-                if(mapeamentoDiff.get(i).contains(unchangedTag))
+                
+                if(mapeamentoDiff.get(i).contains(unchangedTag)) //Eliminando DIFF que possua a tag selecionada como chave primária
                     continue;
+                
                 for (int j = 0; j < mapeamentoTags.size(); j++) {
                     if (j != 0) {
                         arff.append(',');
