@@ -1,11 +1,9 @@
 package GUI.FileManager;
 
 import Documents.Documents;
-import java.io.BufferedReader;
+import Exception.NoSelectedFileException;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JFileChooser;
@@ -30,8 +28,8 @@ public abstract class ProjectSaver{
         File file = null;
         int openedFile = chooser.showSaveDialog(null); // showSaveDialog retorna um inteiro , e ele ira determinar que o chooser será para salvar.
         if (openedFile==JFileChooser.APPROVE_OPTION){
-           pathWay = chooser.getSelectedFile().getAbsolutePath();
-            LastpathManager.savelastpath(pathWay, "xcp");       
+            pathWay = chooser.getSelectedFile().getAbsolutePath();
+            LastpathManager.savelastpath(pathWay, "xcp");
             //salva o arquivo no local selecionado
             String name = pathWay;
             if(!name.toUpperCase().endsWith(".XCP")) {

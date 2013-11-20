@@ -1,5 +1,6 @@
 package GUI.FileManager;
 
+import Exception.NoSelectedFileException;
 import Documents.Documents;
 import Documents.XMLFormatter;
 import gems.ic.uff.br.modelo.LcsXML;

@@ -1,13 +1,16 @@
 package GUI.MainInterface;
 import Documents.Documents;
+import Exception.NoSelectedFileException;
 import GUI.About.*;
 import GUI.FileManager.MultiDiffSaver;
-import GUI.FileManager.NoSelectedFileException;
 import GUI.FileManager.ProjectLoader;
 import GUI.FileManager.ProjectSaver;
 import GUI.FileManager.XMLLoader;
 import GUI.Layout.LayoutConstraints;
 import GUI.Rules.RuleMainInterface;
+import GUI.Util.MainInterfaceHandler;
+import GUI.Util.ProgressBar;
+import GUI.Util.ProgressHandler;
 import Manager.Manager;
 import Merge.MergeShow;
 import gems.ic.uff.br.newView.MergeThreeWayPanel;
@@ -28,23 +31,26 @@ import javax.swing.event.ChangeListener;
  */
 public class MainInterface extends JFrame implements ActionListener{
     private JMenuBar menuBar;
-    private JMenu mFile,mTools, mAbout;
-    private JMenuItem miNew,miOpen,miSave,miContext,miSimilarity, miAdd, miAboutGET, miAboutXChange, miHowToUse,miManager,miShowFacts, miMerge, miInference, miSettings;
+    private JMenu mFile,mTools, mView, mAbout,mMerge;
+    private JMenuItem miNew,miOpen,miSave,miContext,miSimilarity, miAdd, miAboutGET, miAboutXChange, miHowToUse,miManager, miSettings, miMerge, miApplyChoice, miWriteMerged, miMergeCancel , miSyntaticDiff, miSemanticDiff, miSyntaticMerge, miSemanticMerge;
     private ResultsTab resultsTab;
     private DocumentsTab documentsTab;
+    private PrologFactsTab prologFactsTab;
     private JTabbedPane tabbedPane, tabbedPaneMerge;
     private Documents documents;
-    private JButton newBtn,openBtn,addBtn,saveBtn,contextBtn,similarityBtn,managerBtn, mergeBtn, showFactsBtn, saveXMLDiffBtn;
-    private static JButton applyChoicesBtn, writeBtn, cancelBtn;
+    private JButton newBtn,openBtn,addBtn,saveBtn,contextBtn,similarityBtn,managerBtn, mergeBtn, saveXMLDiffBtn, syntaticDiffBtn, semanticDiffBtn, syntaticMergeBtn, semanticMergeBtn, applyChoicesBtn, writeBtn, cancelBtn, reportBtn;
     private boolean isSimilarity;
     private float similarityRate;
     private Manager manager;
-    private JPanel resultsTabMerge, conflictsTabMerge, treesTabMerge, mergeTreeTabMerge;
+    private JPanel resultsTabMerge, conflictsTabMerge, treesTabMerge, mergeTreeTabMerge, initialPane, optionPane;
     private DocumentsTabMerge documentsTabMerge;
-    private Boolean isMerge = false;
+    private Boolean isSyntaticMerge = false, isSyntaticDiff = false, isSemanticDiff = false;
     private SintaticDiffTree sintaticDiff;
     private XMLDiffTab xmldifftab;
     private static JFrame jFrame;
+    private ProgressBar pBar;
+    private GridBagLayout gridBag;
+    private GridBagConstraints constraints;
     
     public MainInterface(Manager manager){//define caracteriscas da janela, tais como tamanho e redimensionamento
         super("XChange");//contrutor, nomeia a janela
@@ -57,23 +63,23 @@ public class MainInterface extends JFrame implements ActionListener{
         this.setMinimumSize(dim);//seta o tamanho mínimo da interface grafica
         this.setLocationRelativeTo(null);//posicao inicial central
         this.buildInterface(); //cria o conteudo da janela principal
+        MainInterfaceHandler.setMainInterface(this);
     }
     
     private void buildInterface(){//monta a interface grafica
-        
+
         //lista de documentos XML abertos
         this.documents = new Documents();
         
         //declara objetos de controle do layout
-        GridBagLayout gridBag = new GridBagLayout();
-        GridBagConstraints constraints = new GridBagConstraints();        
+        gridBag = new GridBagLayout();
+        constraints = new GridBagConstraints();        
         this.setLayout(gridBag);
        
         //cria a barra de menu
         menuBar = new JMenuBar();
         menuBar.setVisible(true);
         this.setJMenuBar(menuBar);
-        
         
         //cria o menu "File" e seus itens
         mFile = new JMenu("File");
@@ -100,12 +106,44 @@ public class MainInterface extends JFrame implements ActionListener{
             mFile.add(miSave);
             miSave.addActionListener(this);
             
-        //cria o item "Tools" na barra de menus
+        //cria o item "View" na barra de menus    
+        mView = new JMenu("View");
+        mView.setMnemonic('v');
+        menuBar.add(mView);
+        mView.addActionListener(this);
             
+            miSyntaticDiff = new JMenuItem("Syntatic Diff");
+            miSyntaticDiff.setMnemonic('y');
+            mView.add(miSyntaticDiff);
+            miSyntaticDiff.addActionListener(this);
+            miSyntaticDiff.setEnabled(true);
+            
+            miSemanticDiff = new JMenuItem("Semantic Diff");
+            miSemanticDiff.setMnemonic('e');
+            mView.add(miSemanticDiff);
+            miSemanticDiff.addActionListener(this);
+            miSemanticDiff.setEnabled(true);
+            
+            mView.addSeparator();
+            
+            miSyntaticMerge = new JMenuItem("Syntatic Merge");
+            miSyntaticMerge.setMnemonic('n');
+            mView.add(miSyntaticMerge);
+            miSyntaticMerge.addActionListener(this);
+            miSyntaticMerge.setEnabled(true);
+            
+            miSemanticMerge = new JMenuItem("Semantic Merge");
+            miSemanticMerge.setMnemonic('m');
+            mView.add(miSemanticMerge);
+            miSemanticMerge.addActionListener(this);
+            miSemanticMerge.setEnabled(false);
+            
+        //cria o item "Tools" na barra de menus
         mTools = new JMenu("Tools");
         mTools.setMnemonic('o');
         menuBar.add(mTools); 
         mTools.addActionListener(this);
+        mTools.setEnabled(true);
             
             miManager = new JMenuItem("Manager");
             miManager.setMnemonic('m');
@@ -119,27 +157,47 @@ public class MainInterface extends JFrame implements ActionListener{
             miContext.setMnemonic('k');
             mTools.add(miContext);
             miContext.addActionListener(this);
+            miContext.setEnabled(false);
             
             miSimilarity = new JMenuItem("Similarity");
             miSimilarity.setMnemonic('s');
             mTools.add(miSimilarity);
             miSimilarity.addActionListener(this);
-
-            miShowFacts = new JMenuItem("Show Facts/XML");
-            miSimilarity.setMnemonic('w');
-            mTools.add(miShowFacts);
-            miShowFacts.addActionListener(this);
+            miSimilarity.setEnabled(false);
            
-            miMerge = new JMenuItem("Merge");
-            miMerge.setMnemonic('g');
-            mTools.add(miMerge);
-            miMerge.addActionListener(this);
+            mMerge = new JMenu("Merge Actions");
+            mMerge.setMnemonic('g');
+            mTools.add(mMerge);
+            mMerge.addActionListener(this);
+            mMerge.setEnabled(false);
             
-            miInference = new JMenuItem("Inference");
-            miInference.setMnemonic('i');
-            miInference.setVisible(false);
-            mTools.add(miInference);
-            miInference.addActionListener(this);
+                miMerge = new JMenuItem("Merge");
+                miMerge.setMnemonic('r');
+                miMerge.setVisible(true);
+                miMerge.setEnabled(false);
+                mMerge.add(miMerge);
+                miMerge.addActionListener(this);
+                
+                miApplyChoice = new JMenuItem("Apply Choice");
+                miApplyChoice.setMnemonic('p');
+                miApplyChoice.setVisible(true);
+                miApplyChoice.setEnabled(false);
+                mMerge.add(miApplyChoice);
+                miApplyChoice.addActionListener(this);
+                
+                miWriteMerged = new JMenuItem("Write Merged");
+                miWriteMerged.setMnemonic('w');
+                miWriteMerged.setVisible(true);
+                miWriteMerged.setEnabled(false);
+                mMerge.add(miWriteMerged);
+                miWriteMerged.addActionListener(this);
+                
+                miMergeCancel = new JMenuItem("Cancel");
+                miMergeCancel.setMnemonic('c');
+                miMergeCancel.setVisible(true);
+                miMergeCancel.setEnabled(false);
+                mMerge.add(miMergeCancel);
+                miMergeCancel.addActionListener(this);
             
             mTools.addSeparator();
             
@@ -148,6 +206,7 @@ public class MainInterface extends JFrame implements ActionListener{
             miSettings.setVisible(true);
             mTools.add(miSettings);
             miSettings.addActionListener(this);
+            miSettings.setEnabled(false);
             
         //Cria o menu "About" e seus itens
         mAbout = new JMenu("About");
@@ -175,8 +234,8 @@ public class MainInterface extends JFrame implements ActionListener{
         JToolBar tBar = new JToolBar();
         
         //Cria o painel que contem  a barra de ferramentas
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        JPanel buttonsPane = new JPanel();
+        buttonsPane.setLayout(new BoxLayout(buttonsPane, BoxLayout.Y_AXIS));
         
         //Define os icones que serão usados nos botões
         ImageIcon newIcon = new ImageIcon(getClass().getResource("/GUI/icons/new.png"));
@@ -190,33 +249,39 @@ public class MainInterface extends JFrame implements ActionListener{
         ImageIcon applyChoicesIcon = new ImageIcon(getClass().getResource("/GUI/icons/applyChoices.png"));
         ImageIcon writeIcon = new ImageIcon(getClass().getResource("/GUI/icons/write.png"));
         ImageIcon cancelIcon = new ImageIcon(getClass().getResource("/GUI/icons/cancelMerge.png"));
-        ImageIcon showFactsIcon = new ImageIcon(getClass().getResource("/GUI/icons/showFacts.png"));
-        ImageIcon saveXMLDiffIcon = new ImageIcon(getClass().getResource("/GUI/icons/save.png"));
+        ImageIcon reportIcon = new ImageIcon(getClass().getResource("/GUI/icons/report.png"));
+        ImageIcon saveXMLDiffIcon = new ImageIcon(getClass().getResource("/GUI/icons/saveXMLDiff.png"));
         
         //Cria os botões e seus eventos
         newBtn = new JButton(newIcon);
         newBtn.setToolTipText("New Project");
         newBtn.addActionListener(this);
+        newBtn.setEnabled(false);
         
         openBtn = new JButton(openIcon);
         openBtn.setToolTipText("Open Project");
         openBtn.addActionListener(this);
+        openBtn.setEnabled(false);
         
         addBtn = new JButton(addIcon);
         addBtn.setToolTipText("Add XML");
         addBtn.addActionListener(this);
+        addBtn.setEnabled(false);
         
         saveBtn = new JButton(saveIcon);
-        saveBtn.setToolTipText("Save");
+        saveBtn.setToolTipText("Save Project");
         saveBtn.addActionListener(this);
+        saveBtn.setEnabled(false);
         
         contextBtn = new JButton(contextIcon);
         contextBtn.setToolTipText("Context Key");
         contextBtn.addActionListener(this);
+        contextBtn.setEnabled(false);
         
         similarityBtn = new JButton(similarityIcon);
         similarityBtn.setToolTipText("Similarity");
         similarityBtn.addActionListener(this);
+        similarityBtn.setEnabled(isSimilarity);
         
         managerBtn = new JButton(managerIcon);
         managerBtn.setToolTipText("Manager");
@@ -247,15 +312,17 @@ public class MainInterface extends JFrame implements ActionListener{
         cancelBtn.setEnabled(false);
         cancelBtn.setVisible(false);
         
-        showFactsBtn = new JButton(showFactsIcon);
-        showFactsBtn.setToolTipText("Show Facts/XML");
-        showFactsBtn.addActionListener(this);
-        showFactsBtn.setEnabled(false);
-        
         saveXMLDiffBtn = new JButton(saveXMLDiffIcon);
         saveXMLDiffBtn.setToolTipText("Save XML Diff");
         saveXMLDiffBtn.addActionListener(this);
         saveXMLDiffBtn.setEnabled(false);
+        saveXMLDiffBtn.setVisible(false);
+        
+        reportBtn = new JButton(reportIcon);
+        reportBtn.setToolTipText("Generate and Save a report as pfd file");
+        reportBtn.addActionListener(this);
+        reportBtn.setEnabled(false);
+        reportBtn.setVisible(false);
         
         //Adiciona os botões à barra de ferramentas
         tBar.add(newBtn);
@@ -269,93 +336,114 @@ public class MainInterface extends JFrame implements ActionListener{
         tBar.add(applyChoicesBtn);
         tBar.add(writeBtn);
         tBar.add(cancelBtn);
-        tBar.add(showFactsBtn);
         tBar.add(saveXMLDiffBtn);
+        tBar.add(reportBtn);
         tBar.setAlignmentX(0);
         
         tBar.setFloatable(false); //Fixa a barra de ferramentas à sua posição
         
         //Adiciona a barra de ferramentas ao seu painel
-        panel.add(tBar);
+        buttonsPane.add(tBar);
         
         //Adiciona o painel da barra de ferramentas à interface gráfica
-        this.add(panel);
+        this.add(buttonsPane);
         
         //indica a posição e layout da barra de ferramentas
         LayoutConstraints.setConstraints(constraints,0,0,1,1,100,1);
         constraints.insets=new Insets(0,0,0,0);
         constraints.fill=GridBagConstraints.HORIZONTAL;
         constraints.anchor=GridBagConstraints.NORTHWEST;
-        gridBag.setConstraints(panel,constraints);       
-                   
-        //cria a aba de resultados
-        resultsTab = new ResultsTab();
+        gridBag.setConstraints(buttonsPane,constraints);
         
-        //cria a aba de documentos
-        documentsTab = new DocumentsTab(manager,this);
-            
-        //cria o gerenciador de abas adicionando as abas de resultados e documentos
-        tabbedPane = new JTabbedPane();
-        tabbedPane.add(documentsTab,"Documents");//adiciona a aba de documentos
-        tabbedPane.add(resultsTab,"Results");//adiciona a aba de resultados
-        tabbedPane.setEnabledAt(1, false);
-        tabbedPane.setVisible(true);
-       
-        sintaticDiff = new SintaticDiffTree(documents); 
-        tabbedPane.add(sintaticDiff, "Sintatic Diff Tree"); //adiciona de arvores (Diff Sintatico)
-        tabbedPane.setEnabledAt(2, false);
-        sintaticDiff.setVisible(true);
+        //cria o painel de opçoes inicial do XChange
+        this.initialPane = new JPanel();
+        this.initialPane.setVisible(true);
+        this.initialPane.setBorder(BorderFactory.createEtchedBorder());
+        this.initialPane.setLayout(gridBag);
         
-        xmldifftab = new XMLDiffTab();
-        tabbedPane.add(xmldifftab, "XML Diff");
-        tabbedPane.setEnabledAt(3,false);
-        xmldifftab.setVisible(true);
+        this.optionPane = new JPanel();
+        this.optionPane.setBorder(BorderFactory.createTitledBorder(""));
+        this.optionPane.setLayout(gridBag);
         
-        // Adiciona um evento para mudança de aba
-        tabbedPane.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-                if(tabbedPane.getSelectedIndex()==2)
-                    sintaticDiff.plotTree();
-                if(tabbedPane.getSelectedIndex()==3){
-                    sintaticDiff.setVisible(false);
-                    xmldifftab.showXMLDiff();
-                }
-            }
-        });
+        Font font = new Font("Serif", Font.BOLD, 30);
         
-        documentsTabMerge = new DocumentsTabMerge();
-        resultsTabMerge = new JPanel();
-        conflictsTabMerge = new JPanel();
-        treesTabMerge = new JPanel();
-        mergeTreeTabMerge = new JPanel();
-                
-                
-        //cria o gerenciador de abas do merge adicionando as abas de documentos, resultados e conflitos
-        tabbedPaneMerge = new JTabbedPane(); 
-        tabbedPaneMerge.add(documentsTabMerge,"Documents");//adiciona a aba de documentos
-        tabbedPaneMerge.add(resultsTabMerge,"Results");//adiciona a aba de resultados
-        tabbedPaneMerge.add(conflictsTabMerge,"Conflicts");//adiciona a aba de conflitos
-        tabbedPaneMerge.add(treesTabMerge, "Trees"); //adiciona a aba das Arvores XML
-        tabbedPaneMerge.add(mergeTreeTabMerge,"Merge Tree");//adiciona a aba de Merge Three (arvores)
-        tabbedPaneMerge.setEnabledAt(1, false);
-        tabbedPaneMerge.setEnabledAt(2, false);
-        tabbedPaneMerge.setEnabledAt(3, false);
-        tabbedPaneMerge.setEnabledAt(4, false);
-        tabbedPaneMerge.setVisible(false);
-       
-        //indica a posição e layout do gerenciador de abas
+        this.syntaticDiffBtn = new JButton("Syntathic Diff");
+        this.syntaticDiffBtn.setPreferredSize(new Dimension(300,100));
+        this.syntaticDiffBtn.setBackground(Color.WHITE);
+        this.syntaticDiffBtn.setFont(font);
+        this.syntaticDiffBtn.addActionListener(this);
+        LayoutConstraints.setConstraints(constraints,0,0,1,1,100,100);
+        constraints.insets=new Insets(70,15,5,10);
+        constraints.fill=GridBagConstraints.HORIZONTAL;
+        constraints.anchor=GridBagConstraints.NORTHWEST;
+        gridBag.setConstraints(syntaticDiffBtn,constraints);
+        
+        this.semanticDiffBtn = new JButton("Semantic Diff");
+        this.semanticDiffBtn.setPreferredSize(new Dimension(300,100));
+        this.semanticDiffBtn.setBackground(Color.WHITE);
+        this.semanticDiffBtn.setFont(font);
+        this.semanticDiffBtn.addActionListener(this);
+        LayoutConstraints.setConstraints(constraints,1,0,1,1,100,100);
+        constraints.insets=new Insets(70,10,5,15);        
+        constraints.fill=GridBagConstraints.HORIZONTAL;
+        constraints.anchor=GridBagConstraints.NORTHWEST;
+        gridBag.setConstraints(semanticDiffBtn,constraints);
+        
+        this.syntaticMergeBtn = new JButton("Syntathic Merge");
+        this.syntaticMergeBtn.setPreferredSize(new Dimension(300,100));
+        this.syntaticMergeBtn.setBackground(Color.WHITE);
+        this.syntaticMergeBtn.setFont(font);
+        this.syntaticMergeBtn.addActionListener(this);
         LayoutConstraints.setConstraints(constraints,0,1,1,1,100,100);
-        constraints.insets=new Insets(0,10,0,10);        
+        constraints.insets=new Insets(5,15,5,10);        
+        constraints.fill=GridBagConstraints.HORIZONTAL;
+        constraints.anchor=GridBagConstraints.NORTHWEST;
+        gridBag.setConstraints(syntaticMergeBtn,constraints);
+        
+        
+        this.semanticMergeBtn = new JButton("Semantic Merge");
+        this.semanticMergeBtn.setPreferredSize(new Dimension(300,100));
+        this.semanticMergeBtn.setBackground(Color.WHITE);
+        this.semanticMergeBtn.setFont(font);
+        this.semanticMergeBtn.addActionListener(this);
+        LayoutConstraints.setConstraints(constraints,1,1,1,1,100,100);
+        constraints.insets=new Insets(5,10,5,15);        
+        constraints.fill=GridBagConstraints.HORIZONTAL;
+        constraints.anchor=GridBagConstraints.NORTHWEST;
+        gridBag.setConstraints(semanticMergeBtn,constraints);
+        
+        // Adiciona os botões ao Panel de Opção
+        this.optionPane.add(syntaticDiffBtn);
+        this.optionPane.add(semanticDiffBtn);
+        this.optionPane.add(syntaticMergeBtn);
+        this.optionPane.add(semanticMergeBtn);
+ 
+        LayoutConstraints.setConstraints(constraints,0,1,10,10,100,100);
+        constraints.insets=new Insets(75,200,75,200);
+        constraints.fill=GridBagConstraints.BOTH;
+        constraints.anchor=GridBagConstraints.CENTER;
+        gridBag.setConstraints(optionPane, constraints);
+        
+        initialPane.add(optionPane);
+        
+        LayoutConstraints.setConstraints(constraints,0,1,1,1,100,100);
+        constraints.insets=new Insets(5,10,0,10);        
         constraints.fill=GridBagConstraints.BOTH;
         constraints.anchor=GridBagConstraints.NORTHWEST;
-        gridBag.setConstraints(tabbedPane,constraints);
-        gridBag.setConstraints(tabbedPaneMerge,constraints);
-
-        //adiciona o gerenciador de abas do merge à interface grafica
-        this.add(tabbedPaneMerge); 
+        gridBag.setConstraints(initialPane,constraints);
         
-        //adiciona o gerenciador de abas à interface grafica
-        this.add(tabbedPane);
+        this.add(initialPane);
+                
+        pBar = ProgressHandler.makeNew(100, "Ready: Waiting for User");
+        ProgressHandler.stop();
+        
+        LayoutConstraints.setConstraints(constraints,0,2,1,1,1,1);
+        constraints.insets=new Insets(0,0,0,0);        
+        constraints.fill=GridBagConstraints.BOTH;
+        constraints.anchor=GridBagConstraints.NORTHWEST;
+        gridBag.setConstraints(pBar,constraints);
+        
+        this.add(pBar);
        
         //inicia o programa zerado
         this.refresh(this.documents);
@@ -363,26 +451,247 @@ public class MainInterface extends JFrame implements ActionListener{
         //torna a janela visivel
         this.setVisible(true);
         
+        //cria o gerenciador de abas adicionando as abas de resultados e documentos
+        tabbedPane = new JTabbedPane();
+               
         this.revalidate();
         this.repaint();
+}
+    
+    /*
+     * Monta a Interface do Diff Sintatico e do Diff Semantico
+     */
+    public void buildDiffInterface(Documents documents, GridBagLayout gridBag, GridBagConstraints constraints){
+        //Desetiva o Syntatic Merge caso o mesmo esteja ativo
+        if(isSyntaticMerge){
+            tabbedPaneMerge.setVisible(false);
+            this.isSyntaticMerge=false;
+        }
+        
+        //torna visivel os botões iniciais
+        newBtn.setEnabled(true);
+        openBtn.setEnabled(true);
+        addBtn.setEnabled(true);
+        
+        //cria a aba de documentos
+        documentsTab = new DocumentsTab(manager,this);
+
+        //cria o gerenciador de abas adicionando as abas de resultados e documentos
+        tabbedPane = new JTabbedPane();
+        
+        tabbedPane.add(documentsTab,"XML Version");//adiciona a aba de documentos
+        tabbedPane.setEnabledAt(0, true);
+        tabbedPane.setVisible(true);
+        
+        // Monta a interface com os componentes especificos do Diff Semantico
+        if(isSemanticDiff){    
+            saveXMLDiffBtn.setVisible(false);
+            mergeBtn.setVisible(false);
+            writeBtn.setVisible(false);
+            applyChoicesBtn.setVisible(false);
+            cancelBtn.setVisible(false);
+            contextBtn.setVisible(true);
+            similarityBtn.setVisible(true);
+            managerBtn.setVisible(true);
+            reportBtn.setVisible(true);
+            miSettings.setEnabled(true);
+            
+            //cria a aba de Fatos Prolog
+            prologFactsTab = new PrologFactsTab(manager,this);
+            
+            //Abilita e desabilita os menus necessários na aba "Tools"
+            mTools.setEnabled(true);
+            mMerge.setEnabled(false);
+            
+            //cria o gerenciador de abas adicionando a aba de Fatos Prolog
+            tabbedPane.add(prologFactsTab,"Prolog Facts");//adiciona a aba de fatosprolog
+            tabbedPane.setEnabledAt(1, false);
+            tabbedPane.setVisible(true);
+
+            //cria a aba de resultados
+            resultsTab = new ResultsTab();
+            
+            //cria o gerenciador de abas adicionando a aba de resultados
+            tabbedPane.add(resultsTab,"XML Diff");//adiciona a aba de resultados
+            tabbedPane.setEnabledAt(2, false);
+            tabbedPane.setVisible(true);
+                        
+            // Adiciona um evento para mudança de aba
+            tabbedPane.addChangeListener(new ChangeListener() {
+                public void stateChanged(ChangeEvent e) {
+                    if(tabbedPane.getSelectedIndex()==1 && !prologFactsTab.alreadySet()){
+                        prologFactsTab.setLeftCB(documentsTab.getLeftCBIndex());
+                        prologFactsTab.setRightCB(documentsTab.getRightCBIndex());
+                    }
+                }
+            });
+        }
+        
+        // Monta a interface com os componentes especificos do Diff Sintatico
+        else if(isSyntaticDiff){            
+            contextBtn.setVisible(false);
+            similarityBtn.setVisible(false);
+            managerBtn.setVisible(false);
+            mergeBtn.setVisible(false);
+            writeBtn.setVisible(false);
+            applyChoicesBtn.setVisible(false);
+            cancelBtn.setVisible(false);
+            saveXMLDiffBtn.setVisible(true);
+            reportBtn.setVisible(false);
+            miSettings.setEnabled(false);
+            
+            //cria a aba Tree Diff
+            sintaticDiff = new SintaticDiffTree(documents);
+            
+            //cria o gerenciador de abas adicionando a aba de Tree Diff
+            tabbedPane.add(sintaticDiff, "Tree Diff"); //adiciona aba de arvores (Diff Sintatico)
+            tabbedPane.setEnabledAt(1, false);
+            sintaticDiff.setVisible(true);
+            
+            //cria a aba XML Diff
+            xmldifftab = new XMLDiffTab();
+            
+            //cria o gerenciador de abas adicionando a aba de XML Diff
+            tabbedPane.add(xmldifftab, "XML Diff");
+            tabbedPane.setEnabledAt(2,false);
+            xmldifftab.setVisible(true);
+            
+            // Adiciona um evento para mudança de aba
+            tabbedPane.addChangeListener(new ChangeListener() {
+                public void stateChanged(ChangeEvent e) {
+                    if(tabbedPane.getSelectedIndex()==1)
+                        sintaticDiff.plotTree();
+                    else
+                    if(tabbedPane.getSelectedIndex()==2){
+                        sintaticDiff.setVisible(false);
+                        xmldifftab.showXMLDiff();
+                    }
+                }
+            });            
+        } 
+       
+        //adiciona o gerenciador de abas à interface grafica
+        this.add(tabbedPane);
+        
+        LayoutConstraints.setConstraints(constraints,0,1,1,1,100,100);
+        constraints.insets=new Insets(0,10,0,10);        
+        constraints.fill=GridBagConstraints.BOTH;
+        constraints.anchor=GridBagConstraints.NORTHWEST;
+        gridBag.setConstraints(tabbedPane,constraints);
+        
+        tabbedPane.setVisible(true);
+        this.refresh(documents);
+    }
+    
+    /*
+     * Monta a Interface do Merge Sintatico
+     */
+    public void buildSyntaticMerge(Documents documents, GridBagLayout gridBag, GridBagConstraints constraints){
+        //desativa Semantic Diff e Syntatic Diff caso os mesmo estejam ativos
+        if(isSyntaticDiff || isSemanticDiff){
+            tabbedPane.setVisible(false);
+            this.isSemanticDiff=false;
+            this.isSyntaticDiff=false;
+        }
+        
+        newBtn.setEnabled(true);
+        openBtn.setEnabled(true);
+        addBtn.setEnabled(true);
+        mTools.setEnabled(true);
+        mMerge.setVisible(true);
+        miManager.setEnabled(false);
+        miContext.setEnabled(false);
+        miSimilarity.setEnabled(false);
+        miSettings.setEnabled(false);
+        similarityBtn.setVisible(false);
+        contextBtn.setVisible(false);
+        managerBtn.setVisible(false);
+        reportBtn.setVisible(false);
+        mergeBtn.setVisible(true);
+        mMerge.setEnabled(true);
+        applyChoicesBtn.setEnabled(false);
+        applyChoicesBtn.setVisible(true);
+        writeBtn.setEnabled(false);
+        writeBtn.setVisible(true);
+        cancelBtn.setEnabled(false);
+        cancelBtn.setVisible(true);
+        saveXMLDiffBtn.setVisible(false);
+        
+        documentsTabMerge = new DocumentsTabMerge();
+        resultsTabMerge = new JPanel();
+        conflictsTabMerge = new JPanel();
+        treesTabMerge = new JPanel();
+        mergeTreeTabMerge = new JPanel();
+                
+        //cria o gerenciador de abas do merge adicionando as abas de documentos, resultados e conflitos
+        tabbedPaneMerge = new JTabbedPane(); 
+        tabbedPaneMerge.add(documentsTabMerge,"XML Version");//adiciona a aba de documentos
+        tabbedPaneMerge.add(resultsTabMerge,"XML Merge");//adiciona a aba de resultados
+        tabbedPaneMerge.add(conflictsTabMerge,"Conflicts");//adiciona a aba de conflitos
+        tabbedPaneMerge.add(treesTabMerge, "XML Version Tree"); //adiciona a aba das Arvores XML
+        tabbedPaneMerge.add(mergeTreeTabMerge,"Merge Tree");//adiciona a aba de Merge Three (arvores)
+        tabbedPaneMerge.setEnabledAt(1, false);
+        tabbedPaneMerge.setEnabledAt(2, false);
+        tabbedPaneMerge.setEnabledAt(3, false);
+        tabbedPaneMerge.setEnabledAt(4, false);
+        tabbedPaneMerge.setVisible(true);
+       
+        //indica a posição e layout do gerenciador de abas
+        LayoutConstraints.setConstraints(constraints,0,1,1,1,100,100);
+        constraints.insets=new Insets(0,10,0,10);        
+        constraints.fill=GridBagConstraints.BOTH;
+        constraints.anchor=GridBagConstraints.NORTHWEST;
+        gridBag.setConstraints(tabbedPaneMerge,constraints);
+
+        //adiciona o gerenciador de abas do merge à interface grafica
+        this.add(tabbedPaneMerge); 
+        
+        LayoutConstraints.setConstraints(constraints,0,1,1,1,100,100);
+        constraints.insets=new Insets(0,10,0,10);        
+        constraints.fill=GridBagConstraints.BOTH;
+        constraints.anchor=GridBagConstraints.NORTHWEST;
+        gridBag.setConstraints(tabbedPaneMerge,constraints);
+        
+        tabbedPaneMerge.setVisible(true);
+        this.refresh(documents);
     }
     
     /**
      * Atualiza as informações na tela inclusive seus subcomponentes
      * @param documents 
      */
-    public void refresh(Documents documents){//modifica a tela de acordo com que novos documentos XML são adcionados ao projeto, ou quand se inicia um novo projeto
-        if (isMerge){
+    public void refresh(Documents documents){//modifica a tela de acordo com que novos documentos XML são adcionados ao projeto, ou quand se inicia um novo projeto      
+        if(isSyntaticMerge){
             documentsTabMerge.refresh(documents);
             if(documents.getSize()>=3){
+                miMerge.setEnabled(true);
                 mergeBtn.setEnabled(true);
             }
         }
-        else{
-            resultsTab.refresh(documents,manager);
+        else if(isSyntaticDiff){
             documentsTab.refresh(documents);
             sintaticDiff.refresh(documents);
             xmldifftab.refresh(documents);
+            if(documents.getSize()>=2){
+                tabbedPane.setEnabledAt(1, true);
+                tabbedPane.setEnabledAt(2, true);
+                miSave.setEnabled(true);
+                saveBtn.setEnabled(true);
+                miSimilarity.setEnabled(true);
+                similarityBtn.setEnabled(true);
+                saveXMLDiffBtn.setEnabled(true);
+            }else{
+                miSave.setEnabled(false);
+                saveBtn.setEnabled(false);
+                miSimilarity.setEnabled(false);
+                similarityBtn.setEnabled(false);
+                saveXMLDiffBtn.setEnabled(false);
+            }
+        }
+        else if(isSemanticDiff){
+            documentsTab.refresh(documents);
+            prologFactsTab.refresh(documents);
+            resultsTab.refresh(documents,manager);
             if(documents.getSize()>=2){
                 miContext.setEnabled(true);
                 contextBtn.setEnabled(true);
@@ -396,7 +705,6 @@ public class MainInterface extends JFrame implements ActionListener{
                 miSave.setEnabled(false);
                 saveBtn.setEnabled(false);
                 miSimilarity.setEnabled(false);
-                miShowFacts.setEnabled(false);
                 similarityBtn.setEnabled(false);
             }
         }
@@ -404,29 +712,43 @@ public class MainInterface extends JFrame implements ActionListener{
         this.repaint();
         jFrame = this;
     }
-
+    
     /**
      * Trata os eventos que ocorrem em objetos-atributos do objeto MainInterface
      * @param e 
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        if(e.getSource().equals(syntaticDiffBtn) || e.getSource().equals(miSyntaticDiff)){
+            this.initialPane.setVisible(false);
+            this.isSyntaticDiff=true;
+            this.isSemanticDiff=false;
+            tabbedPane.setVisible(false);
+            this.buildDiffInterface(documents, gridBag, constraints);
+        }else
+        if(e.getSource().equals(semanticDiffBtn) || e.getSource().equals(miSemanticDiff)){
+            this.initialPane.setVisible(false);
+            this.isSemanticDiff=true;
+            this.isSyntaticDiff=false;
+            tabbedPane.setVisible(false);
+            this.buildDiffInterface(documents, gridBag, constraints);
+        }else
+        if(e.getSource().equals(syntaticMergeBtn) || e.getSource().equals(miSyntaticMerge)){
+            this.initialPane.setVisible(false);
+            this.isSyntaticMerge=true;
+            this.buildSyntaticMerge(documents, gridBag, constraints);
+        }else
         if(e.getSource().equals(miAdd)||e.getSource().equals(addBtn)){//ação "ADICIONAR"
             addXMLFile();
         }else
-        if(e.getSource().equals(miShowFacts)||e.getSource().equals(showFactsBtn)){//mostrar os fatos ou XML
-            documentsTab.setFacts();
-            documentsTab.refresh(documents);
-            tabbedPane.setSelectedIndex(0);
-        }
-        else
         if(e.getSource().equals(similarityBtn)||e.getSource().equals(miSimilarity)){//ação "SIMILARIDADE"
             similarity();
+            tabbedPane.setEnabledAt(1, true);
+            this.repaint();
         }else
-            
         if(e.getSource().equals(contextBtn)||e.getSource().equals(miContext)){//ação "CHAVE DE CONTEXTO"
             contextKey();
+            tabbedPane.setEnabledAt(1, true);
         }else
             
         if(e.getSource().equals(newBtn)||e.getSource().equals(miNew)){//ação "NOVO"
@@ -445,7 +767,7 @@ public class MainInterface extends JFrame implements ActionListener{
         if(e.getSource().equals(openBtn)||e.getSource().equals(miOpen)){//ação "ABRIR"
             try {
                 this.documents = ProjectLoader.load();
-            } catch (IOException ex) {
+            }catch (IOException ex) {
                 JOptionPane.showMessageDialog(null, "Error on load Project", "Error",JOptionPane.ERROR_MESSAGE);
             } catch (NoSelectedFileException ex) {
             }
@@ -454,7 +776,12 @@ public class MainInterface extends JFrame implements ActionListener{
             
         if(e.getSource().equals(managerBtn)||e.getSource().equals(miManager)){//ação "MANAGER"
             callManager();
-            tabbedPane.setEnabledAt(1, true);
+            tabbedPane.setEnabledAt(2, true);
+            reportBtn.setEnabled(true);
+        }
+        
+        else if(e.getSource().equals(reportBtn)){
+            resultsTab.getInferenceFileChooser().exportReport();
         }
         
         else if(e.getSource().equals(miHowToUse)){//Abre o canal do youtube que contem os tutoriais do XChange
@@ -485,16 +812,8 @@ public class MainInterface extends JFrame implements ActionListener{
                 JOptionPane.showMessageDialog(null, "Error on AboutGET", "Error",JOptionPane.ERROR_MESSAGE);
             }
         }
-        
-        else if(e.getSource().equals(miInference)){//ação "Inference"
-            setInference();
-        }
-        
-        else if(e.getSource().equals(miMerge)){//ação "Merge"
-            setMerge();
-        }
-        
-        else if(e.getSource().equals(mergeBtn)){//ação "Merge"
+                     
+        else if(e.getSource().equals(mergeBtn) || e.getSource().equals(miMerge)){//ação "Merge"
             merge();
         }
         
@@ -511,63 +830,7 @@ public class MainInterface extends JFrame implements ActionListener{
             }
         }
     }
-    
-    /**
-     * Inicia o modo de inferencia habilitando componentes necessários à inferencia e desabilitando componentes exclusivamente necessários à opção de merge
-     */
-    public void setInference(){
-        isMerge = false;
-        miMerge.setVisible(true);
-        miManager.setVisible(true);
-        miContext.setVisible(true);
-        miSimilarity.setVisible(true);
-        miShowFacts.setVisible(true);
-        miInference.setVisible(false);
-        tabbedPaneMerge.setVisible(false);
-        tabbedPane.setVisible(true);
-        contextBtn.setVisible(true);
-        similarityBtn.setVisible(true);
-        managerBtn.setVisible(true);
-        showFactsBtn.setVisible(true);
-        mergeBtn.setEnabled(false);
-        mergeBtn.setVisible(false);
-        applyChoicesBtn.setEnabled(false);
-        applyChoicesBtn.setVisible(false);
-        writeBtn.setEnabled(false);
-        writeBtn.setVisible(false);
-        cancelBtn.setEnabled(false);
-        cancelBtn.setVisible(false);
-        saveXMLDiffBtn.setVisible(true);
-        this.refresh(documents);
-    }
-    /**
-     * Inicia o modo de inferencia habilitando componentes necessários à opção de merge e desabilitando componentes exclusivamente necessários à inferencia
-     */    
-    public void setMerge(){
-        isMerge = true;
-        miMerge.setVisible(false);
-        miManager.setVisible(false);
-        miContext.setVisible(false);
-        miSimilarity.setVisible(false);
-        miShowFacts.setVisible(false);
-        miInference.setVisible(true);
-        tabbedPane.setVisible(false);
-        tabbedPaneMerge.setVisible(true);
-        similarityBtn.setVisible(false);
-        contextBtn.setVisible(false);
-        managerBtn.setVisible(false);
-        showFactsBtn.setVisible(false);
-        mergeBtn.setVisible(true);
-        applyChoicesBtn.setEnabled(false);
-        applyChoicesBtn.setVisible(true);
-        writeBtn.setEnabled(false);
-        writeBtn.setVisible(true);
-        cancelBtn.setEnabled(false);
-        cancelBtn.setVisible(true);
-        saveXMLDiffBtn.setVisible(false);
-        this.refresh(documents);
-    }
-    
+            
     /**
      * Constroi a interface de merge
      */
@@ -581,6 +844,8 @@ public class MainInterface extends JFrame implements ActionListener{
         
         applyChoicesBtn.setEnabled(true);
         cancelBtn.setEnabled(true);
+        miApplyChoice.setEnabled(true);
+        miMergeCancel.setEnabled(true);
         
         GridBagLayout gridBag = new GridBagLayout();
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
@@ -651,10 +916,10 @@ public class MainInterface extends JFrame implements ActionListener{
             if(!isSimilarity){ //Se o metodo utilizado for o "Context Key"
                 manager.startResultsInferenciaContextKey();
             } else{ //Se o metodo utilizado for o "Similarity"
-                manager.startResultsInferenciaSimilarity(documents, similarityRate);
+                manager.startResultsInferenciaSimilarity(documents);
             }
             resultsTab.refresh(documents,manager);
-            this.tabbedPane.setSelectedIndex(1);
+            tabbedPane.setSelectedIndex(2);
         } else{ //Se nenhum metodo estiver ativo
             JOptionPane.showMessageDialog(this, "No method started!", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -679,17 +944,12 @@ public class MainInterface extends JFrame implements ActionListener{
      */
     private void newProject() {
         documents = new Documents();
-        documentsTab.setFacts(false);
-        if(isMerge){
+        if(isSyntaticMerge){
             tabbedPaneMerge.setEnabledAt(1, false);
             tabbedPaneMerge.setEnabledAt(2, false);
             tabbedPaneMerge.setEnabledAt(3, false);
             tabbedPaneMerge.setEnabledAt(4, false);
             tabbedPaneMerge.setSelectedIndex(0);
-            tabbedPane.setEnabledAt(1,false);
-            tabbedPane.setEnabledAt(2, false);
-            tabbedPane.setEnabledAt(3, false);
-            tabbedPane.setSelectedIndex(0);
             conflictsTabMerge.removeAll();
             resultsTabMerge.removeAll();
             treesTabMerge.removeAll();
@@ -698,24 +958,20 @@ public class MainInterface extends JFrame implements ActionListener{
             applyChoicesBtn.setEnabled(false);
             writeBtn.setEnabled(false);
             cancelBtn.setEnabled(false);
-            manager.refreshFullManager();
-            miManager.setEnabled(false);
-            managerBtn.setEnabled(false);
-            miShowFacts.setEnabled(false);
-            showFactsBtn.setEnabled(false);
-            saveXMLDiffBtn.setEnabled(false);
+            miMerge.setEnabled(false);
+            miApplyChoice.setEnabled(false);
+            miWriteMerged.setEnabled(false);
+            miMergeCancel.setEnabled(false);
         }
-        else{              
+        else{
             tabbedPane.setSelectedIndex(0);
-            tabbedPane.setEnabledAt(1, false);
-            tabbedPane.setEnabledAt(2, false);
-            tabbedPane.setEnabledAt(3, false);
+            tabbedPane.setEnabledAt(1,false);
+            tabbedPane.setEnabledAt(2,false);
             manager.refreshFullManager();
             miManager.setEnabled(false);
             managerBtn.setEnabled(false);
-            showFactsBtn.setEnabled(false);
-            miShowFacts.setEnabled(false);
             saveXMLDiffBtn.setEnabled(false);
+            reportBtn.setEnabled(false);
         }            
         this.refresh(documents);
     }
@@ -730,9 +986,8 @@ public class MainInterface extends JFrame implements ActionListener{
             manager.startContextKey(documents); //Inicia arquivos como ContextKey
             JOptionPane.showMessageDialog(this, "Context Key successfully started!", "Success", JOptionPane.INFORMATION_MESSAGE);
             managerBtn.setEnabled(true);
-            showFactsBtn.setEnabled(true);
             miManager.setEnabled(true);
-            miShowFacts.setEnabled(true);
+            this.refresh(documents);
         } else{   
             JOptionPane.showMessageDialog(this, "There must be at least two XML documents loaded!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
@@ -744,17 +999,18 @@ public class MainInterface extends JFrame implements ActionListener{
     private void similarity() {
         if(documents.getSize() >= 2){
             try{
+                SettingsDialog settingsFrame = new SettingsDialog(this);
+                settingsFrame.show();
                 this.similarityRate = Float.parseFloat(JOptionPane.showInputDialog("Similarity Rate:"));
                 this.isSimilarity=true;
                 manager.getContextKey().clear();
                 manager.startSimilarity(documents);
                 JOptionPane.showMessageDialog(this, "Similarity successfully started!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 managerBtn.setEnabled(true);
-                showFactsBtn.setEnabled(true);
                 miManager.setEnabled(true);
-                miShowFacts.setEnabled(true);
                 saveXMLDiffBtn.setEnabled(true);
-                tabbedPane.setEnabledAt(3, true);
+                tabbedPane.setEnabledAt(4, true);
+                xmldifftab.revalidate();
             }catch(Exception a){  
             }
         } else{
@@ -772,17 +1028,22 @@ public class MainInterface extends JFrame implements ActionListener{
                 f = XMLLoader.open();
                 this.documents.add(f);
                 this.refresh(documents);
-                if (isMerge){
+                if (isSyntaticMerge){
                     tabbedPaneMerge.setSelectedIndex(0);
                 }
                 else{
-                    if(tabbedPane.getSelectedIndex()==1) {
-                        tabbedPane.setSelectedIndex(0);
-                    }
                     if(documents.getSize()>=2){
-                        tabbedPane.setEnabledAt(2, true);
-                    }
-                    tabbedPane.setEnabledAt(1, false);
+                        if(isSyntaticDiff){
+                            tabbedPane.setEnabledAt(1, true);
+                            tabbedPane.setEnabledAt(2, true);
+                        }else{
+                            tabbedPane.setEnabledAt(1, false);
+                            tabbedPane.setEnabledAt(2, false);
+                        }
+                    } else {
+                        tabbedPane.setEnabledAt(1, false);
+                        tabbedPane.setEnabledAt(2, false);
+                    }                        
                 }
                 this.refresh(documents);
                 managerBtn.setEnabled(false);
@@ -797,22 +1058,43 @@ public class MainInterface extends JFrame implements ActionListener{
     /**
      * @return O botão de aplicar escolhas
      */
-    public static JButton getApplyChoicesBtn(){
+    public JButton getApplyChoicesBtn(){
         return applyChoicesBtn;
+    }
+    
+    /**
+     * @return O menu de aplicar escolhas
+     */
+    public JMenuItem getMiApplyChoices(){
+        return miApplyChoice;
     }
     
     /**
      * @return O botão de criar o merge e fechar
      */
-    public static JButton getWriteMerged(){
+    public JButton getWriteMergedBtn(){
         return writeBtn;
+    }
+    
+    /**
+     * @return O menu de criar o merge e fechar
+     */
+    public JMenuItem getMiWriteMerged(){
+        return miWriteMerged;
     }
     
     /**
      * @return O botão de cancelar o merge
      */
-    public static JButton getCancelBtn(){
+    public JButton getCancelBtn(){
         return cancelBtn;
+    }
+    
+    /**
+     * @return O botão de cancelar o merge
+     */
+    public JMenuItem getMiMergeCancel(){
+        return miMergeCancel;
     }
    
     /**
@@ -827,8 +1109,14 @@ public class MainInterface extends JFrame implements ActionListener{
         return this.isSimilarity;
    }
     
+    /**
+     * Obtém a largura do JFrame, com a finalidade de ajustar os JSplitPane do Syntatic Merge 
+     */
     public static double getWidthJFrame (){
        return jFrame.getSize().getWidth();
-   }
+    }
     
+    public float getSimilarityRate(){
+        return this.similarityRate;
+    }
 }

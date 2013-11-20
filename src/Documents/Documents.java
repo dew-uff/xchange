@@ -71,20 +71,6 @@ public class Documents{
             }
         }
     }
-    
-    /**
-     * Retorna o conteúdo de um arquivo XML sendo buscado por seu nome ou vazio caso não haja.
-     * @param string
-     * @return getContent()
-     */
-    public String getContent(String string){
-        for(Document f:getDocuments()){
-            if(string.equals(f.toString())) {
-                return f.getContent();
-            }
-        }
-        return "";
-    }
 
     /**
      * Retorna o conteúdo de um arquivo XML sendo buscado por sua ID.

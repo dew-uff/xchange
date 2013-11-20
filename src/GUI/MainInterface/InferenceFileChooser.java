@@ -2,6 +2,7 @@ package GUI.MainInterface;
 
 import Documents.Document;
 import Documents.Documents;
+import GUI.FileManager.ReportUtil;
 import GUI.Layout.LayoutConstraints;
 import Manager.Manager;
 import Manager.Results;
@@ -27,6 +28,7 @@ public class InferenceFileChooser extends JPanel implements ActionListener{
     private JTextPane resultsTextPane;//TextPane para mostrar os resultados
     private ArrayList<String> selectedRules = new ArrayList<String>();//Lista de regras selecionadas
     private Documents documents;
+    private String result;//String com os resultados
 
     /**
      * Costrutor da classe.
@@ -129,50 +131,59 @@ public class InferenceFileChooser extends JPanel implements ActionListener{
      * Exibe os resultados da inferência entre os documentos selecionadas no JTextPane passado como parâmetro no cosntrutor da classe
      */
     public void showResults(){
-    String result = "";//String com os resultados
-    if (manager != null) {//se gerenciador for diferente de nulo
-        int k, l;//variaves de iteração da lista de checkboxes
+        result="";
+        if (manager != null) {//se gerenciador for diferente de nulo
+            int k, l;//variaves de iteração da lista de checkboxes
 
-        //combinação dos checkboxes dos documentos selecionados 2 a 2
-        for (k = 0; k < cbList.getCheckBoxes().size(); k++) {//primeiro nivel de iteração dos checkboxes
-            if (cbList.getCheckBoxes().get(k).isSelected()) {//se o checkbox do primeiro nivel estiver selecionado
-                for (l = k + 1; l < cbList.getCheckBoxes().size(); l++) {//segundo nivel de iteração dos checkboxes
-                    if (cbList.getCheckBoxes().get(l).isSelected()) {//se o checkbox do segundo nivel estiver selecionado
+            //combinação dos checkboxes dos documentos selecionados 2 a 2
+            for (k = 0; k < cbList.getCheckBoxes().size(); k++) {//primeiro nivel de iteração dos checkboxes
+                if (cbList.getCheckBoxes().get(k).isSelected()) {//se o checkbox do primeiro nivel estiver selecionado
+                    for (l = k + 1; l < cbList.getCheckBoxes().size(); l++) {//segundo nivel de iteração dos checkboxes
+                        if (cbList.getCheckBoxes().get(l).isSelected()) {//se o checkbox do segundo nivel estiver selecionado
 
-                        //faz a combinação 2 a 2 dos documentos em si
-                        int i, j;
-                        i = -1;
-                        j = -1;
-                        for (Document document : documents.getDocuments()) {//percorre a lista de documentos
-                            if (document.getCode().equals(cbList.getCheckBoxes().get(k).getText())) {
-                                i = document.getId();//carrega para i a id do primeiro documento selecionado nos checkboxes
-                            } else if (document.getCode().equals(cbList.getCheckBoxes().get(l).getText())) {
-                                j = document.getId();//carrega para j a id do segundo documento selecionado nos checkboxes
-                            }
-                        } 
-                        if (i != j) {//garantia de que não estamos comparando os mesmos documentos, pois não há resultados do diff de um documento consigo mesmo
-                            for (Results results : manager.getResultsInference()) {//pega resultado por resultado de cada documento
-                                if (results.getDocument1() == i && results.getDocument2() == j) {//se o resultado for de documentos desejados pela combinação de documentos
-                                    result += "diff(" + documents.getDocument(i).getCode() + ", " + documents.getDocument(j).getCode() + ")\n\n";//adciona cabeçalho do resultado de uma combinação de documentos
-                                    for (String ruleResult : results.getResultInference()) {//pega um resultado especifico de cada documentos para ver se ele faz parte das regras selecionadas
-                                        for (String selectedRule : selectedRules) {//peg uma regra selecionada
-                                            if (ruleResult.toLowerCase().substring(0, ruleResult.indexOf(":")).equals(selectedRule.toLowerCase().substring(0, selectedRule.indexOf("(")))) {//se o resultado vier de uma regra selecionada
-                                                result += ruleResult;//adciona o resultado à string de resultados
-                                                break;
+                            //faz a combinação 2 a 2 dos documentos em si
+                            int i, j;
+                            i = -1;
+                            j = -1;
+                            for (Document document : documents.getDocuments()) {//percorre a lista de documentos
+                                if (document.getCode().equals(cbList.getCheckBoxes().get(k).getText())) {
+                                    i = document.getId();//carrega para i a id do primeiro documento selecionado nos checkboxes
+                                } else if (document.getCode().equals(cbList.getCheckBoxes().get(l).getText())) {
+                                    j = document.getId();//carrega para j a id do segundo documento selecionado nos checkboxes
+                                }
+                            } 
+                            if (i != j) {//garantia de que não estamos comparando os mesmos documentos, pois não há resultados do diff de um documento consigo mesmo
+                                for (Results results : manager.getResultsInference()) {//pega resultado por resultado de cada documento
+                                    if (results.getDocument1() == i && results.getDocument2() == j) {//se o resultado for de documentos desejados pela combinação de documentos
+                                        result += "diff(" + documents.getDocument(i).getCode() + ", " + documents.getDocument(j).getCode() + ")\n\n";//adciona cabeçalho do resultado de uma combinação de documentos
+                                        for (String ruleResult : results.getResultInference()) {//pega um resultado especifico de cada documentos para ver se ele faz parte das regras selecionadas
+                                            for (String selectedRule : selectedRules) {//peg uma regra selecionada
+                                                if (ruleResult.toLowerCase().substring(0, ruleResult.indexOf(":")).equals(selectedRule.toLowerCase().substring(0, selectedRule.indexOf("(")))) {//se o resultado vier de uma regra selecionada
+                                                    result += ruleResult;//adciona o resultado à string de resultados
+                                                    break;
+                                                }
                                             }
                                         }
                                     }
                                 }
+                                result += "\n";//fim de inferencia entre uma das combinações de documentos
+                                break;
                             }
-                            result += "\n";//fim de inferencia entre uma das combinações de documentos
-                            break;
                         }
                     }
                 }
             }
         }
+        resultsTextPane.setText(result);//mostra os resultados no textpane de saida
+        resultsTextPane.setCaretPosition(0);//rola a barra de rolagem para o topo
     }
-    resultsTextPane.setText(result);//mostra os resultados no textpane de saida
-    resultsTextPane.setCaretPosition(0);//rola a barra de rolagem para o topo
+    
+    /*
+     * Responsável por exportar o relatorio
+     */
+    public void exportReport(){
+        //Chama o metodo responsável por gerar o relatório.
+        ReportUtil.exportReport(result);
     }
+    
 }

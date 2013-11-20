@@ -1,6 +1,7 @@
 package Manager;
 
 import Documents.Documents;
+import GUI.FileManager.PhoenixSettings;
 import GUI.MainInterface.MainInterface;
 import GUI.Util.ProgressHandler;
 import Inference.InferenceModule;
@@ -9,6 +10,9 @@ import Translate.ContextKey;
 import Translate.Similarity;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,7 +26,10 @@ public class Manager {
     private ArrayList<ContextKey> contextKey = new ArrayList<ContextKey>();
     private ArrayList<Similarity> similarity = new ArrayList<Similarity>();
     private ArrayList<Results> resultsInference = new ArrayList<Results>();
-    private float similarityRate;
+    private ArrayList<ArrayList<ArrayList<String>>> similarityFacts = new ArrayList<ArrayList<ArrayList<String>>>(); 
+    private float similarityRate=0;
+    private static MainInterface main;
+    private int documentsSize=0;
 
     /**
      * @return contextKey
@@ -58,7 +65,7 @@ public class Manager {
     public ArrayList<Results> getResultsInference() {
         return resultsInference;
     }
-
+    
     /**
      * Apaga as informações contidas em todas as variáveis desta classe.
      */
@@ -82,13 +89,15 @@ public class Manager {
                 getContextKey().remove(i);
             }
         }
-        ProgressHandler.makeNew(documents.getSize(), "Translating XML into Prolog Facts");
+        ProgressHandler.restart(documents.getSize(), "Translating XML into Prolog facts");
         for (int i = 0; i < documents.getSize(); i++) { //Adiciona todos os documentos passados ao conjunto "Context Key"          
+            ProgressHandler.setLabel("Translating \""+documents.getFile(i).getName()+"\" into Prolog facts");
             getContextKey().add(new ContextKey());
             getContextKey().get(i).translateFacts(documents.getDocuments().get(i).getFile());
-            ProgressHandler.setLabel("Translating " + documents.getDocuments().get(i).getFile().getName() + " into Prolog Facts");
+            
+            ProgressHandler.increase();
         }
-        ProgressHandler.dispose();
+        ProgressHandler.stop();
     }
 
     /**
@@ -97,27 +106,74 @@ public class Manager {
      * @param documents
      */
     public void startSimilarity(Documents documents) {
-
-        if (getSimilarity().size() > 0) { //Caso já existam documentos iniciados como "Similarity", estes serão removidos
-            for (int i = (getSimilarity().size() - 1); i >= 0; i--) {
-                getSimilarity().remove(i);
-            }
+        
+        float currentSimilarityRate = main.getSimilarityRate();
+        
+        if(getSimilarityFacts()==null||getSimilarityFacts().isEmpty()||this.similarityRate!=currentSimilarityRate||PhoenixSettings.hasChange()){
+            similarityFacts = new ArrayList<ArrayList<ArrayList<String>>>();
+        }else if(documentsSize==documents.getSize()){
+            return;
         }
-        ProgressHandler.makeNew(documents.getSize()*2 + 7, "Calculating similarity between XML ");
+        
+        documentsSize=documents.getSize();
+        
+        this.similarityRate = currentSimilarityRate;
+        
+        if (getSimilarity().size() > 0) { //Caso já existam documentos iniciados como "Similarity", estes serão removidos
+            getSimilarity().clear();
+        }
+        
+        int iterations = ((documents.getSize()*(documents.getSize()-1))/2)*9;
+
         for (int i = 0; i < documents.getSize(); i++) { //Adiciona todos os documentos passados ao conjunto "Similarity" 
             getSimilarity().add(new Similarity(documents.getDocuments().get(i).getPathWay()));
             
-            ProgressHandler.increase();
-            
             getSimilarity().get(i).translateFacts(documents.getDocuments().get(i).getFile());
         }
-
-        //Inicia os dois primeiros documentos para que eles possam ser utilizados na construção das regras
-        ProgressHandler.setLabel("Getting Facts");
-        getSimilarity().get(0).documentsWithIDs(documents.getDocuments().get(0).getPathWay(), documents.getDocuments().get(1).getPathWay(), ((float) 0.99));
         
-        getSimilarity().get(0).translateFactsID(new File(getSimilarity().get(0).getPathID1()));
-        ProgressHandler.dispose();
+        ProgressHandler.restart(iterations, "Translating XML files using Similarity");
+        try{
+            for (int i = 0; i < (getSimilarity().size() - 1); i++) {
+                if(i > getSimilarityFacts().size()-1) {
+                    getSimilarityFacts().add(new ArrayList<ArrayList<String>>());
+                }
+                for (int j = i + 1; j < getSimilarity().size(); j++) {
+                    if (i != j) {
+
+                        ProgressHandler.setLabel("Getting the similarity between "+documents.getFile(i).getName()+" and "+documents.getFile(j).getName());
+
+                        if(documents.getSize()-i-1 > getSimilarityFacts().get(i).size()){
+
+                            getSimilarityFacts().get(i).add(new ArrayList<String>());
+
+                            getSimilarity().get(i).documentsWithIDs(documents.getDocuments().get(i).getPathWay(), documents.getDocuments().get(j).getPathWay(), this.similarityRate);
+
+                            ProgressHandler.setLabel("Translating Temporary Files into Prolog facts");
+                            getSimilarity().get(i).translateFactsID(new File(getSimilarity().get(i).getPathID1())); //Gera os fatos do primeiro documento
+                            getSimilarityFacts().get(i).get(j-i-1).add(getSimilarity().get(i).getFactsSimilarityID());
+                            ProgressHandler.increase();
+
+                            getSimilarity().get(i).translateFactsID(new File(getSimilarity().get(i).getPathID2())); //Gera os fatos do segundo documento
+                            getSimilarityFacts().get(i).get(j-i-1).add(getSimilarity().get(i).getFactsSimilarityID());
+                            ProgressHandler.increase();                       
+
+                        }else{
+                            for(int a=0;a<8;a++){
+                                ProgressHandler.increase();
+                            }
+                        }
+
+                        ProgressHandler.increase();
+
+                    }
+                }
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Error on translating the files", "Error",JOptionPane.ERROR_MESSAGE);
+        }
+        
+        ProgressHandler.stop();
+        
     }
 
     /**
@@ -131,17 +187,24 @@ public class Manager {
         //Limpa os resultados caso já exista algum
         resultsInference.clear();
 
+        ProgressHandler.restart((getContextKey().size()*(getContextKey().size()-1))/2, "Performing inference");
+        
         //Gera resultados para todos os pares de documentos
         for (int i = 0; i < (getContextKey().size() - 1); i++) {
             for (int j = i + 1; j < getContextKey().size(); j++) {
                 if (i != j) {
+                    ProgressHandler.setLabel("Performing inference");
+                    
                     //Concatena e normaliza os fatos pertencentes a dois documentos
-                    factsInference = getContextKey().get(i).setStandardFacts(getContextKey().get(i).getFacts(), getContextKey().get(j).getFacts());
+                    factsInference = ContextKey.setStandardFacts(getContextKey().get(i).getFacts(), getContextKey().get(j).getFacts());
                     finishResult = getInferenceModule().performInference(factsInference, getRulesModule()); //Realiza a inferência
                     getResultsInference().add(new Results(i + 1, j + 1, finishResult)); //Armazena os resultados referentes aos dois documentos utilizados
+                
+                    ProgressHandler.increase();
                 }
             }
         }
+        ProgressHandler.stop();
     }
 
     /**
@@ -150,55 +213,51 @@ public class Manager {
      * @param documents
      * @param similarityRate
      */
-    public void startResultsInferenciaSimilarity(Documents documents, float similarityRate) {
+    public void startResultsInferenciaSimilarity(Documents documents) {
 
-        this.similarityRate = similarityRate;
+        if(getSimilarityFacts()==null||getSimilarityFacts().isEmpty()||this.similarityRate!=main.getSimilarityRate()||PhoenixSettings.hasChange()){
+            similarityFacts = new ArrayList<ArrayList<ArrayList<String>>>();
+        }
+        
+        this.similarityRate = main.getSimilarityRate();
 
         String factsInference; //Fatos dos dois documentos que serão utilizados na inferência
         ArrayList<String> finishResult; //Resultados da inferência
-        String auxFact1, auxFact2; //Strings auxiliares para obter os fatos dos documentos
 
         //Limpa os resultados caso já exista algum
         resultsInference.clear();
 
-        //comandos para cálculo do valor máximo da barra
-        int iterations = 0;
-
-        for (int i = 0; i < (getSimilarity().size() - 1); i++) {
-            for (int j = i + 1; j < getSimilarity().size(); j++) {
-                if (i != j) iterations++;
-            }
-        }
-        iterations*=8;//multiplica-se por 7 pois a função documentsWithIDs() executa 6 acrécimos na barra de progresso, uma vez para gerar os fatos, e outra para realizar a inferência
-        
-        ProgressHandler.makeNew(iterations, "Getting inference");       
+        ProgressHandler.restart((getContextKey().size()*(getContextKey().size()-1))/2, "Performing inference");
         
         //Gera resultados para todos os pares de documentos
         for (int i = 0; i < (getSimilarity().size() - 1); i++) {
+            if(i > getSimilarityFacts().size()-1) {
+                getSimilarityFacts().add(new ArrayList<ArrayList<String>>());
+            }
             for (int j = i + 1; j < getSimilarity().size(); j++) {
-                if (i != j) {
-                    getSimilarity().get(i).documentsWithIDs(documents.getDocuments().get(i).getPathWay(), documents.getDocuments().get(j).getPathWay(), similarityRate);
+                if (i != j) {      
                     
-                    ProgressHandler.setLabel("Getting Prolog facts");
+                    ProgressHandler.setLabel("Performing inference");
                     
-                    getSimilarity().get(i).translateFactsID(new File(getSimilarity().get(i).getPathID1())); //Gera os fatos do primeiro documento
-                    auxFact1 = getSimilarity().get(i).getFactsSimilarityID(); //Obtêm os fatos referentes ao primeiro documento
-                    getSimilarity().get(i).translateFactsID(new File(getSimilarity().get(i).getPathID2())); //Gera os fatos do segundo documento
-                    auxFact2 = getSimilarity().get(i).getFactsSimilarityID(); //Obtêm os fatos referentes ao segundo documento
-
-                    ProgressHandler.setLabel("Getting inference results");
                     //Concatena e normaliza os fatos pertencentes a dois documentos
-                    factsInference = getSimilarity().get(i).setStandardFacts(auxFact1, auxFact2);
+                    factsInference = Similarity.setStandardFacts(getSimilarityFacts().get(i).get(j-i-1).get(0), getSimilarityFacts().get(i).get(j-i-1).get(1));
                     finishResult = getInferenceModule().performInference(factsInference, getRulesModule()); //Realiza a inferência
                     getResultsInference().add(new Results(i + 1, j + 1, finishResult)); //Armazena os resultados referentes aos dois documentos utilizados
+                    
+                    ProgressHandler.increase();
                 }
             }
         }
-        ProgressHandler.dispose();
+        ProgressHandler.stop();
     }
 
     public float getSimilarityRate() {
         return this.similarityRate;
+    }
+    
+    public void reset(){
+        getSimilarityFacts().clear();
+        documentsSize=0;
     }
 
     /**
@@ -208,6 +267,13 @@ public class Manager {
      */
     public static void main(String[] args) {
         Manager manager = new Manager();
-        MainInterface main = new MainInterface(manager); //Invoca o construtor da interface principal
+        main = new MainInterface(manager); //Invoca o construtor da interface principal
+    }
+
+    /**
+     * @return Os fatos do módulo de similaridade
+     */
+    public ArrayList<ArrayList<ArrayList<String>>> getSimilarityFacts() {
+        return similarityFacts;
     }
 }

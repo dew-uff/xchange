@@ -2,6 +2,7 @@ package Merge.view.frames;
 
 import GUI.Layout.LayoutConstraints;
 import GUI.MainInterface.MainInterface;
+import GUI.Util.MainInterfaceHandler;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -20,6 +21,8 @@ import javax.swing.ListSelectionModel;
 
 import Merge.model.ConflictResolverControler;
 import Merge.view.MultilineLabel;
+import java.awt.event.ActionEvent;
+import javax.swing.JMenuItem;
 
 public class ConflictResolverFrame extends JPanel {
 
@@ -421,20 +424,32 @@ public class ConflictResolverFrame extends JPanel {
      }
 
      /**
-      * This method initializes jButtonConfirmar	
+      * This method initializes jButtonConfirmar (ApplyChoicesBtn)
       * 	
       * @return javax.swing.JButton	
       */
      private void setJButtonConfirmar(MainInterface mainInterface) {
-          jButtonConfirmar = MainInterface.getApplyChoicesBtn();
-          final MainInterface mInterface = mainInterface;
-               jButtonConfirmar.addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent e){
-                        mInterface.selectTabbedPaneMerged(1);
-                        MainInterface.getWriteMerged().setEnabled(true);                    	
-                        mInterface.updateResults(controller.conflitosResolvidos());
-                    }
-               });
+        jButtonConfirmar = MainInterfaceHandler.getMainInterface().getApplyChoicesBtn();
+        JMenuItem miApplyChoices = MainInterfaceHandler.getMainInterface().getMiApplyChoices();
+        final MainInterface mInterface = mainInterface;
+          
+        jButtonConfirmar.addActionListener(new java.awt.event.ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                mInterface.selectTabbedPaneMerged(1);
+                MainInterfaceHandler.getMainInterface().getWriteMergedBtn().setEnabled(true);
+                MainInterfaceHandler.getMainInterface().getMiWriteMerged().setEnabled(true);
+                mInterface.updateResults(controller.conflitosResolvidos());
+            }
+        });
+        
+        miApplyChoices.addActionListener(new java.awt.event.ActionListener() {
+             public void actionPerformed(ActionEvent e) {
+                 mInterface.selectTabbedPaneMerged(1);
+                 MainInterfaceHandler.getMainInterface().getWriteMergedBtn().setEnabled(true);
+                 MainInterfaceHandler.getMainInterface().getMiWriteMerged().setEnabled(true);
+                 mInterface.updateResults(controller.conflitosResolvidos());
+             }
+         });
      }
 
      /**
@@ -442,13 +457,21 @@ public class ConflictResolverFrame extends JPanel {
       * 	
       * @return javax.swing.JButton	
       */
-     private void setJButtonCancel() {
-          jButtonCancel = MainInterface.getCancelBtn();
-               jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
-                    public void actionPerformed(java.awt.event.ActionEvent e) {
-                    	controller.getFrame().setVisible(false);
-                    }
-               });
+    private void setJButtonCancel() {
+        jButtonCancel = MainInterfaceHandler.getMainInterface().getCancelBtn();
+        JMenuItem miMergeCancel = MainInterfaceHandler.getMainInterface().getMiMergeCancel();
+          
+        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                controller.getFrame().setVisible(false);
+            }
+        });
+               
+        miMergeCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                controller.getFrame().setVisible(false);
+            }
+        });
      }
 
      public JLabel getJLabelTipoConflito() {
