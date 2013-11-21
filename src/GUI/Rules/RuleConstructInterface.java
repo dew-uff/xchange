@@ -4,6 +4,7 @@ import GUI.Layout.LayoutConstraints;
 import Manager.Manager;
 import Rules.RulesModule;
 import AutomaticRules.WekaParser;
+import GUI.MainInterface.DocumentsTab;
 import GUI.MainInterface.MainInterface;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -44,6 +45,7 @@ import weka.associations.Item;
 public class RuleConstructInterface extends JDialog implements ActionListener {
      
     //Variáveis utilizadas
+    private DocumentsTab documentsTab;
     private RulesModule rulesModule;
     private JButton btnAtributs;
     private JPanel pnlAll;
@@ -84,7 +86,8 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
      * @param isSimilarity Booleano que indica se o método escolhido foi
      * "Context Key" ou "Similarity".
      */
-    public RuleConstructInterface(Manager manager, boolean isSimilarity) {
+    public RuleConstructInterface(Manager manager, boolean isSimilarity, DocumentsTab documentsTab) {
+        this.documentsTab = documentsTab;
         setModal(true);
         setTitle("Key Attribute");
         this.rulesModule = manager.getRulesModule();
@@ -282,7 +285,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 }
             }
         } else if (e.getSource() == btnMiningRules) { //Mineração de regras de associação
-            List<Set> listRules = WekaParser.gerarRegras(null);
+            List<Set> listRules = WekaParser.gerarRegras(documentsTab);
             createListRules(listRules);
         }
     }

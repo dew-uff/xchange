@@ -1,7 +1,7 @@
 package AutomaticRules;
 
+import GUI.MainInterface.DocumentsTab;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Set;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
-import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -23,20 +22,23 @@ import weka.core.converters.ConverterUtils;
 
 public class WekaParser {
 
-    public static void main(String args[]){
-        gerarRegras(args);
+    public static void main(DocumentsTab documentsTab){
+        gerarRegras(documentsTab);
     }
     
-    public static List<Set> gerarRegras(String args[]) {
+    public static List<Set> gerarRegras(DocumentsTab documentsTab) {
         try {
-            String file1 = "/Users/Matheus/Desenvolvimento/get_gc_xchange/examples/Employee/original_dataset/v9.xml";
-            String file2 = "/Users/Matheus/Desenvolvimento/get_gc_xchange/examples/Employee/original_dataset/v10.xml";
-            String fileDiff = "/Users/Matheus/Desktop/diff.xml";
-            String fileArff = "/Users/Matheus/Desktop/arff.arff";
+            ArrayList<String> paths = documentsTab.getDocuments().getPathWays();
+            String document1 = paths.get(documentsTab.getLeftCBIndex());
+            String document2 = paths.get(documentsTab.getRightCBIndex());
+            String separator = System.getProperty("file.separator");
+            String workingPath = System.getProperty("user.dir");
+            String fileDiff = workingPath+separator+"temp"+separator+"mining_diff.xml";
+            String fileArff = workingPath+separator+"temp"+separator+"mining_arff.arff";
             
             //Lendo todas as tags do <emp> baseado na segunda versão
             XMLInputFactory factory = XMLInputFactory.newInstance();
-            InputStream is = new FileInputStream(file2);
+            InputStream is = new FileInputStream(document2);
             XMLStreamReader reader = factory.createXMLStreamReader(is);
             List<String> mapeamentoTags = new ArrayList<String>();
 
@@ -69,7 +71,7 @@ public class WekaParser {
             mapeamentoTags.removeAll(removeTags);
             
             //Gerando o Diff
-            XDiff diff = new XDiff(file1, file2, fileDiff);
+            XDiff diff = new XDiff(document1, document2, fileDiff);
             //Mepeando o Diff em Lists
             List<List> mapeamentoDiff = new ArrayList<List>();
             int i = 0;

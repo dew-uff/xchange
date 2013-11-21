@@ -1,6 +1,7 @@
 package GUI.Rules;
 import GUI.FileManager.PLOpener;
 import GUI.Layout.LayoutConstraints;
+import GUI.MainInterface.DocumentsTab;
 import GUI.MainInterface.InferenceFileChooser;
 import Manager.Manager;
 import Rules.RulesModule;
@@ -29,6 +30,7 @@ import javax.swing.JTextArea;
 public class RuleMainInterface extends JDialog implements ActionListener{
     
     private Manager manager;
+    private DocumentsTab documentsTab;
     private RulesModule inferenceModule;
     private JButton btnOpenRules, btnCreateRules, btnDone, btnIdentifyRules, btnSelectAll, btnSaveRules;
     private JPanel pnlTop, pnlBotton, pnlCenter;
@@ -48,10 +50,11 @@ public class RuleMainInterface extends JDialog implements ActionListener{
      * Booleano que indica se o método escolhido foi "Context Key" ou "Similarity"
      * @param inferenceFileChooser 
      */
-    public RuleMainInterface(Manager manager, boolean isSimilarity,InferenceFileChooser inferenceFileChooser){
+    public RuleMainInterface(Manager manager, boolean isSimilarity,InferenceFileChooser inferenceFileChooser, DocumentsTab documentsTab){
 
         //atribuições de manager,modulo de inferencia, similaridade, e da lista de documentos a serem mostrados no diff
         this.manager = manager;
+        this.documentsTab = documentsTab;
         this.inferenceModule = manager.getRulesModule();
         similarityActive = isSimilarity;
         this.inferenceFileChooser=inferenceFileChooser;
@@ -232,7 +235,7 @@ public class RuleMainInterface extends JDialog implements ActionListener{
                 String[] rulesPart = rulesInLine.split("\\."); //O final de cada regra é o delimitador "ponto"
                 addLoadedRules(rulesPart);
             }
-            RuleConstructInterface ruleConstructInterface = new RuleConstructInterface(manager, similarityActive);
+            RuleConstructInterface ruleConstructInterface = new RuleConstructInterface(manager, similarityActive, documentsTab);
 
             String textView;
             textView = formatSetTextPane(inferenceModule.getRulesString()); //Formata as regras que serão exibidas na tela
