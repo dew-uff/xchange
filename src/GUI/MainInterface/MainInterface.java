@@ -825,7 +825,7 @@ public class MainInterface extends JFrame implements ActionListener{
         else if(e.getSource().equals(saveXMLDiffBtn)){//ação "Save XML Diff"
             try {  
                 MultiDiffSaver.save(documents);
-            } catch (Exception ex) {
+            } catch (NoSelectedFileException ex) {
                 JOptionPane.showMessageDialog(null, "Diff saving failure!", "Error",JOptionPane.ERROR_MESSAGE);
             }
         }
