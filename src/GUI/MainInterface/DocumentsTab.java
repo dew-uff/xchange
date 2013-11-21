@@ -207,4 +207,8 @@ public class DocumentsTab extends JPanel implements ActionListener {
     public int getRightCBIndex(){
         return this.rightCB.getSelectedIndex();
     }
+    
+    public Documents getDocuments(){
+        return this.documents;
+    }
 }

@@ -108,6 +108,10 @@ public class LineRule extends JPanel{
         return comboOperator;
     }
     
+    public JButton getBtnAddCondition() {
+        return btnAddCondition;
+    }
+    
     
      /**
      * Monta as opções dos comboBox de termos para a construção das regras. 
