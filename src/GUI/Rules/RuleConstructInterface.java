@@ -77,6 +77,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     private JButton btnMiningRules;
     private static JPanel pnlWest;
     private JScrollPane pnWestScroll;
+    private List<Set> listRules = new ArrayList<Set>();
 
     
     /**
@@ -285,7 +286,8 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 }
             }
         } else if (e.getSource() == btnMiningRules) { //Mineração de regras de associação
-            List<Set> listRules = WekaParser.gerarRegras(documentsTab);
+            listRules.clear();
+            listRules = WekaParser.gerarRegras(documentsTab);
             createListRules(listRules);
         }
     }
@@ -684,6 +686,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
         pnlWest.setLayout(new BoxLayout(pnlWest, BoxLayout.PAGE_AXIS));
         pnlWest.setAutoscrolls(true);
+        pnlWest.removeAll();
         
         int i = 1;
 
