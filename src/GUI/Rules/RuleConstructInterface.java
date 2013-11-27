@@ -13,6 +13,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import java.util.Set;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -31,6 +33,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
@@ -76,10 +79,11 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     //Elementos de tela da mineração de regras
     private JButton btnMiningRules;
     private static JPanel pnlWest;
-    private JScrollPane pnWestScroll;
-    private List<Set> listRules = new ArrayList<Set>();
-
-    
+    private ArrayList<JCheckBox> checkTagsArray = new ArrayList<JCheckBox>();
+    private ArrayList<String> chosenTags = new ArrayList<String>();
+    List<Set> listRules = new ArrayList<Set>();
+    JDialog popupRemoveTags = new JDialog();
+            
     /**
      * Exibe a janela para construção das regras.
      *
@@ -285,10 +289,8 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                     pnlRules.revalidate();
                 }
             }
-        } else if (e.getSource() == btnMiningRules) { //Mineração de regras de associação
-            listRules.clear();
-            listRules = WekaParser.gerarRegras(documentsTab);
-            createListRules(listRules);
+        } else if (e.getSource() == btnMiningRules) { //Mineração de regras de associação                        
+            generateAutomaticsRules();            
         }
     }
 
@@ -460,9 +462,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         constraints.insets = new Insets(10, 0, 10, 10);
         LayoutConstraints.setConstraints(constraints, 1, 0, 1000, 1, 10, 1);
         constraints.anchor = GridBagConstraints.NORTHWEST;
-        ruleOutputPnl.add(comboExit, constraints);
-
-        
+        ruleOutputPnl.add(comboExit, constraints);     
         
         //declara objetos de controle do layout do painel central
         GridBagLayout gridBagMid = new GridBagLayout();
@@ -485,8 +485,6 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         pnlRules.add(firstLineRule);
         LineRule.setPnlRules(pnlRules);
         linerules.add(firstLineRule);
-
-        
         
         //declara objetos de controle do layout do painel de baixo (botões)
         GridBagLayout gridBagBottom = new GridBagLayout();
@@ -509,8 +507,6 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         constraints.anchor = GridBagConstraints.WEST;
         constraints.fill = GridBagConstraints.NONE;
         pnlBottom.add(btnAddRule, constraints);
-
-        
         
         //declara objetos de controle do layout do painel da esquerda (regras de associação)
         pnlWest = new JPanel();
@@ -524,8 +520,6 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         JPanel pnBtnMining = new JPanel();
         pnBtnMining.add(btnMiningRules);
         btnMiningRules.setText("Mining Rule");
-        
-//        pnlWest.add(btnMiningRules);
         
         LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1);
         constraints.fill = GridBagConstraints.VERTICAL;
@@ -686,7 +680,6 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
         pnlWest.setLayout(new BoxLayout(pnlWest, BoxLayout.PAGE_AXIS));
         pnlWest.setAutoscrolls(true);
-        pnlWest.removeAll();
         
         int i = 1;
 
@@ -758,5 +751,102 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             i++;
         }
         pnlWest.setAlignmentX(LEFT_ALIGNMENT);
+    }
+
+    private void generateAutomaticsRules() {
+        
+        JPanel pnlTop = new JPanel();
+        JPanel pnlCenter = new JPanel();
+        JPanel pnlBotton = new JPanel();        
+        
+        GridBagLayout generalGridBag = new GridBagLayout();   
+        GridBagConstraints constraints = new GridBagConstraints();
+        
+        popupRemoveTags.setLayout(generalGridBag);         
+        
+        JLabel btnOpenRules = new JLabel("");
+        btnOpenRules.setPreferredSize(new Dimension(110,15));
+        btnOpenRules.revalidate();
+        pnlTop.add(btnOpenRules);
+        
+        //Painel superior
+        popupRemoveTags.add(pnlTop);
+        constraints.anchor = GridBagConstraints.NORTH;
+        constraints.fill = GridBagConstraints.BOTH;
+        LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1); 
+        generalGridBag.setConstraints(pnlTop, constraints);
+        
+        //Painel central
+        GridBagLayout centerGridBag = new GridBagLayout();       
+        pnlCenter.setLayout(centerGridBag);   
+        
+        JPanel p = new JPanel();
+        p.setLayout(new BoxLayout(p, WIDTH));
+        p.setVisible(true);
+        pnlCenter.setLayout(new BoxLayout(pnlCenter, WIDTH));
+        
+        pnlCenter.removeAll();
+        JScrollPane jscPane = new JScrollPane(p);
+        pnlCenter.add(jscPane);
+        
+        LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1);
+        constraints.fill=GridBagConstraints.BOTH;
+        centerGridBag.addLayoutComponent(p, constraints);
+        
+        //Recupera a lista de tags a partir do segundo arquivo carregado no projeto
+        List<String> tags = WekaParser.getTags(documentsTab.getDocuments().getPathWays().get(documentsTab.getRightCBIndex()));        
+        for (String tag : tags) { //Cria os campos do CheckBox de acordo com as regras inseridas pelo usuário
+            JCheckBox chkItem = new JCheckBox(tag);
+            chkItem.setName(tag);
+            chkItem.setSelected(true);
+            checkTagsArray.add(chkItem);
+            p.add(chkItem);
+        }
+        
+        //painel central
+        popupRemoveTags.add(pnlCenter);
+        constraints.insets = new Insets(5,5,5,5);
+        LayoutConstraints.setConstraints(constraints, 0, 1, 1, 1, 1000, 1000); 
+        constraints.anchor = GridBagConstraints.NORTHWEST;
+        generalGridBag.setConstraints(pnlCenter, constraints);
+        constraints.insets = new Insets(0,0,0,0);        
+        
+        //Painel inferior
+        JButton btnDone = new JButton("Mining Rules");
+        btnDone.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                for (JCheckBox item : checkTagsArray) {
+                    if (item.isSelected()) {
+                        chosenTags.add(item.getName());
+                    }
+                }
+                listRules = WekaParser.generateRules(documentsTab, chosenTags);
+                popupRemoveTags.dispose();
+                createListRules(listRules);
+            }
+        });        
+        
+        btnDone.setVisible(true);
+        btnDone.setPreferredSize(new Dimension(110,25));
+        pnlBotton.add(btnDone);
+        
+        popupRemoveTags.add(pnlBotton);
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        LayoutConstraints.setConstraints(constraints, 0, 2, 1, 1, 1, 1); 
+        constraints.anchor = GridBagConstraints.SOUTH;
+        generalGridBag.setConstraints(pnlBotton, constraints);
+        
+         //modifica características da janela
+        popupRemoveTags.setModal(true);//não permite que a tela do XChange seja acessada antes desta ser fechada
+        popupRemoveTags.setTitle("Remove Tags");//modifica o titulo
+        popupRemoveTags.setResizable(true);//permite redimensionar a janela
+        popupRemoveTags.setAlwaysOnTop(false);//esconde a janela se o XChange perder o foco 
+        popupRemoveTags.pack();//desenha a janela com o melhor tamanho para seus componentes
+        
+        Toolkit tk = Toolkit.getDefaultToolkit();//objeto para pegar as dimensoes da tela
+        Dimension dim = tk.getScreenSize();//funçao para pegar as dimensoes da tela
+        popupRemoveTags.setLocation(((int)dim.getWidth()-this.getWidth())/2,((int)dim.getHeight()-this.getHeight())/2);//posiciona a janela no meio da tela 
+        
+        popupRemoveTags.setVisible(true);//torna a janela visivel     
     }
 }

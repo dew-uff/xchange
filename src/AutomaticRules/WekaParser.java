@@ -13,7 +13,11 @@ import javax.xml.stream.XMLStreamReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.stream.XMLStreamException;
 import weka.associations.Apriori;
 import weka.associations.AssociationRule;
 import weka.associations.Item;
@@ -21,12 +25,8 @@ import weka.core.Instances;
 import weka.core.converters.ConverterUtils;
 
 public class WekaParser {
-
-    public static void main(DocumentsTab documentsTab){
-        gerarRegras(documentsTab);
-    }
     
-    public static List<Set> gerarRegras(DocumentsTab documentsTab) {
+    public static List<Set> generateRules(DocumentsTab documentsTab, List<String> mapeamentoTags) {
         try {
             ArrayList<String> paths = documentsTab.getDocuments().getPathWays();
             String document1 = paths.get(documentsTab.getLeftCBIndex());
@@ -34,41 +34,17 @@ public class WekaParser {
             String separator = System.getProperty("file.separator");
             String workingPath = System.getProperty("user.dir");
             String fileDiff = workingPath+separator+"temp"+separator+"mining_diff.xml";
-            String fileArff = workingPath+separator+"temp"+separator+"mining_arff.arff";
+            String fileArff = workingPath+separator+"temp"+separator+"mining_arff.arff";     
             
-            //Lendo todas as tags do <emp> baseado na segunda versão
-            XMLInputFactory factory = XMLInputFactory.newInstance();
-            InputStream is = new FileInputStream(document2);
-            XMLStreamReader reader = factory.createXMLStreamReader(is);
-            List<String> mapeamentoTags = new ArrayList<String>();
-
-            String root = null;
-            String each = null;
-            while (reader.hasNext()) {
-                int event = reader.next();
-                if (event == XMLStreamConstants.START_ELEMENT) {
-                    if (root == null) {
-                        root = reader.getLocalName();
-                    } else if (each == null) {
-                        each = reader.getLocalName();
-                    } else if (reader.getLocalName().equalsIgnoreCase(each)) {
-                        break;
-                    } else {
-                        mapeamentoTags.add(reader.getLocalName());
-                    }
-                }
-            }
-            is.close();
-            
-            //Selecionando a tag chave primaria
-            String unchangedTag = "empno";
-            //Selecionando tags a não serem consideradas
-            List<String> removeTags = new ArrayList<String>();
-            removeTags.add("deptno");
-            removeTags.add("hiredate");
-            
-            //Removendo tags selecionadas do mapeamento de Tags
-            mapeamentoTags.removeAll(removeTags);
+//            //Selecionando a tag chave primaria
+//            String unchangedTag = "empno";
+//            //Selecionando tags a não serem consideradas
+//            List<String> removeTags = new ArrayList<String>();
+//            removeTags.add("deptno");
+//            removeTags.add("hiredate");
+//            
+//            //Removendo tags selecionadas do mapeamento de Tags
+//            mapeamentoTags.removeAll(removeTags);
             
             //Gerando o Diff
             XDiff diff = new XDiff(document1, document2, fileDiff);
@@ -76,11 +52,13 @@ public class WekaParser {
             List<List> mapeamentoDiff = new ArrayList<List>();
             int i = 0;
             
-            is = new FileInputStream(fileDiff);
-            reader = factory.createXMLStreamReader(is);
+            XMLInputFactory factory = XMLInputFactory.newInstance();
+            InputStream is = new FileInputStream(fileDiff);
+            XMLStreamReader reader = factory.createXMLStreamReader(is);
 
-            root = null;
-            each = null;
+            String root = null;
+            String each = null;
+            
             while (reader.hasNext()) {
                 int event = reader.next();
                 if (event == XMLStreamConstants.START_ELEMENT) {
@@ -110,7 +88,7 @@ public class WekaParser {
 
             for (i = 0; i < mapeamentoDiff.size(); i++) {
                 
-                if(mapeamentoDiff.get(i).contains(unchangedTag)) //Eliminando DIFF que possua a tag selecionada como chave primária
+                if(mapeamentoDiff.get(i).contains("empno")) //Eliminando DIFF que possua a tag selecionada como chave primária
                     continue;
                 
                 for (int j = 0; j < mapeamentoTags.size(); j++) {
@@ -169,5 +147,40 @@ public class WekaParser {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    public static List<String> getTags(String document) {
+        
+        List<String> mapeamentoTags = new ArrayList<String>();
+        try {
+            //Lendo todas as tags do <emp> baseado na segunda versão
+            XMLInputFactory factory = XMLInputFactory.newInstance();
+            InputStream is = new FileInputStream(document);
+            XMLStreamReader reader = factory.createXMLStreamReader(is);            
+            
+            String root = null;
+            String each = null;
+            while (reader.hasNext()) {
+                int event = reader.next();
+                if (event == XMLStreamConstants.START_ELEMENT) {
+                    if (root == null) {
+                        root = reader.getLocalName();
+                    } else if (each == null) {
+                        each = reader.getLocalName();
+                    } else if (reader.getLocalName().equalsIgnoreCase(each)) {
+                        break;
+                    } else {
+                        mapeamentoTags.add(reader.getLocalName());
+                    }
+                }
+            }
+            is.close();           
+            
+        } catch (IOException ex) {
+            Logger.getLogger(WekaParser.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (XMLStreamException ex) {
+            Logger.getLogger(WekaParser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return mapeamentoTags;
     }
 }
