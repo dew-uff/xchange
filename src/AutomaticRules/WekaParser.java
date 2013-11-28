@@ -26,25 +26,22 @@ import weka.core.converters.ConverterUtils;
 
 public class WekaParser {
     
-    public static List<Set> generateRules(DocumentsTab documentsTab, List<String> mapeamentoTags) {
+    public List<Set> generateRules(DocumentsTab documentsTab, List<String> mapeamentoTags, String keyChoice) {
         try {
-            ArrayList<String> paths = documentsTab.getDocuments().getPathWays();
-            String document1 = paths.get(documentsTab.getLeftCBIndex());
-            String document2 = paths.get(documentsTab.getRightCBIndex());
             String separator = System.getProperty("file.separator");
             String workingPath = System.getProperty("user.dir");
+            String document1, document2;
+            if(keyChoice == "id") {
+                document1 = workingPath+separator+"temp1.xml";
+                document2 = workingPath+separator+"temp2.xml";
+            } else {
+                ArrayList<String> paths = documentsTab.getDocuments().getPathWays();
+                document1 = paths.get(documentsTab.getLeftCBIndex());
+                document2 = paths.get(documentsTab.getRightCBIndex());
+            }
+            
             String fileDiff = workingPath+separator+"temp"+separator+"mining_diff.xml";
             String fileArff = workingPath+separator+"temp"+separator+"mining_arff.arff";     
-            
-//            //Selecionando a tag chave primaria
-//            String unchangedTag = "empno";
-//            //Selecionando tags a não serem consideradas
-//            List<String> removeTags = new ArrayList<String>();
-//            removeTags.add("deptno");
-//            removeTags.add("hiredate");
-//            
-//            //Removendo tags selecionadas do mapeamento de Tags
-//            mapeamentoTags.removeAll(removeTags);
             
             //Gerando o Diff
             XDiff diff = new XDiff(document1, document2, fileDiff);
@@ -71,7 +68,7 @@ public class WekaParser {
                         mapeamentoDiff.add(new ArrayList<String>());
                         i++;
                     } else {
-                        mapeamentoDiff.get(i).add(reader.getLocalName());
+                        mapeamentoDiff.get(i).add(reader.getLocalName().toLowerCase());
                     }
                 }
             }
@@ -88,7 +85,7 @@ public class WekaParser {
 
             for (i = 0; i < mapeamentoDiff.size(); i++) {
                 
-                if(mapeamentoDiff.get(i).contains("empno")) //Eliminando DIFF que possua a tag selecionada como chave primária
+                if(mapeamentoDiff.get(i).contains(keyChoice)) //Eliminando DIFF que possua a tag selecionada como chave primária
                     continue;
                 
                 for (int j = 0; j < mapeamentoTags.size(); j++) {
@@ -149,7 +146,7 @@ public class WekaParser {
         return null;
     }
     
-    public static List<String> getTags(String document) {
+    public List<String> getTags(String document) {
         
         List<String> mapeamentoTags = new ArrayList<String>();
         try {
@@ -167,10 +164,11 @@ public class WekaParser {
                         root = reader.getLocalName();
                     } else if (each == null) {
                         each = reader.getLocalName();
+                        mapeamentoTags.add(each.toLowerCase());
                     } else if (reader.getLocalName().equalsIgnoreCase(each)) {
                         break;
                     } else {
-                        mapeamentoTags.add(reader.getLocalName());
+                        mapeamentoTags.add(reader.getLocalName().toLowerCase());
                     }
                 }
             }

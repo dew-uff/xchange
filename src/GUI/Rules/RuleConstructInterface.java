@@ -143,14 +143,14 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             factBase1v2 = manager.getSimilarity().get(0).getMainFact(factsPart, "after");
         } else { //Se o metodo utilizado for o "Context Key"
             factsPart = manager.getContextKey().get(0).partFacts(manager.getContextKey().get(0).getFacts());
-            namesFacts = manager.getContextKey().get(0).getNameFacts();
-            nameFactInRule = manager.getContextKey().get(0).getElementName().toUpperCase();
-
+            List<String> listNameFacts = new WekaParser().getTags(this.documentsTab.getDocuments().getPathWays().get(this.documentsTab.getRightCBIndex()));
+            nameFactInRule = listNameFacts.get(0).toUpperCase();
+            listNameFacts.remove(0);
+            namesFacts = listNameFacts.toArray(new String[listNameFacts.size()]);
             factBase1v1 = manager.getContextKey().get(0).getMainFact(factsPart, "before");
             factBase1v2 = manager.getContextKey().get(0).getMainFact(factsPart, "after");
         }
         LineRule.setNamesFacts(namesFacts);
-        namesFacts = removeFactsRepeated(namesFacts);
         factBase1 = factBase1v1 + "," + factBase1v2;
 
         pnlCenter.removeAll(); //Limpa o painel central
@@ -680,6 +680,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
         pnlWest.setLayout(new BoxLayout(pnlWest, BoxLayout.PAGE_AXIS));
         pnlWest.setAutoscrolls(true);
+        pnlWest.removeAll();
         
         int i = 1;
 
@@ -755,6 +756,10 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
     private void generateAutomaticsRules() {
         
+        popupRemoveTags = new JDialog();
+        chosenTags = new ArrayList<String>();
+        checkTagsArray = new ArrayList<JCheckBox>();
+        
         JPanel pnlTop = new JPanel();
         JPanel pnlCenter = new JPanel();
         JPanel pnlBotton = new JPanel();        
@@ -764,7 +769,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         
         popupRemoveTags.setLayout(generalGridBag);         
         
-        JLabel btnOpenRules = new JLabel("");
+        JLabel btnOpenRules = new JLabel("Select the tags you want to mine:");
         btnOpenRules.setPreferredSize(new Dimension(110,15));
         btnOpenRules.revalidate();
         pnlTop.add(btnOpenRules);
@@ -794,15 +799,17 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         centerGridBag.addLayoutComponent(p, constraints);
         
         //Recupera a lista de tags a partir do segundo arquivo carregado no projeto
-        List<String> tags = WekaParser.getTags(documentsTab.getDocuments().getPathWays().get(documentsTab.getRightCBIndex()));        
+        List<String> tags = new WekaParser().getTags(documentsTab.getDocuments().getPathWays().get(documentsTab.getRightCBIndex()));        
         for (String tag : tags) { //Cria os campos do CheckBox de acordo com as regras inseridas pelo usuário
+            if (tags.get(0).equals(tag))
+                continue;
             JCheckBox chkItem = new JCheckBox(tag);
             chkItem.setName(tag);
             chkItem.setSelected(true);
             checkTagsArray.add(chkItem);
             p.add(chkItem);
         }
-        
+
         //painel central
         popupRemoveTags.add(pnlCenter);
         constraints.insets = new Insets(5,5,5,5);
@@ -812,7 +819,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         constraints.insets = new Insets(0,0,0,0);        
         
         //Painel inferior
-        JButton btnDone = new JButton("Mining Rules");
+        JButton btnDone = new JButton("Mine Rules");
         btnDone.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 for (JCheckBox item : checkTagsArray) {
@@ -820,7 +827,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                         chosenTags.add(item.getName());
                     }
                 }
-                listRules = WekaParser.generateRules(documentsTab, chosenTags);
+                listRules = new WekaParser().generateRules(documentsTab, chosenTags, keyChoice);
                 popupRemoveTags.dispose();
                 createListRules(listRules);
             }
@@ -838,7 +845,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         
          //modifica características da janela
         popupRemoveTags.setModal(true);//não permite que a tela do XChange seja acessada antes desta ser fechada
-        popupRemoveTags.setTitle("Remove Tags");//modifica o titulo
+        popupRemoveTags.setTitle("Tags to mine");//modifica o titulo
         popupRemoveTags.setResizable(true);//permite redimensionar a janela
         popupRemoveTags.setAlwaysOnTop(false);//esconde a janela se o XChange perder o foco 
         popupRemoveTags.pack();//desenha a janela com o melhor tamanho para seus componentes
