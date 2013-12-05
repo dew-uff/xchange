@@ -770,7 +770,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         popupRemoveTags.setLayout(generalGridBag);         
         
         JLabel btnOpenRules = new JLabel("Select the tags you want to mine:");
-        btnOpenRules.setPreferredSize(new Dimension(110,15));
+        btnOpenRules.setPreferredSize(new Dimension(300,30));
         btnOpenRules.revalidate();
         pnlTop.add(btnOpenRules);
         

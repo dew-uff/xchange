@@ -31,7 +31,7 @@ public class WekaParser {
             String separator = System.getProperty("file.separator");
             String workingPath = System.getProperty("user.dir");
             String document1, document2;
-            if(keyChoice == "id") {
+            if(keyChoice.equals("id")) {
                 document1 = workingPath+separator+"temp1.xml";
                 document2 = workingPath+separator+"temp2.xml";
             } else {
