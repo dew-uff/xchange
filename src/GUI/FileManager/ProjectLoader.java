@@ -1,14 +1,12 @@
 package GUI.FileManager;
 
-import Exception.NoSelectedFileException;
 import Documents.Document;
 import Documents.Documents;
+import Exception.NoSelectedFileException;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;

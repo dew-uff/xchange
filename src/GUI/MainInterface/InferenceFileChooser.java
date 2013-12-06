@@ -134,7 +134,7 @@ public class InferenceFileChooser extends JPanel implements ActionListener{
         result="";
         if (manager != null) {//se gerenciador for diferente de nulo
             int k, l;//variaves de iteração da lista de checkboxes
-
+                        
             //combinação dos checkboxes dos documentos selecionados 2 a 2
             for (k = 0; k < cbList.getCheckBoxes().size(); k++) {//primeiro nivel de iteração dos checkboxes
                 if (cbList.getCheckBoxes().get(k).isSelected()) {//se o checkbox do primeiro nivel estiver selecionado
