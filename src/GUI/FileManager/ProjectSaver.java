@@ -50,6 +50,10 @@ public abstract class ProjectSaver{
             //Se tiver iniciado contextkey ou similaridade, salva os fatos tambem
             if(isEnabledFactsPrologFacts)
                 savePrologFacts(documents,pathWay);
+            
+            XCPBuilder xcp = new XCPBuilder(pathWay);
+            
+            deleteTemp(file);
         
         }else{
            throw new NoSelectedFileException(); // isso é para quando você clicar em cancelar, ele nao vai ter selecionado nada e o pathWay será nulo.
@@ -141,5 +145,18 @@ public abstract class ProjectSaver{
                 }
             }
         }
+    }
+    
+    public static boolean deleteTemp(File dir){
+        if(dir.isDirectory()){
+            String[] children = dir.list();
+            for(int i=0;i<children.length;i++){
+                boolean success = deleteTemp(new File(dir,children[i]));
+                if(!success){
+                    return false;
+                }
+            }
+        }
+        return dir.delete();
     }
 }
