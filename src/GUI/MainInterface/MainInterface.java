@@ -916,11 +916,11 @@ public class MainInterface extends JFrame implements ActionListener{
         //Se um dos metodos estiver ativo, ou seja, "Context Key" ou "Similarity"
         if(!manager.getContextKey().isEmpty() || !manager.getSimilarity().isEmpty()){  
             RuleMainInterface ruleMainInterface = new RuleMainInterface(manager, isSimilarity,resultsTab.getInferenceFileChooser(), documentsTab);
-            if(!isSimilarity){ //Se o metodo utilizado for o "Context Key"
-                manager.startResultsInferenciaContextKey();
-            } else{ //Se o metodo utilizado for o "Similarity"
-                manager.startResultsInferenciaSimilarity(documents);
-            }
+//            if(!isSimilarity){ //Se o metodo utilizado for o "Context Key"
+//                manager.startResultsInferenciaContextKey();
+//            } else{ //Se o metodo utilizado for o "Similarity"
+//                manager.startResultsInferenciaSimilarity(documents);
+//            }
             resultsTab.refresh(documents,manager);
             tabbedPane.setSelectedIndex(2);
         } else{ //Se nenhum metodo estiver ativo

@@ -4,6 +4,7 @@ import Documents.Document;
 import Documents.Documents;
 import GUI.FileManager.ReportUtil;
 import GUI.Layout.LayoutConstraints;
+import GUI.Util.MainInterfaceHandler;
 import Manager.Manager;
 import Manager.Results;
 import java.awt.GridBagConstraints;
@@ -101,7 +102,7 @@ public class InferenceFileChooser extends JPanel implements ActionListener{
         this.manager=manager;
         this.documents=documents;
         this.selectionBtn.setText("Select All");
-        cbList.selectAll();
+        cbList.unSelectAll();
         showResults();
     }
 
@@ -132,6 +133,18 @@ public class InferenceFileChooser extends JPanel implements ActionListener{
      */
     public void showResults(){
         result="";
+        boolean isSimilarity = MainInterfaceHandler.getMainInterface().getSimilarity();
+        
+        boolean marked[] = new boolean[cbList.getCheckBoxes().size()];
+        for (int i = 0; i < cbList.getCheckBoxes().size(); i++)
+            marked[i]=cbList.getCheckBoxes().get(i).isSelected();
+        
+        if(!isSimilarity){ //Se o metodo utilizado for o "Context Key"
+                manager.startResultsInferenciaContextKey(marked);
+        } else{ //Se o metodo utilizado for o "Similarity"
+                manager.startResultsInferenciaSimilarity(documents,marked);
+        }
+        
         if (manager != null) {//se gerenciador for diferente de nulo
             int k, l;//variaves de iteração da lista de checkboxes
                         
