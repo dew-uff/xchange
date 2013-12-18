@@ -758,9 +758,14 @@ public class MainInterface extends JFrame implements ActionListener{
         if(e.getSource().equals(saveBtn)||e.getSource().equals(miSave)){//ação "SALVAR"
             try {
                 boolean isEnabledFactsPrologFacts=false;
-                if(tabbedPane.isEnabledAt(1))//Se estiver habilitada a aba de fatos prolog
+                boolean isEnabledXMLDiff=false;
+                if(tabbedPane.isEnabledAt(1)){//Se estiver habilitada a aba de fatos prolog
                     isEnabledFactsPrologFacts = true;
-                ProjectSaver.save(documents, this, manager, isEnabledFactsPrologFacts);
+                }
+                if(tabbedPane.isEnabledAt(2)){
+                    isEnabledXMLDiff = true;
+                }
+                ProjectSaver.save(documents, this, manager, isEnabledFactsPrologFacts, isEnabledXMLDiff);
             } catch (NoSelectedFileException ex) {
             } catch (Exception ex){
                 JOptionPane.showMessageDialog(null, "Error on save Project", "Error",JOptionPane.ERROR_MESSAGE);

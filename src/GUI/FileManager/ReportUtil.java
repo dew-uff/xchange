@@ -30,10 +30,11 @@ public class ReportUtil {
             list.add(content);
                            
             String pathWay = "";
-            JFileChooser chooser= new JFileChooser(LastpathManager.getlastpath(".pdf"));
+            JFileChooser chooser= new JFileChooser(LastpathManager.getlastpath("pdf")+".pdf");
             int openedFile = chooser.showSaveDialog(null); // showSaveDialog retorna um inteiro , e ele ira determinar que o chooser será para salvar.
             if(openedFile == JFileChooser.APPROVE_OPTION){
                 pathWay = chooser.getSelectedFile().getAbsolutePath();
+                LastpathManager.savelastpath(pathWay, "pdf");
                 if(!pathWay.toUpperCase().endsWith(".PDF"))
                     pathWay += ".pdf";
                 

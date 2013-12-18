@@ -359,7 +359,7 @@ public class RuleMainInterface extends JDialog implements ActionListener{
      * @return textFormated
      * String com as regras formatadas.
      */
-    private String formatSetTextPane (String paneRules) {
+    static public String formatSetTextPane (String paneRules) {
         String textFormated = paneRules;
         textFormated = textFormated.replaceAll("\n", ""); //Eliminando quebras de linha
         textFormated = textFormated.replaceAll("\r", ""); //Eliminando quebras de linha

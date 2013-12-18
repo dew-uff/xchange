@@ -3,6 +3,7 @@ package GUI.FileManager;
 import Documents.Documents;
 import Exception.NoSelectedFileException;
 import GUI.MainInterface.MainInterface;
+import GUI.Rules.RuleMainInterface;
 import Manager.Manager;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -29,7 +30,7 @@ public abstract class ProjectSaver{
      * @param isEnabledFactsPrologFacts(verifica se foi inicializado algum modulo(ContextKey ou Similaridade), caso contrario so ira salvar os xml abertos)
      * @throws NoSelectedFileException(problema na seleção de um arquivo)
      */
-    public static void save(Documents documents, MainInterface mInterface, Manager mngr, boolean isEnabledFactsPrologFacts) throws NoSelectedFileException, IOException{
+    public static void save(Documents documents, MainInterface mInterface, Manager mngr, boolean isEnabledFactsPrologFacts, boolean isEnableXMLDiff) throws NoSelectedFileException, IOException{
         mainInterface = mInterface;
         manager = mngr;
         
@@ -49,12 +50,15 @@ public abstract class ProjectSaver{
             
             //Se tiver iniciado contextkey ou similaridade, salva os fatos tambem
             if(isEnabledFactsPrologFacts)
-                savePrologFacts(documents,pathWay);
-            
+                savePrologFacts(documents,pathWay, isEnableXMLDiff);
+                        
             XCPBuilder xcp = new XCPBuilder(pathWay);
             
+            //Deleta a Pasta Criada inicialmente
             deleteTemp(file);
-        
+            
+            JOptionPane.showMessageDialog(null, "Project Saved Successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+            
         }else{
            throw new NoSelectedFileException(); // isso é para quando você clicar em cancelar, ele nao vai ter selecionado nada e o pathWay será nulo.
         }
@@ -75,20 +79,21 @@ public abstract class ProjectSaver{
             }
             out.close();
         }catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, "It was not possible save the file.", "Erro", JOptionPane.ERROR_MESSAGE); //caso ocorra algum erro na gravação do arquivo
+            JOptionPane.showMessageDialog(null, "It was not possible save the file.", "Erro", JOptionPane.ERROR_MESSAGE); //caso ocorra algum erro na gravação do arquivo
         }
     }
     
     /*
      * Responsável por os fatos prolog
      */
-    public static void savePrologFacts(Documents documents, String pathWay){
+    public static void savePrologFacts(Documents documents, String pathWay, boolean isEnableXMLDiff){
+        File directory = null;
         //ContextKey
         if(!mainInterface.getSimilarity()){
             String contextKeyDirectory = "ContextKey";
-            File directory = new File(new File(pathWay),contextKeyDirectory);
+            directory = new File(new File(pathWay),contextKeyDirectory);
             directory.mkdir();
-                        
+            
             for(int i=0; i < documents.getSize(); i++){
                 //Obtém o nome do documento sem o ".xml" no final
                 String name = documents.getDocument(i+1).getFile().getName().substring(0,documents.getDocument(i+1).getFile().getName().lastIndexOf("."))+".pl";
@@ -108,10 +113,10 @@ public abstract class ProjectSaver{
                 }catch(IOException ex){
                     JOptionPane.showMessageDialog(null, "It was not possible save the file.", "Erro", JOptionPane.ERROR_MESSAGE); //caso ocorra algum erro na gravação do arquivo
                 }
-            }
+            }            
         }else{//Similarity
             String similarityDirectory = "Similarity";
-            File directory = new File(new File(pathWay),similarityDirectory);
+            directory = new File(new File(pathWay),similarityDirectory);
             directory.mkdir();
             
             for(int i=0; i<(documents.getSize()-1);i++){
@@ -121,8 +126,7 @@ public abstract class ProjectSaver{
                     
                     File file = new File(directory, name);
                     
-                    String[] factVi;
-                    factVi = (manager.getSimilarityFacts().get(i).get(documents.getSize()-j-1).get(0)).split("\n");
+                    String[] factVi = (manager.getSimilarityFacts().get(i).get(documents.getSize()-j-1).get(0)).split("\n");
                                         
                     String[] factVj;
                     factVj = (manager.getSimilarityFacts().get(i).get(documents.getSize()-j-1).get(1)).split("\n");
@@ -143,6 +147,25 @@ public abstract class ProjectSaver{
                         JOptionPane.showMessageDialog(null, "It was not possible save the file.", "Erro", JOptionPane.ERROR_MESSAGE); //caso ocorra algum erro na gravação do arquivo
                     }
                 }
+            }
+        }
+        
+        if(isEnableXMLDiff){
+            String rulesName = "rules"+".pl";
+                
+            File fileRules = new File(directory, rulesName);
+
+            String[] rules = RuleMainInterface.formatSetTextPane(manager.getRulesModule().getRulesString()).split("\n");
+
+            try{
+                BufferedWriter out = new BufferedWriter(new FileWriter(fileRules.getAbsolutePath()));
+                for(int i=0; i < rules.length; i++){
+                    out.write(rules[i]);
+                    out.newLine();
+                }
+                out.close();
+            }catch(IOException ex){
+                JOptionPane.showMessageDialog(null, "It was not possible save the file.", "Erro", JOptionPane.ERROR_MESSAGE); //caso ocorra algum erro na gravação do arquivo
             }
         }
     }

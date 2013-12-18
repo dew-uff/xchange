@@ -46,7 +46,7 @@ public abstract class ProjectLoader {
                     try {
                         Document.differentProject();//reinicia o contador de documentos da classe
                         Documents documents = new Documents();//cria um novo projeto contendo um conjunto de documentos
-                        while (br.ready()) {
+                        while (br.ready()){
                             String s = br.readLine();//para cada linha lida
                             documents.add(new File(s));//cria e adiciona um novo documento ao conjunto
                         }
