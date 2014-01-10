@@ -13,8 +13,8 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Marcio Tadeu de Oliveira Junior Cria um objeto para abrir um projeto
- * .XCP
+ * @author Marcio Tadeu de Oliveira Junior 
+ * Cria um objeto para abrir um projeto .XCP
  */
 public abstract class ProjectLoader {
 
@@ -36,7 +36,16 @@ public abstract class ProjectLoader {
         if (openedFile == JFileChooser.APPROVE_OPTION) {//caso um arquivo tenha sido selecionado
             pathWay = chooser.getSelectedFile().getAbsolutePath();//atribui o caminho onde o arquivo foi selecionado a variável pathWay
             LastpathManager.savelastpath(pathWay, "xcp");
-
+            
+            /*eu que coloquei
+            System.err.println(pathWay);
+            
+            XCPExtractor extractor = new XCPExtractor(pathWay);
+            
+            //fim eu que coloquei
+             
+            */
+            
             //importa os arquivos do projeto salvo para o novo projeto caso um arquivo tenha sido selecionado e tenha extenção XCP
             if (pathWay.toUpperCase().endsWith(".XCP")) {
                 File file = new File(pathWay);
