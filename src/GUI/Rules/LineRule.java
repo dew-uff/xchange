@@ -28,7 +28,7 @@ public class LineRule extends JPanel{
 
     LineRule(){
         super(new FlowLayout());
-        this.setMaximumSize(new Dimension(700,32));
+        this.setMaximumSize(new Dimension(730,32));
         this.comboTerm1 = new JComboBox();
         this.comboTerm2 = new JComboBox();
         this.comboOperator = new JComboBox();
@@ -57,7 +57,10 @@ public class LineRule extends JPanel{
             public void actionPerformed(ActionEvent e) {
                 if(linerules.size()>1){
                  int i=linerules.indexOf(aux);
-                 if(i==linerules.size()-1)linerules.get(i-1).btnAddCondition.setEnabled(true);
+                 if(i==linerules.size()-1){
+                     linerules.get(i-1).btnAddCondition.setEnabled(true);
+                      pnlRules.updateUI();
+                 }
                  linerules.remove(aux);
                  pnlRules.remove(aux);
                 }else JOptionPane.showMessageDialog(pnlRules,"It's necessary one or more conditions to create a rule.");
