@@ -235,7 +235,7 @@ public class RuleMainInterface extends JDialog implements ActionListener{
                 String[] rulesPart = rulesInLine.split("\\."); //O final de cada regra é o delimitador "ponto"
                 addLoadedRules(rulesPart);
             }
-            RuleConstructInterface ruleConstructInterface = new RuleConstructInterface(manager, similarityActive, documentsTab);
+            new RuleConstructInterface(manager, similarityActive, documentsTab);
 
             String textView;
             textView = formatSetTextPane(inferenceModule.getRulesString()); //Formata as regras que serão exibidas na tela
