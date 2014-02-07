@@ -5,6 +5,7 @@ import Manager.Manager;
 import Rules.RulesModule;
 import AutomaticRules.WekaParser;
 import GUI.MainInterface.DocumentsTab;
+import GUI.MainInterface.InferenceFileChooser;
 import static java.awt.Component.LEFT_ALIGNMENT;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -12,7 +13,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -32,7 +32,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
@@ -74,6 +73,8 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     private String results; //regras usadas pelo usuário
     private JPanel pnlBar, pnlBottom, pnlMining, pnlConstructRule, pnlResults, pnlOutput; //paineis principais
     private GridBagLayout gridBag;
+    private InferenceFileChooser inferenceFileChooser;
+    private ArrayList<JCheckBox> rulesSelect; //permite usuário escolher quais regras usar
 
     /**
      * Exibe a janela para construção das regras.
@@ -82,8 +83,9 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
      * @param isSimilarity Booleano que indica se o método escolhido foi
      * "Context Key" ou "Similarity".
      */
-    public RuleConstructInterface(Manager manager, boolean isSimilarity, DocumentsTab documentsTab) {
+    public RuleConstructInterface(Manager manager, boolean isSimilarity, InferenceFileChooser inferenceFileChooser, DocumentsTab documentsTab) {
         this.documentsTab = documentsTab;
+        this.inferenceFileChooser = inferenceFileChooser;
         setModal(true);
         setTitle("Key Attribute");
         this.rulesModule = manager.getRulesModule();
@@ -199,12 +201,10 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                     }
                     //dispose();
 
-                    results = "\n" + formatSetTextPane(rulesModule.getRulesString()); //Formata as regras que serão exibidas na tela
+                    results = formatSetTextPane(rulesModule.getRulesString()); //Formata as regras que serão exibidas na tela
 
                     if (!results.isEmpty()) {
-                        String rules = results;
-
-                        String[] partRules = rulesModule.partRules(rules); //Pega o cabeçalho das regras (ex: salary(NAME))
+                        String[] partRules = rulesModule.partRules(results); //Pega o cabeçalho das regras (ex: salary(NAME))
                         identifyRules(rulesModule.getNameAndArgumentsRules(partRules));
                     } else {
                         JOptionPane.showMessageDialog(this, "It's necessary to difine the rules to "
@@ -270,48 +270,72 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         } else if (e.getSource() == btnMineRules) { //Mineração de regras de associação                        
             createListRules(listRules);
         } else if (e.getSource() == btnFinishBuilder) {
-            dispose();
+            System.out.println(this.getSize());
+            if (!results.isEmpty()) {
+                ArrayList<String> selectedRules = new ArrayList<String>();
+                int cont = 0;
+                for (JCheckBox item : rulesSelect) { //Verifica quais regras foram selecionadas pelo usuário
+                    if (item.isSelected()) {
+                        cont++;
+                        selectedRules.add(item.getName());
+                    }
+                }
+                if (cont > 0) {
+                    String paneRules = formatGetTextPane(results); //Formata as regras obtidas através do Painel
+                    
+                    this.rulesModule.addRules(paneRules); //Adiciona as regras do painel
+                    this.rulesModule.addSelectRules(selectedRules); //Adiciona as regras selecionadas em sua respectiva variável
+                    this.rulesModule.adjustRules(); //Remove as regras repetidas
+                    this.inferenceFileChooser.setSelectedRules(selectedRules);//Envia ao InferenceFileChooser a lista de regras selecionadas
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "It's necessary to define the rules to "
+                            + "realize inference of informations.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "It's necessary to difine the rules to "
+                        + "realize inference of informations.", "Erro", JOptionPane.ERROR_MESSAGE);
+            }
         }
+    }
+    
+    private String formatGetTextPane (String paneRules) {
+        String textFormated = paneRules;
+        textFormated = textFormated.replaceAll("\n", ""); //Eliminando quebras de linha
+        textFormated = textFormated.replaceAll("\r", ""); //Eliminando quebras de linha
+        textFormated = textFormated.replaceAll("\t", ""); //Eliminando tabulações
+        textFormated = textFormated.replaceAll(" ", ""); //Eliminando espaçoes em branco
+        textFormated = textFormated.replaceAll("\\.", "\\.\n"); //Acrescenta quebra de linha entre as regras do painel
+
+        return textFormated;
     }
 
     private void identifyRules(String[] results) {
-        pnlResults.setLayout(new BoxLayout(pnlResults, BoxLayout.PAGE_AXIS));
-        pnlResults.setAutoscrolls(true);
+        rulesSelect = new ArrayList<JCheckBox>();
+        JPanel p = new JPanel();
+        
+        p.setLayout(new BoxLayout(p, WIDTH));
+        pnlResults.setLayout(new BoxLayout(pnlResults, WIDTH));
+        
         pnlResults.removeAll();
-
-        int i = 1;
-
-        for (String rule : results) {
-            JPanel painel = new JPanel();
-            FlowLayout flow = new FlowLayout();
-            flow.setAlignment(FlowLayout.LEFT);
-            painel.setLayout(flow);
-            painel.setAlignmentX(LEFT_ALIGNMENT);
-
-            JLabel label = new JLabel("label" + i);
-            label.setText(rule.toString().replace("[", "").replace("]", ""));
-
-            final JButton button = new JButton("+");
-            button.setSize(15, 15);
-            button.setMaximumSize(new Dimension(15, 15));
-            button.setMinimumSize(new Dimension(15, 15));
-            button.setPreferredSize(new Dimension(15, 15));
-            button.setFont(new Font("verdana", 1, 8));
-            button.setHorizontalTextPosition(SwingConstants.LEFT);
-            button.setVerticalTextPosition(SwingConstants.TOP);
-            button.setMargin(new Insets(1, 1, 1, 1));
-            button.setName("button" + 1);
-
-            //button.addActionListener(new ActionListener() {
-
-            painel.add(button);
-            painel.add(label);
-
-            pnlResults.add(painel);
-            pnlResults.updateUI();
-            i++;
+        JScrollPane jscPane = new JScrollPane(p);
+        pnlResults.add(jscPane);
+        
+        GridBagLayout centerGridBag = new GridBagLayout();
+        GridBagConstraints constraints = new GridBagConstraints();
+        LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1);
+        constraints.fill=GridBagConstraints.BOTH;
+        centerGridBag.addLayoutComponent(p, constraints);
+        
+        p.setVisible(true);
+        for (String rule : results) { //Cria os campos do CheckBox de acordo com as regras inseridas pelo usuário
+            JCheckBox chkItem = new JCheckBox(rule);
+            chkItem.setName(rule);
+            rulesSelect.add(chkItem);
+            p.add(chkItem);
         }
-        pnlResults.setAlignmentX(LEFT_ALIGNMENT);
+        
+        pnlResults.updateUI();
     }
 
     /**
