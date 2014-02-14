@@ -310,13 +310,12 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             }
         } else if (e.getSource() == btnSave) {
             if (!results.isEmpty()) {
-                String[] partRules = rulesModule.partRules(results); //Pega o cabeçalho das regras (ex: salary(NAME))
-                saveRules("/teste.xml", rulesModule.getNameAndArgumentsRules(partRules));
+                saveRules("/teste.xml");
             } else {
                 JOptionPane.showMessageDialog(this, "It's necessary to define the rules to "
                         + "save them.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-            
+
         }
     }
 
@@ -916,7 +915,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         pnlMining.revalidate();
     }
 
-    private void saveRules(String xml,String[] results) {
+    private void saveRules(String xml) {
         Document dom;
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         try {
@@ -925,13 +924,11 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
             // cria o elemento raiz
             Element rootEle = dom.createElement("project");
-            rootEle.setAttribute("name", xml);
-            rootEle.setAttribute("context-key", xml);
-            rootEle.setAttribute("author", xml);
+            rootEle.setAttribute("context-key", keyChoice.toLowerCase());
 
             // cria o elemento rule
-            /*for(Rule rule : rulesModule.getRules()){
-                
+            /*for (Rule rule : rulesModule.getRules()) {
+
                 Element ruleEle = dom.createElement("rule");
                 ruleEle.setAttribute("output", xml);
                 ruleEle.setAttribute("enabled", xml);
@@ -940,62 +937,52 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 Element fieldEle = dom.createElement("field");
                 fieldEle.setAttribute("change", xml);
                 fieldEle.appendChild(dom.createTextNode("Tag teste"));
-                
+
                 ruleEle.appendChild(fieldEle);
-                rootEle.appendChild(ruleEle);                
+                rootEle.appendChild(ruleEle);
             }*/
-            for(Rule rule : rulesModule.getRules()){
+
+            ArrayList<Rule> rules = rulesModule.getRules();
+            for (int i = 0; i < rules.size(); i++) {
+                Rule rule = rules.get(i);
                 String[] aux = rule.getRule().split(":");
-                
+
                 Element ruleEle = dom.createElement("rule");
-                ruleEle.setAttribute("output", xml);
-                ruleEle.setAttribute("enabled", xml);
-                ruleEle.setAttribute("name", aux[0]);
-                
-                for(String s : aux[1].split(",")){
-                    if(s.contains("\\=")){
-                        s = s.replace("After", "");
-                        String s2[] = s.split("\\=");
-                        
-                        Element fieldEle = dom.createElement("field");
-                        fieldEle.setAttribute("change", "difference");
-                        fieldEle.appendChild(dom.createTextNode(s2[1]));
+                ruleEle.setAttribute("output", rule.getRule().substring(rule.getRule().indexOf("(") + 1, rule.getRule().indexOf(")")).toLowerCase());
+                ruleEle.setAttribute("enabled", rulesSelect.get(i).isSelected() ? "true" : "false");
+                ruleEle.setAttribute("name", aux[0].substring(0, aux[0].indexOf("(")));
 
-                        ruleEle.appendChild(fieldEle);
+                for (String s : aux[1].split(",")) {
+                    String operator = "";
+                    String change = "";
+                    if (s.contains("\\=")) {
+                        operator = "\\=";
+                        change = "difference";
+                    } else if (s.contains("<")) {
+                        operator = "<";
+                        change = "increase";
+                    } else if (s.contains(">")) {
+                        operator = ">";
+                        change = "decrease";
+                    } else if (s.contains("==")) {
+                        operator = "==";
+                        change = "nothing";
                     }
-                    else if(s.contains("<")){
-                        s = s.replace("After", "");
-                        String s2[] = s.split("<");
-                        
-                        Element fieldEle = dom.createElement("field");
-                        fieldEle.setAttribute("change", "increased");
-                        fieldEle.appendChild(dom.createTextNode(s2[1]));
 
-                        ruleEle.appendChild(fieldEle);
-                    }
-                    else if(s.contains(">")){
+                    if (operator != "") {
                         s = s.replace("After", "");
-                        String s2[] = s.split(">");
-                        
-                        Element fieldEle = dom.createElement("field");
-                        fieldEle.setAttribute("change", "decreased");
-                        fieldEle.appendChild(dom.createTextNode(s2[1]));
+                        String s2[] = s.split(operator);
+                        s2[1] = s2[1].replace(".", "");
 
-                        ruleEle.appendChild(fieldEle);
-                    }
-                    else if(s.contains("==")){
-                        s = s.replace("After", "");
-                        String s2[] = s.split("==");
-                        
                         Element fieldEle = dom.createElement("field");
-                        fieldEle.setAttribute("change", "nothing");
-                        fieldEle.appendChild(dom.createTextNode(s2[1]));
+                        fieldEle.setAttribute("change", change);
+                        fieldEle.appendChild(dom.createTextNode(s2[1].toLowerCase()));
 
                         ruleEle.appendChild(fieldEle);
                     }
                 }
-                
-                rootEle.appendChild(ruleEle);                
+
+                rootEle.appendChild(ruleEle);
             }
 
             dom.appendChild(rootEle);
