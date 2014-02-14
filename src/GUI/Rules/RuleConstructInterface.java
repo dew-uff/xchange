@@ -183,7 +183,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 int validRows = 0;
                 while (iter.hasNext()) {
                     LineRule condition = (LineRule) iter.next();
-                    if ((!condition.getComboTerm1().getSelectedItem().toString().equals("") && !condition.getComboTerm2().getSelectedItem().toString().equals("")) || (condition.getComboOperator().getSelectedItem().toString().equals("new_element") || (condition.getComboOperator().getSelectedItem().toString().equals("deleted_element")))) {
+                    if (!condition.getComboTerm().getSelectedItem().toString().equals("") || (condition.getComboOperator().getSelectedItem().toString().equals("new_element") || (condition.getComboOperator().getSelectedItem().toString().equals("deleted_element")))) {
                         validRows += 1;
                         break;
                     }
@@ -194,8 +194,8 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                     String regraConst = "";
                     for (Iterator it = lineRules.iterator(); it.hasNext();) {
                         LineRule condition = (LineRule) it.next();
-                        if ((!condition.getComboTerm1().getSelectedItem().toString().equals("") && !condition.getComboTerm2().getSelectedItem().toString().equals("")) || (condition.getComboOperator().getSelectedItem().toString().equals("new_element") || (condition.getComboOperator().getSelectedItem().toString().equals("deleted_element")))) {
-                            String aux = buildCondition(comboOutput.getSelectedItem().toString(), condition.getComboTerm1().getSelectedItem().toString(), condition.getComboOperator().getSelectedItem().toString(), condition.getComboTerm2().getSelectedItem().toString());
+                        if (!condition.getComboTerm().getSelectedItem().toString().equals("") || (condition.getComboOperator().getSelectedItem().toString().equals("new_element") || (condition.getComboOperator().getSelectedItem().toString().equals("deleted_element")))) {
+                            String aux = buildCondition(comboOutput.getSelectedItem().toString(), condition.getComboTerm().getSelectedItem().toString(), condition.getComboOperator().getSelectedItem().toString());
                             if (regraConst.equals("")) {
                                 regraConst = aux;
                             } else {
@@ -237,7 +237,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 int validRows = 0;
                 while (iter.hasNext()) {
                     LineRule condition = (LineRule) iter.next();
-                    if ((!condition.getComboTerm1().getSelectedItem().toString().equals("") && !condition.getComboTerm2().getSelectedItem().toString().equals("")) || (condition.getComboOperator().getSelectedItem().toString().equals("new_element") || (condition.getComboOperator().getSelectedItem().toString().equals("deleted_element")))) {
+                    if (!condition.getComboTerm().getSelectedItem().toString().equals("") || (condition.getComboOperator().getSelectedItem().toString().equals("new_element") || (condition.getComboOperator().getSelectedItem().toString().equals("deleted_element")))) {
                         validRows += 1;
                         break;
                     }
@@ -248,8 +248,8 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                     String regraConst = "";
                     for (Iterator it = lineRules.iterator(); it.hasNext();) {
                         LineRule condition = (LineRule) it.next();
-                        if ((!condition.getComboTerm1().getSelectedItem().toString().equals("") && !condition.getComboTerm2().getSelectedItem().toString().equals("")) || (condition.getComboOperator().getSelectedItem().toString().equals("new_element") || (condition.getComboOperator().getSelectedItem().toString().equals("deleted_element")))) {
-                            String aux = buildCondition(comboOutput.getSelectedItem().toString(), condition.getComboTerm1().getSelectedItem().toString(), condition.getComboOperator().getSelectedItem().toString(), condition.getComboTerm2().getSelectedItem().toString());
+                        if (!condition.getComboTerm().getSelectedItem().toString().equals("") || (condition.getComboOperator().getSelectedItem().toString().equals("new_element") || (condition.getComboOperator().getSelectedItem().toString().equals("deleted_element")))) {
+                            String aux = buildCondition(comboOutput.getSelectedItem().toString(), condition.getComboTerm().getSelectedItem().toString(), condition.getComboOperator().getSelectedItem().toString());
                             if (regraConst.equals("")) {
                                 regraConst = aux;
                             } else {
@@ -275,7 +275,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                     LineRule aux = new LineRule();
                     lineRules.add(aux);
                     pnlRules.add(aux);
-                    aux.getComboTerm1().requestFocus();
+                    aux.getComboTerm().requestFocus();
                     pnlRules.revalidate();
                 }
             }
@@ -363,7 +363,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
      */
     private void setPanelTerminal() {
         JPanel allPane = new JPanel();
-        this.setMinimumSize(new Dimension(1100, 600));
+        this.setMinimumSize(new Dimension(800, 600));
         this.setSize(this.getMinimumSize());
 
         this.setContentPane(allPane);
@@ -693,12 +693,12 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
      * Função para criar cada condição existente na regra composta.
      *
      * @param exit O que se deseja como saída da regra.
-     * @param term1 Primeiro termo a ser utilizado.
+     * @param term Primeiro termo a ser utilizado.
      * @param operator Operador a ser aplicado.
      * @param term2 Segundo termo a ser utilizado.
      * @return newRule Nova regra construída.
      */
-    private String buildCondition(String exit, String term1, String operator, String term2) {
+    private String buildCondition(String exit, String term, String operator) {
         String newRule;
         String ruleAux;
         String term1After;
@@ -728,49 +728,30 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
              */
             newRule = factBase1v1 + "," + keyChoice + "(" + nameFactInRule + "Before," + keyChoice.toUpperCase() + ")," + exit + "(" + nameFactInRule + "Before," + exit.toUpperCase() + ")," + "not((" + factBase1v2 + "," + keyChoice + "(" + nameFactInRule + "After," + keyChoice.toUpperCase() + ")))";
         } else {
-            String[] term1part = term1.split("\\-");
-            //Indice 0: nome do fato que compõe o termo
-            //Indice 1: v. Before OU v. After
-            String[] term2part = term2.split("\\-");
-
             //pegando o "Before" ou "After"
-            term1part[1] = term1part[1].substring(term1part[1].lastIndexOf(".") + 2);
-            term2part[1] = term2part[1].substring(term2part[1].lastIndexOf(".") + 2);
+            String before = "Before";
+            String after = "After";
 
-            if (term1part[1].equals("Before")) {
-                arg1term1 = nameFactInRule + "Before";
-            } else {
-                arg1term1 = nameFactInRule + "After";
-            }
-
-            if (term2part[1].equals("Before")) {
-                arg1term2 = nameFactInRule + "Before";
-            } else {
-                arg1term2 = nameFactInRule + "After";
-            }
-
-            term1part[0] = term1part[0].replaceAll(" ", "");
-            term1part[1] = term1part[1].replaceAll(" ", "");
-            term2part[0] = term2part[0].replaceAll(" ", "");
-            term2part[1] = term2part[1].replaceAll(" ", "");
+            arg1term1 = nameFactInRule + "Before";
+            arg1term2 = nameFactInRule + "After";
 
             //salario(Fb,SALARIOBefore)
-            term1After = term1part[0] + "(" + arg1term1 + "," + term1part[0].toUpperCase() + term1part[1] + ")";
-            term2After = term2part[0] + "(" + arg1term2 + "," + term1part[0].toUpperCase() + term2part[1] + ")";
+            term1After = term + "(" + arg1term1 + "," + term.toUpperCase() + before + ")";
+            term2After = term + "(" + arg1term2 + "," + term.toUpperCase() + after + ")";
 
             if (operator.equals("and")) {
                 //Nao faz nada
                 ruleAux = "";
             } else if (operator.equals(">")) {
                 //Adiciona uma regra do tipo SalarioB>SalarioM
-                ruleAux = term1part[0].toUpperCase() + term1part[1] + ">" + term1part[0].toUpperCase() + term2part[1];
+                ruleAux = term.toUpperCase() + before + ">" + term.toUpperCase() + after;
             } else if (operator.equals("<")) {
                 //Adiciona uma regra do tipo SalarioB<SalarioM
-                ruleAux = term1part[0].toUpperCase() + term1part[1] + "<" + term1part[0].toUpperCase() + term2part[1];
+                ruleAux = term.toUpperCase() + before + "<" + term.toUpperCase() + after;
             } else if (operator.equals("=")) {
-                ruleAux = term1part[0].toUpperCase() + term1part[1] + "==" + term1part[0].toUpperCase() + term2part[1];
+                ruleAux = term.toUpperCase() + before + "==" + term.toUpperCase() + after;
             } else if (operator.equals("!=")) {
-                ruleAux = term1part[0].toUpperCase() + term1part[1] + "\\=" + term1part[0].toUpperCase() + term2part[1];
+                ruleAux = term.toUpperCase() + before + "\\=" + term.toUpperCase() + after;
             }
             newRule = term1After + "," + term2After + "," + ruleAux;
             return newRule;
@@ -880,14 +861,11 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                         aux.getComboOperator().setSelectedItem("!=");
                         aux.getComboOperator().setEnabled(false);
 
-                        aux.getComboTerm1().setSelectedItem(rule + " - v. Before");
-                        aux.getComboTerm1().setEnabled(false);
-
-                        aux.getComboTerm2().setSelectedItem(rule + " - v. After");
-                        aux.getComboTerm2().setEnabled(false);
+                        aux.getComboTerm().setSelectedItem(rule);
+                        aux.getComboTerm().setEnabled(false);
 
                         aux.getBtnAddCondition().setEnabled(false);
-                        aux.getComboTerm1().requestFocus();
+                        aux.getComboTerm().requestFocus();
 
                         lineRules.add(aux);
                         LineRule.setLinerules(lineRules);
@@ -897,7 +875,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                     LineRule aux = new LineRule();
                     lineRules.add(aux);
                     pnlRules.add(aux);
-                    aux.getComboTerm1().requestFocus();
+                    aux.getComboTerm().requestFocus();
                     LineRule.setPnlRules(pnlRules);
                     pnlRules.revalidate();
                 }
@@ -927,20 +905,20 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             rootEle.setAttribute("context-key", keyChoice.toLowerCase());
 
             // cria o elemento rule
-            /*for (Rule rule : rulesModule.getRules()) {
+            for (Rule rule : rulesModule.getRules()) {
 
-                Element ruleEle = dom.createElement("rule");
-                ruleEle.setAttribute("output", xml);
-                ruleEle.setAttribute("enabled", xml);
-                ruleEle.setAttribute("name", rule.getRule());
+             Element ruleEle = dom.createElement("rule");
+             ruleEle.setAttribute("output", xml);
+             ruleEle.setAttribute("enabled", xml);
+             ruleEle.setAttribute("name", rule.getRule());
 
-                Element fieldEle = dom.createElement("field");
-                fieldEle.setAttribute("change", xml);
-                fieldEle.appendChild(dom.createTextNode("Tag teste"));
+             Element fieldEle = dom.createElement("field");
+             fieldEle.setAttribute("change", xml);
+             fieldEle.appendChild(dom.createTextNode("Tag teste"));
 
-                ruleEle.appendChild(fieldEle);
-                rootEle.appendChild(ruleEle);
-            }*/
+             ruleEle.appendChild(fieldEle);
+             rootEle.appendChild(ruleEle);
+             }
 
             ArrayList<Rule> rules = rulesModule.getRules();
             for (int i = 0; i < rules.size(); i++) {

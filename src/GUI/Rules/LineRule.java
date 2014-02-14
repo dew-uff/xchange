@@ -20,7 +20,7 @@ import javax.swing.JPanel;
  */
 public class LineRule extends JPanel {
 
-    private JComboBox comboTerm1, comboTerm2, comboOperator;
+    private JComboBox comboTerm, comboOperator;
     private JButton btnAddCondition;
     private JButton btnRemoveCondition;
     private static JPanel pnlRules;
@@ -29,14 +29,12 @@ public class LineRule extends JPanel {
     LineRule() {
         super(new FlowLayout());
         this.setMaximumSize(new Dimension(730, 32));
-        this.comboTerm1 = new JComboBox();
-        this.comboTerm2 = new JComboBox();
+        this.comboTerm = new JComboBox();
         this.comboOperator = new JComboBox();
         this.btnAddCondition = new JButton("+");
         this.btnRemoveCondition = new JButton("-");
-        this.add(comboTerm1);
+        this.add(comboTerm);
         this.add(comboOperator);
-        this.add(comboTerm2);
         this.add(btnAddCondition);
         this.add(btnRemoveCondition);
         this.btnAddCondition.addActionListener(new ActionListener() {
@@ -48,7 +46,7 @@ public class LineRule extends JPanel {
                 pnlRules.add(aux);
                 btnAddCondition.setEnabled(false);
                 ((LineRule) pnlRules.getComponent(0)).btnRemoveCondition.setEnabled(true);
-                aux.comboTerm1.requestFocus();
+                aux.comboTerm.requestFocus();
                 pnlRules.revalidate();
             }
         });
@@ -80,18 +78,15 @@ public class LineRule extends JPanel {
                 if(e.getStateChange() == ItemEvent.SELECTED){
                     if ((comboOperator.getSelectedItem().toString().indexOf("_")) >= 0) { //somente os operadores de diferença tem esse simbolo ex.: element_deleted
                         if (pnlRules.getComponentCount() == 1) { //só permite selecionar operadores de diferença se a regra tiver somente 1 condição
-                            comboTerm1.setEnabled(false);
-                            comboTerm2.setEnabled(false);
-                            comboTerm1.setSelectedItem("");
-                            comboTerm2.setSelectedItem("");
+                            comboTerm.setEnabled(false);
+                            comboTerm.setSelectedItem("");
                             btnAddCondition.setEnabled(false);
                         } else {
                             JOptionPane.showMessageDialog(pnlRules, "The new_element operator and the element_deleted operator do not support more than 1 condition.");
                             comboOperator.setSelectedItem("");
                         }
                     } else {
-                        comboTerm1.setEnabled(true);
-                        comboTerm2.setEnabled(true);
+                        comboTerm.setEnabled(true);
                         if (pnlRules.getComponent(pnlRules.getComponentCount() - 1) == aux) { //só ativa o botão "+" na última condição
                             btnAddCondition.setEnabled(true);
                         }
@@ -99,22 +94,15 @@ public class LineRule extends JPanel {
                 }
             }
         });
-        this.comboTerm1.setModel(new DefaultComboBoxModel(getDoubleNames(namesFacts)));
-        this.comboTerm2.setModel(new DefaultComboBoxModel(getDoubleNames(namesFacts)));
-        this.comboTerm1.insertItemAt("", 0);
-        this.comboTerm2.insertItemAt("", 0);
-        this.comboTerm2.setSelectedItem("");
-        this.comboTerm1.setSelectedItem("");
+        this.comboTerm.setModel(new DefaultComboBoxModel(namesFacts));
+        this.comboTerm.insertItemAt("", 0);
+        this.comboTerm.setSelectedItem("");
         this.comboOperator.setModel(new DefaultComboBoxModel(new String[]{"", ">", "<", "=", "!=", "new_element", "deleted_element"}));
         this.comboOperator.setSelectedItem("");
     }
 
-    public JComboBox getComboTerm1() {
-        return comboTerm1;
-    }
-
-    public JComboBox getComboTerm2() {
-        return comboTerm2;
+    public JComboBox getComboTerm() {
+        return comboTerm;
     }
 
     public JComboBox getComboOperator() {
@@ -123,26 +111,6 @@ public class LineRule extends JPanel {
 
     public JButton getBtnAddCondition() {
         return btnAddCondition;
-    }
-
-    /**
-     * Monta as opções dos comboBox de termos para a construção das regras.
-     * Exemplo: (fato - v. Before / fato - v. After).
-     * @param namesFacts
-     * Vetors de Strings contendo o nome de todos os fatos.
-     * @return doubleNames
-     * Nomes duplificados e normalizados.
-     */
-    private String[] getDoubleNames(String[] namesFacts) {
-        String[] doubleNames;
-        ArrayList<String> listNomesDuplicados = new ArrayList<String>();
-
-        for (int i = 0; i < namesFacts.length; i++) {
-            listNomesDuplicados.add(namesFacts[i] + " - v. Before");
-            listNomesDuplicados.add(namesFacts[i] + " - v. After");
-        }
-        doubleNames = (String[]) listNomesDuplicados.toArray(new String[listNomesDuplicados.size()]);
-        return doubleNames;
     }
 
     public static JPanel getPnlRules() {
