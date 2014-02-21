@@ -101,7 +101,7 @@ public class LineRule extends JPanel {
             }
         });
         this.comboTerm.setModel(new DefaultComboBoxModel(namesFacts));
-        //this.comboTerm.insertItemAt("", 0);
+        this.comboTerm.insertItemAt("", 0);
         this.comboTerm.setSelectedItem("");
         this.comboOperator.setModel(new DefaultComboBoxModel(new String[]{"", ">", "<", "=", "!=", "new_element", "deleted_element"}));
         this.comboOperator.setSelectedItem("");

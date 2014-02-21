@@ -74,7 +74,6 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     //Lista que contém todas as linhas de regra
     ArrayList<LineRule> lineRules;
     //Elementos de tela da mineração de regras
-    private JButton btnMineRules; //avança para a etapa de mineração
     private static JPanel pnlGeneratedRules; //exibe as regras geradas a partir da mineração
     private ArrayList<JCheckBox> checkTagsArray = new ArrayList<JCheckBox>();
     private ArrayList<String> chosenTags = new ArrayList<String>();
@@ -114,8 +113,6 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         btnCreateNewRule.addActionListener(this);
         btnFinishBuilder = new JButton();
         btnFinishBuilder.addActionListener(this);
-        btnMineRules = new JButton();
-        btnMineRules.addActionListener(this);
 
         if (isSimilarity) { //Se o metodo utilizado for o "Similarity"
             factsPart = manager.getSimilarity().get(0).partFacts(manager.getSimilarity().get(0).getFacts());
@@ -154,7 +151,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
         constructRules();
 
-        setPanelTerminal();
+        buildInterface();
 
         setVisible(true);
     }
@@ -177,9 +174,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 comboOutput.requestFocus();
             } else {
                 Iterator iter = lineRules.iterator();
-                System.out.println(lineRules.size());
                 lineRules = LineRule.getLinerules();
-                System.out.println(lineRules.size());
                 LineRule.setLinerules(lineRules);
                 int validRows = 0;
                 while (iter.hasNext()) {
@@ -218,7 +213,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
                     if (!results.isEmpty()) {
                         String[] partRules = rulesModule.partRules(results); //Pega o cabeçalho das regras (ex: salary(NAME))
-                        identifyRules(rulesModule.getNameAndArgumentsRules(partRules));
+                        identifyRules(partRules);
                     } else {
                         JOptionPane.showMessageDialog(this, "It's necessary to difine the rules to "
                                 + "realize inference of informations.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -280,10 +275,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                     pnlRules.revalidate();
                 }
             }
-        } else if (e.getSource() == btnMineRules) { //Mineração de regras de associação                        
-            createListRules(listRules);
         } else if (e.getSource() == btnFinishBuilder) {
-            System.out.println(this.getSize());
             if (!results.isEmpty()) {
                 ArrayList<String> selectedRules = new ArrayList<String>();
                 int cont = 0;
@@ -331,7 +323,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         return textFormated;
     }
 
-    private void identifyRules(String[] results) {
+    private void identifyRules(String[] partRules) {
         rulesSelect = new ArrayList<JCheckBox>();
         JPanel p = new JPanel();
 
@@ -349,9 +341,17 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         centerGridBag.addLayoutComponent(p, constraints);
 
         p.setVisible(true);
-        for (String rule : results) { //Cria os campos do CheckBox de acordo com as regras inseridas pelo usuário
-            JCheckBox chkItem = new JCheckBox(rule);
-            chkItem.setName(rule);
+
+        String[] rulesHeads = rulesModule.getNameAndArgumentsRules(partRules);
+        for (int i = 0; i < rulesHeads.length; i++) { //Cria os campos do CheckBox de acordo com as regras inseridas pelo usuário
+            JCheckBox chkItem = new JCheckBox(rulesHeads[i]);
+            chkItem.setName(rulesHeads[i]);
+            final String rule = partRules[i];
+            chkItem.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    showInBuilder(rule);
+                }
+            });
             rulesSelect.add(chkItem);
             p.add(chkItem);
         }
@@ -360,9 +360,52 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     }
 
     /**
+     * Exibe a regra selecionada no construtor
+     */
+    private void showInBuilder(String rule) {
+        lineRules.clear();
+
+        rule = rule.replace(" ", "");
+        System.out.println("regra: " + rule);
+        String[] aux = rule.split(":-");
+
+        System.out.println("\\=");
+        comboOutput.setSelectedItem(rule.substring(rule.indexOf("(") + 1, rule.indexOf(")")).toLowerCase());
+        System.out.println("nome da regra: " + aux[0].substring(0, aux[0].indexOf("(")));
+        nameRule.setText(aux[0].substring(0, aux[0].indexOf("(")));
+
+        for (String s : aux[1].split(",")) {
+            LineRule condition = new LineRule();
+
+            System.out.println("presplit: "+s);
+            
+            if (s.contains("\\=")) {
+                condition.getComboOperator().setSelectedIndex(4);
+            } else if (s.contains("<")) {
+                condition.getComboOperator().setSelectedIndex(2);
+            } else if (s.contains(">")) {
+                condition.getComboOperator().setSelectedIndex(1);
+            } else if (s.contains("==")) {
+                condition.getComboOperator().setSelectedIndex(3);
+            } else {
+                continue;
+            }
+            
+            s = s.substring(0, s.indexOf("Before")).toLowerCase();
+
+            System.out.println("campo: " + s);
+            condition.getComboTerm().setSelectedItem(s);
+
+            lineRules.add(condition);
+            LineRule.setLinerules(lineRules);
+            pnlRules.revalidate();
+        }
+    }
+
+    /**
      * Exibe a interface de construção de regras.
      */
-    private void setPanelTerminal() {
+    private void buildInterface() {
         JPanel allPane = new JPanel();
         this.setMinimumSize(new Dimension(1000, 600));
         this.setSize(this.getMinimumSize());
@@ -403,7 +446,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
         //adiciona os paineis à janela de construção de regras
         LayoutConstraints.setConstraints(constraints, 0, 0, 3, 1, 1, 0);
-        constraints.fill = GridBagConstraints.NONE;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.anchor = GridBagConstraints.NORTHWEST;
         allPane.add(pnlBar, constraints);
 
@@ -891,18 +934,18 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             // cria o elemento rule
             /*for (Rule rule : rulesModule.getRules()) {
 
-                Element ruleEle = dom.createElement("rule");
-                ruleEle.setAttribute("output", xml);
-                ruleEle.setAttribute("enabled", xml);
-                ruleEle.setAttribute("name", rule.getRule());
+             Element ruleEle = dom.createElement("rule");
+             ruleEle.setAttribute("output", xml);
+             ruleEle.setAttribute("enabled", xml);
+             ruleEle.setAttribute("name", rule.getRule());
 
-                Element fieldEle = dom.createElement("field");
-                fieldEle.setAttribute("change", xml);
-                fieldEle.appendChild(dom.createTextNode("Tag teste"));
+             Element fieldEle = dom.createElement("field");
+             fieldEle.setAttribute("change", xml);
+             fieldEle.appendChild(dom.createTextNode("Tag teste"));
 
-                ruleEle.appendChild(fieldEle);
-                rootEle.appendChild(ruleEle);
-            }*/
+             ruleEle.appendChild(fieldEle);
+             rootEle.appendChild(ruleEle);
+             }*/
 
             ArrayList<Rule> rules = rulesModule.getRules();
             for (int i = 0; i < rules.size(); i++) {
@@ -931,7 +974,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                         change = "nothing";
                     }
 
-                    if (operator != "") {
+                    if (!operator.equals("")) {
                         s = s.replace("After", "");
                         String s2[] = s.split(operator);
                         s2[1] = s2[1].replace(".", "");
