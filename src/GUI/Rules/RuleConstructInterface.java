@@ -38,6 +38,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
@@ -310,7 +311,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             }
         } else if (e.getSource() == btnSave) {
             if (!results.isEmpty()) {
-                saveRules("/teste.xml");
+                saveRules("teste.xml");
             } else {
                 JOptionPane.showMessageDialog(this, "It's necessary to define the rules to "
                         + "save them.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -363,7 +364,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
      */
     private void setPanelTerminal() {
         JPanel allPane = new JPanel();
-        this.setMinimumSize(new Dimension(800, 600));
+        this.setMinimumSize(new Dimension(1000, 600));
         this.setSize(this.getMinimumSize());
 
         this.setContentPane(allPane);
@@ -380,11 +381,9 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         GridBagConstraints constraints = new GridBagConstraints();
         allPane.setLayout(gridBag);
 
-
         //paineis da janela de criação de regras
         pnlBar = new JPanel();
         pnlBar.setLayout(new BoxLayout(pnlBar, BoxLayout.Y_AXIS));
-        pnlBar.setBorder(javax.swing.BorderFactory.createTitledBorder("Association Rules:"));
 
         pnlOutput = new JPanel();
         pnlOutput.setBorder(javax.swing.BorderFactory.createTitledBorder("Output:"));
@@ -397,41 +396,42 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
         pnlResults = new JPanel();
         pnlResults.setBorder(javax.swing.BorderFactory.createTitledBorder("Results"));
+        pnlResults.setMinimumSize(new Dimension(200, 0));
+        pnlResults.setPreferredSize(new Dimension(200, 0));
 
         pnlBottom = new JPanel();
 
-
         //adiciona os paineis à janela de construção de regras
-        LayoutConstraints.setConstraints(constraints, 0, 0, 3, 1, 1000, 1);
-        constraints.fill = GridBagConstraints.HORIZONTAL;
+        LayoutConstraints.setConstraints(constraints, 0, 0, 3, 1, 1, 0);
+        constraints.fill = GridBagConstraints.NONE;
         constraints.anchor = GridBagConstraints.NORTHWEST;
         allPane.add(pnlBar, constraints);
 
-        LayoutConstraints.setConstraints(constraints, 1, 1, 1, 1, 1, 1);
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.anchor = GridBagConstraints.NORTH;
-        allPane.add(pnlOutput, constraints);
-
-        LayoutConstraints.setConstraints(constraints, 1, 2, 1, 1, 1000, 1000);
-        constraints.fill = GridBagConstraints.BOTH;
-        constraints.anchor = GridBagConstraints.NORTHWEST;
-        allPane.add(pnlConstructRule, constraints);
-
-        LayoutConstraints.setConstraints(constraints, 0, 3, 3, 1, 1000, 1);
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.anchor = GridBagConstraints.SOUTH;
-        allPane.add(pnlBottom, constraints);
-
-        LayoutConstraints.setConstraints(constraints, 0, 1, 1, 2, 600, 1);
+        LayoutConstraints.setConstraints(constraints, 0, 1, 1, 2, 1, 1);
         constraints.fill = GridBagConstraints.BOTH;
         constraints.anchor = GridBagConstraints.WEST;
         allPane.add(pnlMining, constraints);
 
-        LayoutConstraints.setConstraints(constraints, 2, 1, 1, 2, 600, 1);
+        LayoutConstraints.setConstraints(constraints, 1, 1, 1, 1, 2, 0);
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.anchor = GridBagConstraints.NORTH;
+        allPane.add(pnlOutput, constraints);
+
+        LayoutConstraints.setConstraints(constraints, 1, 2, 1, 1, 2, 1);
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.anchor = GridBagConstraints.NORTHWEST;
+        allPane.add(pnlConstructRule, constraints);
+
+        LayoutConstraints.setConstraints(constraints, 3, 1, 1, 2, 1, 1);
+        constraints.insets = new Insets(3, 3, 3, 3);
         constraints.fill = GridBagConstraints.BOTH;
         constraints.anchor = GridBagConstraints.WEST;
         allPane.add(pnlResults, constraints);
 
+        LayoutConstraints.setConstraints(constraints, 0, 3, 3, 1, 1, 0);
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.anchor = GridBagConstraints.SOUTH;
+        allPane.add(pnlBottom, constraints);
 
         //Cria a barra de ferramentas
         JToolBar tBar = new JToolBar();
@@ -479,8 +479,6 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         pnlBar.add(tBar);
         tBar.setVisible(true);
         pnlBar.setVisible(true);
-
-        allPane.add(pnlBar);
 
         //declara objetos de controle do layout do painel do topo
         GridBagLayout gridBagTop = new GridBagLayout();
@@ -587,45 +585,36 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         constraints.fill = GridBagConstraints.NONE;
         pnlBottom.add(btnFinishBuilder, constraints);
 
-        //declara objetos de controle do layout do painel da esquerda (regras de associação)        
+        //declara objetos de controle do layout do painel da esquerda (regras de associação)
         GridBagLayout gridBagLeft = new GridBagLayout();
+        GridBagConstraints constraintsMining = new GridBagConstraints();
         pnlMining.setLayout(gridBagLeft);
 
-        JPanel pnBtnMining = new JPanel();
-        pnBtnMining.add(btnMineRules);
-        btnMineRules.setText("Mine Rules");
+        JLabel lblMineRules = new JLabel("Select the tags you want to mine:");
+        lblMineRules.revalidate();
 
-        //
-        chosenTags = new ArrayList<String>();
-        checkTagsArray = new ArrayList<JCheckBox>();
+        LayoutConstraints.setConstraints(constraintsMining, 0, 0, 1, 1, 1, 0);
+        constraintsMining.fill = GridBagConstraints.NONE;
+        constraintsMining.anchor = GridBagConstraints.NORTHWEST;
+        pnlMining.add(lblMineRules, constraintsMining);
 
-        JPanel pnlTop = new JPanel();
-        JPanel pnlCenter = new JPanel();
-        JPanel pnlBotton = new JPanel();
-
-        JLabel btnOpenRules = new JLabel("Select the tags you want to mine:");
-        btnOpenRules.setPreferredSize(new Dimension(300, 30));
-        btnOpenRules.revalidate();
-        pnlTop.add(btnOpenRules);
-
-        //Painel central
+        //Painel com as tags no painel "Association Rules"
         GridBagLayout centerGridBag = new GridBagLayout();
-        pnlCenter.setLayout(centerGridBag);
 
         JPanel p = new JPanel();
         p.setLayout(new BoxLayout(p, WIDTH));
         p.setVisible(true);
-        pnlCenter.setLayout(new BoxLayout(pnlCenter, WIDTH));
 
-        pnlCenter.removeAll();
         JScrollPane jscPane = new JScrollPane(p);
-        pnlCenter.add(jscPane);
 
-        LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1);
-        constraints.fill = GridBagConstraints.BOTH;
-        centerGridBag.addLayoutComponent(p, constraints);
+        LayoutConstraints.setConstraints(constraintsMining, 0, 0, 1, 1, 1, 1);
+        constraintsMining.fill = GridBagConstraints.BOTH;
+        centerGridBag.addLayoutComponent(p, constraintsMining);
 
         //Recupera a lista de tags a partir do segundo arquivo carregado no projeto
+        chosenTags = new ArrayList<String>();
+        checkTagsArray = new ArrayList<JCheckBox>();
+
         List<String> tags = new WekaParser().getTags(documentsTab.getDocuments().getPathWays().get(documentsTab.getRightCBIndex()));
         for (String tag : tags) { //Cria os campos do CheckBox de acordo com as regras inseridas pelo usuário
             if (tags.get(0).equals(tag)) {
@@ -638,9 +627,14 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             p.add(chkItem);
         }
 
-        //Painel inferior
-        JButton btnDone = new JButton("Mine Rules");
-        btnDone.addActionListener(new ActionListener() {
+        LayoutConstraints.setConstraints(constraintsMining, 0, 1, 1, 1, 1, 1);
+        constraintsMining.fill = GridBagConstraints.BOTH;
+        constraintsMining.anchor = GridBagConstraints.NORTHWEST;
+        pnlMining.add(jscPane, constraintsMining);
+
+        //Botão para minerar regras
+        JButton btnMineRules = new JButton("Mine Rules");
+        btnMineRules.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 for (JCheckBox item : checkTagsArray) {
                     if (item.isSelected()) {
@@ -652,24 +646,14 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             }
         });
 
-        btnDone.setVisible(true);
-        btnDone.setPreferredSize(new Dimension(110, 25));
-        pnlBotton.add(btnDone);
+        btnMineRules.setText("Mine Rules");
+        btnMineRules.setVisible(true);
+        btnMineRules.setPreferredSize(new Dimension(110, 25));
 
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        LayoutConstraints.setConstraints(constraints, 0, 2, 1, 1, 1, 1);
-        constraints.anchor = GridBagConstraints.SOUTH;
-        pnlMining.add(pnlBotton, constraints);
-
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        LayoutConstraints.setConstraints(constraints, 0, 1, 1, 1, 1, 1);
-        constraints.anchor = GridBagConstraints.SOUTH;
-        pnlMining.add(pnlCenter, constraints);
-
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1);
-        constraints.anchor = GridBagConstraints.SOUTH;
-        pnlMining.add(pnlTop, constraints);
+        LayoutConstraints.setConstraints(constraintsMining, 0, 2, 1, 1, 1, 0);
+        constraintsMining.fill = GridBagConstraints.NONE;
+        constraintsMining.anchor = GridBagConstraints.SOUTH;
+        pnlMining.add(btnMineRules, constraintsMining);
 
         results = formatSetTextPane(rulesModule.getRulesString()); //Formata as regras que serão exibidas na tela
 
@@ -814,9 +798,9 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         jsPaneWest.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
         GridBagConstraints constraints = new GridBagConstraints();
-        LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1000);
+        LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1);
         constraints.fill = GridBagConstraints.BOTH;
-        constraints.anchor = GridBagConstraints.WEST;
+        constraints.anchor = GridBagConstraints.NORTHWEST;
         pnlMining.add(jsPaneWest, constraints);
 
         pnlGeneratedRules.setLayout(new BoxLayout(pnlGeneratedRules, BoxLayout.PAGE_AXIS));
@@ -905,20 +889,20 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             rootEle.setAttribute("context-key", keyChoice.toLowerCase());
 
             // cria o elemento rule
-            for (Rule rule : rulesModule.getRules()) {
+            /*for (Rule rule : rulesModule.getRules()) {
 
-             Element ruleEle = dom.createElement("rule");
-             ruleEle.setAttribute("output", xml);
-             ruleEle.setAttribute("enabled", xml);
-             ruleEle.setAttribute("name", rule.getRule());
+                Element ruleEle = dom.createElement("rule");
+                ruleEle.setAttribute("output", xml);
+                ruleEle.setAttribute("enabled", xml);
+                ruleEle.setAttribute("name", rule.getRule());
 
-             Element fieldEle = dom.createElement("field");
-             fieldEle.setAttribute("change", xml);
-             fieldEle.appendChild(dom.createTextNode("Tag teste"));
+                Element fieldEle = dom.createElement("field");
+                fieldEle.setAttribute("change", xml);
+                fieldEle.appendChild(dom.createTextNode("Tag teste"));
 
-             ruleEle.appendChild(fieldEle);
-             rootEle.appendChild(ruleEle);
-             }
+                ruleEle.appendChild(fieldEle);
+                rootEle.appendChild(ruleEle);
+            }*/
 
             ArrayList<Rule> rules = rulesModule.getRules();
             for (int i = 0; i < rules.size(); i++) {

@@ -11,8 +11,10 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 
 /**
  * @author Celio Henrique Nogueira Larcher Júnior 
@@ -33,8 +35,12 @@ public class LineRule extends JPanel {
         this.comboOperator = new JComboBox();
         this.btnAddCondition = new JButton("+");
         this.btnRemoveCondition = new JButton("-");
+        this.add(new JLabel("Field: "));
         this.add(comboTerm);
+        this.add(new JSeparator());
+        this.add(new JLabel("Comparisson: "));
         this.add(comboOperator);
+        this.add(new JSeparator());
         this.add(btnAddCondition);
         this.add(btnRemoveCondition);
         this.btnAddCondition.addActionListener(new ActionListener() {
@@ -95,7 +101,7 @@ public class LineRule extends JPanel {
             }
         });
         this.comboTerm.setModel(new DefaultComboBoxModel(namesFacts));
-        this.comboTerm.insertItemAt("", 0);
+        //this.comboTerm.insertItemAt("", 0);
         this.comboTerm.setSelectedItem("");
         this.comboOperator.setModel(new DefaultComboBoxModel(new String[]{"", ">", "<", "=", "!=", "new_element", "deleted_element"}));
         this.comboOperator.setSelectedItem("");
