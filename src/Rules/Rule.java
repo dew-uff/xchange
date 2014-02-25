@@ -11,7 +11,7 @@ public class Rule {
      * Construtor da classe.
      * @param rule 
      */
-    Rule(String rule){
+    public Rule(String rule){
         this.rule=rule;
     }
     

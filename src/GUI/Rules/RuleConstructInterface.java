@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import static java.awt.image.ImageObserver.WIDTH;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,12 +39,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
 import org.w3c.dom.*;
+import org.xml.sax.SAXException;
 
 /**
  * Interface onde o usuário monta as regras para a realização de inferencia
@@ -84,6 +85,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     private GridBagLayout gridBag;
     private InferenceFileChooser inferenceFileChooser;
     private ArrayList<JCheckBox> rulesSelect; //permite usuário escolher quais regras usar
+    private int selectedRuleIndex; //usado para identificar qual regra estásendo construída/editada (-1 para nova regra)
 
     /**
      * Exibe a janela para construção das regras.
@@ -91,6 +93,8 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
      * @param manager Objeto do tipo "Manager" que chamou esta função.
      * @param isSimilarity Booleano que indica se o método escolhido foi
      * "Context Key" ou "Similarity".
+     * @param inferenceFileChooser
+     * @param documentsTab
      */
     public RuleConstructInterface(Manager manager, boolean isSimilarity, InferenceFileChooser inferenceFileChooser, DocumentsTab documentsTab) {
         this.documentsTab = documentsTab;
@@ -113,6 +117,8 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         btnCreateNewRule.addActionListener(this);
         btnFinishBuilder = new JButton();
         btnFinishBuilder.addActionListener(this);
+
+        selectedRuleIndex = -1;
 
         if (isSimilarity) { //Se o metodo utilizado for o "Similarity"
             factsPart = manager.getSimilarity().get(0).partFacts(manager.getSimilarity().get(0).getFacts());
@@ -165,150 +171,73 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnAtributs) {
         } else if (e.getSource() == btnFinishRule) {
-            if (nameRule.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "It's necessary give the rule a name", "Error", JOptionPane.ERROR_MESSAGE);
-                nameRule.requestFocus();
-            }
-            if (comboOutput.getSelectedItem().equals("")) {
-                JOptionPane.showMessageDialog(this, "It's necessary choose output type", "Error", JOptionPane.ERROR_MESSAGE);
-                comboOutput.requestFocus();
-            } else {
-                Iterator iter = lineRules.iterator();
-                lineRules = LineRule.getLinerules();
-                LineRule.setLinerules(lineRules);
-                int validRows = 0;
-                while (iter.hasNext()) {
-                    LineRule condition = (LineRule) iter.next();
-                    if (!condition.getComboTerm().getSelectedItem().toString().equals("") || (condition.getComboOperator().getSelectedItem().toString().equals("new_element") || (condition.getComboOperator().getSelectedItem().toString().equals("deleted_element")))) {
-                        validRows += 1;
-                        break;
-                    }
-                }
-                if (validRows == 0) {
-                    JOptionPane.showMessageDialog(this, "You must select at least one valid condition!", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    String regraConst = "";
-                    for (Iterator it = lineRules.iterator(); it.hasNext();) {
-                        LineRule condition = (LineRule) it.next();
-                        if (!condition.getComboTerm().getSelectedItem().toString().equals("") || (condition.getComboOperator().getSelectedItem().toString().equals("new_element") || (condition.getComboOperator().getSelectedItem().toString().equals("deleted_element")))) {
-                            String aux = buildCondition(comboOutput.getSelectedItem().toString(), condition.getComboTerm().getSelectedItem().toString(), condition.getComboOperator().getSelectedItem().toString());
-                            if (regraConst.equals("")) {
-                                regraConst = aux;
-                            } else {
-                                regraConst = regraConst + "," + aux;
-                            }
-                        }
-                    }
-                    //Adiciona as regras construídas
-                    if (lineRules.get(0).getComboOperator().getSelectedItem().toString().indexOf("_") < 0) {
-                        regraConst = nameRule.getText().toLowerCase() + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + baseRule + "," + comboOutput.getSelectedItem().toString() + "(" + nameFactInRule + "Before," + comboOutput.getSelectedItem().toString().toUpperCase() + ")," + regraConst + ".";
-                        rulesModule.addRules(regraConst);
-                    } else {
-                        regraConst = nameRule.getText().toLowerCase() + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + "" + regraConst + ".";
-                        rulesModule.addRules(regraConst);
-                    }
-                    //dispose();
-
-                    results = formatSetTextPane(rulesModule.getRulesString()); //Formata as regras que serão exibidas na tela
-
-                    if (!results.isEmpty()) {
-                        String[] partRules = rulesModule.partRules(results); //Pega o cabeçalho das regras (ex: salary(NAME))
-                        identifyRules(partRules);
-                    } else {
-                        JOptionPane.showMessageDialog(this, "It's necessary to difine the rules to "
-                                + "realize inference of informations.", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                }
-            }
+            finishRule();
         } else if (e.getSource() == btnCreateNewRule) { //Valida as opções de selecionadas na construção da regra e a adiciona ao conjunto de regras
-            if (nameRule.getText().isEmpty()) { //Caso falte o "nome" da regra
-                JOptionPane.showMessageDialog(this, "It's necessary give the rule a name", "Error", JOptionPane.ERROR_MESSAGE);
-                nameRule.requestFocus();
-            }
-            if (comboOutput.getSelectedItem().equals("")) { //Caso falte a "saída" da regra
-                JOptionPane.showMessageDialog(this, "It's necessary choose output type", "Error", JOptionPane.ERROR_MESSAGE);
-                comboOutput.requestFocus();
-            } else {
-                Iterator iter = lineRules.iterator();
-                int validRows = 0;
-                while (iter.hasNext()) {
-                    LineRule condition = (LineRule) iter.next();
-                    if (!condition.getComboTerm().getSelectedItem().toString().equals("") || (condition.getComboOperator().getSelectedItem().toString().equals("new_element") || (condition.getComboOperator().getSelectedItem().toString().equals("deleted_element")))) {
-                        validRows += 1;
-                        break;
-                    }
-                }
-                if (validRows == 0) {
-                    JOptionPane.showMessageDialog(this, "You must select at least one valid condition!", "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    String regraConst = "";
-                    for (Iterator it = lineRules.iterator(); it.hasNext();) {
-                        LineRule condition = (LineRule) it.next();
-                        if (!condition.getComboTerm().getSelectedItem().toString().equals("") || (condition.getComboOperator().getSelectedItem().toString().equals("new_element") || (condition.getComboOperator().getSelectedItem().toString().equals("deleted_element")))) {
-                            String aux = buildCondition(comboOutput.getSelectedItem().toString(), condition.getComboTerm().getSelectedItem().toString(), condition.getComboOperator().getSelectedItem().toString());
-                            if (regraConst.equals("")) {
-                                regraConst = aux;
-                            } else {
-                                regraConst = regraConst + "," + aux;
-                            }
-                        }
-                        condition.setVisible(false);
-                    }
-                    if (lineRules.get(0).getComboOperator().getSelectedItem().toString().indexOf("_") < 0) {
-                        regraConst = nameRule.getText().toLowerCase() + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + baseRule + "," + comboOutput.getSelectedItem().toString() + "(" + nameFactInRule + "Before," + comboOutput.getSelectedItem().toString().toUpperCase() + ")," + regraConst + ".";
-                        rulesModule.addRules(regraConst);
-                    } else {
-                        regraConst = nameRule.getText().toLowerCase() + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + regraConst + ".";
-                        rulesModule.addRules(regraConst);
-                    }
-
-                    comboOutput.setSelectedItem("");
-                    nameRule.setText("");
-
-                    btnCreateNewRule.setEnabled(true);
-                    pnlRules.removeAll();
-                    lineRules.clear();
-                    LineRule aux = new LineRule();
-                    lineRules.add(aux);
-                    pnlRules.add(aux);
-                    aux.getComboTerm().requestFocus();
-                    pnlRules.revalidate();
-                }
-            }
+            createRule();
         } else if (e.getSource() == btnFinishBuilder) {
-            if (!results.isEmpty()) {
-                ArrayList<String> selectedRules = new ArrayList<String>();
-                int cont = 0;
-                for (JCheckBox item : rulesSelect) { //Verifica quais regras foram selecionadas pelo usuário
-                    if (item.isSelected()) {
-                        cont++;
-                        selectedRules.add(item.getName());
-                    }
-                }
-                if (cont > 0) {
-                    String paneRules = formatGetTextPane(results); //Formata as regras obtidas através do Painel
-
-                    this.rulesModule.addRules(paneRules); //Adiciona as regras do painel
-                    this.rulesModule.addSelectRules(selectedRules); //Adiciona as regras selecionadas em sua respectiva variável
-                    this.rulesModule.adjustRules(); //Remove as regras repetidas
-                    this.inferenceFileChooser.setSelectedRules(selectedRules);//Envia ao InferenceFileChooser a lista de regras selecionadas
-                    dispose();
-                } else {
-                    JOptionPane.showMessageDialog(this, "It's necessary to define the rules to "
-                            + "realize inference of informations.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            } else {
-                JOptionPane.showMessageDialog(this, "It's necessary to define the rules to "
-                        + "realize inference of informations.", "Erro", JOptionPane.ERROR_MESSAGE);
-            }
+            finish();
         } else if (e.getSource() == btnSave) {
-            if (!results.isEmpty()) {
-                saveRules("teste.xml");
-            } else {
-                JOptionPane.showMessageDialog(this, "It's necessary to define the rules to "
-                        + "save them.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+            saveProject();
+        } else if (e.getSource() == btnOpen) {
+            loadProject();
+        }
+    }
 
+    private void createRule() {
+        selectedRuleIndex = -1;
+        if (nameRule.getText().isEmpty()) { //Caso falte o "nome" da regra
+            JOptionPane.showMessageDialog(this, "It's necessary give the rule a name", "Error", JOptionPane.ERROR_MESSAGE);
+            nameRule.requestFocus();
+        }
+        if (comboOutput.getSelectedItem().equals("")) { //Caso falte a "saída" da regra
+            JOptionPane.showMessageDialog(this, "It's necessary choose output type", "Error", JOptionPane.ERROR_MESSAGE);
+            comboOutput.requestFocus();
+        } else {
+            Iterator iter = lineRules.iterator();
+            int validRows = 0;
+            while (iter.hasNext()) {
+                LineRule condition = (LineRule) iter.next();
+                if (!condition.getComboTerm().getSelectedItem().toString().equals("") || (condition.getComboOperator().getSelectedItem().toString().equals("new_element") || (condition.getComboOperator().getSelectedItem().toString().equals("deleted_element")))) {
+                    validRows += 1;
+                    break;
+                }
+            }
+            if (validRows == 0) {
+                JOptionPane.showMessageDialog(this, "You must select at least one valid condition!", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                String regraConst = "";
+                for (Iterator it = lineRules.iterator(); it.hasNext();) {
+                    LineRule condition = (LineRule) it.next();
+                    if (!condition.getComboTerm().getSelectedItem().toString().equals("") || (condition.getComboOperator().getSelectedItem().toString().equals("new_element") || (condition.getComboOperator().getSelectedItem().toString().equals("deleted_element")))) {
+                        String aux = buildCondition(comboOutput.getSelectedItem().toString(), condition.getComboTerm().getSelectedItem().toString(), condition.getComboOperator().getSelectedItem().toString());
+                        if (regraConst.equals("")) {
+                            regraConst = aux;
+                        } else {
+                            regraConst = regraConst + "," + aux;
+                        }
+                    }
+                    condition.setVisible(false);
+                }
+                if (lineRules.get(0).getComboOperator().getSelectedItem().toString().indexOf("_") < 0) {
+                    regraConst = nameRule.getText().toLowerCase() + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + baseRule + "," + comboOutput.getSelectedItem().toString() + "(" + nameFactInRule + "Before," + comboOutput.getSelectedItem().toString().toUpperCase() + ")," + regraConst + ".";
+                    rulesModule.addRule(regraConst);
+                } else {
+                    regraConst = nameRule.getText().toLowerCase() + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + regraConst + ".";
+                    rulesModule.addRule(regraConst);
+                }
+
+                comboOutput.setSelectedItem("");
+                nameRule.setText("");
+
+                btnCreateNewRule.setEnabled(true);
+                pnlRules.removeAll();
+                lineRules.clear();
+                LineRule aux = new LineRule();
+                lineRules.add(aux);
+                pnlRules.add(aux);
+                aux.getComboTerm().requestFocus();
+                pnlRules.revalidate();
+            }
         }
     }
 
@@ -323,7 +252,105 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         return textFormated;
     }
 
-    private void identifyRules(String[] partRules) {
+    /**
+     * Finaliza a construção da regra atual
+     */
+    private void finishRule() {
+        if (nameRule.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "It's necessary give the rule a name", "Error", JOptionPane.ERROR_MESSAGE);
+            nameRule.requestFocus();
+        }
+        if (comboOutput.getSelectedItem().equals("")) {
+            JOptionPane.showMessageDialog(this, "It's necessary choose output type", "Error", JOptionPane.ERROR_MESSAGE);
+            comboOutput.requestFocus();
+        } else {
+            Iterator iter = lineRules.iterator();
+            lineRules = LineRule.getLinerules();
+            LineRule.setLinerules(lineRules);
+            int validRows = 0;
+            while (iter.hasNext()) {
+                LineRule condition = (LineRule) iter.next();
+                if (!condition.getComboTerm().getSelectedItem().toString().equals("") || (condition.getComboOperator().getSelectedItem().toString().equals("new_element") || (condition.getComboOperator().getSelectedItem().toString().equals("deleted_element")))) {
+                    validRows += 1;
+                    break;
+                }
+            }
+            if (validRows == 0) {
+                JOptionPane.showMessageDialog(this, "You must select at least one valid condition!", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                String regraConst = "";
+                for (Iterator it = lineRules.iterator(); it.hasNext();) {
+                    LineRule condition = (LineRule) it.next();
+                    if (!condition.getComboTerm().getSelectedItem().toString().equals("") || (condition.getComboOperator().getSelectedItem().toString().equals("new_element") || (condition.getComboOperator().getSelectedItem().toString().equals("deleted_element")))) {
+                        String aux = buildCondition(comboOutput.getSelectedItem().toString(), condition.getComboTerm().getSelectedItem().toString(), condition.getComboOperator().getSelectedItem().toString());
+                        if (regraConst.equals("")) {
+                            regraConst = aux;
+                        } else {
+                            regraConst = regraConst + "," + aux;
+                        }
+                    }
+                }
+                //Prepara as regras construídas
+                if (lineRules.get(0).getComboOperator().getSelectedItem().toString().indexOf("_") < 0) {
+                    regraConst = nameRule.getText().toLowerCase() + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + baseRule + "," + comboOutput.getSelectedItem().toString() + "(" + nameFactInRule + "Before," + comboOutput.getSelectedItem().toString().toUpperCase() + ")," + regraConst + ".";
+                } else {
+                    regraConst = nameRule.getText().toLowerCase() + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + "" + regraConst + ".";
+                }
+
+                if (selectedRuleIndex == -1) {
+                    rulesModule.addRule(regraConst);
+                } else {
+                    rulesModule.getRules().set(selectedRuleIndex, new Rule(regraConst));
+                }
+
+                results = formatSetTextPane(rulesModule.getRulesString()); //Formata as regras que serão exibidas na tela
+
+                if (!results.isEmpty()) {
+                    String[] partRules = rulesModule.partRules(results); //Pega o cabeçalho das regras (ex: salary(NAME))
+                    buildResultsPanel(partRules);
+                } else {
+                    JOptionPane.showMessageDialog(this, "It's necessary to difine the rules to "
+                            + "realize inference of informations.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
+    }
+
+    /**
+     * Encerra o construtor
+     */
+    private void finish() {
+        if (!results.isEmpty()) {
+            ArrayList<String> selectedRules = new ArrayList<String>();
+            int cont = 0;
+            for (JCheckBox item : rulesSelect) { //Verifica quais regras foram selecionadas pelo usuário
+                if (item.isSelected()) {
+                    cont++;
+                    selectedRules.add(item.getName());
+                }
+            }
+            if (cont > 0) {
+                String paneRules = formatGetTextPane(results); //Formata as regras obtidas através do Painel
+
+                this.rulesModule.addRule(paneRules); //Adiciona as regras do painel
+                this.rulesModule.addSelectRules(selectedRules); //Adiciona as regras selecionadas em sua respectiva variável
+                this.rulesModule.adjustRules(); //Remove as regras repetidas
+                this.inferenceFileChooser.setSelectedRules(selectedRules);//Envia ao InferenceFileChooser a lista de regras selecionadas
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "It's necessary to define the rules to "
+                        + "realize inference of informations.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "It's necessary to define the rules to "
+                    + "realize inference of informations.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * Atualiza a lista de regras construidas
+     */
+    private void buildResultsPanel(String[] partRules) {
         rulesSelect = new ArrayList<JCheckBox>();
         JPanel p = new JPanel();
 
@@ -347,9 +374,10 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             JCheckBox chkItem = new JCheckBox(rulesHeads[i]);
             chkItem.setName(rulesHeads[i]);
             final String rule = partRules[i];
+            final int index = i;
             chkItem.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    showInBuilder(rule);
+                    editRule(rule, index);
                 }
             });
             rulesSelect.add(chkItem);
@@ -357,28 +385,27 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         }
 
         pnlResults.updateUI();
+
     }
 
     /**
      * Exibe a regra selecionada no construtor
      */
-    private void showInBuilder(String rule) {
+    private void editRule(String rule, int index) {
+        selectedRuleIndex = index;
         lineRules.clear();
 
         rule = rule.replace(" ", "");
-        System.out.println("regra: " + rule);
         String[] aux = rule.split(":-");
 
-        System.out.println("\\=");
         comboOutput.setSelectedItem(rule.substring(rule.indexOf("(") + 1, rule.indexOf(")")).toLowerCase());
-        System.out.println("nome da regra: " + aux[0].substring(0, aux[0].indexOf("(")));
         nameRule.setText(aux[0].substring(0, aux[0].indexOf("(")));
 
         for (String s : aux[1].split(",")) {
             LineRule condition = new LineRule();
 
-            System.out.println("presplit: "+s);
-            
+            System.out.println("presplit: " + s);
+
             if (s.contains("\\=")) {
                 condition.getComboOperator().setSelectedIndex(4);
             } else if (s.contains("<")) {
@@ -390,10 +417,9 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             } else {
                 continue;
             }
-            
+
             s = s.substring(0, s.indexOf("Before")).toLowerCase();
 
-            System.out.println("campo: " + s);
             condition.getComboTerm().setSelectedItem(s);
 
             lineRules.add(condition);
@@ -465,7 +491,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         constraints.anchor = GridBagConstraints.NORTHWEST;
         allPane.add(pnlConstructRule, constraints);
 
-        LayoutConstraints.setConstraints(constraints, 3, 1, 1, 2, 1, 1);
+        LayoutConstraints.setConstraints(constraints, 2, 1, 1, 2, 1, 1);
         constraints.insets = new Insets(3, 3, 3, 3);
         constraints.fill = GridBagConstraints.BOTH;
         constraints.anchor = GridBagConstraints.WEST;
@@ -685,7 +711,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                     }
                 }
                 listRules = new WekaParser().generateRules(documentsTab, chosenTags, keyChoice);
-                createListRules(listRules);
+                showMinedRules(listRules);
             }
         });
 
@@ -777,7 +803,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 ruleAux = term.toUpperCase() + before + "<" + term.toUpperCase() + after;
             } else if (operator.equals("=")) {
                 ruleAux = term.toUpperCase() + before + "==" + term.toUpperCase() + after;
-            } else if (operator.equals("!=")) {
+            } else if (operator.equals("!=") || operator.equals("\\=")) {
                 ruleAux = term.toUpperCase() + before + "\\=" + term.toUpperCase() + after;
             }
             newRule = term1After + "," + term2After + "," + ruleAux;
@@ -832,7 +858,10 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         lblChoiceKey.setVisible(true);
     }
 
-    private void createListRules(List<Set> listRules) {
+    /**
+     * Constroi o painel de regras mineradas
+     */
+    private void showMinedRules(List<Set> listRules) {
         pnlMining.removeAll();
 
         pnlGeneratedRules = new JPanel();
@@ -920,7 +949,19 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         pnlMining.revalidate();
     }
 
-    private void saveRules(String xml) {
+    /**
+     * Salva as regras construídas em um arquivo XML
+     */
+    private void saveProject() {
+        //Verifica se é possível salvar o projeto
+        if (results.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "It's necessary to define the rules to "
+                    + "save them.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //Constroi o XML
+        String xml = "teste.xml";
         Document dom;
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         try {
@@ -932,51 +973,31 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             rootEle.setAttribute("context-key", keyChoice.toLowerCase());
 
             // cria o elemento rule
-            /*for (Rule rule : rulesModule.getRules()) {
-
-             Element ruleEle = dom.createElement("rule");
-             ruleEle.setAttribute("output", xml);
-             ruleEle.setAttribute("enabled", xml);
-             ruleEle.setAttribute("name", rule.getRule());
-
-             Element fieldEle = dom.createElement("field");
-             fieldEle.setAttribute("change", xml);
-             fieldEle.appendChild(dom.createTextNode("Tag teste"));
-
-             ruleEle.appendChild(fieldEle);
-             rootEle.appendChild(ruleEle);
-             }*/
-
             ArrayList<Rule> rules = rulesModule.getRules();
             for (int i = 0; i < rules.size(); i++) {
                 Rule rule = rules.get(i);
                 String[] aux = rule.getRule().split(":");
 
                 Element ruleEle = dom.createElement("rule");
-                ruleEle.setAttribute("output", rule.getRule().substring(rule.getRule().indexOf("(") + 1, rule.getRule().indexOf(")")).toLowerCase());
+                ruleEle.setAttribute("output", rule.getRule().substring(rule.getRule().indexOf("(") + 1, rule.getRule().indexOf(")")));
                 ruleEle.setAttribute("enabled", rulesSelect.get(i).isSelected() ? "true" : "false");
                 ruleEle.setAttribute("name", aux[0].substring(0, aux[0].indexOf("(")));
 
                 for (String s : aux[1].split(",")) {
-                    String operator = "";
                     String change = "";
                     if (s.contains("\\=")) {
-                        operator = "\\=";
-                        change = "difference";
+                        change = "\\=";
                     } else if (s.contains("<")) {
-                        operator = "<";
-                        change = "increase";
+                        change = "<";
                     } else if (s.contains(">")) {
-                        operator = ">";
-                        change = "decrease";
+                        change = ">";
                     } else if (s.contains("==")) {
-                        operator = "==";
-                        change = "nothing";
+                        change = "==";
                     }
 
-                    if (!operator.equals("")) {
+                    if (!change.equals("")) {
                         s = s.replace("After", "");
-                        String s2[] = s.split(operator);
+                        String s2[] = s.split(change);
                         s2[1] = s2[1].replace(".", "");
 
                         Element fieldEle = dom.createElement("field");
@@ -999,7 +1020,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 tr.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
                 tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
-                // send DOM to file
+                // cria o arquivo XML
                 tr.transform(new DOMSource(dom),
                         new StreamResult(new FileOutputStream(xml)));
 
@@ -1012,4 +1033,93 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             System.out.println("UsersXML: Error trying to instantiate DocumentBuilder " + pce);
         }
     }
+
+    /**
+     * Carrega projeto a partir de um arquivo XML
+     */
+    private void loadProject() {
+        try {
+            rulesModule.clearRules();
+            File fXmlFile = new File("\\Users\\Jorge\\Documents\\NetBeansProjects\\get_gc_xchange\\teste.xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(fXmlFile);
+
+            doc.getDocumentElement().normalize();
+
+            System.out.println("\nRoot element :" + doc.getDocumentElement().getNodeName());
+
+            NodeList ruleNodeList = doc.getElementsByTagName("rule");
+
+            System.out.println("----------------------------");
+
+            for (int i = 0; i < ruleNodeList.getLength(); i++) {
+
+                Node ruleNode = ruleNodeList.item(i);
+
+                System.out.println("\nCurrent Element :" + ruleNode.getNodeName());
+
+                if (ruleNode.getNodeType() == Node.ELEMENT_NODE) {
+
+                    Element ruleElement = (Element) ruleNode;
+
+                    //Lê os atributos de cada regra
+                    String output = ruleElement.getAttribute("output");
+                    System.out.println("\noutput: " + output);
+                    String name = ruleElement.getAttribute("name");
+                    System.out.println("\nname: " + name);
+                    String enabled = ruleElement.getAttribute("enabled");
+                    System.out.println("\nenabled: " + enabled);
+
+                    NodeList fieldNodeList = ruleElement.getElementsByTagName("field");
+                    System.out.println("no field " + fieldNodeList.getLength());
+
+                    String rule = "";
+                    for (int j = 0; j < fieldNodeList.getLength(); j++) {
+                        Node fieldNode = fieldNodeList.item(j);
+
+                        if (ruleNode.getNodeType() == Node.ELEMENT_NODE) {
+
+                            Element fieldElement = (Element) fieldNode;
+
+                            //Lê os atributos de cada regra
+                            String change = fieldElement.getAttribute("change");
+                            System.out.println("\nchange: " + change);
+                            String field = fieldElement.getTextContent();
+                            System.out.println("\nfield: " + field);
+
+                            if (!field.equals("") || (change.equals("new_element") || (change.equals("deleted_element")))) {
+                                String aux = buildCondition(output, field, change);
+                                System.out.println(rule);
+                                if (rule.equals("")) {
+                                    rule = aux;
+                                } else {
+                                    rule = rule + "," + aux;
+                                }
+                            }
+                        }
+                    }
+
+                    rule = name + "(" + output + "):-" + baseRule + "," + output.toLowerCase() + "(" + nameFactInRule + "Before," + output + ")," + rule + ".";
+                    System.out.println(rule);
+                    rulesModule.addRule(rule);
+                }
+
+                results = formatSetTextPane(rulesModule.getRulesString()); //Formata as regras que serão exibidas na tela
+
+                String[] partRules = rulesModule.partRules(results); //Pega o cabeçalho das regras (ex: salary(NAME))
+                buildResultsPanel(partRules);
+            }
+
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (DOMException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

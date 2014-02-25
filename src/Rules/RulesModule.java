@@ -18,7 +18,7 @@ public class RulesModule{
     * @param rule 
     * String com a regra.
     */
-   public void addRules(String rule){
+   public void addRule(String rule){
        Iterator it = rules.iterator();
        boolean contain=false;
        while(it.hasNext()){ //Verifica se a regra não existe ainda
@@ -168,7 +168,7 @@ public class RulesModule{
         while(it1.hasNext()){ //Reinsere as regras inseridas pelo usuário
             insert = (String) it1.next();
             if(!insert.equals("\n") && !insert.equals("\r") && !insert.equals("")){
-                this.addRules(insert);
+                this.addRule(insert);
             }
         }
         Iterator it2 = arrayAux2.iterator();
