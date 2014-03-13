@@ -4,6 +4,10 @@ import GUI.Layout.LayoutConstraints;
 import Manager.Manager;
 import Rules.RulesModule;
 import AutomaticRules.WekaParser;
+import Exception.NoSelectedFileException;
+import GUI.FileManager.LastpathManager;
+import GUI.FileManager.XCProjectFileFilter;
+import GUI.FileManager.XMLFileFilter;
 import GUI.MainInterface.DocumentsTab;
 import GUI.MainInterface.InferenceFileChooser;
 import Rules.Rule;
@@ -20,18 +24,22 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import static java.awt.image.ImageObserver.WIDTH;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -179,7 +187,11 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         } else if (e.getSource() == btnSave) {
             saveProject();
         } else if (e.getSource() == btnOpen) {
-            loadProject();
+            try {
+                loadProject();
+            } catch (NoSelectedFileException ex) {
+                JOptionPane.showMessageDialog(this, "You didn't selected a file.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
@@ -238,8 +250,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 JOptionPane.showMessageDialog(this, "You must select at least one valid condition!", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
                 String regraConst = "";
-                for (Iterator it = lineRules.iterator(); it.hasNext();) {
-                    LineRule condition = (LineRule) it.next();
+                for (LineRule condition : lineRules) {
                     if ((!condition.getComboTerm1().getSelectedItem().toString().equals("") && !condition.getComboTerm2().getSelectedItem().toString().equals("")) || (condition.getComboOperator().getSelectedItem().toString().equals("new_element") || (condition.getComboOperator().getSelectedItem().toString().equals("deleted_element")))) {
                         String aux = buildCondition(comboOutput.getSelectedItem().toString(), condition.getComboTerm1().getSelectedItem().toString(), condition.getComboOperator().getSelectedItem().toString(), condition.getComboTerm2().getSelectedItem().toString());
                         if (regraConst.equals("")) {
@@ -255,14 +266,16 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 } else {
                     regraConst = nameRule.getText().toLowerCase() + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + "" + regraConst + ".";
                 }
+                
+                System.out.println(regraConst);
 
                 if (selectedRuleIndex == -1) {
                     rulesModule.addRule(regraConst);
                 } else {
                     rulesModule.getRules().set(selectedRuleIndex, new Rule(regraConst));
                 }
-                
-                System.out.println("termo2: "+lineRules.get(0).getComboTerm2().getSelectedItem().toString());
+
+                System.out.println("termo2: " + lineRules.get(0).getComboTerm2().getSelectedItem().toString());
 
                 results = formatSetTextPane(rulesModule.getRulesString()); //Formata as regras que serão exibidas na tela
 
@@ -370,7 +383,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         for (String s : aux[1].split(",")) {
             LineRule condition = new LineRule();
 
-            String change = "";
+            String change;
             if (s.contains("\\=")) {
                 change = "\\=";
                 condition.getComboOperator().setSelectedIndex(4);
@@ -813,9 +826,9 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 ruleAux = term1part[0].toUpperCase() + term1part[1] + "\\=" + term2part[0].toUpperCase() + term2part[1];
 
             }
-            newRule = term1After + "," + term2After + "," + ruleAux;
-            System.out.println("buildCondition: "+newRule);
+            newRule = term1After + "," + term2After + "," + ruleAux;            
         }//Fecha else do teste dos operadores new_element ou element_deleted
+        System.out.println("buildCondition: " + newRule);
         return newRule;
     }
 
@@ -971,7 +984,6 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         }
 
         //Constroi o XML
-        String xml = "teste.xml";
         Document dom;
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         try {
@@ -996,7 +1008,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
                 //lê os argumentos da regra e identifica as condições
                 for (String s : aux[1].split(",")) {
-                    String change = "";
+                    String change;
                     if (s.contains("new_element")) {
                         Element conditionEle = dom.createElement("condition");
                         conditionEle.setAttribute("change", "new_element");
@@ -1017,13 +1029,12 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                         continue;
                     }
 
-                    String terms[] = s.split(change);
-                    terms[1] = terms[1].replace(".", "");
+                    s = s.replace(".", "");
 
                     Element conditionEle = dom.createElement("condition");
                     conditionEle.setAttribute("change", change);
-                    conditionEle.setAttribute("term1", terms[0]);
-                    conditionEle.setAttribute("term2", terms[1]);
+                    conditionEle.setAttribute("term1", s.substring(0, s.indexOf(change)));
+                    conditionEle.setAttribute("term2", s.substring(s.indexOf(change) + change.length(), s.length()));
 
                     ruleEle.appendChild(conditionEle);
                 }
@@ -1040,14 +1051,28 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 tr.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
                 tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
-                // cria o arquivo XML
-                tr.transform(new DOMSource(dom),
-                        new StreamResult(new FileOutputStream(xml)));
+                //Solicita o endereço em que o arquivo deverá ser salvo
+                JFileChooser chooser = new JFileChooser(LastpathManager.getlastpath("xmlproject") + ".XML");//caso exista um histórico com o ultimo caminho acessado, cria um JFileChooser com este caminho
+                chooser.setFileFilter(new XMLFileFilter());
+                //abre o salvamento do arquivo de projetos
+                String pathWay;
+                int openedFile = chooser.showSaveDialog(null); // showSaveDialog retorna um inteiro , e ele ira determinar que o chooser será para salvar.
+                if (openedFile == JFileChooser.APPROVE_OPTION) {
+                    pathWay = chooser.getSelectedFile().getAbsolutePath();
+                    if(!pathWay.endsWith(".xml"))
+                        pathWay += ".xml";
+                    LastpathManager.savelastpath(pathWay, "xmlproject");
+                    try {
+                        // cria o arquivo XML
+                        tr.transform(new DOMSource(dom),
+                                new StreamResult(new FileOutputStream(pathWay)));
+                    } catch (FileNotFoundException ex) {
+                        JOptionPane.showMessageDialog(this, "An error occured. Did you selected a valid location?", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
 
             } catch (TransformerException te) {
                 System.out.println(te.getMessage());
-            } catch (IOException ioe) {
-                System.out.println(ioe.getMessage());
             }
         } catch (ParserConfigurationException pce) {
             System.out.println("UsersXML: Error trying to instantiate DocumentBuilder " + pce);
@@ -1057,82 +1082,98 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     /**
      * Carrega projeto a partir de um arquivo XML
      */
-    private void loadProject() {
-        try {
-            rulesModule.clearRules();
-            List<Boolean> enabledList = new ArrayList<Boolean>(); //utilizadoa para marcar ou não as checkboxes dos resultados
+    private void loadProject() throws NoSelectedFileException {
+        JFileChooser chooser = new JFileChooser(LastpathManager.getlastpath("xmlproject") + ".XML");//caso exista um histórico com o ultimo caminho acessado, cria um JFileChooser com este caminho
+        chooser.setFileFilter(new XMLFileFilter());//define o filtro de seleção para XML
+        String pathWay;
+        int openedFile = chooser.showOpenDialog(null);
+        if (openedFile == JFileChooser.APPROVE_OPTION) {//caso um arquivo tenha sido selecionado
+            pathWay = chooser.getSelectedFile().getAbsolutePath();//atribui o caminho onde o arquivo foi selecionado a variável pathWay
+            LastpathManager.savelastpath(pathWay, "xmlproject");
 
-            File fXmlFile = new File("\\Users\\Jorge\\Documents\\NetBeansProjects\\get_gc_xchange\\teste.xml");
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(fXmlFile);
+            //Lê o arquivo
+            if (pathWay.toUpperCase().endsWith(".XML")) {
+                try {
+                    rulesModule.clearRules();
+                    List<Boolean> enabledList = new ArrayList<Boolean>(); //utilizadoa para marcar ou não as checkboxes dos resultados
 
-            doc.getDocumentElement().normalize();
+                    File xml = new File(pathWay);
+                    DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+                    Document doc = dBuilder.parse(xml);
 
-            NodeList ruleNodeList = doc.getElementsByTagName("rule");
+                    doc.getDocumentElement().normalize();
 
-            for (int i = 0; i < ruleNodeList.getLength(); i++) {
+                    NodeList ruleNodeList = doc.getElementsByTagName("rule");
 
-                Node ruleNode = ruleNodeList.item(i);
+                    for (int i = 0; i < ruleNodeList.getLength(); i++) {
 
-                if (ruleNode.getNodeType() == Node.ELEMENT_NODE) {
+                        Node ruleNode = ruleNodeList.item(i);
 
-                    Element ruleElement = (Element) ruleNode;
+                        if (ruleNode.getNodeType() == Node.ELEMENT_NODE) {
 
-                    //Lê os atributos de cada regra
-                    String output = ruleElement.getAttribute("output");
-                    String name = ruleElement.getAttribute("name");
-                    String enabled = ruleElement.getAttribute("enabled");
-                    enabledList.add(enabled.equals("true"));
+                            Element ruleElement = (Element) ruleNode;
 
-                    NodeList conditionNodeList = ruleElement.getElementsByTagName("condition");
+                            //Lê os atributos de cada regra
+                            String output = ruleElement.getAttribute("output");
+                            String name = ruleElement.getAttribute("name");
+                            String enabled = ruleElement.getAttribute("enabled");
+                            enabledList.add(enabled.equals("true"));
 
-                    String rule = "";
-                    for (int j = 0; j < conditionNodeList.getLength(); j++) {
-                        Node conditionNode = conditionNodeList.item(j);
+                            NodeList conditionNodeList = ruleElement.getElementsByTagName("condition");
 
-                        if (conditionNode.getNodeType() == Node.ELEMENT_NODE) {
+                            String rule = "";
+                            for (int j = 0; j < conditionNodeList.getLength(); j++) {
+                                Node conditionNode = conditionNodeList.item(j);
 
-                            Element conditionElement = (Element) conditionNode;
+                                if (conditionNode.getNodeType() == Node.ELEMENT_NODE) {
 
-                            //Lê as condições de cada regra
-                            String change = conditionElement.getAttribute("change");
-                            if (change.contains("_")) {
-                                rule = buildCondition(output.toLowerCase(), "", change, "");
-                                rule = nameRule.getText().toLowerCase() + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + "" + rule + ".";
-                            } else if (change.equals("deleted_element")) {
+                                    Element conditionElement = (Element) conditionNode;
 
+                                    //Lê as condições de cada regra
+                                    String change = conditionElement.getAttribute("change");
+                                    if (change.contains("_")) {
+                                        rule = buildCondition(output.toLowerCase(), "", change, "");
+                                        rule = nameRule.getText().toLowerCase() + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + "" + rule + ".";
+                                    } else if (change.equals("deleted_element")) {
+
+                                    }
+
+                                    String term1 = conditionElement.getAttribute("term1");
+                                    String term2 = conditionElement.getAttribute("term2");
+
+                                    if (rule.equals("")) {
+                                        rule = term1 + change + term2;
+                                    } else {
+                                        rule += "," + term1 + change + term2;
+                                    }
+                                }
                             }
 
-                            String term1 = conditionElement.getAttribute("term1");
-                            String term2 = conditionElement.getAttribute("term2");
-
-                            if (rule == "") {
-                                rule = term1 + change + term2;
-                            } else {
-                                rule += "," + term1 + change + term2;
-                            }
+                            rule = name + "(" + output + "):-" + baseRule + "," + output.toLowerCase() + "(" + nameFactInRule + "Before," + output + ")," + rule + ".";
+                            rulesModule.addRule(rule);
                         }
+
+                        results = formatSetTextPane(rulesModule.getRulesString()); //Formata as regras que serão exibidas na tela
+
+                        String[] partRules = rulesModule.partRules(results); //Pega o cabeçalho das regras (ex: salary(NAME))
+                        buildResultsPanel(partRules, enabledList);
                     }
 
-                    rule = name + "(" + output + "):-" + baseRule + "," + output.toLowerCase() + "(" + nameFactInRule + "Before," + output + ")," + rule + ".";
-                    rulesModule.addRule(rule);
+                } catch (ParserConfigurationException e) {
+                    e.printStackTrace();
+                } catch (SAXException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (DOMException e) {
+                    e.printStackTrace();
                 }
-
-                results = formatSetTextPane(rulesModule.getRulesString()); //Formata as regras que serão exibidas na tela
-
-                String[] partRules = rulesModule.partRules(results); //Pega o cabeçalho das regras (ex: salary(NAME))
-                buildResultsPanel(partRules, enabledList);
+            } else {
+                JOptionPane.showMessageDialog(this, "Only XML files are supported.", "Invalid file", JOptionPane.ERROR_MESSAGE);
             }
-
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (DOMException e) {
-            e.printStackTrace();
+        } else {
+            throw new NoSelectedFileException(); //caso não tenha sido selecionado nenhum arquivo
         }
     }
 
