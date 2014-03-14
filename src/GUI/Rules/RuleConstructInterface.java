@@ -6,7 +6,6 @@ import Rules.RulesModule;
 import AutomaticRules.WekaParser;
 import Exception.NoSelectedFileException;
 import GUI.FileManager.LastpathManager;
-import GUI.FileManager.XCProjectFileFilter;
 import GUI.FileManager.XMLFileFilter;
 import GUI.MainInterface.DocumentsTab;
 import GUI.MainInterface.InferenceFileChooser;
@@ -22,6 +21,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import static java.awt.image.ImageObserver.WIDTH;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -31,8 +32,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -57,7 +56,7 @@ import org.xml.sax.SAXException;
 /**
  * Interface onde o usuário monta as regras para a realização de inferencia
  *
- * @author Guilherme Martins, Marcio Oliveira Junior e Celio H. N. Larcher
+ * @author Guilherme Martins, Marcio Oliveira Junior, Celio H. N. Larcher e Jorge Moreira
  * Junior
  */
 public class RuleConstructInterface extends JDialog implements ActionListener {
@@ -266,7 +265,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 } else {
                     regraConst = nameRule.getText().toLowerCase() + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + "" + regraConst + ".";
                 }
-                
+
                 System.out.println(regraConst);
 
                 if (selectedRuleIndex == -1) {
@@ -345,19 +344,25 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
         String[] rulesHeads = rulesModule.getNameAndArgumentsRules(partRules);
         for (int i = 0; i < rulesHeads.length; i++) { //Cria os campos do CheckBox de acordo com as regras inseridas pelo usuário
-            JCheckBox chkItem = new JCheckBox(rulesHeads[i]);
+            JPanel pnlRule = new JPanel(new FlowLayout());
+            pnlRule.setMaximumSize(new Dimension(100, 10));
+            JCheckBox chkItem = new JCheckBox();
+            JLabel rule = new JLabel(rulesHeads[i]);
             chkItem.setName(rulesHeads[i]);
             if (enabledList != null) {
                 chkItem.setSelected(enabledList.get(i));
             }
             final int index = i;
-            chkItem.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
+            rule.addMouseListener(new MouseAdapter() {
+
+                @Override
+                public void mouseClicked(MouseEvent e) {
                     editRule(index);
                 }
             });
             rulesSelect.add(chkItem);
             p.add(chkItem);
+            p.add(rule);
         }
 
         pnlResults.updateUI();
@@ -452,13 +457,13 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         pnlBar.setLayout(new BoxLayout(pnlBar, BoxLayout.Y_AXIS));
 
         pnlOutput = new JPanel();
-        pnlOutput.setBorder(javax.swing.BorderFactory.createTitledBorder("Output:"));
+        pnlOutput.setBorder(javax.swing.BorderFactory.createTitledBorder("Output"));
 
         pnlConstructRule = new JPanel();
-        pnlConstructRule.setBorder(javax.swing.BorderFactory.createTitledBorder("Conditions:"));
+        pnlConstructRule.setBorder(javax.swing.BorderFactory.createTitledBorder("Conditions"));
 
         pnlMining = new JPanel();
-        pnlMining.setBorder(javax.swing.BorderFactory.createTitledBorder("Association Rules:"));
+        pnlMining.setBorder(javax.swing.BorderFactory.createTitledBorder("Association Rules"));
 
         pnlResults = new JPanel();
         pnlResults.setBorder(javax.swing.BorderFactory.createTitledBorder("Results"));
@@ -826,7 +831,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 ruleAux = term1part[0].toUpperCase() + term1part[1] + "\\=" + term2part[0].toUpperCase() + term2part[1];
 
             }
-            newRule = term1After + "," + term2After + "," + ruleAux;            
+            newRule = term1After + "," + term2After + "," + ruleAux;
         }//Fecha else do teste dos operadores new_element ou element_deleted
         System.out.println("buildCondition: " + newRule);
         return newRule;
@@ -1059,8 +1064,9 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 int openedFile = chooser.showSaveDialog(null); // showSaveDialog retorna um inteiro , e ele ira determinar que o chooser será para salvar.
                 if (openedFile == JFileChooser.APPROVE_OPTION) {
                     pathWay = chooser.getSelectedFile().getAbsolutePath();
-                    if(!pathWay.endsWith(".xml"))
+                    if (!pathWay.endsWith(".xml")) {
                         pathWay += ".xml";
+                    }
                     LastpathManager.savelastpath(pathWay, "xmlproject");
                     try {
                         // cria o arquivo XML

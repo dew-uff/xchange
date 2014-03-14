@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
 /**
- * @author Celio Henrique Nogueira Larcher Júnior Classe contém cada linha em
+ * @author Celio Henrique Nogueira Larcher Júnior, Jorge Moreira
+ * Classe contém cada linha em
  * que a regra é montada, inicializando seus combobox e seus eventos.
  */
 public class LineRule extends JPanel {
