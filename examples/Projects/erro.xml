@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project context-key="empno">
-    <rule enabled="false" name="new" output="EMPNO">
-        <condition change="\=" term1="EMPNOBefore\" term2="EMPNOBefore"/>
+    <rule enabled="false" name="test" output="EMPNO">
+        <condition change="\=" term1="TITLEBefore" term2="TITLEAfter"/>
+        <condition change="\=" term1="SALARYBefore" term2="SALARYAfter"/>
     </rule>
 </project>
