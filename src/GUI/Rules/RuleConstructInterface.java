@@ -74,7 +74,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     private String factBase2v1, factBase2v2, factBase1v1, factBase1v2;
     private String factBase2, factBase1, baseRule;
     private final JLabel lblChoiceKey;
-    private JButton btnFinishRule, btnCreateNewRule, btnFinishBuilder; //Botões do rodapé
+    private JButton btnSaveRule, btnFinishBuilder; //Botões do rodapé
     private JButton btnOpen, btnSave, btnExport; //Botões da barra de ferramentas
     private JTextField nameRule;
     private JComboBox comboOutput;
@@ -119,10 +119,8 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
         btnAtributs = new JButton("List the attributes");
         btnAtributs.addActionListener(this);
-        btnFinishRule = new JButton();
-        btnFinishRule.addActionListener(this);
-        btnCreateNewRule = new JButton();
-        btnCreateNewRule.addActionListener(this);
+        btnSaveRule = new JButton();
+        btnSaveRule.addActionListener(this);
         btnFinishBuilder = new JButton();
         btnFinishBuilder.addActionListener(this);
 
@@ -178,9 +176,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnAtributs) {
-        } else if (e.getSource() == btnFinishRule) {
-            finishRule();
-        } else if (e.getSource() == btnCreateNewRule) { //Valida as opções de selecionadas na construção da regra e a adiciona ao conjunto de regras
+        } else if (e.getSource() == btnSaveRule) { //Valida as opções de selecionadas na construção da regra e a adiciona ao conjunto de regras
             finishRuleAndCreateNew();
         } else if (e.getSource() == btnFinishBuilder) {
             finish();
@@ -201,7 +197,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         comboOutput.setSelectedItem("");
         nameRule.setText("");
 
-        btnCreateNewRule.setEnabled(true);
+        btnSaveRule.setEnabled(true);
         pnlRules.removeAll();
         lineRules.clear();
         LineRule aux = new LineRule();
@@ -330,6 +326,9 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
             JCheckBox chkItem = new JCheckBox();
             chkItem.setName(rulesHeads[i]);
+            if(enabledList != null){
+                chkItem.setSelected(enabledList.get(i));
+            }
 
             GridBagConstraints constraints = new GridBagConstraints();
 
@@ -619,20 +618,12 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         constraints.anchor = GridBagConstraints.NORTHWEST;
         pnlConstructRule.add(buttonsPanel, constraints);
 
-        btnFinishRule.setText("Save rule");
-        btnFinishRule.setMinimumSize(new Dimension(350, 25));
+        btnSaveRule.setText("Save rule and create new");
+        btnSaveRule.setMinimumSize(new Dimension(350, 25));
         LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1);
-        constraints.insets = new Insets(5, 5, 5, 5);
-        constraints.anchor = GridBagConstraints.EAST;
+        constraints.anchor = GridBagConstraints.CENTER;
         constraints.fill = GridBagConstraints.NONE;
-        buttonsPanel.add(btnFinishRule, constraints);
-
-        btnCreateNewRule.setText("Save and create new");
-        btnCreateNewRule.setMinimumSize(btnFinishRule.getSize());
-        LayoutConstraints.setConstraints(constraints, 1, 0, 1, 1, 1, 1);
-        constraints.anchor = GridBagConstraints.WEST;
-        constraints.fill = GridBagConstraints.NONE;
-        buttonsPanel.add(btnCreateNewRule, constraints);
+        buttonsPanel.add(btnSaveRule, constraints);
 
         LineRule firstLineRule = new LineRule();
         pnlRules.setLayout(new BoxLayout(pnlRules, BoxLayout.PAGE_AXIS));
@@ -1230,7 +1221,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                     }
 
                     String[] partRules = rulesModule.partRules(results); //Pega o cabeçalho das regras (ex: salary(NAME))
-                    buildResultsPanel(partRules, null);
+                    buildResultsPanel(partRules, enabledList);
 
                 } catch (ParserConfigurationException e) {
                     e.printStackTrace();
