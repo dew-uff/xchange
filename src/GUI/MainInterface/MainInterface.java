@@ -690,11 +690,8 @@ public class MainInterface extends JFrame implements ActionListener{
         }
         else if(isSemanticDiff){
             documentsTab.refresh(documents);
-            System.out.println("acabou");
             prologFactsTab.refresh(documents);
-            System.out.println("acabou2");
             resultsTab.refresh(documents,manager);
-            System.out.println("acabou3");
             if(documents.getSize()>=2){
                 miContext.setEnabled(true);
                 contextBtn.setEnabled(true);
