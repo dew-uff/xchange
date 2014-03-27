@@ -21,7 +21,7 @@ public class LineFile extends JPanel {
     private static JPanel pnlFiles;
     private Document document;
 
-    LineFile(Document document) {
+    public LineFile(Document document) {
         super(new FlowLayout());
         setMaximumSize(new Dimension(300, 32));
         

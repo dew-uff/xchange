@@ -34,7 +34,7 @@ public class DocumentsTab extends JPanel implements ActionListener {
     private MainInterface main;
     private ArrayList<LineFile> lineFiles;
     private JPanel pnlFiles;
-    final static int MOVE_UP = 1, REMOVE = 0, MOVE_DOWN = -1; //utilizadas para controlar a lista de documentos
+    private final static int MOVE_UP = 1, REMOVE = 0, MOVE_DOWN = -1; //utilizadas para controlar a lista de documentos
 
     /**
      * Construtor da classe.

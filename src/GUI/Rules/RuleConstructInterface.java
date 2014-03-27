@@ -9,6 +9,7 @@ import GUI.FileManager.LastpathManager;
 import GUI.FileManager.XMLFileFilter;
 import GUI.MainInterface.DocumentsTab;
 import GUI.MainInterface.InferenceFileChooser;
+import GUI.MainInterface.LineFile;
 import Rules.Rule;
 import static java.awt.Component.LEFT_ALIGNMENT;
 import java.awt.Dimension;
@@ -74,7 +75,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     private String factBase2v1, factBase2v2, factBase1v1, factBase1v2;
     private String factBase2, factBase1, baseRule;
     private final JLabel lblChoiceKey;
-    private JButton btnSaveRule, btnFinishBuilder; //Botões do rodapé
+    private JButton btnSaveRule, btnFinishBuilder, btnMineRules, btnFilesList; //Botões do rodapé
     private JButton btnOpen, btnSave, btnExport; //Botões da barra de ferramentas
     private JTextField nameRule;
     private JComboBox comboOutput;
@@ -94,6 +95,9 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     private GridBagLayout gridBag;
     private InferenceFileChooser inferenceFileChooser;
     private int selectedRuleIndex; //usado para identificar qual regra estásendo construída/editada (-1 para nova regra)
+    private ArrayList<LineFile> lineFiles;
+    private JPanel pnlFiles;
+    private final static int MOVE_UP = 1, REMOVE = 0, MOVE_DOWN = -1; //utilizadas para controlar a lista de documentos
 
     /**
      * Exibe a janela para construção das regras.
@@ -187,7 +191,143 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 loadProject();
             } catch (NoSelectedFileException ex) {
             }
+        } else if (e.getSource() == btnMineRules) {
+            for (JCheckBox item : checkTagsArray) {
+                if (item.isSelected()) {
+                    chosenTags.add(item.getName());
+                }
+            }
+            setModal(false);
+            //DocumentsInterface documentsInterface = new DocumentsInterface(documentsTab, listRules, chosenTags, keyChoice);
+            listRules = new WekaParser().generateRules(documentsTab, chosenTags, keyChoice);
+            showMinedRules(listRules);
+        } else if (e.getSource() == btnFilesList)
+            showFilesList();
+    }
+    
+    private void showFilesList(){
+        pnlMining.removeAll();
+
+        //declara objetos de controle do layout
+        GridBagLayout gridBag = new GridBagLayout();
+        GridBagConstraints constraints = new GridBagConstraints();
+        pnlMining.setLayout(gridBag);
+
+        pnlFiles = new JPanel();
+        JScrollPane jsPane = new JScrollPane(pnlFiles);
+        jsPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        jsPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        jsPane.setBorder(null);
+
+        constraints = new GridBagConstraints();
+        LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1);
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.anchor = GridBagConstraints.NORTHWEST;
+        pnlMining.add(jsPane, constraints);
+
+        pnlFiles.setLayout(new BoxLayout(pnlFiles, BoxLayout.PAGE_AXIS));
+
+        lineFiles = new ArrayList<LineFile>();
+        for (Documents.Document doc : documentsTab.getDocuments().getDocuments()) {
+            final LineFile lineFile = new LineFile(doc);
+
+            lineFile.getButtonUp().addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e) {
+                    moveLineFile((LineFile) lineFile.getButtonUp().getParent(), MOVE_UP);
+                }
+            });
+            lineFile.getButtonRemove().addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e) {
+                    moveLineFile((LineFile) lineFile.getButtonUp().getParent(), REMOVE);
+                }
+            });
+            lineFile.getButtonDown().addActionListener(new ActionListener() {
+
+                public void actionPerformed(ActionEvent e) {
+                    moveLineFile((LineFile) lineFile.getButtonUp().getParent(), MOVE_DOWN);
+                }
+            });
+
+            pnlFiles.add(lineFile);
+            LineFile.setPnlFiles(pnlFiles);
+            lineFiles.add(lineFile);
         }
+
+        LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1000);
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.anchor = GridBagConstraints.NORTH;
+        gridBag.setConstraints(this, constraints);
+        pnlMining.add(jsPane, constraints);
+        
+        JPanel btnMineRulesPanel = new JPanel();
+
+        constraints = new GridBagConstraints();
+        LayoutConstraints.setConstraints(constraints, 0, 2, 1, 1, 1, 1);
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.anchor = GridBagConstraints.NORTHWEST;
+        pnlMining.add(btnMineRulesPanel, constraints);
+
+        //Botão para minerar regras
+        btnMineRules = new JButton("Mine Rules");
+        btnMineRules.addActionListener(this);
+
+        btnMineRules.setVisible(true);
+        btnMineRules.setMinimumSize(new Dimension(350, 25));
+        LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1);
+        constraints.insets = new Insets(5, 5, 5, 5);
+        constraints.anchor = GridBagConstraints.CENTER;
+        constraints.fill = GridBagConstraints.NONE;
+        btnMineRulesPanel.add(btnMineRules, constraints);
+        
+        pnlMining.revalidate();
+    }
+    
+    private void moveLineFile(LineFile caller, int action) {
+        int callerIndex = lineFiles.indexOf(caller);
+        Documents.Document currentDoc = documentsTab.getDocuments().getDocuments().get(callerIndex);
+
+        switch (action) {
+            case MOVE_UP:
+                //Troca posições na lista de LineFiles
+                LineFile before = lineFiles.get(callerIndex - 1);
+                lineFiles.set(callerIndex - 1, caller);
+                lineFiles.set(callerIndex, before);
+
+                //Troca posição dos Documents
+                Documents.Document beforeDoc = documentsTab.getDocuments().getDocuments().get(callerIndex - 1);
+                documentsTab.getDocuments().getDocuments().set(callerIndex - 1, currentDoc);
+                documentsTab.getDocuments().getDocuments().set(callerIndex, beforeDoc);
+                break;
+            case REMOVE:
+                //Remove da lista de LineFiles
+                lineFiles.remove(callerIndex);
+
+                //Remove dos Documents
+                documentsTab.getDocuments().remove(callerIndex);
+                break;
+            case MOVE_DOWN:
+                //Troca posições na lista de LineFiles
+                LineFile after = lineFiles.get(callerIndex + 1);
+                lineFiles.set(callerIndex + 1, caller);
+                lineFiles.set(callerIndex, after);
+
+                //Troca posição dos Documents                
+                Documents.Document afterDoc = documentsTab.getDocuments().getDocuments().get(callerIndex + 1);
+                documentsTab.getDocuments().getDocuments().set(callerIndex + 1, currentDoc);
+                documentsTab.getDocuments().getDocuments().set(callerIndex, afterDoc);
+                break;
+        }
+
+        //Troca posições na UI
+        pnlFiles.removeAll();
+        for (LineFile lf : lineFiles) {
+            pnlFiles.add(lf);
+        }
+
+        //Atualiza UI
+        revalidate();
     }
 
     private void finishRuleAndCreateNew() {
@@ -326,7 +466,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
             JCheckBox chkItem = new JCheckBox();
             chkItem.setName(rulesHeads[i]);
-            if(enabledList != null){
+            if (enabledList != null) {
                 chkItem.setSelected(enabledList.get(i));
             }
 
@@ -679,35 +819,25 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         constraintsMining.anchor = GridBagConstraints.NORTHWEST;
         pnlMining.add(jscPane, constraintsMining);
 
-        JPanel btnMineRulesPanel = new JPanel();
+        JPanel btnFileListPanel = new JPanel();
 
         constraints = new GridBagConstraints();
         LayoutConstraints.setConstraints(constraints, 0, 2, 1, 1, 1, 1);
         constraints.fill = GridBagConstraints.BOTH;
         constraints.anchor = GridBagConstraints.NORTHWEST;
-        pnlMining.add(btnMineRulesPanel, constraints);
+        pnlMining.add(btnFileListPanel, constraints);
 
         //Botão para minerar regras
-        JButton btnMineRules = new JButton("Mine Rules");
-        btnMineRules.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                for (JCheckBox item : checkTagsArray) {
-                    if (item.isSelected()) {
-                        chosenTags.add(item.getName());
-                    }
-                }
-                listRules = new WekaParser().generateRules(documentsTab, chosenTags, keyChoice);
-                showMinedRules(listRules);
-            }
-        });
+        btnFilesList = new JButton("Next");
+        btnFilesList.addActionListener(this);
 
-        btnMineRules.setVisible(true);
-        btnMineRules.setMinimumSize(new Dimension(350, 25));
+        btnFilesList.setVisible(true);
+        btnFilesList.setMinimumSize(new Dimension(350, 25));
         LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1);
         constraints.insets = new Insets(5, 5, 5, 5);
         constraints.anchor = GridBagConstraints.CENTER;
         constraints.fill = GridBagConstraints.NONE;
-        btnMineRulesPanel.add(btnMineRules, constraints);
+        btnFileListPanel.add(btnFilesList, constraints);
 
         //Painel de resultados
         GridBagLayout gridBagRight = new GridBagLayout();

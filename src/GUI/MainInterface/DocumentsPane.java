@@ -89,7 +89,7 @@ public class DocumentsPane extends JSplitPane{
      * @param docSize 
     */
     public void resizeSplitPane(int docSize){
-        double dimJFrame = MainInterface.getWidthJFrame(); // Obtém o Tamanho Atual da Janela do XChange
+        /*double dimJFrame = MainInterface.getWidthJFrame(); // Obtém o Tamanho Atual da Janela do XChange
         
         Toolkit tk = Toolkit.getDefaultToolkit();//objeto para pegar as dimensoes da tela
         Dimension dimension = tk.getDefaultToolkit().getScreenSize();//funçao para pegar as dimensoes da tela
@@ -97,10 +97,10 @@ public class DocumentsPane extends JSplitPane{
         double inicial = (7*(int)dimPC/8); // Tamanho da Tela Inicialmente
         
         double diferenca = ((dimPC-inicial)/3); // Diferença da Tela do Computador e da Tela Inicial do XChange divido por 3
-        int divider = (int)((dimJFrame-diferenca)/2)+1; // Calcula a localização do SplitPane Geral
+        int divider = (int)((dimJFrame-diferenca)/3)+1; // Calcula a localização do SplitPane Geral
         
         if(docSize==1 || docSize>=2){
             this.setDividerLocation(divider);
-        }
+        }*/
     }
 }
