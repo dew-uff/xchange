@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -18,7 +19,7 @@ public class RulesModule{
     * @param rule 
     * String com a regra.
     */
-   public void addRule(String rule){
+   public void addRule(String rule, List<Condition> conditions){
        Iterator it = rules.iterator();
        boolean contain=false;
        while(it.hasNext()){ //Verifica se a regra não existe ainda
@@ -26,7 +27,7 @@ public class RulesModule{
            if(aux.getRule().compareTo(rule)==0)contain=true; //Caso exista, muda a variável contain para true
        }
        if(!contain){ //Caso não exista a regra
-           Rule newrule = new Rule(rule); //Cria o objeto Rule com a string da regra
+           Rule newrule = new Rule(rule, conditions); //Cria o objeto Rule com a string da regra
            this.rules.add(newrule); //Adciona a regra na lista de regras
        }
    }
@@ -53,7 +54,7 @@ public class RulesModule{
     * @param rule
     * String com uma das regras selecionadas pelo usuário.
     */
-   public void addSelectRules(String rule){
+   public void addSelectRules(String rule, List<Condition> conditions){
        Iterator it=selectRules.iterator();
        boolean contain=false;
        while(it.hasNext()){ //Verifica se a regra existe
@@ -61,7 +62,7 @@ public class RulesModule{
            if(aux.getRule().compareTo(rule)==0)contain=true; //Caso exista, muda a variável contain para true
        }
        if(!contain){ //Caso não exista a regra
-           Rule newrule=new Rule(rule); //Cria o objeto Rule com a string da regra
+           Rule newrule=new Rule(rule, conditions); //Cria o objeto Rule com a string da regra
            this.selectRules.add(newrule); //Adciona a regra na lista de regras
        }
    }
@@ -140,44 +141,6 @@ public class RulesModule{
      */
     public void clearSelectRules(){
         selectRules.clear();
-    }
-
-    /**
-     * Realiza ajustes tanto no arrayList "rules" quanto no "selectRules".
-     * Estes ajustes são: remoção de regras em branco e de regras duplicadas.
-     */
-    public void adjustRules(){
-        String insert = ""; //Variavel auxiliar para reinserir as regras em seus devidos lugares
-        
-        //Separa as regras em um ArrayList onde cada posicao representa uma regra
-        String stringAux1 = this.getRulesString();
-        String stringAux2 = this.getSelectRulesString();
-        String[] stringVectorAux1 = stringAux1.split("(\n|\r)");
-        String[] stringVectorAux2 = stringAux2.split("(\n|\r)");
-        ArrayList<String> arrayAux1 = new ArrayList<String>(Arrays.asList(stringVectorAux1));
-        ArrayList<String> arrayAux2 = new ArrayList<String>(Arrays.asList(stringVectorAux2));
-        arrayAux1 = new ArrayList(new HashSet(arrayAux1));
-        arrayAux2 = new ArrayList(new HashSet(arrayAux2));
-        
-        //Remove todas as regras antigas
-        this.clearRules();
-        this.clearSelectRules();
-        
-        //Readiciona as regras SEM conter regras repetidas ou em branco
-        Iterator it1 = arrayAux1.iterator();
-        while(it1.hasNext()){ //Reinsere as regras inseridas pelo usuário
-            insert = (String) it1.next();
-            if(!insert.equals("\n") && !insert.equals("\r") && !insert.equals("")){
-                this.addRule(insert);
-            }
-        }
-        Iterator it2 = arrayAux2.iterator();
-        while(it2.hasNext()){ //Reinsere as regras selecionadas pelo usuário
-            insert = (String) it2.next();
-            if(!insert.equals("\n") && !insert.equals("\r") && !insert.equals("") && !insert.equals(" ")){
-                this.addSelectRules(insert);
-            } 
-        }        
     }
     
     /**
