@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -17,23 +18,26 @@ import javax.swing.JPanel;
 public class LineFile extends JPanel {
 
     private final JLabel lblFileName;
-    private final JButton btnUp, btnDown, btnRemove;
+    private final JButton btnUp, btnDown;
+    private final JCheckBox chkMine;
     private static JPanel pnlFiles;
     private Document document;
 
     public LineFile(Document document) {
         super(new FlowLayout());
+        
+        this.document = document;
         setMaximumSize(new Dimension(300, 32));
         
         lblFileName = new JLabel(document.getFile().getName());
         btnUp = new JButton("^");
         btnDown = new JButton("v");
-        btnRemove = new JButton("x");
-        
+        chkMine = new JCheckBox();
+                
+        add(chkMine);
         add(lblFileName);
         add(btnUp);
         add(btnDown);
-        add(btnRemove);
     }
     
     public JButton getButtonUp(){
@@ -44,11 +48,11 @@ public class LineFile extends JPanel {
         return btnDown;
     }
     
-    public JButton getButtonRemove(){
-        return btnRemove;
+    public JCheckBox getCheckbox(){
+        return chkMine;
     }
     
-    public Document getDcument(){
+    public Document getDocument(){
         return document;
     }
     

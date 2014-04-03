@@ -1,6 +1,6 @@
 package AutomaticRules;
 
-import GUI.MainInterface.DocumentsTab;
+import Documents.Document;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ import weka.core.converters.ConverterUtils;
 
 public class WekaParser {
     
-    public List<Set> generateRules(DocumentsTab documentsTab, List<String> mapeamentoTags, String keyChoice) {
+    public List<Set> generateRules(List<Document> documents, List<String> mapeamentoTags, String keyChoice) {
         try {
             String separator = System.getProperty("file.separator");
             String workingPath = System.getProperty("user.dir");
@@ -35,9 +35,8 @@ public class WekaParser {
                 document1 = workingPath+separator+"temp1.xml";
                 document2 = workingPath+separator+"temp2.xml";
             } else {
-                ArrayList<String> paths = documentsTab.getDocuments().getPathWays();
-                document1 = paths.get(documentsTab.getLeftCBIndex());
-                document2 = paths.get(documentsTab.getRightCBIndex());
+                document1 = documents.get(0).getPathWay();
+                document2 = documents.get(1).getPathWay();
             }
             
             String fileDiff = workingPath+separator+"temp"+separator+"mining_diff.xml";

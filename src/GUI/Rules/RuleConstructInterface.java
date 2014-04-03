@@ -4,6 +4,7 @@ import GUI.Layout.LayoutConstraints;
 import Manager.Manager;
 import Rules.RulesModule;
 import AutomaticRules.WekaParser;
+import Documents.Document;
 import Exception.NoSelectedFileException;
 import GUI.FileManager.LastpathManager;
 import GUI.FileManager.XMLFileFilter;
@@ -52,7 +53,9 @@ import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
-import org.w3c.dom.*;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
@@ -87,7 +90,6 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     private static JPanel pnlGeneratedRules; //exibe as regras geradas a partir da mineração
     private ArrayList<JCheckBox> checkTagsArray = new ArrayList<JCheckBox>();
     private ArrayList<String> chosenTags = new ArrayList<String>();
-    List<Set> listRules = new ArrayList<Set>();
     private JComboBox cmbKey; //permite escolher a chave de contexto
     private String results; //regras usadas pelo usuário
     private JPanel pnlBar, pnlMining, pnlConstructRule, pnlResults, pnlOutput; //paineis principais
@@ -97,7 +99,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     private int selectedRuleIndex; //usado para identificar qual regra estásendo construída/editada (-1 para nova regra)
     private ArrayList<LineFile> lineFiles;
     private JPanel pnlFiles;
-    private final static int MOVE_UP = 1, REMOVE = 0, MOVE_DOWN = -1; //utilizadas para controlar a lista de documentos
+    private final static int MOVE_UP = 1, MOVE_DOWN = -1; //utilizadas para controlar a lista de documentos
 
     /**
      * Exibe a janela para construção das regras.
@@ -192,20 +194,46 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             } catch (NoSelectedFileException ex) {
             }
         } else if (e.getSource() == btnMineRules) {
-            for (JCheckBox item : checkTagsArray) {
-                if (item.isSelected()) {
-                    chosenTags.add(item.getName());
-                }
-            }
-            setModal(false);
-            //DocumentsInterface documentsInterface = new DocumentsInterface(documentsTab, listRules, chosenTags, keyChoice);
-            listRules = new WekaParser().generateRules(documentsTab, chosenTags, keyChoice);
-            showMinedRules(listRules);
-        } else if (e.getSource() == btnFilesList)
+            mineRules();
+        } else if (e.getSource() == btnFilesList) {
             showFilesList();
+        }
     }
-    
-    private void showFilesList(){
+
+    /**
+     * Minera as regras com base nas tags e nos documentos selecionados
+     */
+    private void mineRules() {
+        //Identifica as tags a serem mineradas
+        for (JCheckBox item : checkTagsArray) {
+            if (item.isSelected()) {
+                chosenTags.add(item.getName());
+            }
+        }
+
+        //Seleciona os documentos a minerar
+        List<Document> documentsToMine = new ArrayList<Document>();
+        for (LineFile lf : lineFiles) {
+            if (lf.getCheckbox().isSelected()) {
+                documentsToMine.add(lf.getDocument());
+            }
+        }
+
+        //Verifica se ao menos 2 documetnos foram minrerados
+        if (documentsToMine.size() < 2) {
+            JOptionPane.showMessageDialog(this, "Please select at least two documents to mine rules", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        //Gera as regras e as mostra
+        List<Set> listRules = new WekaParser().generateRules(documentsToMine, chosenTags, keyChoice);
+        showMinedRules(listRules);
+    }
+
+    /**
+     * Mostra a liata de documentos aicionados
+     */
+    private void showFilesList() {
         pnlMining.removeAll();
 
         //declara objetos de controle do layout
@@ -228,19 +256,13 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         pnlFiles.setLayout(new BoxLayout(pnlFiles, BoxLayout.PAGE_AXIS));
 
         lineFiles = new ArrayList<LineFile>();
-        for (Documents.Document doc : documentsTab.getDocuments().getDocuments()) {
+        for (Document doc : documentsTab.getDocuments().getDocuments()) {
             final LineFile lineFile = new LineFile(doc);
 
             lineFile.getButtonUp().addActionListener(new ActionListener() {
 
                 public void actionPerformed(ActionEvent e) {
                     moveLineFile((LineFile) lineFile.getButtonUp().getParent(), MOVE_UP);
-                }
-            });
-            lineFile.getButtonRemove().addActionListener(new ActionListener() {
-
-                public void actionPerformed(ActionEvent e) {
-                    moveLineFile((LineFile) lineFile.getButtonUp().getParent(), REMOVE);
                 }
             });
             lineFile.getButtonDown().addActionListener(new ActionListener() {
@@ -260,7 +282,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         constraints.anchor = GridBagConstraints.NORTH;
         gridBag.setConstraints(this, constraints);
         pnlMining.add(jsPane, constraints);
-        
+
         JPanel btnMineRulesPanel = new JPanel();
 
         constraints = new GridBagConstraints();
@@ -280,13 +302,20 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         constraints.anchor = GridBagConstraints.CENTER;
         constraints.fill = GridBagConstraints.NONE;
         btnMineRulesPanel.add(btnMineRules, constraints);
-        
+
         pnlMining.revalidate();
     }
-    
+
+    /**
+     * Método para ordenar a lista de documentos adicionados
+     *
+     * @param caller {@link LineFile} a ser ordenado
+     * @param action {@link RuleConstructInterface.MOVE_UP} para mover para cima
+     * ou {@link RuleConstructInterface.MOVE_DOWN} para mover para baixo
+     */
     private void moveLineFile(LineFile caller, int action) {
         int callerIndex = lineFiles.indexOf(caller);
-        Documents.Document currentDoc = documentsTab.getDocuments().getDocuments().get(callerIndex);
+        Document currentDoc = documentsTab.getDocuments().getDocuments().get(callerIndex);
 
         switch (action) {
             case MOVE_UP:
@@ -296,16 +325,9 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 lineFiles.set(callerIndex, before);
 
                 //Troca posição dos Documents
-                Documents.Document beforeDoc = documentsTab.getDocuments().getDocuments().get(callerIndex - 1);
+                Document beforeDoc = documentsTab.getDocuments().getDocuments().get(callerIndex - 1);
                 documentsTab.getDocuments().getDocuments().set(callerIndex - 1, currentDoc);
                 documentsTab.getDocuments().getDocuments().set(callerIndex, beforeDoc);
-                break;
-            case REMOVE:
-                //Remove da lista de LineFiles
-                lineFiles.remove(callerIndex);
-
-                //Remove dos Documents
-                documentsTab.getDocuments().remove(callerIndex);
                 break;
             case MOVE_DOWN:
                 //Troca posições na lista de LineFiles
@@ -314,7 +336,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 lineFiles.set(callerIndex, after);
 
                 //Troca posição dos Documents                
-                Documents.Document afterDoc = documentsTab.getDocuments().getDocuments().get(callerIndex + 1);
+                Document afterDoc = documentsTab.getDocuments().getDocuments().get(callerIndex + 1);
                 documentsTab.getDocuments().getDocuments().set(callerIndex + 1, currentDoc);
                 documentsTab.getDocuments().getDocuments().set(callerIndex, afterDoc);
                 break;
@@ -330,6 +352,9 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         revalidate();
     }
 
+    /**
+     * Salva a regra, exibe no painel de regras construídas
+     */
     private void finishRuleAndCreateNew() {
         finishRule(); //Salva a atual
 
@@ -413,7 +438,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
                 if (!results.isEmpty()) {
                     String[] partRules = rulesModule.partRules(results); //Pega o cabeçalho das regras (ex: salary(NAME))
-                    buildResultsPanel(partRules, null);
+                    buildRulesPanel(partRules, null);
                 } else {
                     JOptionPane.showMessageDialog(this, "It's necessary to difine the rules to "
                             + "realize inference of informations.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -457,7 +482,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     /**
      * Atualiza a lista de regras construidas
      */
-    private void buildResultsPanel(String[] partRules, List<Boolean> enabledList) {
+    private void buildRulesPanel(String[] partRules, List<Boolean> enabledList) {
         pResults.removeAll();
 
         String[] rulesHeads = rulesModule.getNameAndArgumentsRules(partRules);
@@ -509,6 +534,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
     /**
      * Exibe a regra selecionada no construtor
+     * @param index Índice da {@link Rule}
      */
     private void editRule(int index) {
         selectedRuleIndex = index;
@@ -603,7 +629,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         pnlMining.setBorder(javax.swing.BorderFactory.createTitledBorder("Association Rules"));
 
         pnlResults = new JPanel();
-        pnlResults.setBorder(javax.swing.BorderFactory.createTitledBorder("Results"));
+        pnlResults.setBorder(javax.swing.BorderFactory.createTitledBorder("Builded Rules"));
 
         //adiciona os paineis à janela de construção de regras
         LayoutConstraints.setConstraints(constraints, 0, 0, 3, 1, 1, 0);
@@ -827,7 +853,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         constraints.anchor = GridBagConstraints.NORTHWEST;
         pnlMining.add(btnFileListPanel, constraints);
 
-        //Botão para minerar regras
+        //Botão para escolher os arquivos a serem minerados e sua ordem
         btnFilesList = new JButton("Next");
         btnFilesList.addActionListener(this);
 
@@ -1184,7 +1210,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         }
 
         //Constroi o XML
-        Document dom;
+        org.w3c.dom.Document dom;
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         try {
             DocumentBuilder db = dbf.newDocumentBuilder();
@@ -1301,7 +1327,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                     File xml = new File(pathWay);
                     DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
                     DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-                    Document doc = dBuilder.parse(xml);
+                    org.w3c.dom.Document doc = dBuilder.parse(xml);
 
                     doc.getDocumentElement().normalize();
 
@@ -1351,7 +1377,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                     }
 
                     String[] partRules = rulesModule.partRules(results); //Pega o cabeçalho das regras (ex: salary(NAME))
-                    buildResultsPanel(partRules, enabledList);
+                    buildRulesPanel(partRules, enabledList);
 
                 } catch (ParserConfigurationException e) {
                     e.printStackTrace();
