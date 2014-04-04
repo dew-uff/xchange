@@ -171,8 +171,6 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         constructRules();
 
         buildInterface();
-
-        setVisible(true);
     }
 
     /**
