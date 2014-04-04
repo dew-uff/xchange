@@ -233,7 +233,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     }
 
     /**
-     * Mostra a liata de documentos aicionados
+     * Mostra a liata de documentos adicionados
      */
     private void showFilesList() {
         pnlMining.removeAll();
@@ -258,8 +258,10 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         pnlFiles.setLayout(new BoxLayout(pnlFiles, BoxLayout.PAGE_AXIS));
 
         lineFiles = new ArrayList<LineFile>();
-        for (Document doc : documentsTab.getDocuments().getDocuments()) {
-            final LineFile lineFile = new LineFile(doc);
+        for (int i = 0; i < documentsTab.getDocuments().getSize(); i++) {
+            final LineFile lineFile = new LineFile(documentsTab.getDocuments().getDocuments().get(i));
+            if(i < 2)
+                lineFile.getCheckbox().setSelected(true);
 
             lineFile.getButtonUp().addActionListener(new ActionListener() {
 
