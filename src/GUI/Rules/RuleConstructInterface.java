@@ -406,15 +406,16 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
                 //Prepara as regras construídas
                 if (lineRules.get(0).getComboOperator().getSelectedItem().toString().indexOf("_") < 0) {
-                    regraConst = nameRule.getText().toLowerCase() + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + baseRule + "," + comboOutput.getSelectedItem().toString() + "(" + nameFactInRule + "Before," + comboOutput.getSelectedItem().toString().toUpperCase() + ")," + regraConst + ".";
+                    regraConst = nameRule.getText().toLowerCase().replaceAll(" ", "") + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + baseRule + "," + comboOutput.getSelectedItem().toString() + "(" + nameFactInRule + "Before," + comboOutput.getSelectedItem().toString().toUpperCase() + ")," + regraConst + ".";
                 } else {
-                    regraConst = nameRule.getText().toLowerCase() + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + "" + regraConst + ".";
+                    regraConst = nameRule.getText().toLowerCase().replaceAll(" ", "") + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + "" + regraConst + ".";
                 }
 
+                Rule rule = new Rule(nameRule.getText().toLowerCase(), comboOutput.getSelectedItem().toString().toLowerCase(), conditions, regraConst);
                 if (selectedRuleIndex == -1) {
-                    rulesModule.addRule(regraConst, conditions);
+                    rulesModule.addRule(rule);
                 } else {
-                    rulesModule.getRules().set(selectedRuleIndex, new Rule(regraConst, conditions));
+                    rulesModule.getRules().set(selectedRuleIndex, rule);
                 }
 
                 results = formatSetTextPane(rulesModule.getRulesString()); //Formata as regras que serão exibidas na tela
@@ -529,57 +530,23 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         selectedRuleIndex = index;
         lineRules.clear();
 
-        String rule = rulesModule.getRules().get(index).getRule();
-        rule = rule.replace(" ", "");
-        String[] aux = rule.split(":-");
+        Rule rule = rulesModule.getRules().get(index);
 
-        //lê o cabeçalho da regra
-        comboOutput.setSelectedItem(rule.substring(rule.indexOf("(") + 1, rule.indexOf(")")).toLowerCase());
-        nameRule.setText(aux[0].substring(0, aux[0].indexOf("(")));
+        comboOutput.setSelectedItem(rule.getOutput());
+        nameRule.setText(rule.getName());
 
         //lê cada condição
-        for (String s : aux[1].split(",")) {
-            LineRule condition = new LineRule();
-
-            String change;
-            if (s.contains("\\=")) {
-                change = "\\=";
-                condition.getComboOperator().setSelectedIndex(4);
-            } else if (s.contains("<")) {
-                change = "<";
-                condition.getComboOperator().setSelectedIndex(2);
-            } else if (s.contains(">")) {
-                change = ">";
-                condition.getComboOperator().setSelectedIndex(1);
-            } else if (s.contains("==")) {
-                change = "==";
-                condition.getComboOperator().setSelectedIndex(3);
-            } else {
-                continue;
-            }
-
-            String[] terms = s.split(change);
-
-            if (terms[0].contains("Before")) {
-                String term1 = terms[0].substring(0, terms[0].indexOf("Before")).toLowerCase() + " - v. Before";
-                condition.getComboTerm1().setSelectedItem(term1);
-            } else {
-                String term1 = terms[0].substring(0, terms[0].indexOf("After")).toLowerCase() + " - v. After";
-                condition.getComboTerm1().setSelectedItem(term1);
-            }
-
-            if (terms[1].contains("Before")) {
-                String term2 = terms[1].substring(0, terms[1].indexOf("Before")).toLowerCase() + " - v. Before";
-                condition.getComboTerm2().setSelectedItem(term2);
-            } else {
-                String term2 = terms[1].substring(0, terms[1].indexOf("After")).toLowerCase() + " - v. After";
-                condition.getComboTerm2().setSelectedItem(term2);
-            }
-
-            lineRules.add(condition);
+        for(Condition condition: rule.getConditions()){
+            LineRule lineRule = new LineRule();
+            lineRule.getComboTerm1().setSelectedItem(condition.getFirstTerm());
+            lineRule.getComboOperator().setSelectedItem(condition.getOperator());
+            lineRule.getComboTerm2().setSelectedItem(condition.getSecondTerm());
+            
+            lineRules.add(lineRule);
             LineRule.setLinerules(lineRules);
             pnlRules.revalidate();
         }
+        
     }
 
     /**

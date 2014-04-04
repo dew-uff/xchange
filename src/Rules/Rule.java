@@ -8,28 +8,46 @@ import java.util.List;
  */
 public class Rule {
 
-    private String rule;
+    private String name;
+    private String output;
     private List<Condition> conditions;
+    private String rule;
 
     /**
      * Construtor da classe.
      *
-     * @param rule
+     * @param name
+     * @param output
      * @param conditions
+     * @param rule
      */
-    public Rule(String rule, List<Condition> conditions) {
-        this.rule = rule;
+    public Rule(String name, String output, List<Condition> conditions, String rule) {
+        this.name = name;
+        this.output = output;
         this.conditions = conditions;
+        this.rule = rule;
+    }
+        
+    /**
+     * Função que retorna o nome da regra.
+     *
+     * @return Nome da regra.
+     */
+    public String getName() {
+        return this.name;
+    }
+    
+        
+    /**
+     * Função que retorna o a saída da regra.
+     *
+     * @return Saída da regra.
+     */
+    public String getOutput() {
+        return this.output;
     }
 
-    /**
-     * Responsável por retornar uma determinada regra.
-     *
-     * @return rule String contendo a regra.
-     */
-    public String getRule() {
-        return this.rule;
-    }
+    
 
     /**
      * Responsável por retornar as condições de uma determinada regra.
@@ -41,14 +59,14 @@ public class Rule {
     }
 
     /**
-     * Função que retorna o nome da regra.
+     * Responsável por retornar uma determinada regra.
      *
-     * @return Nome da regra.
+     * @return rule String contendo a regra.
      */
-    public String getName() {
-        return this.rule.substring(0, this.rule.indexOf("("));
+    public String getRule() {
+        return this.rule;
     }
-
+    
     /**
      * Função que retorna um vetor com os argumentos da regra.
      *
@@ -71,7 +89,7 @@ public class Rule {
         for (int i = 0; i < argumentsList.length; i++) {//a cada posição da lista de argumentos em string, o atribui a lista de Var
             varList[i] = new Var("Xid" + argumentsList[i]);//cria um objeto var inicializado com Xid+argumento
         }
-        Struct struct = new Struct(this.getName(), varList);//cria Struct com nome da regra e lista de Var
+        Struct struct = new Struct(this.getName().replaceAll(" ", ""), varList);//cria Struct com nome da regra e lista de Var
         return struct;//retorna Struct
     }
 }
