@@ -258,8 +258,9 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         lineFiles = new ArrayList<LineFile>();
         for (int i = 0; i < documentsTab.getDocuments().getSize(); i++) {
             final LineFile lineFile = new LineFile(documentsTab.getDocuments().getDocuments().get(i));
-            if(i < 2)
+            if (i < 2) {
                 lineFile.getCheckbox().setSelected(true);
+            }
 
             lineFile.getButtonUp().addActionListener(new ActionListener() {
 
@@ -401,15 +402,17 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                     }
 
                 }
+                
+                String ruleName = nameRule.getText().toLowerCase().replaceAll(" ", "");
 
                 //Prepara as regras construídas
                 if (lineRules.get(0).getComboOperator().getSelectedItem().toString().indexOf("_") < 0) {
-                    regraConst = nameRule.getText().toLowerCase().replaceAll(" ", "") + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + baseRule + "," + comboOutput.getSelectedItem().toString() + "(" + nameFactInRule + "Before," + comboOutput.getSelectedItem().toString().toUpperCase() + ")," + regraConst + ".";
+                    regraConst =  ruleName + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + baseRule + "," + comboOutput.getSelectedItem().toString() + "(" + nameFactInRule + "Before," + comboOutput.getSelectedItem().toString().toUpperCase() + ")," + regraConst + ".";
                 } else {
-                    regraConst = nameRule.getText().toLowerCase().replaceAll(" ", "") + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + "" + regraConst + ".";
+                    regraConst = ruleName + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + "" + regraConst + ".";
                 }
 
-                Rule rule = new Rule(nameRule.getText().toLowerCase(), comboOutput.getSelectedItem().toString().toLowerCase(), conditions, regraConst);
+                Rule rule = new Rule(ruleName, comboOutput.getSelectedItem().toString().toLowerCase(), conditions, regraConst);
                 if (selectedRuleIndex == -1) {
                     rulesModule.addRule(rule);
                 } else {
@@ -534,17 +537,17 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         nameRule.setText(rule.getName());
 
         //lê cada condição
-        for(Condition condition: rule.getConditions()){
+        for (Condition condition : rule.getConditions()) {
             LineRule lineRule = new LineRule();
             lineRule.getComboTerm1().setSelectedItem(condition.getFirstTerm());
             lineRule.getComboOperator().setSelectedItem(condition.getOperator());
             lineRule.getComboTerm2().setSelectedItem(condition.getSecondTerm());
-            
+
             lineRules.add(lineRule);
             LineRule.setLinerules(lineRules);
             pnlRules.revalidate();
         }
-        
+
     }
 
     /**
@@ -1177,43 +1180,21 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             ArrayList<Rule> rules = rulesModule.getRules();
             for (int i = 0; i < rules.size(); i++) {
                 Rule rule = rules.get(i);
-                String[] aux = rule.getRule().split(":-");
 
                 //lê o cabeçalho da regra. ex: nomeRegra(SAIDA)
                 Element ruleEle = dom.createElement("rule");
-                ruleEle.setAttribute("output", rule.getRule().substring(rule.getRule().indexOf("(") + 1, rule.getRule().indexOf(")")));
+                ruleEle.setAttribute("output", rule.getOutput());
                 ruleEle.setAttribute("enabled", ((JCheckBox) ((JPanel) pResults.getComponents()[i]).getComponents()[0]).isSelected() ? "true" : "false");
-                ruleEle.setAttribute("name", aux[0].substring(0, aux[0].indexOf("(")));
+                ruleEle.setAttribute("name", rule.getName());
 
-                //lê os argumentos da regra e identifica as condições
-                for (String s : aux[1].split(",")) {
-                    String change;
-                    if (s.contains("new_element")) {
-                        Element conditionEle = dom.createElement("condition");
-                        conditionEle.setAttribute("change", "new_element");
-                        continue;
-                    } else if (s.contains("deleted_element")) {
-                        Element conditionEle = dom.createElement("condition");
-                        conditionEle.setAttribute("change", "deleted_element");
-                        continue;
-                    } else if (s.contains("\\=")) {
-                        change = "\\=";
-                    } else if (s.contains("<")) {
-                        change = "<";
-                    } else if (s.contains(">")) {
-                        change = ">";
-                    } else if (s.contains("==")) {
-                        change = "==";
-                    } else {
-                        continue;
-                    }
-
-                    s = s.replace(".", "");
-
+                for (Condition condition : rule.getConditions()) {
                     Element conditionEle = dom.createElement("condition");
-                    conditionEle.setAttribute("change", change);
-                    conditionEle.setAttribute("term1", s.substring(0, s.indexOf(change)));
-                    conditionEle.setAttribute("term2", s.substring(s.indexOf(change) + change.length(), s.length()));
+                    conditionEle.setAttribute("change", condition.getOperator());
+                    if (!condition.getOperator().equals("new_element") && !condition.getOperator().equals("deleted_element")) {
+                        conditionEle.setAttribute("term1", condition.getFirstTerm());
+                        conditionEle.setAttribute("term2", condition.getSecondTerm());
+
+                    }
 
                     ruleEle.appendChild(conditionEle);
                 }
@@ -1297,6 +1278,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                         enabledList.add(enabled.equals("true"));
 
                         NodeList conditionNodeList = ruleElement.getElementsByTagName("condition");
+                        List<Condition> conditions = new ArrayList<Condition>();
 
                         String rule = "";
                         for (int j = 0; j < conditionNodeList.getLength(); j++) {
@@ -1307,7 +1289,8 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                             String change = conditionElement.getAttribute("change");
                             String term1 = conditionElement.getAttribute("term1");
                             String term2 = conditionElement.getAttribute("term2");
-
+                            conditions.add(new Condition(term1,term2, change));
+                            
                             String aux = buildCondition(output.toLowerCase(), term1, change, term2, true);
                             if (rule.equals("")) {
                                 rule = aux;
@@ -1322,8 +1305,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                             rule = name + "(" + output + "):-" + "" + rule + ".";
                         }
 
-                        //TODO TODO TODO
-                        //rulesModule.addRule(rule);
+                        rulesModule.addRule(new Rule(name, output, conditions, rule));
                         results = formatSetTextPane(rulesModule.getRulesString()); //Formata as regras que serão exibidas na tela
                         System.out.println(results);
 

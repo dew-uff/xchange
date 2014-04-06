@@ -22,6 +22,12 @@ public class Condition {
         this.secondTerm = lineRule.getComboTerm2().getSelectedItem().toString();
         this.operator = lineRule.getComboOperator().getSelectedItem().toString();
     }
+    
+    public Condition(String firstTerm, String secondTerm, String operator) {
+        this.firstTerm = firstTerm;
+        this.secondTerm = secondTerm;
+        this.operator = operator;
+    }
 
     public String getFirstTerm() {
         return firstTerm;
