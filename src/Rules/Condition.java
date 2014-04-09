@@ -5,7 +5,7 @@
  */
 package Rules;
 
-import GUI.Rules.LineRule;
+import GUI.Rules.LineCondition;
 
 /**
  *
@@ -17,7 +17,7 @@ public class Condition {
     private String secondTerm;
     private String operator;
 
-    public Condition(LineRule lineRule) {
+    public Condition(LineCondition lineRule) {
         this.firstTerm = lineRule.getComboTerm1().getSelectedItem().toString();
         this.secondTerm = lineRule.getComboTerm2().getSelectedItem().toString();
         this.operator = lineRule.getComboOperator().getSelectedItem().toString();

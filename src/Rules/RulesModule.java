@@ -47,6 +47,11 @@ public class RulesModule {
             }
         }
     }
+    
+    public void removeRule(int index){
+        selectRules.remove(rules.get(index));
+        rules.remove(index);        
+    }
 
     /**
      * Transforma a lista contendo todas as regras em uma string com cada regra

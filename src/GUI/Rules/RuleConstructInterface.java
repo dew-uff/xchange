@@ -10,13 +10,10 @@ import GUI.FileManager.LastpathManager;
 import GUI.FileManager.XMLFileFilter;
 import GUI.MainInterface.DocumentsTab;
 import GUI.MainInterface.InferenceFileChooser;
-import GUI.MainInterface.LineFile;
 import Rules.Condition;
 import Rules.Rule;
-import static java.awt.Component.LEFT_ALIGNMENT;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -32,7 +29,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import javax.swing.BoxLayout;
@@ -71,7 +67,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     private DocumentsTab documentsTab;
     private RulesModule rulesModule;
     private JButton btnAtributs;
-    private static JPanel pnlRules; //onde ficam os campos da regra em construção
+    private static JPanel pnlConditions; //onde ficam os campos da regra em construção
     private String[] factsPart;
     private String[] namesFacts;
     public String keyChoice; //chave de contexto
@@ -86,7 +82,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     private JLabel labelRuleName, labelOutput;
     private boolean terminalOpen;
     //Lista que contém todas as linhas de regra
-    ArrayList<LineRule> lineRules;
+    ArrayList<LineCondition> lineConditions;
     //Elementos de tela da mineração de regras
     private static JPanel pnlGeneratedRules; //exibe as regras geradas a partir da mineração
     private ArrayList<JCheckBox> checkTagsArray = new ArrayList<JCheckBox>();
@@ -101,6 +97,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     private ArrayList<LineFile> lineFiles;
     private JPanel pnlFiles;
     private final static int MOVE_UP = 1, MOVE_DOWN = -1; //utilizadas para controlar a lista de documentos
+    private static boolean succeeded;
 
     /**
      * Exibe a janela para construção das regras.
@@ -112,15 +109,16 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
      * @param documentsTab
      */
     public RuleConstructInterface(Manager manager, boolean isSimilarity, InferenceFileChooser inferenceFileChooser, DocumentsTab documentsTab) {
+        succeeded = false;
         this.documentsTab = documentsTab;
         this.inferenceFileChooser = inferenceFileChooser;
         setModal(true);
         setTitle("Key Attribute");
         this.rulesModule = manager.getRulesModule();
-        lineRules = new ArrayList<LineRule>();
-        LineRule.setLinerules(lineRules);
+        lineConditions = new ArrayList<LineCondition>();
+        LineCondition.setLineConditions(lineConditions);
         terminalOpen = false;
-        pnlRules = new JPanel(new FlowLayout());
+        pnlConditions = new JPanel(new FlowLayout());
         lblChoiceKey = new JLabel("Select the Key Attribute:");
         cmbKey = new JComboBox<String>();
 
@@ -165,7 +163,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             });
         }
 
-        LineRule.setNamesFacts(namesFacts);
+        LineCondition.setNamesFacts(namesFacts);
         factBase1 = factBase1v1 + "," + factBase1v2;
 
         constructRules();
@@ -276,7 +274,6 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             });
 
             pnlFiles.add(lineFile);
-            LineFile.setPnlFiles(pnlFiles);
             lineFiles.add(lineFile);
         }
 
@@ -379,11 +376,11 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             comboOutput.requestFocus();
         } else {
             List<Condition> conditions = new ArrayList<Condition>();
-            lineRules = LineRule.getLinerules();
-            LineRule.setLinerules(lineRules);
+            lineConditions = LineCondition.getLineConditions();
+            LineCondition.setLineConditions(lineConditions);
             int validRows = 0;
-            for (LineRule linerule : lineRules) {
-                Condition condition = new Condition(linerule);
+            for (LineCondition lineCondition : lineConditions) {
+                Condition condition = new Condition(lineCondition);
                 if ((!condition.getFirstTerm().equals("") && !condition.getSecondTerm().equals("") && !condition.getOperator().equals("")) || (condition.getOperator().equals("new_element") || (condition.getOperator().equals("deleted_element")))) {
                     conditions.add(condition);
                     validRows += 1;
@@ -402,12 +399,12 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                     }
 
                 }
-                
+
                 String ruleName = nameRule.getText().toLowerCase().replaceAll(" ", "");
 
                 //Prepara as regras construídas
-                if (lineRules.get(0).getComboOperator().getSelectedItem().toString().indexOf("_") < 0) {
-                    regraConst =  ruleName + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + baseRule + "," + comboOutput.getSelectedItem().toString() + "(" + nameFactInRule + "Before," + comboOutput.getSelectedItem().toString().toUpperCase() + ")," + regraConst + ".";
+                if (lineConditions.get(0).getComboOperator().getSelectedItem().toString().indexOf("_") < 0) {
+                    regraConst = ruleName + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + baseRule + "," + comboOutput.getSelectedItem().toString() + "(" + nameFactInRule + "Before," + comboOutput.getSelectedItem().toString().toUpperCase() + ")," + regraConst + ".";
                 } else {
                     regraConst = ruleName + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + "" + regraConst + ".";
                 }
@@ -430,13 +427,13 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                     nameRule.setText("");
 
                     btnSaveRule.setEnabled(true);
-                    pnlRules.removeAll();
-                    lineRules.clear();
-                    LineRule aux = new LineRule();
-                    lineRules.add(aux);
-                    pnlRules.add(aux);
+                    pnlConditions.removeAll();
+                    lineConditions.clear();
+                    LineCondition aux = new LineCondition();
+                    lineConditions.add(aux);
+                    pnlConditions.add(aux);
                     aux.getComboTerm1().requestFocus();
-                    pnlRules.revalidate();
+                    pnlConditions.revalidate();
 
                 } else {
                     JOptionPane.showMessageDialog(this, "It's necessary to difine the rules to "
@@ -462,6 +459,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         if (cont > 0) {
             this.rulesModule.addSelectRules(selectedRules); //Adiciona as regras selecionadas em sua respectiva variável
             this.inferenceFileChooser.setSelectedRules(selectedRules);//Envia ao InferenceFileChooser a lista de regras selecionadas
+            succeeded = true;
             dispose();
         } else {
             JOptionPane.showMessageDialog(this, "It's necessary to define the rules to "
@@ -477,44 +475,38 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
         String[] rulesHeads = rulesModule.getNameAndArgumentsRules(partRules);
         for (int i = 0; i < rulesHeads.length; i++) { //Cria os campos do CheckBox de acordo com as regras inseridas pelo usuário
-            JPanel pnlRule = new JPanel();
+            final LineRule pnlRule = new LineRule(rulesHeads[i], false);
 
-            JCheckBox chkItem = new JCheckBox();
-            chkItem.setName(rulesHeads[i]);
+            final JCheckBox chk = pnlRule.getCheckbox();
+            chk.setName(rulesHeads[i]);
             if (enabledList != null) {
-                chkItem.setSelected(enabledList.get(i));
+                chk.setSelected(enabledList.get(i));
             }
 
-            GridBagConstraints constraints = new GridBagConstraints();
-
-            LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1);
-            constraints.fill = GridBagConstraints.HORIZONTAL;
-            constraints.anchor = GridBagConstraints.NORTHWEST;
-            pnlRule.add(chkItem, constraints);
-
-            JLabel rule = new JLabel(rulesHeads[i]);
-
-            LayoutConstraints.setConstraints(constraints, 1, 0, 1, 1, 1000, 1);
-            constraints.fill = GridBagConstraints.HORIZONTAL;
-            constraints.anchor = GridBagConstraints.NORTHWEST;
-            pnlRule.add(rule, constraints);
-
-            if (enabledList != null) {
-                chkItem.setSelected(enabledList.get(i));
-            }
             final int index = i;
-            rule.addMouseListener(new MouseAdapter() {
-
+            pnlRule.getLabel().addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     editRule(index);
                 }
             });
 
-            constraints = new GridBagConstraints();
-            LayoutConstraints.setConstraints(constraints, 0, i, 1, 1, 1, 1);
-            constraints.fill = GridBagConstraints.HORIZONTAL;
-            constraints.anchor = GridBagConstraints.NORTHWEST;
+            pnlRule.getButtonRemove().addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    pResults.remove(pnlRule);
+                    pResults.updateUI();
+                    rulesModule.removeRule(index);
+                    System.out.println(index + " " + selectedRuleIndex);
+
+                    if (index == selectedRuleIndex) {
+                        nameRule.setText("");
+                        comboOutput.setSelectedIndex(0);
+                        pnlConditions.removeAll();
+                        pnlConditions.updateUI();
+                    }
+                }
+            });
+
             pResults.add(pnlRule);
         }
 
@@ -529,7 +521,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
      */
     private void editRule(int index) {
         selectedRuleIndex = index;
-        lineRules.clear();
+        lineConditions.clear();
 
         Rule rule = rulesModule.getRules().get(index);
 
@@ -538,16 +530,20 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
         //lê cada condição
         for (Condition condition : rule.getConditions()) {
-            LineRule lineRule = new LineRule();
-            lineRule.getComboTerm1().setSelectedItem(condition.getFirstTerm());
-            lineRule.getComboOperator().setSelectedItem(condition.getOperator());
-            lineRule.getComboTerm2().setSelectedItem(condition.getSecondTerm());
+            LineCondition lineCondition = new LineCondition();
+            lineCondition.getComboTerm1().setSelectedItem(condition.getFirstTerm());
+            lineCondition.getComboOperator().setSelectedItem(condition.getOperator());
+            lineCondition.getComboTerm2().setSelectedItem(condition.getSecondTerm());
 
-            lineRules.add(lineRule);
-            LineRule.setLinerules(lineRules);
-            pnlRules.revalidate();
+            lineConditions.add(lineCondition);
+            LineCondition.setLineConditions(lineConditions);
+            pnlConditions.revalidate();
         }
 
+    }
+
+    public static boolean succeeded() {
+        return succeeded;
     }
 
     /**
@@ -720,9 +716,9 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         GridBagLayout gridBagMid = new GridBagLayout();
         pnlConstructRule.setLayout(gridBagMid);
 
-        pnlRules = new JPanel();
+        pnlConditions = new JPanel();
 
-        JScrollPane jsPane = new JScrollPane(pnlRules);
+        JScrollPane jsPane = new JScrollPane(pnlConditions);
         jsPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         jsPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         jsPane.setBorder(null);
@@ -748,11 +744,11 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         constraints.fill = GridBagConstraints.NONE;
         buttonsPanel.add(btnSaveRule, constraints);
 
-        LineRule firstLineRule = new LineRule();
-        pnlRules.setLayout(new BoxLayout(pnlRules, BoxLayout.PAGE_AXIS));
-        pnlRules.add(firstLineRule);
-        LineRule.setPnlRules(pnlRules);
-        lineRules.add(firstLineRule);
+        LineCondition firstConditionRule = new LineCondition();
+        pnlConditions.setLayout(new BoxLayout(pnlConditions, BoxLayout.PAGE_AXIS));
+        pnlConditions.add(firstConditionRule);
+        LineCondition.setPnlConditions(pnlConditions);
+        lineConditions.add(firstConditionRule);
 
         //declara objetos de controle do layout do painel da esquerda (regras de associação)
         GridBagLayout gridBagLeft = new GridBagLayout();
@@ -1044,7 +1040,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     /**
      * Constroi o painel de regras mineradas
      */
-    private void showMinedRules(List<Set> listRules) {
+    private void showMinedRules(List<Set> listTags) {
         pnlMining.removeAll();
 
         pnlGeneratedRules = new JPanel();
@@ -1061,77 +1057,59 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
         pnlGeneratedRules.setLayout(new BoxLayout(pnlGeneratedRules, BoxLayout.PAGE_AXIS));
         pnlGeneratedRules.setAutoscrolls(true);
-        pnlGeneratedRules.removeAll();
 
-        int i = 1;
+        for (final Set<String> tags : listTags) {
+            final LineRule pnlMinedRule = new LineRule(tags.toString().replace("[", "").replace("]", ""), true);
 
-        for (final Set<String> rules : listRules) {
-            JPanel painel = new JPanel();
-            FlowLayout flow = new FlowLayout();
-            flow.setAlignment(FlowLayout.LEFT);
-            painel.setLayout(flow);
-            painel.setAlignmentX(LEFT_ALIGNMENT);
+            pnlMinedRule.getLabel().addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    pnlConditions.removeAll();
+                    pnlConditions.updateUI();
+                    lineConditions.removeAll(lineConditions);
+                    pnlConditions.revalidate();
+                    pnlConditions.updateUI();
 
-            JLabel label = new JLabel("label" + i);
-            label.setText(rules.toString().replace("[", "").replace("]", ""));
-
-            final JButton button = new JButton("+");
-            button.setSize(15, 15);
-            button.setMaximumSize(new Dimension(15, 15));
-            button.setMinimumSize(new Dimension(15, 15));
-            button.setPreferredSize(new Dimension(15, 15));
-            button.setFont(new Font("verdana", 1, 8));
-            button.setHorizontalTextPosition(SwingConstants.LEFT);
-            button.setVerticalTextPosition(SwingConstants.TOP);
-            button.setMargin(new Insets(1, 1, 1, 1));
-            button.setName("button" + 1);
-
-            button.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    pnlRules.removeAll();
-                    pnlRules.updateUI();
-                    lineRules.removeAll(lineRules);
-                    pnlRules.revalidate();
-                    pnlRules.updateUI();
-
-                    for (String rule : rules) {
-                        LineRule aux = new LineRule();
-                        pnlRules.add(aux);
+                    for (String tag : tags) {
+                        LineCondition aux = new LineCondition();
+                        pnlConditions.add(aux);
 
                         aux.getComboOperator().setSelectedItem("!=");
                         aux.getComboOperator().setEnabled(false);
 
-                        aux.getComboTerm1().setSelectedItem(rule + " - v. Before");
+                        aux.getComboTerm1().setSelectedItem(tag + " - v. Before");
                         aux.getComboTerm1().setEnabled(false);
 
-                        aux.getComboTerm2().setSelectedItem(rule + " - v. After");
+                        aux.getComboTerm2().setSelectedItem(tag + " - v. After");
                         aux.getComboTerm2().setEnabled(false);
 
                         aux.getBtnAddCondition().setEnabled(false);
                         aux.getComboTerm1().requestFocus();
 
-                        lineRules.add(aux);
-                        LineRule.setLinerules(lineRules);
-                        pnlRules.revalidate();
+                        lineConditions.add(aux);
+                        LineCondition.setLineConditions(lineConditions);
+                        pnlConditions.revalidate();
                     }
 
-                    LineRule aux = new LineRule();
-                    lineRules.add(aux);
-                    pnlRules.add(aux);
+                    LineCondition aux = new LineCondition();
+                    lineConditions.add(aux);
+                    pnlConditions.add(aux);
                     aux.getComboTerm1().requestFocus();
-                    LineRule.setPnlRules(pnlRules);
-                    pnlRules.revalidate();
+                    LineCondition.setPnlConditions(pnlConditions);
+                    pnlConditions.revalidate();
                 }
             });
 
-            painel.add(button);
-            painel.add(label);
+            pnlMinedRule.getButtonRemove().addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    pnlGeneratedRules.remove(pnlMinedRule);
+                    pnlGeneratedRules.updateUI();
+                }
+            });
 
-            pnlGeneratedRules.add(painel);
+            pnlGeneratedRules.add(pnlMinedRule);
             pnlGeneratedRules.updateUI();
-            i++;
         }
-        pnlGeneratedRules.setAlignmentX(LEFT_ALIGNMENT);
 
         JPanel btnMineRulesPanel = new JPanel();
 
@@ -1141,7 +1119,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         constraints.anchor = GridBagConstraints.NORTHWEST;
         pnlMining.add(btnMineRulesPanel, constraints);
 
-        JButton btnMineRules = new JButton("Mine Rules");
+        btnMineRules = new JButton("Mine Rules");
         btnMineRules.setVisible(true);
         btnMineRules.setEnabled(false);
         btnMineRules.setMinimumSize(new Dimension(350, 25));
@@ -1289,8 +1267,8 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                             String change = conditionElement.getAttribute("change");
                             String term1 = conditionElement.getAttribute("term1");
                             String term2 = conditionElement.getAttribute("term2");
-                            conditions.add(new Condition(term1,term2, change));
-                            
+                            conditions.add(new Condition(term1, term2, change));
+
                             String aux = buildCondition(output.toLowerCase(), term1, change, term2, true);
                             if (rule.equals("")) {
                                 rule = aux;
