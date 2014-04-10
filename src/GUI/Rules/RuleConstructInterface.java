@@ -82,7 +82,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     private JLabel labelRuleName, labelOutput;
     private boolean terminalOpen;
     //Lista que contém todas as linhas de regra
-    ArrayList<LineCondition> lineConditions;
+    private ArrayList<LineCondition> lineConditions;
     //Elementos de tela da mineração de regras
     private static JPanel pnlGeneratedRules; //exibe as regras geradas a partir da mineração
     private ArrayList<JCheckBox> checkTagsArray = new ArrayList<JCheckBox>();
@@ -97,7 +97,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     private ArrayList<LineFile> lineFiles;
     private JPanel pnlFiles;
     private final static int MOVE_UP = 1, MOVE_DOWN = -1; //utilizadas para controlar a lista de documentos
-    private static boolean succeeded;
+    public static boolean succeeded;
 
     /**
      * Exibe a janela para construção das regras.
@@ -114,7 +114,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         this.inferenceFileChooser = inferenceFileChooser;
         setModal(true);
         setTitle("Key Attribute");
-        this.rulesModule = manager.getRulesModule();
+        rulesModule = manager.getRulesModule();
         lineConditions = new ArrayList<LineCondition>();
         LineCondition.setLineConditions(lineConditions);
         terminalOpen = false;
@@ -151,7 +151,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             keyChoice = listNameFacts.get(0);
 
             cmbKey = new JComboBox(listNameFacts.toArray());
-            cmbKey.setSelectedIndex(0);
+            cmbKey.setSelectedIndex(-1);
             cmbKey.addItemListener(new ItemListener() {
                 @Override
                 public void itemStateChanged(ItemEvent e) {
@@ -235,7 +235,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         pnlMining.removeAll();
 
         //declara objetos de controle do layout
-        GridBagLayout gridBag = new GridBagLayout();
+        gridBag = new GridBagLayout();
         GridBagConstraints constraints = new GridBagConstraints();
         pnlMining.setLayout(gridBag);
 
@@ -276,6 +276,10 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             pnlFiles.add(lineFile);
             lineFiles.add(lineFile);
         }
+        
+        //Desativa alguns botões de ordenação nos primeiro e último arquivos
+        lineFiles.get(0).getButtonUp().setEnabled(false);
+        lineFiles.get(lineFiles.size() - 1).getButtonDown().setEnabled((false));
 
         LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1000);
         constraints.fill = GridBagConstraints.BOTH;
@@ -319,10 +323,18 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
         switch (action) {
             case MOVE_UP:
+                //Verifica se vai para a primeira posição
+                caller.getButtonUp().setEnabled(callerIndex - 1 > 0);
+                caller.getButtonDown().setEnabled(true);
+                
                 //Troca posições na lista de LineFiles
                 LineFile before = lineFiles.get(callerIndex - 1);
                 lineFiles.set(callerIndex - 1, caller);
                 lineFiles.set(callerIndex, before);
+                
+                //Verifica se o anterior está indo para a primeira posição
+                before.getButtonDown().setEnabled(callerIndex + 1 < lineFiles.size() - 1);
+                before.getButtonUp().setEnabled(true);
 
                 //Troca posição dos Documents
                 Document beforeDoc = documentsTab.getDocuments().getDocuments().get(callerIndex - 1);
@@ -330,10 +342,18 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 documentsTab.getDocuments().getDocuments().set(callerIndex, beforeDoc);
                 break;
             case MOVE_DOWN:
+                //Verifica se vai para a última posição
+                caller.getButtonDown().setEnabled(callerIndex + 1 < lineFiles.size() - 1);
+                caller.getButtonUp().setEnabled(true);
+                
                 //Troca posições na lista de LineFiles
                 LineFile after = lineFiles.get(callerIndex + 1);
                 lineFiles.set(callerIndex + 1, caller);
                 lineFiles.set(callerIndex, after);
+                
+                //Verifica se vai para a primeira posição
+                after.getButtonUp().setEnabled(callerIndex - 1 > 0);
+                after.getButtonDown().setEnabled(true);
 
                 //Troca posição dos Documents                
                 Document afterDoc = documentsTab.getDocuments().getDocuments().get(callerIndex + 1);
@@ -542,16 +562,12 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
     }
 
-    public static boolean succeeded() {
-        return succeeded;
-    }
-
     /**
      * Exibe a interface de construção de regras.
      */
     private void buildInterface() {
         JPanel allPane = new JPanel();
-        this.setMinimumSize(new Dimension(1000, 500));
+        this.setMinimumSize(new Dimension(1200, 500));
         this.setSize(this.getMinimumSize());
 
         this.setContentPane(allPane);
