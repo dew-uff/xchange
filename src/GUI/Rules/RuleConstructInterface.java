@@ -24,13 +24,17 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import static java.awt.image.ImageObserver.WIDTH;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -195,6 +199,8 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             mineRules();
         } else if (e.getSource() == btnFilesList) {
             showFilesList();
+        } else if (e.getSource() == btnExport){
+            exportProlog();
         }
     }
 
@@ -510,7 +516,6 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 }
             } else {
                 for (Rule selectedRule : selectedRules) {
-                    System.out.println(selectedRule.getName() + "/" + rulesHeads[i]);
                     if (selectedRule.getName().equals(rulesHeads[i].substring(0, rulesHeads[i].indexOf("(")))) {
                         chk.setSelected(true);
                         break;
@@ -531,7 +536,6 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                     pResults.remove(pnlRule);
                     pResults.updateUI();
                     rulesModule.removeRule(index);
-                    System.out.println(index + " " + selectedRuleIndex);
 
                     if (index == selectedRuleIndex) {
                         nameRule.setText("");
@@ -960,7 +964,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             String[] term2part;
 
             term1part = term1.split("\\-");
-                //Indice 0: nome do fato que compõe o termo
+            //Indice 0: nome do fato que compõe o termo
             //Indice 1: v. Before OU v. After
             term2part = term2.split("\\-");
 
@@ -1288,9 +1292,10 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                             String term1 = conditionElement.getAttribute("term1");
                             String term2 = conditionElement.getAttribute("term2");
                             conditions.add(new Condition(term1, term2, change));
-                            
-                            if(change.equals("!="))
+
+                            if (change.equals("!=")) {
                                 change = "\\=";
+                            }
 
                             String aux = buildCondition(output.toLowerCase(), term1, change, term2, true);
                             if (rule.equals("")) {
@@ -1308,7 +1313,6 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
                         rulesModule.addRule(new Rule(name, output, conditions, rule));
                         results = formatSetTextPane(rulesModule.getRulesString()); //Formata as regras que serão exibidas na tela
-                        System.out.println(results);
 
                     }
 
@@ -1330,6 +1334,37 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         } else {
             throw new NoSelectedFileException(); //caso não tenha sido selecionado nenhum arquivo
         }
+    }
+
+    /**Exporta as regras construídas para Prolog 
+     */
+    public void exportProlog() {
+        //Solicita o endereço em que o arquivo deverá ser salvo
+        JFileChooser chooser = new JFileChooser(LastpathManager.getlastpath("txt") + ".TXT");//caso exista um histórico com o ultimo caminho acessado, cria um JFileChooser com este caminho
+        chooser.setFileFilter(new XMLFileFilter());
+        //abre o salvamento do arquivo de projetos
+        String pathWay;
+        int openedFile = chooser.showSaveDialog(null); // showSaveDialog retorna um inteiro , e ele ira determinar que o chooser será para salvar.
+        if (openedFile == JFileChooser.APPROVE_OPTION) {
+            pathWay = chooser.getSelectedFile().getAbsolutePath();
+            if (!pathWay.endsWith(".txt")) {
+                pathWay += ".txt";
+            }
+            LastpathManager.savelastpath(pathWay, "txt");
+
+            try {
+                FileWriter fw = new FileWriter(new File(pathWay).getAbsoluteFile());
+                BufferedWriter bw = new BufferedWriter(fw);
+                bw.write(results);
+                bw.close();
+            } catch (IOException ex) {
+                Logger.getLogger(RuleConstructInterface.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            System.out.println("Done");
+
+        }
+
     }
 
 }
