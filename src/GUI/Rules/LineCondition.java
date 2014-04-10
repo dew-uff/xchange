@@ -32,7 +32,7 @@ public class LineCondition extends JPanel {
 
     LineCondition() {
         super(new FlowLayout());
-        this.setMaximumSize(new Dimension(730, 32));
+        this.setMaximumSize(new Dimension(770, 32));
         this.comboTerm1 = new JComboBox();
         this.comboTerm2 = new JComboBox();
         this.comboOperator = new JComboBox();
