@@ -95,6 +95,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     private InferenceFileChooser inferenceFileChooser;
     private int selectedRuleIndex; //usado para identificar qual regra estásendo construída/editada (-1 para nova regra)
     private ArrayList<LineFile> lineFiles;
+    private List<LineRule> buildedRules;
     private JPanel pnlFiles;
     private final static int MOVE_UP = 1, MOVE_DOWN = -1; //utilizadas para controlar a lista de documentos
     public static boolean succeeded;
@@ -276,7 +277,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             pnlFiles.add(lineFile);
             lineFiles.add(lineFile);
         }
-        
+
         //Desativa alguns botões de ordenação nos primeiro e último arquivos
         lineFiles.get(0).getButtonUp().setEnabled(false);
         lineFiles.get(lineFiles.size() - 1).getButtonDown().setEnabled((false));
@@ -326,12 +327,12 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 //Verifica se vai para a primeira posição
                 caller.getButtonUp().setEnabled(callerIndex - 1 > 0);
                 caller.getButtonDown().setEnabled(true);
-                
+
                 //Troca posições na lista de LineFiles
                 LineFile before = lineFiles.get(callerIndex - 1);
                 lineFiles.set(callerIndex - 1, caller);
                 lineFiles.set(callerIndex, before);
-                
+
                 //Verifica se o anterior está indo para a primeira posição
                 before.getButtonDown().setEnabled(callerIndex + 1 < lineFiles.size() - 1);
                 before.getButtonUp().setEnabled(true);
@@ -345,12 +346,12 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 //Verifica se vai para a última posição
                 caller.getButtonDown().setEnabled(callerIndex + 1 < lineFiles.size() - 1);
                 caller.getButtonUp().setEnabled(true);
-                
+
                 //Troca posições na lista de LineFiles
                 LineFile after = lineFiles.get(callerIndex + 1);
                 lineFiles.set(callerIndex + 1, caller);
                 lineFiles.set(callerIndex, after);
-                
+
                 //Verifica se vai para a primeira posição
                 after.getButtonUp().setEnabled(callerIndex - 1 > 0);
                 after.getButtonDown().setEnabled(true);
@@ -492,15 +493,29 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
      */
     private void buildRulesPanel(String[] partRules, List<Boolean> enabledList) {
         pResults.removeAll();
+        List<LineRule> newBuiledRules = new ArrayList<LineRule>();
+        List<Rule> selectedRules = rulesModule.getSelectRules();
 
         String[] rulesHeads = rulesModule.getNameAndArgumentsRules(partRules);
         for (int i = 0; i < rulesHeads.length; i++) { //Cria os campos do CheckBox de acordo com as regras inseridas pelo usuário
             final LineRule pnlRule = new LineRule(rulesHeads[i], false);
 
-            final JCheckBox chk = pnlRule.getCheckbox();
+            JCheckBox chk = pnlRule.getCheckbox();
             chk.setName(rulesHeads[i]);
             if (enabledList != null) {
                 chk.setSelected(enabledList.get(i));
+            } else if (buildedRules != null) {
+                if (i < buildedRules.size()) {
+                    chk.setSelected(buildedRules.get(i).getCheckbox().isSelected());
+                }
+            } else {
+                for (Rule selectedRule : selectedRules) {
+                    System.out.println(selectedRule.getName() + "/" + rulesHeads[i]);
+                    if (selectedRule.getName().equals(rulesHeads[i].substring(0, rulesHeads[i].indexOf("(")))) {
+                        chk.setSelected(true);
+                        break;
+                    }
+                }
             }
 
             final int index = i;
@@ -528,8 +543,10 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             });
 
             pResults.add(pnlRule);
+            newBuiledRules.add(pnlRule);
         }
 
+        buildedRules = newBuiledRules;
         btnFinishBuilder.setEnabled(pResults.getComponentCount() > 0);
         pResults.revalidate();
     }
@@ -878,6 +895,11 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
         results = formatSetTextPane(rulesModule.getRulesString()); //Formata as regras que serão exibidas na tela
 
+        if (!results.isEmpty()) {
+            String[] partRules = rulesModule.partRules(results); //Pega o cabeçalho das regras (ex: salary(NAME))
+            buildRulesPanel(partRules, null);
+        }
+
         setVisible(true);
         pResults.setVisible(true);
     }
@@ -937,49 +959,31 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             String[] term1part;
             String[] term2part;
 
-            if (openningProject) {
-                if (term1.contains("Before")) {
-                    term1part = new String[]{term1.substring(0, term1.indexOf("Before")).toLowerCase(), "Before"};
-                    arg1term1 = nameFactInRule + "Before";
-                } else {
-                    term1part = new String[]{term1.substring(0, term1.indexOf("After")).toLowerCase(), "After"};
-                    arg1term1 = nameFactInRule + "After";
-                }
-
-                if (term2.contains("Before")) {
-                    term2part = new String[]{term2.substring(0, term2.indexOf("Before")).toLowerCase(), "Before"};
-                    arg1term2 = nameFactInRule + "Before";
-                } else {
-                    term2part = new String[]{term2.substring(0, term2.indexOf("After")).toLowerCase(), "After"};
-                    arg1term2 = nameFactInRule + "After";
-                }
-            } else {
-                term1part = term1.split("\\-");
+            term1part = term1.split("\\-");
                 //Indice 0: nome do fato que compõe o termo
-                //Indice 1: v. Before OU v. After
-                term2part = term2.split("\\-");
+            //Indice 1: v. Before OU v. After
+            term2part = term2.split("\\-");
 
-                //pegando o "Before" ou "After"
-                term1part[1] = term1part[1].substring(term1part[1].lastIndexOf(".") + 2);
-                term2part[1] = term2part[1].substring(term2part[1].lastIndexOf(".") + 2);
+            //pegando o "Before" ou "After"
+            term1part[1] = term1part[1].substring(term1part[1].lastIndexOf(".") + 2);
+            term2part[1] = term2part[1].substring(term2part[1].lastIndexOf(".") + 2);
 
-                if (term1part[1].equals("Before")) {
-                    arg1term1 = nameFactInRule + "Before";
-                } else {
-                    arg1term1 = nameFactInRule + "After";
-                }
-
-                if (term2part[1].equals("Before")) {
-                    arg1term2 = nameFactInRule + "Before";
-                } else {
-                    arg1term2 = nameFactInRule + "After";
-                }
-
-                term1part[0] = term1part[0].replaceAll(" ", "");
-                term1part[1] = term1part[1].replaceAll(" ", "");
-                term2part[0] = term2part[0].replaceAll(" ", "");
-                term2part[1] = term2part[1].replaceAll(" ", "");
+            if (term1part[1].equals("Before")) {
+                arg1term1 = nameFactInRule + "Before";
+            } else {
+                arg1term1 = nameFactInRule + "After";
             }
+
+            if (term2part[1].equals("Before")) {
+                arg1term2 = nameFactInRule + "Before";
+            } else {
+                arg1term2 = nameFactInRule + "After";
+            }
+
+            term1part[0] = term1part[0].replaceAll(" ", "");
+            term1part[1] = term1part[1].replaceAll(" ", "");
+            term2part[0] = term2part[0].replaceAll(" ", "");
+            term2part[1] = term2part[1].replaceAll(" ", "");
 
             term1After = term1part[0] + "(" + arg1term1 + "," + term1part[0].toUpperCase() + term1part[1] + ")";
             term2After = term2part[0] + "(" + arg1term2 + "," + term2part[0].toUpperCase() + term2part[1] + ")";
@@ -998,7 +1002,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             } else if (operator.equals("=")) {
                 ruleAux = term1part[0].toUpperCase() + term1part[1] + "==" + term2part[0].toUpperCase() + term2part[1];
 
-            } else if ((openningProject && operator.equals("\\=")) || (!openningProject && operator.equals("!="))) {
+            } else if (operator.equals("\\=") || operator.equals("!=")) {
                 ruleAux = term1part[0].toUpperCase() + term1part[1] + "\\=" + term2part[0].toUpperCase() + term2part[1];
 
             }
@@ -1284,6 +1288,9 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                             String term1 = conditionElement.getAttribute("term1");
                             String term2 = conditionElement.getAttribute("term2");
                             conditions.add(new Condition(term1, term2, change));
+                            
+                            if(change.equals("!="))
+                                change = "\\=";
 
                             String aux = buildCondition(output.toLowerCase(), term1, change, term2, true);
                             if (rule.equals("")) {
