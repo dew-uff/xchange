@@ -1,5 +1,6 @@
 package GUI.Rules;
 
+import GUI.FileManager.LineFile;
 import GUI.Layout.LayoutConstraints;
 import Manager.Manager;
 import Rules.RulesModule;
@@ -7,11 +8,13 @@ import AutomaticRules.WekaParser;
 import Documents.Document;
 import Exception.NoSelectedFileException;
 import GUI.FileManager.LastpathManager;
+import GUI.FileManager.TXTFileFilter;
 import GUI.FileManager.XMLFileFilter;
 import GUI.MainInterface.DocumentsTab;
 import GUI.MainInterface.InferenceFileChooser;
 import Rules.Condition;
 import Rules.Rule;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
@@ -40,6 +43,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -93,7 +97,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     private ArrayList<String> chosenTags = new ArrayList<String>();
     private JComboBox cmbKey; //permite escolher a chave de contexto
     private String results; //regras usadas pelo usuário
-    private JPanel pnlBar, pnlMining, pnlConstructRule, pnlResults, pnlOutput; //paineis principais
+    private JPanel allPane, pnlBar, pnlMining, pnlConstructRule, pnlResults, pnlOutput; //paineis principais
     private JPanel pResults; //painel que contem as regras construídas e permite usuário escolher quais regras usar
     private GridBagLayout gridBag;
     private InferenceFileChooser inferenceFileChooser;
@@ -161,8 +165,9 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 @Override
                 public void itemStateChanged(ItemEvent e) {
                     if (e.getStateChange() == ItemEvent.SELECTED) {
-                        keyChoice = ((JComboBox) e.getSource()).getSelectedItem().toString();
+                        keyChoice = cmbKey.getSelectedItem().toString();
                         constructRules();
+                        setAllEnabled(allPane, true);
                     }
                 }
             });
@@ -199,7 +204,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             mineRules();
         } else if (e.getSource() == btnFilesList) {
             showFilesList();
-        } else if (e.getSource() == btnExport){
+        } else if (e.getSource() == btnExport) {
             exportProlog();
         }
     }
@@ -240,23 +245,15 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
      */
     private void showFilesList() {
         pnlMining.removeAll();
+        pnlMining.setBorder(javax.swing.BorderFactory.createTitledBorder("Files to mine"));
 
-        //declara objetos de controle do layout
-        gridBag = new GridBagLayout();
         GridBagConstraints constraints = new GridBagConstraints();
-        pnlMining.setLayout(gridBag);
 
         pnlFiles = new JPanel();
         JScrollPane jsPane = new JScrollPane(pnlFiles);
         jsPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         jsPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         jsPane.setBorder(null);
-
-        constraints = new GridBagConstraints();
-        LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1);
-        constraints.fill = GridBagConstraints.BOTH;
-        constraints.anchor = GridBagConstraints.NORTHWEST;
-        pnlMining.add(jsPane, constraints);
 
         pnlFiles.setLayout(new BoxLayout(pnlFiles, BoxLayout.PAGE_AXIS));
 
@@ -587,7 +584,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
      * Exibe a interface de construção de regras.
      */
     private void buildInterface() {
-        JPanel allPane = new JPanel();
+        allPane = new JPanel();
         this.setMinimumSize(new Dimension(1200, 500));
         this.setSize(this.getMinimumSize());
 
@@ -616,7 +613,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         pnlConstructRule.setBorder(javax.swing.BorderFactory.createTitledBorder("Conditions"));
 
         pnlMining = new JPanel();
-        pnlMining.setBorder(javax.swing.BorderFactory.createTitledBorder("Association Rules"));
+        pnlMining.setBorder(javax.swing.BorderFactory.createTitledBorder("Tags to mine"));
 
         pnlResults = new JPanel();
         pnlResults.setBorder(javax.swing.BorderFactory.createTitledBorder("Builded Rules"));
@@ -646,55 +643,6 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         constraints.fill = GridBagConstraints.BOTH;
         constraints.anchor = GridBagConstraints.WEST;
         allPane.add(pnlResults, constraints);
-
-        //Cria a barra de ferramentas
-        JToolBar tBar = new JToolBar();
-
-        //Define os icones que serão usados nos botões
-        ImageIcon openIcon = new ImageIcon(getClass().getResource("/GUI/icons/open.png"));
-        ImageIcon saveIcon = new ImageIcon(getClass().getResource("/GUI/icons/save.png"));
-
-        //Cria os botões e seus eventos        
-        btnOpen = new JButton(openIcon);
-        btnOpen.setToolTipText("Open Project");
-        btnOpen.setEnabled(true);
-        btnOpen.addActionListener(this);
-
-        btnSave = new JButton(saveIcon);
-        btnSave.setToolTipText("Save Project");
-        btnSave.setEnabled(true);
-        btnSave.addActionListener(this);
-
-        btnExport = new JButton(openIcon);
-        btnExport.setToolTipText("Export to Prolog Facts");
-        btnExport.setEnabled(true);
-        btnExport.addActionListener(this);
-
-        //Adiciona os botões à barra de ferramentas
-        tBar.add(btnOpen);
-        tBar.add(btnSave);
-        tBar.add(btnExport);
-        if (!keyChoice.equals("id")) {
-            tBar.add(new JSeparator(SwingConstants.VERTICAL));
-            tBar.add(new JLabel("Context Key: "));
-            tBar.add(cmbKey);
-        }
-
-        tBar.setAlignmentX(0);
-
-        tBar.setFloatable(false); //Fixa a barra de ferramentas à sua posição
-
-        //indica a posição e layout da barra de ferramentas
-        LayoutConstraints.setConstraints(constraints, 0, 0, 3, 1, 1000, 0);
-        constraints.insets = new Insets(0, 0, 0, 0);
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.anchor = GridBagConstraints.NORTHWEST;
-        gridBag.setConstraints(pnlBar, constraints);
-
-        //Adiciona a barra de ferramentas ao seu painel
-        pnlBar.add(tBar);
-        tBar.setVisible(true);
-        pnlBar.setVisible(true);
 
         //declara objetos de controle do layout do painel do topo
         GridBagLayout gridBagTop = new GridBagLayout();
@@ -755,16 +703,16 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
         pnlConditions = new JPanel();
 
-        JScrollPane jsPane = new JScrollPane(pnlConditions);
-        jsPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        jsPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        jsPane.setBorder(null);
+        JScrollPane jsPaneCentral = new JScrollPane(pnlConditions);
+        jsPaneCentral.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        jsPaneCentral.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        jsPaneCentral.setBorder(null);
 
         constraints = new GridBagConstraints();
         LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1000);
         constraints.fill = GridBagConstraints.BOTH;
         constraints.anchor = GridBagConstraints.NORTHWEST;
-        pnlConstructRule.add(jsPane, constraints);
+        pnlConstructRule.add(jsPaneCentral, constraints);
 
         JPanel buttonsPanel = new JPanel();
 
@@ -792,28 +740,15 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         GridBagConstraints constraintsMining = new GridBagConstraints();
         pnlMining.setLayout(gridBagLeft);
 
-        JLabel lblMineRules = new JLabel("Select the tags you want to mine:");
-        lblMineRules.revalidate();
+        JPanel pnlTags = new JPanel();
+        JScrollPane jsPaneLeft = new JScrollPane(pnlTags);
+        jsPaneLeft.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        jsPaneLeft.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        jsPaneLeft.setBorder(null);
 
-        LayoutConstraints.setConstraints(constraintsMining, 0, 0, 1, 1, 1, 0);
-        constraintsMining.fill = GridBagConstraints.NONE;
-        constraintsMining.anchor = GridBagConstraints.NORTHWEST;
-        pnlMining.add(lblMineRules, constraintsMining);
+        pnlTags.setLayout(new BoxLayout(pnlTags, BoxLayout.PAGE_AXIS));
 
         //Painel com as tags no painel "Association Rules"
-        GridBagLayout centerGridBag = new GridBagLayout();
-
-        JPanel p = new JPanel();
-        p.setLayout(new BoxLayout(p, WIDTH));
-        p.setVisible(true);
-
-        JScrollPane jscPane = new JScrollPane(p);
-        jscPane.setBorder(null);
-
-        LayoutConstraints.setConstraints(constraintsMining, 0, 0, 1, 1, 1, 1);
-        constraintsMining.fill = GridBagConstraints.BOTH;
-        centerGridBag.addLayoutComponent(p, constraintsMining);
-
         //Recupera a lista de tags a partir do segundo arquivo carregado no projeto
         checkTagsArray = new ArrayList<JCheckBox>();
 
@@ -826,13 +761,14 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             chkItem.setName(tag);
             chkItem.setSelected(true);
             checkTagsArray.add(chkItem);
-            p.add(chkItem);
+            pnlTags.add(chkItem);
         }
 
-        LayoutConstraints.setConstraints(constraintsMining, 0, 1, 1, 1, 1, 1000);
-        constraintsMining.fill = GridBagConstraints.BOTH;
-        constraintsMining.anchor = GridBagConstraints.NORTHWEST;
-        pnlMining.add(jscPane, constraintsMining);
+        LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1000);
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.anchor = GridBagConstraints.NORTH;
+        gridBag.setConstraints(this, constraints);
+        pnlMining.add(jsPaneLeft, constraints);
 
         JPanel btnFileListPanel = new JPanel();
 
@@ -904,8 +840,76 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             buildRulesPanel(partRules, null);
         }
 
+        //Desabilita todos os JComponents criados até agora
+        setAllEnabled(allPane, false);
+        
+        //Cria a barra de ferramentas
+        JToolBar tBar = new JToolBar();
+
+        //Define os icones que serão usados nos botões
+        ImageIcon openIcon = new ImageIcon(getClass().getResource("/GUI/icons/open.png"));
+        ImageIcon saveIcon = new ImageIcon(getClass().getResource("/GUI/icons/save.png"));
+
+        //Cria os botões e seus eventos        
+        btnOpen = new JButton(openIcon);
+        btnOpen.setToolTipText("Open Project");
+        btnOpen.setEnabled(true);
+        btnOpen.addActionListener(this);
+
+        btnSave = new JButton(saveIcon);
+        btnSave.setToolTipText("Save Project");
+        btnSave.setEnabled(true);
+        btnSave.addActionListener(this);
+
+        btnExport = new JButton(openIcon);
+        btnExport.setToolTipText("Export to Prolog Facts");
+        btnExport.setEnabled(true);
+        btnExport.addActionListener(this);
+
+        //Adiciona os botões à barra de ferramentas
+        tBar.add(btnOpen);
+        tBar.add(btnSave);
+        tBar.add(btnExport);
+        if (!keyChoice.equals("id")) {
+            tBar.add(new JSeparator(SwingConstants.VERTICAL));
+            tBar.add(new JLabel("Context Key: "));
+            tBar.add(cmbKey);
+        }
+
+        tBar.setAlignmentX(0);
+
+        tBar.setFloatable(false); //Fixa a barra de ferramentas à sua posição
+
+        //indica a posição e layout da barra de ferramentas
+        LayoutConstraints.setConstraints(constraints, 0, 0, 3, 1, 1000, 0);
+        constraints.insets = new Insets(0, 0, 0, 0);
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.anchor = GridBagConstraints.NORTHWEST;
+        gridBag.setConstraints(pnlBar, constraints);
+
+        //Adiciona a barra de ferramentas ao seu painel
+        pnlBar.add(tBar);
+        tBar.setVisible(true);
+        pnlBar.setVisible(true);
+
         setVisible(true);
         pResults.setVisible(true);
+    }
+
+    private void setAllEnabled(JComponent comp, boolean enabled) {
+        if (comp.getComponents().length == 0) {
+            return;
+        }
+        //Desabilita todos os JComponents filhos deste e de seus filhos
+        for (Component c : comp.getComponents()) {
+            c.setEnabled(enabled);
+            try {
+                setAllEnabled((JComponent) c, enabled);
+            } catch (ClassCastException e) {
+                //Se não é um JComponent, este não possui "filhos"
+                return;
+            }
+        }
     }
 
     private String formatSetTextPane(String paneRules) {
@@ -1066,6 +1070,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
      */
     private void showMinedRules(List<Set> listTags) {
         pnlMining.removeAll();
+        pnlMining.setBorder(javax.swing.BorderFactory.createTitledBorder("Mined rules"));
 
         pnlGeneratedRules = new JPanel();
         JScrollPane jsPaneWest = new JScrollPane(pnlGeneratedRules);
@@ -1336,12 +1341,13 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         }
     }
 
-    /**Exporta as regras construídas para Prolog 
+    /**
+     * Exporta as regras construídas para Prolog
      */
     public void exportProlog() {
         //Solicita o endereço em que o arquivo deverá ser salvo
         JFileChooser chooser = new JFileChooser(LastpathManager.getlastpath("txt") + ".TXT");//caso exista um histórico com o ultimo caminho acessado, cria um JFileChooser com este caminho
-        chooser.setFileFilter(new XMLFileFilter());
+        chooser.setFileFilter(new TXTFileFilter());
         //abre o salvamento do arquivo de projetos
         String pathWay;
         int openedFile = chooser.showSaveDialog(null); // showSaveDialog retorna um inteiro , e ele ira determinar que o chooser será para salvar.
@@ -1355,13 +1361,12 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             try {
                 FileWriter fw = new FileWriter(new File(pathWay).getAbsoluteFile());
                 BufferedWriter bw = new BufferedWriter(fw);
+                results = results.replaceAll("\n", System.getProperty("line.separator"));
                 bw.write(results);
                 bw.close();
             } catch (IOException ex) {
                 Logger.getLogger(RuleConstructInterface.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-            System.out.println("Done");
 
         }
 

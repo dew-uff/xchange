@@ -1,4 +1,4 @@
-package GUI.Rules;
+package GUI.FileManager;
 
 import Documents.Document;
 import java.awt.Dimension;
