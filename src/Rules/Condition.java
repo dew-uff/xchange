@@ -52,4 +52,29 @@ public class Condition {
     public void setOperator(String operator) {
         this.operator = operator;
     }
+    
+    @Override
+    public boolean equals(Object object)
+    {
+        boolean equals = false;
+
+        if (object != null && object instanceof Condition)
+        {
+            if(this.firstTerm.equals(((Condition)object).getFirstTerm())
+                && this.secondTerm.equals(((Condition)object).getSecondTerm())
+                    && this.operator.equals(((Condition)object).getOperator()))
+                equals = true;
+        }
+
+        return equals;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + (this.firstTerm != null ? this.firstTerm.hashCode() : 0);
+        hash = 97 * hash + (this.secondTerm != null ? this.secondTerm.hashCode() : 0);
+        hash = 97 * hash + (this.operator != null ? this.operator.hashCode() : 0);
+        return hash;
+    }
 }

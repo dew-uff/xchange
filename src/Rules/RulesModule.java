@@ -13,24 +13,42 @@ public class RulesModule {
     private ArrayList<Rule> selectRules = new ArrayList<Rule>();
 
     /**
-     * Adciona regra a lista de regras, verificando se a mesma não se repete.
+     * Adciona regra a lista de regras.
      *
-     * @param newRule String com a regra.
+     * @param newRule Rule.
      */
     public void addRule(Rule newRule) {
-        Iterator it = rules.iterator();
-        boolean contain = false;
-        while (it.hasNext()) { //Verifica se a regra não existe ainda
-            Rule aux = (Rule) it.next();
-            if (aux.getRule().compareTo(newRule.getRule()) == 0) {
-                contain = true; //Caso exista, muda a variável contain para true
-            }
-        }
-        if (!contain) { //Caso não exista a regra
-            this.rules.add(newRule); //Adciona a regra na lista de regras
-        }
+        this.rules.add(newRule); //Adciona a regra na lista de regras
     }
 
+    /**
+     * Verifica se a regra não se repete
+     *
+     * @param rule Rule.
+     * @param selectedRuleIndex index of the rule(editing)
+     * @return boolean
+     */
+    public boolean checkExists(Rule rule, int selectedRuleIndex) {
+        if(selectedRuleIndex != -1){
+            if(rule.isEquals(this.rules.get(selectedRuleIndex), false)){
+                System.out.println("Saiu aqui!");
+                return false;
+            }
+        }
+        
+        return this.rules.contains(rule);
+    }
+    
+    /**
+     * Verifica se a regra não se repete
+     *
+     * @param rule Rule.
+     * @return boolean
+     */
+    public boolean checkExists(Rule rule) {
+        return this.checkExists(rule, -1);
+    }
+    
     /**
      * Adiciona as regras selecionadas em sua respectiva variável.
      *

@@ -47,8 +47,6 @@ public class Rule {
         return this.output;
     }
 
-    
-
     /**
      * Responsável por retornar as condições de uma determinada regra.
      *
@@ -92,4 +90,40 @@ public class Rule {
         Struct struct = new Struct(this.getName().replaceAll(" ", ""), varList);//cria Struct com nome da regra e lista de Var
         return struct;//retorna Struct
     }
+
+    public boolean isEquals(Object object, boolean checkName){
+        boolean equals = false;
+
+        if (object != null && object instanceof Rule)
+        {
+            if(checkName && this.name.equals(((Rule)object).getName()))
+                equals = true;
+            else if(this.conditions.size() == ((Rule)object).getConditions().size()){
+                int countEquals = 0;
+                for(Condition cond: ((Rule)object).getConditions()){
+                    if(this.conditions.contains(cond))
+                        countEquals++;
+                }
+                if(countEquals == this.conditions.size())
+                    equals = true;
+            }
+        }
+
+        return equals;
+    }
+    
+    @Override
+    public boolean equals(Object object)
+    {
+        return isEquals(object, true);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + (this.name != null ? this.name.hashCode() : 0);
+        hash = 67 * hash + (this.conditions != null ? this.conditions.hashCode() : 0);
+        return hash;
+    }
+    
 }

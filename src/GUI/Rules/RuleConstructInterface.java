@@ -394,8 +394,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         if (nameRule.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "It's necessary give the rule a name", "Error", JOptionPane.ERROR_MESSAGE);
             nameRule.requestFocus();
-        }
-        if (comboOutput.getSelectedItem().equals("")) {
+        }else if (comboOutput.getSelectedItem().equals("")) {
             JOptionPane.showMessageDialog(this, "It's necessary choose output type", "Error", JOptionPane.ERROR_MESSAGE);
             comboOutput.requestFocus();
         } else {
@@ -434,34 +433,39 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 }
 
                 Rule rule = new Rule(ruleName, comboOutput.getSelectedItem().toString().toLowerCase(), conditions, regraConst);
-                if (selectedRuleIndex == -1) {
-                    rulesModule.addRule(rule);
+                if(!rulesModule.checkExists(rule, selectedRuleIndex)) {
+                    if (selectedRuleIndex == -1) {
+                        rulesModule.addRule(rule);
+                    } else {
+                        rulesModule.getRules().set(selectedRuleIndex, rule);
+                        selectedRuleIndex = -1;
+                    }
+
+                    results = formatSetTextPane(rulesModule.getRulesString()); //Formata as regras que serão exibidas na tela
+
+                    if (!results.isEmpty()) {
+                        String[] partRules = rulesModule.partRules(results); //Pega o cabeçalho das regras (ex: salary(NAME))
+                        buildRulesPanel(partRules, null);
+
+                        //"Limpa" o construtor
+                        comboOutput.setSelectedItem("");
+                        nameRule.setText("");
+
+                        btnSaveRule.setEnabled(true);
+                        pnlConditions.removeAll();
+                        lineConditions.clear();
+                        LineCondition aux = new LineCondition();
+                        lineConditions.add(aux);
+                        pnlConditions.add(aux);
+                        aux.getComboTerm1().requestFocus();
+                        pnlConditions.revalidate();
+
+                    } else {
+                        JOptionPane.showMessageDialog(this, "It's necessary to difine the rules to "
+                                + "realize inference of informations.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 } else {
-                    rulesModule.getRules().set(selectedRuleIndex, rule);
-                }
-
-                results = formatSetTextPane(rulesModule.getRulesString()); //Formata as regras que serão exibidas na tela
-
-                if (!results.isEmpty()) {
-                    String[] partRules = rulesModule.partRules(results); //Pega o cabeçalho das regras (ex: salary(NAME))
-                    buildRulesPanel(partRules, null);
-
-                    //"Limpa" o construtor
-                    comboOutput.setSelectedItem("");
-                    nameRule.setText("");
-
-                    btnSaveRule.setEnabled(true);
-                    pnlConditions.removeAll();
-                    lineConditions.clear();
-                    LineCondition aux = new LineCondition();
-                    lineConditions.add(aux);
-                    pnlConditions.add(aux);
-                    aux.getComboTerm1().requestFocus();
-                    pnlConditions.revalidate();
-
-                } else {
-                    JOptionPane.showMessageDialog(this, "It's necessary to difine the rules to "
-                            + "realize inference of informations.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "This RULE already exists", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
