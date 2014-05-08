@@ -29,14 +29,13 @@ public class RulesModule {
      * @return boolean
      */
     public boolean checkExists(Rule rule, int selectedRuleIndex) {
-        if(selectedRuleIndex != -1){
-            if(rule.isEquals(this.rules.get(selectedRuleIndex), false)){
-                System.out.println("Saiu aqui!");
-                return false;
+        for(int i =0; i < this.rules.size(); i++){
+            if(selectedRuleIndex != i && this.rules.get(i).equals(rule)){
+                return true;
             }
         }
         
-        return this.rules.contains(rule);
+        return false;
     }
     
     /**
