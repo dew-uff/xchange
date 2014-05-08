@@ -83,7 +83,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     private String factBase2v1, factBase2v2, factBase1v1, factBase1v2;
     private String factBase2, factBase1, baseRule;
     private final JLabel lblChoiceKey;
-    private JButton btnSaveRule, btnFinishBuilder, btnMineRules, btnFilesList; //Botões do rodapé
+    private JButton btnSaveRule, btnCancelRule, btnFinishBuilder, btnMineRules, btnFilesList; //Botões do rodapé
     private JButton btnOpen, btnSave, btnExport; //Botões da barra de ferramentas
     private JTextField nameRule;
     private JComboBox comboOutput;
@@ -135,6 +135,8 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         btnAtributs.addActionListener(this);
         btnSaveRule = new JButton();
         btnSaveRule.addActionListener(this);
+        btnCancelRule = new JButton();
+        btnCancelRule.addActionListener(this);
         btnFinishBuilder = new JButton();
         btnFinishBuilder.addActionListener(this);
 
@@ -159,6 +161,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
             keyChoice = listNameFacts.get(0);
 
+            //Inicialização e configuração da Combobox da Context Key            
             cmbKey = new JComboBox(listNameFacts.toArray());
             cmbKey.setSelectedIndex(-1);
             cmbKey.addItemListener(new ItemListener() {
@@ -166,7 +169,9 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 public void itemStateChanged(ItemEvent e) {
                     if (e.getStateChange() == ItemEvent.SELECTED) {
                         keyChoice = cmbKey.getSelectedItem().toString();
+                        //Reconstroi as regras
                         constructRules();
+                        //Ativa todos os componentes
                         setAllEnabled(allPane, true);
                     }
                 }
@@ -176,9 +181,16 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         LineCondition.setNamesFacts(namesFacts);
         factBase1 = factBase1v1 + "," + factBase1v2;
 
+        //Constroi as regras
         constructRules();
 
+        //Constroi a interface
         buildInterface();
+    }
+
+    private enum Button {
+
+        btnSaveRule, btnCancelRule, btnFinishBuilder, btnMineRules, btnFilesList, btnOpen, btnSave, btnExport;
     }
 
     /**
@@ -188,8 +200,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == btnAtributs) {
-        } else if (e.getSource() == btnSaveRule) { //Valida as opções de selecionadas na construção da regra e a adiciona ao conjunto de regras
+        if (e.getSource() == btnSaveRule) { //Valida as opções de selecionadas na construção da regra e a adiciona ao conjunto de regras
             finishRuleAndCreateNew();
         } else if (e.getSource() == btnFinishBuilder) {
             finish();
@@ -206,6 +217,8 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             showFilesList();
         } else if (e.getSource() == btnExport) {
             exportProlog();
+        } else if (e.getSource() == btnCancelRule) {
+            cancelRule();
         }
     }
 
@@ -249,6 +262,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
         GridBagConstraints constraints = new GridBagConstraints();
 
+        //Cria um painel para a lista de LineFile e o coloca em um painel rolável
         pnlFiles = new JPanel();
         JScrollPane jsPane = new JScrollPane(pnlFiles);
         jsPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -257,9 +271,11 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
         pnlFiles.setLayout(new BoxLayout(pnlFiles, BoxLayout.PAGE_AXIS));
 
+        //Constroi uma LineFile para cada documento
         lineFiles = new ArrayList<LineFile>();
         for (int i = 0; i < documentsTab.getDocuments().getSize(); i++) {
             final LineFile lineFile = new LineFile(documentsTab.getDocuments().getDocuments().get(i));
+            //Pré-seleciona os dois primeiros arquivos
             if (i < 2) {
                 lineFile.getCheckbox().setSelected(true);
             }
@@ -285,6 +301,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         lineFiles.get(0).getButtonUp().setEnabled(false);
         lineFiles.get(lineFiles.size() - 1).getButtonDown().setEnabled((false));
 
+        //Adiciona o painel com os arquivos ao painel esquerdo
         LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1000);
         constraints.fill = GridBagConstraints.BOTH;
         constraints.anchor = GridBagConstraints.NORTH;
@@ -391,83 +408,84 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
      * Finaliza a construção da regra atual
      */
     private void finishRuleAndCreateNew() {
+        //Verifica se o usuário informou o nome da regra
         if (nameRule.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "It's necessary give the rule a name", "Error", JOptionPane.ERROR_MESSAGE);
             nameRule.requestFocus();
-        }else if (comboOutput.getSelectedItem().equals("")) {
+        } else if (comboOutput.getSelectedItem().equals("")) {
             JOptionPane.showMessageDialog(this, "It's necessary choose output type", "Error", JOptionPane.ERROR_MESSAGE);
             comboOutput.requestFocus();
         } else {
+            //Valida cada condição da regra. Caso encontre uma inválida, avisa o usuário
             List<Condition> conditions = new ArrayList<Condition>();
             lineConditions = LineCondition.getLineConditions();
             LineCondition.setLineConditions(lineConditions);
-            int validRows = 0;
-            for (LineCondition lineCondition : lineConditions) {
-                Condition condition = new Condition(lineCondition);
+            for (int i = 0; i < lineConditions.size(); i++) {
+                Condition condition = new Condition(lineConditions.get(i));
                 if ((!condition.getFirstTerm().equals("") && !condition.getSecondTerm().equals("") && !condition.getOperator().equals("")) || (condition.getOperator().equals("new_element") || (condition.getOperator().equals("deleted_element")))) {
                     conditions.add(condition);
-                    validRows += 1;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Your " + (i + 1) + "º condition is not valid.", "Invalid condition encoutered", JOptionPane.ERROR_MESSAGE);
+                    return;
                 }
             }
-            if (validRows == 0) {
-                JOptionPane.showMessageDialog(this, "You must select at least one valid condition!", "Error", JOptionPane.ERROR_MESSAGE);
+
+            //COnstroi a regra
+            String regraConst = "";
+            for (Condition condition : conditions) {
+                String aux = buildCondition(comboOutput.getSelectedItem().toString(), condition.getFirstTerm(), condition.getOperator(), condition.getSecondTerm(), false);
+                if (regraConst.equals("")) {
+                    regraConst = aux;
+                } else {
+                    regraConst = regraConst + "," + aux;
+                }
+
+            }
+            String ruleName = nameRule.getText().toLowerCase().replaceAll(" ", "");
+
+            //Prepara as regras construídas
+            if (lineConditions.get(0).getComboOperator().getSelectedItem().toString().indexOf("_") < 0) {
+                regraConst = ruleName + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + baseRule + "," + comboOutput.getSelectedItem().toString() + "(" + nameFactInRule + "Before," + comboOutput.getSelectedItem().toString().toUpperCase() + ")," + regraConst + ".";
             } else {
-                String regraConst = "";
-                for (Condition condition : conditions) {
-                    String aux = buildCondition(comboOutput.getSelectedItem().toString(), condition.getFirstTerm(), condition.getOperator(), condition.getSecondTerm(), false);
-                    if (regraConst.equals("")) {
-                        regraConst = aux;
-                    } else {
-                        regraConst = regraConst + "," + aux;
-                    }
-
-                }
-
-                String ruleName = nameRule.getText().toLowerCase().replaceAll(" ", "");
-
-                //Prepara as regras construídas
-                if (lineConditions.get(0).getComboOperator().getSelectedItem().toString().indexOf("_") < 0) {
-                    regraConst = ruleName + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + baseRule + "," + comboOutput.getSelectedItem().toString() + "(" + nameFactInRule + "Before," + comboOutput.getSelectedItem().toString().toUpperCase() + ")," + regraConst + ".";
-                } else {
-                    regraConst = ruleName + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + "" + regraConst + ".";
-                }
-
-                Rule rule = new Rule(ruleName, comboOutput.getSelectedItem().toString().toLowerCase(), conditions, regraConst);
-                if(!rulesModule.checkExists(rule, selectedRuleIndex)) {
-                    if (selectedRuleIndex == -1) {
-                        rulesModule.addRule(rule);
-                    } else {
-                        rulesModule.getRules().set(selectedRuleIndex, rule);
-                        selectedRuleIndex = -1;
-                    }
-
-                    results = formatSetTextPane(rulesModule.getRulesString()); //Formata as regras que serão exibidas na tela
-
-                    if (!results.isEmpty()) {
-                        String[] partRules = rulesModule.partRules(results); //Pega o cabeçalho das regras (ex: salary(NAME))
-                        buildRulesPanel(partRules, null);
-
-                        //"Limpa" o construtor
-                        comboOutput.setSelectedItem("");
-                        nameRule.setText("");
-
-                        btnSaveRule.setEnabled(true);
-                        pnlConditions.removeAll();
-                        lineConditions.clear();
-                        LineCondition aux = new LineCondition();
-                        lineConditions.add(aux);
-                        pnlConditions.add(aux);
-                        aux.getComboTerm1().requestFocus();
-                        pnlConditions.revalidate();
-
-                    } else {
-                        JOptionPane.showMessageDialog(this, "It's necessary to difine the rules to "
-                                + "realize inference of informations.", "Error", JOptionPane.ERROR_MESSAGE);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(this, "This RULE already exists", "Error", JOptionPane.ERROR_MESSAGE);
-                }
+                regraConst = ruleName + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + "" + regraConst + ".";
             }
+
+            Rule rule = new Rule(ruleName, comboOutput.getSelectedItem().toString().toLowerCase(), conditions, regraConst);
+            if (!rulesModule.checkExists(rule, selectedRuleIndex)) {
+                if (selectedRuleIndex == -1) {
+                    rulesModule.addRule(rule);
+                } else {
+                    rulesModule.getRules().set(selectedRuleIndex, rule);
+                    selectedRuleIndex = -1;
+                }
+
+                results = formatSetTextPane(rulesModule.getRulesString()); //Formata as regras que serão exibidas na tela
+
+                if (!results.isEmpty()) {
+                    String[] partRules = rulesModule.partRules(results); //Pega o cabeçalho das regras (ex: salary(NAME))
+                    buildRulesPanel(partRules, null);
+
+                    //"Limpa" o construtor
+                    comboOutput.setSelectedItem("");
+                    nameRule.setText("");
+
+                    btnSaveRule.setEnabled(true);
+                    pnlConditions.removeAll();
+                    lineConditions.clear();
+                    LineCondition aux = new LineCondition();
+                    lineConditions.add(aux);
+                    pnlConditions.add(aux);
+                    aux.getComboTerm1().requestFocus();
+                    pnlConditions.revalidate();
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "It's necessary to difine the rules to "
+                            + "realize inference of informations.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "This RULE already exists", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
         }
     }
 
@@ -476,21 +494,19 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
      */
     private void finish() {
         ArrayList<String> selectedRules = new ArrayList<String>();
-        int cont = 0;
         for (int i = 0; i < pResults.getComponentCount(); i++) { //Verifica quais regras foram selecionadas pelo usuário
             JCheckBox item = (JCheckBox) ((JPanel) pResults.getComponents()[i]).getComponents()[0];
             if (item.isSelected()) {
-                cont++;
                 selectedRules.add(item.getName());
             }
         }
-        if (cont > 0) {
+        if (selectedRules.size() > 0) {
             this.rulesModule.addSelectRules(selectedRules); //Adiciona as regras selecionadas em sua respectiva variável
             this.inferenceFileChooser.setSelectedRules(selectedRules);//Envia ao InferenceFileChooser a lista de regras selecionadas
             succeeded = true;
             dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "It's necessary to define the rules to "
+            JOptionPane.showMessageDialog(this, "It's necessary to define at least one rule to "
                     + "realize inference of informations.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -499,12 +515,14 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
      * Atualiza a lista de regras construidas
      */
     private void buildRulesPanel(String[] partRules, List<Boolean> enabledList) {
+        //"Limpa" o painel de regras construídas
         pResults.removeAll();
         List<LineRule> newBuiledRules = new ArrayList<LineRule>();
         List<Rule> selectedRules = rulesModule.getSelectRules();
 
         String[] rulesHeads = rulesModule.getNameAndArgumentsRules(partRules);
-        for (int i = 0; i < rulesHeads.length; i++) { //Cria os campos do CheckBox de acordo com as regras inseridas pelo usuário
+        //Cria uma LineRule para cada regra
+        for (int i = 0; i < rulesHeads.length; i++) {
             final LineRule pnlRule = new LineRule(rulesHeads[i], false);
 
             JCheckBox chk = pnlRule.getCheckbox();
@@ -565,6 +583,9 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         selectedRuleIndex = index;
         lineConditions.clear();
 
+        btnSaveRule.setText("Update rule");
+        btnCancelRule.setText("Cancel");
+
         Rule rule = rulesModule.getRules().get(index);
 
         comboOutput.setSelectedItem(rule.getOutput());
@@ -582,6 +603,23 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             pnlConditions.revalidate();
         }
 
+    }
+
+    /**
+     * Método para cancelar a construção da regra
+     */
+    private void cancelRule() {
+        lineConditions = new ArrayList<LineCondition>();
+        lineConditions.add(new LineCondition());
+        LineCondition.setLineConditions(lineConditions);
+
+        btnSaveRule.setText("Save rule");
+        btnCancelRule.setText("Clear");
+
+        comboOutput.setSelectedItem("");
+        nameRule.setText("");
+
+        selectedRuleIndex = -1;
     }
 
     /**
@@ -726,12 +764,19 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         constraints.anchor = GridBagConstraints.NORTHWEST;
         pnlConstructRule.add(buttonsPanel, constraints);
 
-        btnSaveRule.setText("Save rule and create new");
+        btnSaveRule.setText("Save rule");
         btnSaveRule.setMinimumSize(new Dimension(350, 25));
         LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1);
         constraints.anchor = GridBagConstraints.CENTER;
         constraints.fill = GridBagConstraints.NONE;
         buttonsPanel.add(btnSaveRule, constraints);
+
+        btnCancelRule.setText("Clear");
+        btnCancelRule.setMinimumSize(new Dimension(350, 25));
+        LayoutConstraints.setConstraints(constraints, 1, 0, 1, 1, 1, 1);
+        constraints.anchor = GridBagConstraints.CENTER;
+        constraints.fill = GridBagConstraints.NONE;
+        buttonsPanel.add(btnCancelRule, constraints);
 
         LineCondition firstConditionRule = new LineCondition();
         pnlConditions.setLayout(new BoxLayout(pnlConditions, BoxLayout.PAGE_AXIS));
@@ -741,7 +786,6 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
         //declara objetos de controle do layout do painel da esquerda (regras de associação)
         GridBagLayout gridBagLeft = new GridBagLayout();
-        GridBagConstraints constraintsMining = new GridBagConstraints();
         pnlMining.setLayout(gridBagLeft);
 
         JPanel pnlTags = new JPanel();
@@ -846,7 +890,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
         //Desabilita todos os JComponents criados até agora
         setAllEnabled(allPane, false);
-        
+
         //Cria a barra de ferramentas
         JToolBar tBar = new JToolBar();
 
