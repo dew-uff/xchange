@@ -34,8 +34,8 @@ import javax.swing.event.ChangeListener;
 public class MainInterface extends JFrame implements ActionListener {
 
     private JMenuBar menuBar;
-    private JMenu mFile, mTools, mView, mAbout, mMerge;
-    private JMenuItem miNew, miOpen, miSave, miContext, miSimilarity, miAdd, miAboutGET, miAboutXChange, miHowToUse, miManager, miSettings, miMerge, miApplyChoice, miWriteMerged, miMergeCancel, miSyntaticDiff, miSemanticDiff, miSyntaticMerge, miSemanticMerge;
+    private JMenu mFile, mTools, mView, mAbout, mMerge, mTreeTest;
+    private JMenuItem miNew, miOpen, miSave, miContext, miSimilarity, miAdd, miAboutGET, miAboutXChange, miHowToUse, miManager, miSettings, miMerge, miApplyChoice, miWriteMerged, miMergeCancel, miSyntaticDiff, miSemanticDiff, miSyntaticMerge, miSemanticMerge, miTreeTest;
     private ResultsTab resultsTab;
     private DocumentsTab documentsTab;
     private PrologFactsTab prologFactsTab;
@@ -232,6 +232,14 @@ public class MainInterface extends JFrame implements ActionListener {
         miHowToUse.setMnemonic('u');
         mAbout.add(miHowToUse);
         miHowToUse.addActionListener(this);
+        
+        mTreeTest = new JMenu("TreeTest");
+        menuBar.add(mTreeTest);
+        mTreeTest.addActionListener(this);
+        
+        miTreeTest = new JMenuItem("Run");
+        mTreeTest.add(miTreeTest);
+        miTreeTest.addActionListener(this);
 
         //Cria a barra de ferramentas
         JToolBar tBar = new JToolBar();
@@ -718,7 +726,9 @@ public class MainInterface extends JFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(syntaticDiffBtn) || e.getSource().equals(miSyntaticDiff)) {
+        if(e.getSource().equals(miTreeTest)){
+            new TreeTest(Color.GREEN).setVisible(true);
+        } else if (e.getSource().equals(syntaticDiffBtn) || e.getSource().equals(miSyntaticDiff)) {
             this.initialPane.setVisible(false);
             this.isSyntaticDiff = true;
             this.isSemanticDiff = false;
