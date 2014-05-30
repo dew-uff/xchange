@@ -861,6 +861,7 @@ public class MainInterface extends JFrame implements ActionListener {
         tabbedPaneMerge.setEnabledAt(3, true);
 
         mergeTreeTabMerge.setLayout(gridBag);
+        new TreeTest(Color.GREEN, documents.getContent(0)).setVisible(true);
         JPanel mergeTree = new MergeThreeWayPanel(documents.getContent(0), documents.getContent(1), documents.getContent(2));
         gridBag.setConstraints(mergeTree, gridBagConstraints);
         mergeTreeTabMerge.add(mergeTree);
