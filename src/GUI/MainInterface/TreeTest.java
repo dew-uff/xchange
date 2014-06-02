@@ -5,8 +5,6 @@
  */
 package GUI.MainInterface;
 
-import Rules.Condition;
-import Rules.Rule;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.algorithms.layout.TreeLayout;
 import edu.uci.ics.jung.graph.DelegateTree;
@@ -16,7 +14,9 @@ import edu.uci.ics.jung.visualization.control.CrossoverScalingControl;
 import edu.uci.ics.jung.visualization.control.PluggableGraphMouse;
 import edu.uci.ics.jung.visualization.control.ScalingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.control.TranslatingGraphMousePlugin;
-import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
+import edu.uci.ics.jung.visualization.renderers.Renderer.VertexLabel.Position;
+import gems.ic.uff.br.modelo.LcsXML;
+import gems.ic.uff.br.modelo.XML;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Paint;
@@ -25,14 +25,14 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import org.apache.commons.collections15.Transformer;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
@@ -42,61 +42,64 @@ import org.xml.sax.SAXException;
  *
  * @author Jorge
  */
-public class TreeTest extends JFrame {
+public class TreeTest extends JPanel {
 
-    private Forest<String, String> tree;
+    private List<VisualizationViewer<String, String>> vvs;
+    private JSplitPane aux;
 
-    public TreeTest(final Color vertexColor, String... documentsContent) {
-        super("Tree Test");
+    public TreeTest(String documentsContent1, String documentsContent2, String documentsContentFather) {
+        //Criação do SplitPane
+        super();
 
-        for (String documentContent : documentsContent) {
-            buildTree(documentContent);
-            this.getContentPane().add(buildView(vertexColor));
-        }
+        XML xml1 = new XML(documentsContent1);
+        XML xml2 = new XML(documentsContent2);
+        XML xmlFather = new XML(documentsContentFather);
 
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.pack();
+        LcsXML lcsXML = new LcsXML(xmlFather, xml1, xml2, true);
+
+        vvs = new ArrayList<VisualizationViewer<String, String>>();
+        
+        System.out.println("\n\nInicio\n\n");
+        System.out.println(lcsXML.getDiffXML().toString());
+        System.out.println("\n\nFinal\n\n");
+        /*
+
+        Forest<String, String> tree = buildTree(lcsXML.getDiffXML().toString());
+        VisualizationViewer<String, String> vv = buildView(tree);
+        vvs.add(vv);*/
     }
 
     /**
-     * Construção do gráfico em si
+     * Construção da estrutura da árvore
      */
-    private void buildTree(String documentContent) {
-        /*
-
-         //Adiciona as arestas, cujos nomes representam os campos
-         t.addEdge("employee", "company", "1");
-         t.addEdge("name", "1", "John");
-         t.addEdge("cpf", "1", "000000");*/
-
-        System.out.println("\n\nInicio\n\n");
-        System.out.println(documentContent);
+    private Forest<String, String> buildTree(String documentContent) {
 
         try {
             org.w3c.dom.Document doc = loadXMLFromString(documentContent);
             doc.getDocumentElement().normalize();
 
-            tree = new DelegateTree<String, String>() {
+            Forest<String, String> tree = new DelegateTree<String, String>() {
             };
-            tree.addVertex(doc.getDocumentElement().getNodeName().trim().replace("\n", "").replace("\r", ""));
+            tree.addVertex("/" + doc.getDocumentElement().getNodeName());
 
-            NodeList ruleNodeList = doc.getDocumentElement().getChildNodes();
-            System.out.println(doc.getDocumentElement().getNodeName().trim().replace("\n", "").replace("\r", ""));
+            NodeList beansList = doc.getDocumentElement().getChildNodes();
 
-            for (int i = 0; i < 2; i++) {
-                if (ruleNodeList.item(i).getNodeType() == Node.ELEMENT_NODE) {
-                    Element mainElement = (Element) ruleNodeList.item(i);
-                    tree.addEdge("" + i, doc.getDocumentElement().getNodeName(), mainElement.getNodeName());
-                    //System.out.println("\t" + " " + mainElement.getNodeName().trim().replace("\n", "").replace("\r", ""));
+            for (int i = 0; i < beansList.getLength(); i++) {
+                if (beansList.item(i).getNodeType() == Node.ELEMENT_NODE) {
+                    Element bean = (Element) beansList.item(i);
+                    tree.addEdge("rootToBean" + i, "/" + doc.getDocumentElement().getNodeName(), i + "/" + bean.getNodeName());
 
-                    for (int j = 0; j < mainElement.getChildNodes().getLength(); j++) {
-                        if (mainElement.getChildNodes().item(j).getNodeType() == Node.ELEMENT_NODE) {
-                            tree.addEdge(mainElement.getChildNodes().item(j).getNodeName(), mainElement.getNodeName(), mainElement.getChildNodes().item(j).getTextContent().trim().replace("\n", "").replace("\r", ""));
-                            //System.out.println("\t\t" + " " + mainElement.getChildNodes().item(j).getTextContent().trim().replace("\n", "").replace("\r", ""));
+                    for (int j = 0; j < bean.getChildNodes().getLength(); j++) {
+                        if (bean.getChildNodes().item(j).getNodeType() == Node.ELEMENT_NODE) {
+                            Element tag = (Element) bean.getChildNodes().item(j);
+                            tree.addEdge("bean" + i + "ToTag" + j, i + "/" + bean.getNodeName(), i + j + "/" + tag.getNodeName());
+                            tree.addEdge("tag" + i + "ToValue" + j, i + j + "/" + tag.getNodeName(), i + j + "/" + tag.getTextContent());
                         }
                     }
                 }
             }
+
+            return tree;
 
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
@@ -108,7 +111,7 @@ public class TreeTest extends JFrame {
             e.printStackTrace();
         }
 
-        System.out.println("\n\nFinal\n\n");
+        return null;
     }
 
     /**
@@ -116,7 +119,7 @@ public class TreeTest extends JFrame {
      *
      * @return O BasicVisualizationServer responsável pela visualização
      */
-    private VisualizationViewer<String, String> buildView(final Color vertexColor) {
+    private VisualizationViewer<String, String> buildView(Forest<String, String> tree) {
         //Cria um layout posicionando os vértices do gráfico igualmente espaçados em uma área circular
         Layout<String, String> layout = new TreeLayout<String, String>(tree, 100, 100);
         //Sub-classe de JPanel que pode ser colocada na GUI do Swing
@@ -126,14 +129,25 @@ public class TreeTest extends JFrame {
         //Retorna a cor verde para cada vértice
         Transformer<String, Paint> elementPaint = new Transformer<String, Paint>() {
             public Paint transform(String s) {
-                return vertexColor;
+                return Color.WHITE;
+            }
+        };
+
+        //Define os rótulos de cada vértice e aresta
+        Transformer<String, String> labeller = new Transformer<String, String>() {
+            public String transform(String s) {
+                if (!s.contains("/")) {
+                    return null;
+                }
+                return s.substring(s.indexOf("/") + 1);
             }
         };
 
         //Define a visualização dos vértices e arestas
         vv.getRenderContext().setVertexFillPaintTransformer(elementPaint);
-        vv.getRenderContext().setVertexLabelTransformer(new ToStringLabeller());
-        vv.getRenderContext().setEdgeLabelTransformer(new ToStringLabeller());
+        vv.getRenderContext().setVertexLabelTransformer(labeller);
+        vv.getRenderContext().setEdgeLabelTransformer(labeller);
+        vv.getRenderer().getVertexLabelRenderer().setPosition(Position.AUTO);
 
         //Adiciona o comportamento do mouse sobre o gráfico
         PluggableGraphMouse gm = new PluggableGraphMouse();

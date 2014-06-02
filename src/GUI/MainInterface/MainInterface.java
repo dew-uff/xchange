@@ -726,9 +726,7 @@ public class MainInterface extends JFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource().equals(miTreeTest)){
-            new TreeTest(Color.GREEN).setVisible(true);
-        } else if (e.getSource().equals(syntaticDiffBtn) || e.getSource().equals(miSyntaticDiff)) {
+        if (e.getSource().equals(syntaticDiffBtn) || e.getSource().equals(miSyntaticDiff)) {
             this.initialPane.setVisible(false);
             this.isSyntaticDiff = true;
             this.isSemanticDiff = false;
@@ -861,8 +859,7 @@ public class MainInterface extends JFrame implements ActionListener {
         tabbedPaneMerge.setEnabledAt(3, true);
 
         mergeTreeTabMerge.setLayout(gridBag);
-        new TreeTest(Color.GREEN, documents.getContent(0)).setVisible(true);
-        JPanel mergeTree = new MergeThreeWayPanel(documents.getContent(0), documents.getContent(1), documents.getContent(2));
+        JPanel mergeTree = new TreeTest(documents.getContent(0), documents.getContent(1), documents.getContent(2));
         gridBag.setConstraints(mergeTree, gridBagConstraints);
         mergeTreeTabMerge.add(mergeTree);
         tabbedPaneMerge.setEnabledAt(4, true);
