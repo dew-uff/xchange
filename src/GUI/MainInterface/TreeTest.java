@@ -42,31 +42,34 @@ import org.xml.sax.SAXException;
  *
  * @author Jorge
  */
-public class TreeTest extends JPanel {
+public class TreeTest{
 
-    private List<VisualizationViewer<String, String>> vvs;
+    private VisualizationViewer<String, String> vv;
     private JSplitPane aux;
 
     public TreeTest(String documentsContent1, String documentsContent2, String documentsContentFather) {
-        //Criação do SplitPane
-        super();
-
-        XML xml1 = new XML(documentsContent1);
+        /*XML xml1 = new XML(documentsContent1);
         XML xml2 = new XML(documentsContent2);
         XML xmlFather = new XML(documentsContentFather);
 
         LcsXML lcsXML = new LcsXML(xmlFather, xml1, xml2, true);
 
-        vvs = new ArrayList<VisualizationViewer<String, String>>();
+        vvs = new ArrayList<VisualizationViewer<String, String>>();*/
         
         System.out.println("\n\nInicio\n\n");
-        System.out.println(lcsXML.getDiffXML().toString());
-        System.out.println("\n\nFinal\n\n");
-        /*
+        System.out.println(documentsContent1);
+        System.out.println("\n\nFinal\n\n");/*
+        
 
         Forest<String, String> tree = buildTree(lcsXML.getDiffXML().toString());
-        VisualizationViewer<String, String> vv = buildView(tree);
-        vvs.add(vv);*/
+        VisualizationViewer<String, String> vv = buildView(tree);*/
+        
+        Forest<String, String> tree = buildTree(documentsContent1);
+        vv = buildView(tree);
+    }
+    
+    public VisualizationViewer<String, String> getTree(){
+        return vv;
     }
 
     /**
@@ -124,7 +127,6 @@ public class TreeTest extends JPanel {
         Layout<String, String> layout = new TreeLayout<String, String>(tree, 100, 100);
         //Sub-classe de JPanel que pode ser colocada na GUI do Swing
         VisualizationViewer<String, String> vv = new VisualizationViewer<String, String>(layout);
-        vv.setPreferredSize(new Dimension(350, 350));
 
         //Retorna a cor verde para cada vértice
         Transformer<String, Paint> elementPaint = new Transformer<String, Paint>() {

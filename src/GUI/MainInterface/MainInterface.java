@@ -14,7 +14,6 @@ import GUI.Util.ProgressBar;
 import GUI.Util.ProgressHandler;
 import Manager.Manager;
 import Merge.MergeShow;
-import gems.ic.uff.br.newView.MergeThreeWayPanel;
 import gems.ic.uff.br.newView.SettingsDialog;
 import gems.ic.uff.br.newView.TreePanel;
 import java.awt.*;
@@ -233,13 +232,6 @@ public class MainInterface extends JFrame implements ActionListener {
         mAbout.add(miHowToUse);
         miHowToUse.addActionListener(this);
         
-        mTreeTest = new JMenu("TreeTest");
-        menuBar.add(mTreeTest);
-        mTreeTest.addActionListener(this);
-        
-        miTreeTest = new JMenuItem("Run");
-        mTreeTest.add(miTreeTest);
-        miTreeTest.addActionListener(this);
 
         //Cria a barra de ferramentas
         JToolBar tBar = new JToolBar();
@@ -859,9 +851,10 @@ public class MainInterface extends JFrame implements ActionListener {
         tabbedPaneMerge.setEnabledAt(3, true);
 
         mergeTreeTabMerge.setLayout(gridBag);
-        JPanel mergeTree = new TreeTest(documents.getContent(0), documents.getContent(1), documents.getContent(2));
-        gridBag.setConstraints(mergeTree, gridBagConstraints);
-        mergeTreeTabMerge.add(mergeTree);
+        TreeTest mergeTree = new TreeTest(documents.getContent(0), documents.getContent(1), documents.getContent(2));
+        //mergeTree.setVisible(true);
+        gridBag.setConstraints(mergeTree.getTree(), gridBagConstraints);
+        mergeTreeTabMerge.add(mergeTree.getTree());
         tabbedPaneMerge.setEnabledAt(4, true);
 
         this.refresh(documents);
