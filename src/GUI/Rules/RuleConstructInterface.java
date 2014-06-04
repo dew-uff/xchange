@@ -1329,7 +1329,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                         Element ruleElement = (Element) ruleNodeList.item(i);
 
                         //Lê os atributos de cada regra
-                        String output = ruleElement.getAttribute("output");
+                        String output = ruleElement.getAttribute("output").toUpperCase();
                         String name = ruleElement.getAttribute("name");
                         String enabled = ruleElement.getAttribute("enabled");
                         enabledList.add(enabled.equals("true"));
