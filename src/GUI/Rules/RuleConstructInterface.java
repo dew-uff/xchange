@@ -142,6 +142,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
         selectedRuleIndex = -1;
 
+        boolean block_comp = false;
         if (isSimilarity) { //Se o metodo utilizado for o "Similarity"
             factsPart = manager.getSimilarity().get(0).partFacts(manager.getSimilarity().get(0).getFacts());
             namesFacts = manager.getSimilarity().get(0).getNameFacts();
@@ -151,6 +152,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             factBase1v2 = manager.getSimilarity().get(0).getMainFact(factsPart, "after");
             keyChoice = "id"; //No modulo "Similarity" a chave de contexto sempre será o atributo ID
         } else { //Se o metodo utilizado for o "Context Key"
+            block_comp = true;
             factsPart = manager.getContextKey().get(0).partFacts(manager.getContextKey().get(0).getFacts());
             List<String> listNameFacts = new WekaParser().getTags(this.documentsTab.getDocuments().getPathWays().get(this.documentsTab.getRightCBIndex()));
             nameFactInRule = listNameFacts.get(0).toUpperCase();
@@ -180,12 +182,11 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
         LineCondition.setNamesFacts(namesFacts);
         factBase1 = factBase1v1 + "," + factBase1v2;
-
         //Constroi as regras
         constructRules();
 
         //Constroi a interface
-        buildInterface();
+        buildInterface(block_comp);
     }
 
     private enum Button {
@@ -624,8 +625,9 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
     /**
      * Exibe a interface de construção de regras.
+     * 
      */
-    private void buildInterface() {
+    private void buildInterface(boolean block_comp) {
         allPane = new JPanel();
         this.setMinimumSize(new Dimension(1200, 500));
         this.setSize(this.getMinimumSize());
@@ -889,7 +891,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         }
 
         //Desabilita todos os JComponents criados até agora
-        setAllEnabled(allPane, false);
+        setAllEnabled(allPane, !block_comp);
 
         //Cria a barra de ferramentas
         JToolBar tBar = new JToolBar();
