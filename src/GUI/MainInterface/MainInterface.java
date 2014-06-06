@@ -14,8 +14,8 @@ import GUI.Util.ProgressBar;
 import GUI.Util.ProgressHandler;
 import Manager.Manager;
 import Merge.MergeShow;
+import edu.uci.ics.jung.visualization.VisualizationViewer;
 import gems.ic.uff.br.newView.SettingsDialog;
-import gems.ic.uff.br.newView.TreePanel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,6 +26,7 @@ import java.net.URISyntaxException;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import org.w3c.dom.Node;
 
 /**
  * @author Marcio Tadeu de Oliveira Júnior
@@ -845,16 +846,15 @@ public class MainInterface extends JFrame implements ActionListener {
 
         // Arvores do Phoenix
         treesTabMerge.setLayout(gridBag);
-        JPanel trees = new TreePanel(documents.getContent(1), documents.getContent(2));
+        JSplitPane trees = TwoTreePane.build(documents.getContent(1), documents.getContent(2));
         gridBag.setConstraints(trees, gridBagConstraints);
         treesTabMerge.add(trees);
         tabbedPaneMerge.setEnabledAt(3, true);
 
         mergeTreeTabMerge.setLayout(gridBag);
-        TreeTest mergeTree = new TreeTest(documents.getContent(0), documents.getContent(1), documents.getContent(2));
-        //mergeTree.setVisible(true);
-        gridBag.setConstraints(mergeTree.getTree(), gridBagConstraints);
-        mergeTreeTabMerge.add(mergeTree.getTree());
+        VisualizationViewer<Node, String> mergeTree = MergeDiffPanel.build(documents.getContent(0), documents.getContent(1), documents.getContent(2));
+        gridBag.setConstraints(mergeTree, gridBagConstraints);
+        mergeTreeTabMerge.add(mergeTree);
         tabbedPaneMerge.setEnabledAt(4, true);
 
         this.refresh(documents);
