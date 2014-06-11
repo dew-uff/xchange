@@ -6,7 +6,7 @@ package GUI.MainInterface;
 
 import Documents.Documents;
 import GUI.Layout.LayoutConstraints;
-import gems.ic.uff.br.newView.DiffTreePanel;
+import edu.uci.ics.jung.visualization.VisualizationViewer;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
+import org.w3c.dom.Node;
 
 /**
  * @author Carlos Roberto Carvalho Oliveira
@@ -169,8 +170,7 @@ public class SintaticDiffTree extends JPanel implements ActionListener{
             
             this.remove(diffTreePane);
             diffTreePane.setLayout(gridBag);
-            diffTreePane = new DiffTreePanel(documents.getContent(leftCB.getSelectedIndex()),documents.getContent(rightCB.getSelectedIndex()));         
-            diffTreePane.setVisible(true);
+            diffTreePane = DiffTreePanelTest.build(documents.getContent(leftCB.getSelectedIndex()),documents.getContent(rightCB.getSelectedIndex()));
             gridBag.setConstraints(diffTreePane, constraints);
             this.add(diffTreePane);
             diffTreePane.revalidate();

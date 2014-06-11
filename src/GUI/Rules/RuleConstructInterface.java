@@ -434,6 +434,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             //COnstroi a regra
             String regraConst = "";
             for (Condition condition : conditions) {
+                System.out.println('"'+comboOutput.getSelectedItem().toString()+'"');
                 String aux = buildCondition(comboOutput.getSelectedItem().toString(), condition.getFirstTerm(), condition.getOperator(), condition.getSecondTerm(), false);
                 if (regraConst.equals("")) {
                     regraConst = aux;
@@ -589,7 +590,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
         Rule rule = rulesModule.getRules().get(index);
 
-        comboOutput.setSelectedItem(rule.getOutput());
+        comboOutput.setSelectedItem(rule.getOutput().toLowerCase());
         nameRule.setText(rule.getName());
 
         //lê cada condição
