@@ -170,7 +170,7 @@ public class SintaticDiffTree extends JPanel implements ActionListener{
             
             this.remove(diffTreePane);
             diffTreePane.setLayout(gridBag);
-            diffTreePane = DiffTreePanelTest.build(documents.getContent(leftCB.getSelectedIndex()),documents.getContent(rightCB.getSelectedIndex()));
+            diffTreePane = DiffTreePanel.build(documents.getContent(leftCB.getSelectedIndex()),documents.getContent(rightCB.getSelectedIndex()));
             gridBag.setConstraints(diffTreePane, constraints);
             this.add(diffTreePane);
             diffTreePane.revalidate();
