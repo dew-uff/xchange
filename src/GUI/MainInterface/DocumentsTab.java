@@ -79,12 +79,11 @@ public class DocumentsTab extends JPanel implements ActionListener {
         cbPanel.add(rightPane);
 
         /*Define o layout e a posição dos ComboBoxes*/
-        LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1);
+        LayoutConstraints.setConstraints(constraints, 1, 0, 1, 1, 3, 1);
         constraints.insets = new Insets(2, 2, 0, 2);
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.anchor = GridBagConstraints.EAST;
         gridBag.setConstraints(cbPanel, constraints);
-
 
         //torna os ComboBoxes visíveis
         leftCB.setVisible(true);
@@ -98,13 +97,16 @@ public class DocumentsTab extends JPanel implements ActionListener {
          */
         docPane = new DocumentsPane();
 
-        LayoutConstraints.setConstraints(constraints, 0, 1, 2, 1, 1, 100);
+        LayoutConstraints.setConstraints(constraints, 1, 1, 1, 1, 3, 100);
         constraints.fill = GridBagConstraints.BOTH;
         constraints.anchor = GridBagConstraints.NORTHWEST;
         gridBag.setConstraints(docPane, constraints);
         docPane.setVisible(true);
 
         this.add(docPane);
+
+        //Conclui a construção da interface
+        documents = new Documents();
         this.manager = manager;
     }
 
@@ -151,7 +153,7 @@ public class DocumentsTab extends JPanel implements ActionListener {
             leftCB.addItem(s);
             rightCB.addItem(s);
         }
-        
+
         if (documents.getSize() == 0) {//se não há documentos limpa as areas de texto
             setRightText("");
             setLeftText("");
@@ -161,7 +163,7 @@ public class DocumentsTab extends JPanel implements ActionListener {
             rightCB.addItem("");
             rightCB.setSelectedIndex(1);
         } else if (documents.getSize() >= 2) {//se há mais de dois documentos permanecem os que estavam em exibição
-            if(leftCBIndex == -1 && rightCBIndex == -1){//Quando se está em algum modulo (ex: Syntatic Diff) e troca para outro modulo (ex: Semantic Diff), ou vice e versa, esses valores ficam igual a -1. O mesmo ocorre quando se abre um projeto
+            if (leftCBIndex == -1 && rightCBIndex == -1) {//Quando se está em algum modulo (ex: Syntatic Diff) e troca para outro modulo (ex: Semantic Diff), ou vice e versa, esses valores ficam igual a -1. O mesmo ocorre quando se abre um projeto
                 leftCBIndex = 0;
                 rightCBIndex = 1;
             }
@@ -175,40 +177,40 @@ public class DocumentsTab extends JPanel implements ActionListener {
         //adiciona novamente os eventos
         leftCB.addActionListener(this);
         rightCB.addActionListener(this);
-        
-        //Redefine a posição dos SplitPane's de acordo com a quantidade de documentos abertos
-        this.docPane.resizeSplitPane(documents.getSize());
 
         //define a nova lista de documentos da classe
         this.documents = documents;
+
+        this.revalidate();
     }
-    
+
     /**
      * Trata os eventos da classe.
      *
      * @param e
      */
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e
+    ) {
         if (e.getSource().equals(leftCB)) {//muda o texto esquerdo de acordo com o combobox esquerdo
             this.setLeftText(documents.getContent(leftCB.getSelectedIndex()));
         }
         if (e.getSource().equals(rightCB)) {//muda o texto direito de acordo com o combobox direito
-            if (rightCB.getSelectedIndex() < rightCB.getItemCount() && rightCB.getItemCount()==2) {
+            if (rightCB.getItemCount() >= 2) {
                 this.setRightText(documents.getContent(rightCB.getSelectedIndex()));
             }
         }
     }
-    
-    public int getLeftCBIndex(){
+
+    public int getLeftCBIndex() {
         return this.leftCB.getSelectedIndex();
     }
-    
-    public int getRightCBIndex(){
+
+    public int getRightCBIndex() {
         return this.rightCB.getSelectedIndex();
     }
-    
-    public Documents getDocuments(){
+
+    public Documents getDocuments() {
         return this.documents;
     }
 }

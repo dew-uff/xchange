@@ -1,6 +1,7 @@
 package AutomaticRules;
 
-import GUI.MainInterface.DocumentsTab;
+import Documents.Document;
+import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -12,8 +13,13 @@ import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.stream.XMLStreamException;
 import weka.associations.Apriori;
 import weka.associations.AssociationRule;
 import weka.associations.Item;
@@ -22,97 +28,93 @@ import weka.core.converters.ConverterUtils;
 
 public class WekaParser {
 
-    public static void main(DocumentsTab documentsTab){
-        gerarRegras(documentsTab);
-    }
-    
-    public static List<Set> gerarRegras(DocumentsTab documentsTab) {
+    public List<Set> generateRules(List<Document> documents, List<String> mapeamentoTags, String keyChoice) {
         try {
-            ArrayList<String> paths = documentsTab.getDocuments().getPathWays();
-            String document1 = paths.get(documentsTab.getLeftCBIndex());
-            String document2 = paths.get(documentsTab.getRightCBIndex());
             String separator = System.getProperty("file.separator");
             String workingPath = System.getProperty("user.dir");
-            String fileDiff = workingPath+separator+"temp"+separator+"mining_diff.xml";
-            String fileArff = workingPath+separator+"temp"+separator+"mining_arff.arff";
-            
-            //Lendo todas as tags do <emp> baseado na segunda versão
-            XMLInputFactory factory = XMLInputFactory.newInstance();
-            InputStream is = new FileInputStream(document2);
-            XMLStreamReader reader = factory.createXMLStreamReader(is);
-            List<String> mapeamentoTags = new ArrayList<String>();
+            int i;
 
-            String root = null;
-            String each = null;
-            while (reader.hasNext()) {
-                int event = reader.next();
-                if (event == XMLStreamConstants.START_ELEMENT) {
-                    if (root == null) {
-                        root = reader.getLocalName();
-                    } else if (each == null) {
-                        each = reader.getLocalName();
-                    } else if (reader.getLocalName().equalsIgnoreCase(each)) {
-                        break;
-                    } else {
-                        mapeamentoTags.add(reader.getLocalName());
-                    }
-                }
-            }
-            is.close();
-            
-            //Selecionando a tag chave primaria
-            String unchangedTag = "empno";
-            //Selecionando tags a não serem consideradas
-            List<String> removeTags = new ArrayList<String>();
-            removeTags.add("deptno");
-            removeTags.add("hiredate");
-            
-            //Removendo tags selecionadas do mapeamento de Tags
-            mapeamentoTags.removeAll(removeTags);
-            
+            String tempDiff = workingPath + separator + "temp" + separator + "temp_diff.xml";
+            String fileDiff = workingPath + separator + "temp" + separator + "mining_diff.xml";
+            String fileArff = workingPath + separator + "temp" + separator + "mining_arff.arff";
+
             //Gerando o Diff
-            XDiff diff = new XDiff(document1, document2, fileDiff);
-            //Mepeando o Diff em Lists
+            StringBuilder fileDiffContent = new StringBuilder();
             List<List> mapeamentoDiff = new ArrayList<List>();
-            int i = 0;
-            
-            is = new FileInputStream(fileDiff);
-            reader = factory.createXMLStreamReader(is);
+            String root = null;
 
-            root = null;
-            each = null;
-            while (reader.hasNext()) {
-                int event = reader.next();
-                if (event == XMLStreamConstants.START_ELEMENT) {
-                    if (root == null) {
-                        root = reader.getLocalName();
-                    } else if (each == null) {
-                        each = reader.getLocalName();
-                        mapeamentoDiff.add(new ArrayList<String>());
-                    } else if (reader.getLocalName().equalsIgnoreCase(each)) {
-                        mapeamentoDiff.add(new ArrayList<String>());
-                        i++;
+            for (int k = 1; k < documents.size(); k++) {
+                String path1 = null, path2 = null;
+                if (keyChoice.equals("id")) {
+                    String file1 = documents.get(k - 1).getFile().getName();
+                    String file2 = documents.get(k).getFile().getName();
+                    String preName = workingPath + separator + "temp" + separator +file1.substring(0, file1.length()-4)+file2.substring(0, file2.length()-4)+"_";
+                    if(new File(preName+file1).isFile()){
+                        path1 = preName+file1;
+                        path2 = preName+file2;
                     } else {
-                        mapeamentoDiff.get(i).add(reader.getLocalName());
+                        preName = workingPath + separator + "temp" + separator +file2.substring(0, file2.length()-4)+file1.substring(0, file1.length()-4)+"_";
+                        path1 = preName+file1;
+                        path2 = preName+file2;
+                    }
+                    
+                } else {
+                    path1 = documents.get(k - 1).getPathWay();
+                    path2 = documents.get(k).getPathWay();
+                }
+                
+                XDiff diff = new XDiff(path1, path2, tempDiff);
+                List<List> mapeamentoDiffTemp = new ArrayList<List>();
+                i = 0;
+
+                XMLInputFactory factory = XMLInputFactory.newInstance();
+                InputStream is = new FileInputStream(tempDiff);
+                XMLStreamReader reader = factory.createXMLStreamReader(is);
+
+                root = null;
+                String each = null;
+                while (reader.hasNext()) {
+                    int event = reader.next();
+                    if (event == XMLStreamConstants.START_ELEMENT) {
+                        if (root == null) {
+                            root = reader.getLocalName();
+                        } else if (each == null) {
+                            each = reader.getLocalName();
+                            mapeamentoDiff.add(new ArrayList<String>());
+                        } else if (reader.getLocalName().equalsIgnoreCase(each)) {
+                            mapeamentoDiff.add(new ArrayList<String>());
+                            i++;
+                        } else {
+                            mapeamentoDiff.get(i).add(reader.getLocalName().toLowerCase());
+                        }
                     }
                 }
+                is.close();
+
+                if (mapeamentoDiffTemp.size() > 0) {
+                    mapeamentoDiff.add(mapeamentoDiffTemp);
+                }
             }
-            is.close();
-            
-            
+
+            BufferedWriter bw = new BufferedWriter(new FileWriter(new File(fileDiff)));
+            bw.write(fileDiffContent.toString());
+            bw.close();
+
             //Gerando ARFF baseado nas tags que você quer
             StringBuilder arff = new StringBuilder();
             arff.append("@relation ").append(root).append('\n');
             for (i = 0; i < mapeamentoTags.size(); i++) {
-                    arff.append("@attribute '").append(mapeamentoTags.get(i)).append("' {y}\n");
+                arff.append("@attribute '").append(mapeamentoTags.get(i)).append("' {y}\n");
             }
             arff.append("@data\n");
 
             for (i = 0; i < mapeamentoDiff.size(); i++) {
-                
-                if(mapeamentoDiff.get(i).contains(unchangedTag)) //Eliminando DIFF que possua a tag selecionada como chave primária
+
+                if (mapeamentoDiff.get(i).contains(keyChoice)) //Eliminando DIFF que possua a tag selecionada como chave primária
+                {
                     continue;
-                
+                }
+
                 for (int j = 0; j < mapeamentoTags.size(); j++) {
                     if (j != 0) {
                         arff.append(',');
@@ -122,12 +124,12 @@ public class WekaParser {
                 arff.append('\n');
             }
 
-            System.out.println(arff);        
+            System.out.println(arff);
 
             //Passar arff para o Weka e tratar a sáida 
-            BufferedWriter br = new BufferedWriter(new FileWriter(new File(fileArff)));  
-            br.write(arff.toString());  
-            br.close(); 
+            BufferedWriter bw2 = new BufferedWriter(new FileWriter(new File(fileArff)));
+            bw2.write(arff.toString());
+            bw2.close();
 
             InputStream isArff = new FileInputStream(fileArff);
 
@@ -135,7 +137,7 @@ public class WekaParser {
             data.setClassIndex(data.numAttributes() - 1);
 
             // build associator
-            Apriori apriori = new Apriori();        
+            Apriori apriori = new Apriori();
             apriori.setClassIndex(data.classIndex());
             apriori.setNumRules(1000);
             apriori.setMinMetric(0);
@@ -143,7 +145,7 @@ public class WekaParser {
             apriori.buildAssociations(data);
             apriori.getAssociationRules();
 
-            List<Set> listRules = new ArrayList<Set>();        
+            List<Set> listRules = new ArrayList<Set>();
 
             for (AssociationRule rule : apriori.getAssociationRules().getRules()) {
                 Set<String> currentRule = new HashSet<String>();
@@ -154,9 +156,9 @@ public class WekaParser {
                     currentRule.add(tag.getAttribute().name());
                 }
 
-                if(!listRules.contains(currentRule)) {
+                if (!listRules.contains(currentRule)) {
                     listRules.add(currentRule);
-                }           
+                }
             }
 
             System.out.println(apriori);
@@ -169,5 +171,41 @@ public class WekaParser {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public List<String> getTags(String document) {
+
+        List<String> mapeamentoTags = new ArrayList<String>();
+        try {
+            //Lendo todas as tags do <emp> baseado na segunda versão
+            XMLInputFactory factory = XMLInputFactory.newInstance();
+            InputStream is = new FileInputStream(document);
+            XMLStreamReader reader = factory.createXMLStreamReader(is);
+
+            String root = null;
+            String each = null;
+            while (reader.hasNext()) {
+                int event = reader.next();
+                if (event == XMLStreamConstants.START_ELEMENT) {
+                    if (root == null) {
+                        root = reader.getLocalName();
+                    } else if (each == null) {
+                        each = reader.getLocalName();
+                        mapeamentoTags.add(each.toLowerCase());
+                    } else if (reader.getLocalName().equalsIgnoreCase(each)) {
+                        break;
+                    } else {
+                        mapeamentoTags.add(reader.getLocalName().toLowerCase());
+                    }
+                }
+            }
+            is.close();
+
+        } catch (IOException ex) {
+            Logger.getLogger(WekaParser.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (XMLStreamException ex) {
+            Logger.getLogger(WekaParser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return mapeamentoTags;
     }
 }

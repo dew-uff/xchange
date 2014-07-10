@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project context-key="empno">
+    <rule enabled="true" name="testee" output="DEPTNO">
+        <condition change="&gt;" term1="EMPNOAfter" term2="EMPNOBefore"/>
+    </rule>
+    <rule enabled="false" name="new" output="EMPNO">
+        <condition change="\=" term1="EMPNOBefore\\" term2="EMPNOBefore"/>
+    </rule>
+</project>
