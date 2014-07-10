@@ -33,10 +33,6 @@ public class WekaParser {
             String separator = System.getProperty("file.separator");
             String workingPath = System.getProperty("user.dir");
             int i;
-            //Similaridade não funcionando ainda
-            if (keyChoice.equals("id")) {
-                return new ArrayList<Set>();
-            }
 
             String tempDiff = workingPath + separator + "temp" + separator + "temp_diff.xml";
             String fileDiff = workingPath + separator + "temp" + separator + "mining_diff.xml";
@@ -48,7 +44,26 @@ public class WekaParser {
             String root = null;
 
             for (int k = 1; k < documents.size(); k++) {
-                XDiff diff = new XDiff(documents.get(k - 1).getPathWay(), documents.get(k).getPathWay(), tempDiff);
+                String path1 = null, path2 = null;
+                if (keyChoice.equals("id")) {
+                    String file1 = documents.get(k - 1).getFile().getName();
+                    String file2 = documents.get(k).getFile().getName();
+                    String preName = workingPath + separator + "temp" + separator +file1.substring(0, file1.length()-4)+file2.substring(0, file2.length()-4)+"_";
+                    if(new File(preName+file1).isFile()){
+                        path1 = preName+file1;
+                        path2 = preName+file2;
+                    } else {
+                        preName = workingPath + separator + "temp" + separator +file2.substring(0, file2.length()-4)+file1.substring(0, file1.length()-4)+"_";
+                        path1 = preName+file1;
+                        path2 = preName+file2;
+                    }
+                    
+                } else {
+                    path1 = documents.get(k - 1).getPathWay();
+                    path2 = documents.get(k).getPathWay();
+                }
+                
+                XDiff diff = new XDiff(path1, path2, tempDiff);
                 List<List> mapeamentoDiffTemp = new ArrayList<List>();
                 i = 0;
 

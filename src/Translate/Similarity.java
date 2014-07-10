@@ -99,7 +99,13 @@ public class Similarity extends ContextKey {
      * @param similarityRate Raio de similarida desejado.
      */
     public void documentsWithIDs(String pathDocument1, String pathDocument2, float similarityRate) {
-
+        String file1 = new File(pathDocument1).getName();
+        String file2 = new File(pathDocument2).getName();
+        String preName = System.getProperty("user.dir")+System.getProperty("file.separator")+"temp"+System.getProperty("file.separator")+file1.substring(0, file1.length()-4)+file2.substring(0, file2.length()-4)+"_";
+        
+        pathID1 = preName+file1;
+        pathID2 = preName+file2;
+        
         this.similarityRate = similarityRate;
 
         ProgressHandler.setLabel("Creating DOM Documents");
@@ -328,9 +334,6 @@ public class Similarity extends ContextKey {
      * @param txt2
      */
     private void salvaXmlComId(String txt1, String txt2) {
-
-        pathID1 = "temp1.xml";
-        pathID2 = "temp2.xml";
 
         if (!txt1.equals("") && !txt2.equals("")) {
             try {
