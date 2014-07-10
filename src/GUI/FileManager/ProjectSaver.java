@@ -3,7 +3,6 @@ package GUI.FileManager;
 import Documents.Documents;
 import Exception.NoSelectedFileException;
 import GUI.MainInterface.MainInterface;
-import GUI.Rules.RuleMainInterface;
 import Manager.Manager;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -181,6 +180,7 @@ public abstract class ProjectSaver{
             }
         }
         
+        /*
         if(isEnableXMLDiff){
             String rulesName = "rules"+".pl";
                 
@@ -198,7 +198,7 @@ public abstract class ProjectSaver{
             }catch(IOException ex){
                 JOptionPane.showMessageDialog(null, "It was not possible save the file.", "Erro", JOptionPane.ERROR_MESSAGE); //caso ocorra algum erro na gravação do arquivo
             }
-        }
+        }*/
     }
     
     public static boolean deleteTemp(File dir){
