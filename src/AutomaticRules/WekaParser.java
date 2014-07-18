@@ -35,11 +35,9 @@ public class WekaParser {
             int i;
 
             String tempDiff = workingPath + separator + "temp" + separator + "temp_diff.xml";
-            String fileDiff = workingPath + separator + "temp" + separator + "mining_diff.xml";
             String fileArff = workingPath + separator + "temp" + separator + "mining_arff.arff";
 
             //Gerando o Diff
-            StringBuilder fileDiffContent = new StringBuilder();
             List<List> mapeamentoDiff = new ArrayList<List>();
             String root = null;
 
@@ -95,11 +93,7 @@ public class WekaParser {
                     mapeamentoDiff.add(mapeamentoDiffTemp);
                 }
             }
-
-            BufferedWriter bw = new BufferedWriter(new FileWriter(new File(fileDiff)));
-            bw.write(fileDiffContent.toString());
-            bw.close();
-
+            
             //Gerando ARFF baseado nas tags que você quer
             StringBuilder arff = new StringBuilder();
             arff.append("@relation ").append(root).append('\n');
