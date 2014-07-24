@@ -48,7 +48,7 @@ public class MainInterface extends JFrame implements ActionListener {
     private PrologFactsMergeTab prologFactsMergeTab;
     private JTabbedPane tabbedPane, tabbedPaneMerge;
     private Documents documents;
-    private JButton testeBtn, newBtn, openBtn, addBtn, saveBtn, contextBtn, similarityBtn, managerBtn, mergeBtn, saveXMLDiffBtn, syntaticDiffBtn, semanticDiffBtn, syntaticMergeBtn, semanticMergeBtn, applyChoicesBtn, writeBtn, cancelBtn, reportBtn;
+    private JButton newBtn, openBtn, addBtn, saveBtn, contextBtn, similarityBtn, managerBtn, mergeBtn, saveXMLDiffBtn, syntaticDiffBtn, semanticDiffBtn, syntaticMergeBtn, semanticMergeBtn, applyChoicesBtn, writeBtn, cancelBtn, reportBtn;
     private boolean isSimilarity;
     private float similarityRate;
     private Manager manager;
@@ -262,13 +262,7 @@ public class MainInterface extends JFrame implements ActionListener {
         ImageIcon cancelIcon = new ImageIcon(getClass().getResource("/GUI/icons/cancelMerge.png"));
         ImageIcon reportIcon = new ImageIcon(getClass().getResource("/GUI/icons/report.png"));
         ImageIcon saveXMLDiffIcon = new ImageIcon(getClass().getResource("/GUI/icons/saveXMLDiff.png"));
-
-        //Cria os botões e seus eventos
-        testeBtn = new JButton(testeIcon);
-        testeBtn.setToolTipText("Teste");
-        testeBtn.addActionListener(this);
-        testeBtn.setEnabled(true);
-
+        
         //Cria os botões e seus eventos
         newBtn = new JButton(newIcon);
         newBtn.setToolTipText("New Project");
@@ -355,7 +349,6 @@ public class MainInterface extends JFrame implements ActionListener {
         tBar.add(cancelBtn);
         tBar.add(saveXMLDiffBtn);
         tBar.add(reportBtn);
-        tBar.add(testeBtn);
         tBar.setAlignmentX(0);
 
         tBar.setFloatable(false); //Fixa a barra de ferramentas à sua posição
