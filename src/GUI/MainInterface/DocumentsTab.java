@@ -20,7 +20,7 @@ import javax.swing.JPanel;
  * areas de texto e os ComboBoxes que servirão para selecionar qual arquivo XML
  * será mostrado em cada Text Area definidas em DocumentsPane
  */
-public class DocumentsTab extends JPanel implements ActionListener {
+public class DocumentsTab extends JPanel implements ActionListener, IDocumentsTab {
 
     private DocumentsPane docPane;
     private JComboBox leftCB, rightCB;

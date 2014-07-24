@@ -117,6 +117,60 @@ public class Conflict {
     public void setStatusno2(String statusno2) {
         this.statusno2 = statusno2;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 47 * hash + (this.conflictNodes != null ? this.conflictNodes.hashCode() : 0);
+        hash = 47 * hash + (this.description != null ? this.description.hashCode() : 0);
+        hash = 47 * hash + (this.name != null ? this.name.hashCode() : 0);
+        hash = 47 * hash + (this.type != null ? this.type.hashCode() : 0);
+        hash = 47 * hash + this.defaultBranch;
+        hash = 47 * hash + this.selectedBranch;
+        hash = 47 * hash + this.conflictWarning;
+        hash = 47 * hash + (this.statusno1 != null ? this.statusno1.hashCode() : 0);
+        hash = 47 * hash + (this.statusno2 != null ? this.statusno2.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Conflict other = (Conflict) obj;
+        if (this.conflictNodes != other.conflictNodes && (this.conflictNodes == null || !this.conflictNodes.equals(other.conflictNodes))) {
+            return false;
+        }
+        if ((this.description == null) ? (other.description != null) : !this.description.equals(other.description)) {
+            return false;
+        }
+        if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
+            return false;
+        }
+        if ((this.type == null) ? (other.type != null) : !this.type.equals(other.type)) {
+            return false;
+        }
+        if (this.defaultBranch != other.defaultBranch) {
+            return false;
+        }
+        if (this.selectedBranch != other.selectedBranch) {
+            return false;
+        }
+        if (this.conflictWarning != other.conflictWarning) {
+            return false;
+        }
+        if ((this.statusno1 == null) ? (other.statusno1 != null) : !this.statusno1.equals(other.statusno1)) {
+            return false;
+        }
+        if ((this.statusno2 == null) ? (other.statusno2 != null) : !this.statusno2.equals(other.statusno2)) {
+            return false;
+        }
+        return true;
+    }
      
      
 }

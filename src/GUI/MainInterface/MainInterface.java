@@ -13,8 +13,12 @@ import GUI.Util.MainInterfaceHandler;
 import GUI.Util.ProgressBar;
 import GUI.Util.ProgressHandler;
 import Manager.Manager;
+import Manager.Results;
 import Merge.MergeShow;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
+import SemanticMerge.SemanticMergeShow;
+import SemanticMerge.SemanticRules;
+import gems.ic.uff.br.newView.MergeThreeWayPanel;
 import gems.ic.uff.br.newView.SettingsDialog;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -23,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -37,17 +42,19 @@ public class MainInterface extends JFrame implements ActionListener {
     private JMenu mFile, mTools, mView, mAbout, mMerge, mTreeTest;
     private JMenuItem miNew, miOpen, miSave, miContext, miSimilarity, miAdd, miAboutGET, miAboutXChange, miHowToUse, miManager, miSettings, miMerge, miApplyChoice, miWriteMerged, miMergeCancel, miSyntaticDiff, miSemanticDiff, miSyntaticMerge, miSemanticMerge, miTreeTest;
     private ResultsTab resultsTab;
+    private ResultsTabMerge resultsTabSemanticMerge;
     private DocumentsTab documentsTab;
     private PrologFactsTab prologFactsTab;
+    private PrologFactsMergeTab prologFactsMergeTab;
     private JTabbedPane tabbedPane, tabbedPaneMerge;
     private Documents documents;
-    private JButton newBtn, openBtn, addBtn, saveBtn, contextBtn, similarityBtn, managerBtn, mergeBtn, saveXMLDiffBtn, syntaticDiffBtn, semanticDiffBtn, syntaticMergeBtn, semanticMergeBtn, applyChoicesBtn, writeBtn, cancelBtn, reportBtn;
+    private JButton testeBtn, newBtn, openBtn, addBtn, saveBtn, contextBtn, similarityBtn, managerBtn, mergeBtn, saveXMLDiffBtn, syntaticDiffBtn, semanticDiffBtn, syntaticMergeBtn, semanticMergeBtn, applyChoicesBtn, writeBtn, cancelBtn, reportBtn;
     private boolean isSimilarity;
     private float similarityRate;
     private Manager manager;
-    private JPanel resultsTabMerge, conflictsTabMerge, treesTabMerge, mergeTreeTabMerge, initialPane, optionPane;
+    private JPanel resultsTabMerge, conflictsTabMerge, semanticConflictsTabMerge, treesTabMerge, mergeTreeTabMerge, initialPane, optionPane;
     private DocumentsTabMerge documentsTabMerge;
-    private Boolean isSyntaticMerge = false, isSyntaticDiff = false, isSemanticDiff = false;
+    private Boolean isSyntaticMerge = false, isSyntaticDiff = false, isSemanticDiff = false, isSemanticMerge = false;
     private SintaticDiffTree sintaticDiff;
     private XMLDiffTab xmldifftab;
     private static JFrame jFrame;
@@ -139,7 +146,7 @@ public class MainInterface extends JFrame implements ActionListener {
         miSemanticMerge.setMnemonic('m');
         mView.add(miSemanticMerge);
         miSemanticMerge.addActionListener(this);
-        miSemanticMerge.setEnabled(false);
+        miSemanticMerge.setEnabled(true);
 
         //cria o item "Tools" na barra de menus
         mTools = new JMenu("Tools");
@@ -232,7 +239,6 @@ public class MainInterface extends JFrame implements ActionListener {
         miHowToUse.setMnemonic('u');
         mAbout.add(miHowToUse);
         miHowToUse.addActionListener(this);
-        
 
         //Cria a barra de ferramentas
         JToolBar tBar = new JToolBar();
@@ -243,6 +249,7 @@ public class MainInterface extends JFrame implements ActionListener {
 
         //Define os icones que serão usados nos botões
         ImageIcon newIcon = new ImageIcon(getClass().getResource("/GUI/icons/new.png"));
+        ImageIcon testeIcon = new ImageIcon(getClass().getResource("/GUI/icons/new.png"));
         ImageIcon openIcon = new ImageIcon(getClass().getResource("/GUI/icons/open.png"));
         ImageIcon addIcon = new ImageIcon(getClass().getResource("/GUI/icons/add.png"));
         ImageIcon saveIcon = new ImageIcon(getClass().getResource("/GUI/icons/save.png"));
@@ -255,6 +262,12 @@ public class MainInterface extends JFrame implements ActionListener {
         ImageIcon cancelIcon = new ImageIcon(getClass().getResource("/GUI/icons/cancelMerge.png"));
         ImageIcon reportIcon = new ImageIcon(getClass().getResource("/GUI/icons/report.png"));
         ImageIcon saveXMLDiffIcon = new ImageIcon(getClass().getResource("/GUI/icons/saveXMLDiff.png"));
+
+        //Cria os botões e seus eventos
+        testeBtn = new JButton(testeIcon);
+        testeBtn.setToolTipText("Teste");
+        testeBtn.addActionListener(this);
+        testeBtn.setEnabled(true);
 
         //Cria os botões e seus eventos
         newBtn = new JButton(newIcon);
@@ -342,6 +355,7 @@ public class MainInterface extends JFrame implements ActionListener {
         tBar.add(cancelBtn);
         tBar.add(saveXMLDiffBtn);
         tBar.add(reportBtn);
+        tBar.add(testeBtn);
         tBar.setAlignmentX(0);
 
         tBar.setFloatable(false); //Fixa a barra de ferramentas à sua posição
@@ -461,14 +475,108 @@ public class MainInterface extends JFrame implements ActionListener {
         this.repaint();
     }
 
+    /**
+     *
+     *
+     * @param documents
+     * @param gridBag
+     * @param constraints
+     */
+    public void buildSemanticMerge(Documents documents, GridBagLayout gridBag, GridBagConstraints constraints) {
+        //desativa Semantic Diff e Syntatic Diff caso os mesmo estejam ativos
+        if (isSyntaticDiff || isSemanticDiff || isSyntaticMerge) {
+            tabbedPane.setVisible(false);
+            this.isSemanticDiff = false;
+            this.isSyntaticDiff = false;
+            this.isSyntaticMerge = false;
+        }
+
+        newBtn.setEnabled(true);
+        openBtn.setEnabled(true);
+        addBtn.setEnabled(true);
+        mTools.setEnabled(true);
+        mMerge.setVisible(true);
+        miManager.setEnabled(false);
+        miManager.setVisible(true);
+        miContext.setEnabled(false);
+        miSimilarity.setEnabled(false);
+        miSettings.setEnabled(false);
+        similarityBtn.setVisible(false);
+        contextBtn.setVisible(true);
+        managerBtn.setVisible(true);
+        managerBtn.setEnabled(false);
+        reportBtn.setVisible(false);
+        mergeBtn.setVisible(true);
+        mMerge.setEnabled(true);
+        applyChoicesBtn.setEnabled(false);
+        applyChoicesBtn.setVisible(true);
+        writeBtn.setEnabled(false);
+        writeBtn.setVisible(true);
+        cancelBtn.setEnabled(false);
+        cancelBtn.setVisible(true);
+        saveXMLDiffBtn.setVisible(false);
+
+        documentsTabMerge = new DocumentsTabMerge();
+        resultsTabSemanticMerge = new ResultsTabMerge();
+        conflictsTabMerge = new JPanel();
+        semanticConflictsTabMerge = new JPanel();
+        resultsTabMerge = new JPanel();
+        prologFactsMergeTab = new PrologFactsMergeTab(manager, this);
+
+        //cria o gerenciador de abas do merge adicionando as abas de documentos, resultados e conflitos
+        tabbedPaneMerge = new JTabbedPane();
+        tabbedPaneMerge.add(documentsTabMerge, "XML Version");//adiciona a aba de documentos
+        tabbedPaneMerge.add(prologFactsMergeTab, "Prolog Facts");
+        tabbedPaneMerge.add(resultsTabSemanticMerge, "XML Diff");//adiciona a aba de resultados
+        tabbedPaneMerge.add(conflictsTabMerge, "Conflicts");//adiciona a aba de conflitos
+        tabbedPaneMerge.add(semanticConflictsTabMerge, "Semantic Conflicts"); //adiciona a aba de conflitos semanticos.
+        tabbedPaneMerge.add(resultsTabMerge, "XML Merge"); //adiciona a aba Diff XML
+
+        tabbedPaneMerge.setEnabledAt(1, false);
+        tabbedPaneMerge.setEnabledAt(2, false);
+        tabbedPaneMerge.setEnabledAt(3, false);
+        tabbedPaneMerge.setEnabledAt(4, false);
+        tabbedPaneMerge.setVisible(true);
+
+        tabbedPaneMerge.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                if (tabbedPaneMerge.getSelectedIndex() == 1 && !prologFactsMergeTab.alreadySet()) {
+                    prologFactsMergeTab.setLeftCB(documentsTabMerge.getLeftCBIndex());
+                    prologFactsMergeTab.setCenterCB(documentsTabMerge.getCenterCBIndex());
+                    prologFactsMergeTab.setRightCB(documentsTabMerge.getRightCBIndex());
+                }
+            }
+        });
+
+        //indica a posição e layout do gerenciador de abas
+        LayoutConstraints.setConstraints(constraints, 0, 1, 1, 1, 100, 100);
+        constraints.insets = new Insets(0, 10, 0, 10);
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.anchor = GridBagConstraints.NORTHWEST;
+        gridBag.setConstraints(tabbedPaneMerge, constraints);
+
+        //adiciona o gerenciador de abas do merge à interface grafica
+        this.add(tabbedPaneMerge);
+
+        LayoutConstraints.setConstraints(constraints, 0, 1, 1, 1, 100, 100);
+        constraints.insets = new Insets(0, 10, 0, 10);
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.anchor = GridBagConstraints.NORTHWEST;
+        gridBag.setConstraints(tabbedPaneMerge, constraints);
+
+        tabbedPaneMerge.setVisible(true);
+        this.refresh(documents);
+    }
+
     /*
      * Monta a Interface do Diff Sintatico e do Diff Semantico
      */
     public void buildDiffInterface(Documents documents, GridBagLayout gridBag, GridBagConstraints constraints) {
         //Desetiva o Syntatic Merge caso o mesmo esteja ativo
-        if (isSyntaticMerge) {
+        if (isSyntaticMerge || isSemanticMerge) {
             tabbedPaneMerge.setVisible(false);
             this.isSyntaticMerge = false;
+            this.isSemanticMerge = false;
         }
 
         //torna visivel os botões iniciais
@@ -592,6 +700,7 @@ public class MainInterface extends JFrame implements ActionListener {
             tabbedPane.setVisible(false);
             this.isSemanticDiff = false;
             this.isSyntaticDiff = false;
+            this.isSemanticMerge = false;
         }
 
         newBtn.setEnabled(true);
@@ -668,6 +777,14 @@ public class MainInterface extends JFrame implements ActionListener {
                 miMerge.setEnabled(true);
                 mergeBtn.setEnabled(true);
             }
+        } else if (isSemanticMerge) {
+            documentsTabMerge.refresh(documents);
+            prologFactsMergeTab.refresh(documents);
+            resultsTabSemanticMerge.refresh(documents, manager);
+            if (documents.getSize() >= 3) {
+                contextBtn.setEnabled(true);
+                miContext.setEnabled(true);
+            }
         } else if (isSyntaticDiff) {
             documentsTab.refresh(documents);
             sintaticDiff.refresh(documents);
@@ -724,6 +841,9 @@ public class MainInterface extends JFrame implements ActionListener {
             this.isSyntaticDiff = true;
             this.isSemanticDiff = false;
             tabbedPane.setVisible(false);
+            if (tabbedPaneMerge != null) {
+                tabbedPaneMerge.setVisible(false);
+            }
             this.buildDiffInterface(documents, gridBag, constraints);
         } else if (e.getSource().equals(semanticDiffBtn) || e.getSource().equals(miSemanticDiff)) {
             this.initialPane.setVisible(false);
@@ -735,6 +855,10 @@ public class MainInterface extends JFrame implements ActionListener {
             this.initialPane.setVisible(false);
             this.isSyntaticMerge = true;
             this.buildSyntaticMerge(documents, gridBag, constraints);
+        } else if (e.getSource().equals(semanticMergeBtn) || e.getSource().equals(miSemanticMerge)) {
+            this.initialPane.setVisible(false);
+            this.isSemanticMerge = true;
+            this.buildSemanticMerge(documents, gridBag, constraints);
         } else if (e.getSource().equals(miAdd) || e.getSource().equals(addBtn)) {//ação "ADICIONAR"
             addXMLFile();
         } else if (e.getSource().equals(similarityBtn) || e.getSource().equals(miSimilarity)) {//ação "SIMILARIDADE"
@@ -743,7 +867,11 @@ public class MainInterface extends JFrame implements ActionListener {
             this.repaint();
         } else if (e.getSource().equals(contextBtn) || e.getSource().equals(miContext)) {//ação "CHAVE DE CONTEXTO"
             contextKey();
-            tabbedPane.setEnabledAt(1, true);
+            if (!isSemanticMerge) {
+                tabbedPane.setEnabledAt(1, true);
+            } else {
+                tabbedPaneMerge.setEnabledAt(1, true);
+            }
         } else if (e.getSource().equals(newBtn) || e.getSource().equals(miNew)) {//ação "NOVO"
             newProject();
         } else if (e.getSource().equals(saveBtn) || e.getSource().equals(miSave)) {//ação "SALVAR"
@@ -769,9 +897,13 @@ public class MainInterface extends JFrame implements ActionListener {
             } catch (NoSelectedFileException ex) {
             }
             this.refresh(this.documents);
-        } else if (e.getSource().equals(managerBtn) || e.getSource().equals(miManager)) {//ação "MANAGER"
+        } else if ((e.getSource().equals(managerBtn) || e.getSource().equals(miManager)) && (!isSemanticMerge)) {//ação "MANAGER"
             callManager();
             tabbedPane.setEnabledAt(2, true);
+            reportBtn.setEnabled(true);
+        } else if ((e.getSource().equals(managerBtn) || e.getSource().equals(miManager)) && isSemanticMerge) {//ação "MANAGER" para o merge semântico
+            callManagerSemantic();
+            tabbedPaneMerge.setEnabledAt(2, true);
             reportBtn.setEnabled(true);
         } else if (e.getSource().equals(reportBtn)) {
             resultsTab.getInferenceFileChooser().exportReport();
@@ -807,7 +939,7 @@ public class MainInterface extends JFrame implements ActionListener {
             try {
                 MultiDiffSaver.save(documents);
             } catch (NoSelectedFileException ex) {
-                JOptionPane.showMessageDialog(null, "Diff saving failure!", "Error",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Diff saving failure!", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -819,7 +951,9 @@ public class MainInterface extends JFrame implements ActionListener {
         MergeShow mergeshow = new MergeShow();
         mergeshow.merge(documentsTabMerge.getPathDocLeft(), documentsTabMerge.getPathDocCenter(), documentsTabMerge.getPathDocRight(), this);
         conflictsTabMerge.removeAll();
+
         resultsTabMerge.removeAll();
+
         treesTabMerge.removeAll();
         mergeTreeTabMerge.removeAll();
 
@@ -846,9 +980,12 @@ public class MainInterface extends JFrame implements ActionListener {
         } else {
             tabbedPaneMerge.setSelectedIndex(1);
         }
-        resultsTabMerge.setLayout(gridBag);
         JPanel resultsJP = mergeshow.getResultsJP();
         gridBag.setConstraints(resultsJP, gridBagConstraints);
+        if (isSemanticMerge) {
+            tabbedPaneMerge.setEnabledAt(5, true);
+        }
+        resultsTabMerge.setLayout(gridBag);
         resultsTabMerge.add(resultsJP);
         tabbedPaneMerge.setEnabledAt(1, true);
 
@@ -864,6 +1001,58 @@ public class MainInterface extends JFrame implements ActionListener {
         gridBag.setConstraints(mergeTree, gridBagConstraints);
         mergeTreeTabMerge.add(mergeTree);
         tabbedPaneMerge.setEnabledAt(4, true);
+
+        this.refresh(documents);
+    }
+
+        public void semanticMerge(Manager manager) {
+        SemanticMergeShow semanticMergeShow = new SemanticMergeShow();
+        semanticMergeShow.merge(documentsTabMerge.getPathDocLeft(), documentsTabMerge.getPathDocCenter(), documentsTabMerge.getPathDocRight(), this, manager);
+        conflictsTabMerge.removeAll();
+
+        resultsTabMerge.removeAll();
+
+        applyChoicesBtn.setEnabled(true);
+        cancelBtn.setEnabled(true);
+        miApplyChoice.setEnabled(true);
+        miMergeCancel.setEnabled(true);
+
+        GridBagLayout gridBag = new GridBagLayout();
+        GridBagConstraints gridBagConstraints = new GridBagConstraints();
+        //indica a posição e o layout
+        LayoutConstraints.setConstraints(gridBagConstraints, 0, 0, 1, 1, 1, 1);
+        gridBagConstraints.insets = new Insets(2, 2, 2, 2);
+        gridBagConstraints.fill = GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
+
+        if (semanticMergeShow.getConflictsJP() != null) {
+            conflictsTabMerge.setLayout(gridBag);
+            JPanel conflictsJP = semanticMergeShow.getConflictsJP();
+            gridBag.setConstraints(conflictsJP, gridBagConstraints);
+            conflictsTabMerge.add(conflictsJP);
+            tabbedPaneMerge.setEnabledAt(2, true);
+            //tabbedPaneMerge.setSelectedIndex(2);
+        } 
+        if (semanticMergeShow.getSemanticConflictisJP()!= null) {
+            semanticConflictsTabMerge.setLayout(gridBag);
+            JPanel semanticConflictsJP = semanticMergeShow.getSemanticConflictisJP();
+            gridBag.setConstraints(semanticConflictsJP, gridBagConstraints);
+            semanticConflictsTabMerge.add(semanticConflictsJP);
+            tabbedPaneMerge.setEnabledAt(4, true);
+            //tabbedPaneMerge.setSelectedIndex(4);
+        }
+        else {
+            tabbedPaneMerge.setSelectedIndex(1);
+        }
+        JPanel resultsJP = semanticMergeShow.getResultsJP();
+        gridBag.setConstraints(resultsJP, gridBagConstraints);
+        if (isSemanticMerge) {
+            tabbedPaneMerge.setEnabledAt(4, true);
+            tabbedPaneMerge.setEnabledAt(3, true);
+        }
+        resultsTabMerge.setLayout(gridBag);
+        resultsTabMerge.add(resultsJP);
+        tabbedPaneMerge.setEnabledAt(1, true);
 
         this.refresh(documents);
     }
@@ -903,6 +1092,29 @@ public class MainInterface extends JFrame implements ActionListener {
                 resultsTab.refresh(documents, manager);
                 tabbedPane.setSelectedIndex(2);
             }
+        } else { //Se nenhum metodo estiver ativo
+            JOptionPane.showMessageDialog(this, "No method started!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void callManagerSemantic() {
+        //Se um dos metodos estiver ativo, ou seja, "Context Key" ou "Similarity"
+        if (!manager.getContextKey().isEmpty() || !manager.getSimilarity().isEmpty()) {
+            RuleConstructInterface ruleMainInterface = new RuleConstructInterface(manager, isSimilarity, resultsTabSemanticMerge.getInferenceFileChooser(), documentsTabMerge);
+            //Selecionando todos os documentos para executar as regras
+            //boolean marked[] = new boolean[manager.getContextKey().size()];
+            //for (int i = 0; i < manager.getContextKey().size(); i++)
+            //    marked[i] = true;
+            
+           // manager.startResultsInferenciaContextKey(marked);
+            if (!isSemanticMerge) {
+                resultsTabSemanticMerge.refresh(documents, manager);
+                tabbedPaneMerge.setSelectedIndex(2);
+            } else {
+                semanticMerge(manager);
+                tabbedPaneMerge.setSelectedIndex(2);
+            }
+
         } else { //Se nenhum metodo estiver ativo
             JOptionPane.showMessageDialog(this, "No method started!", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -1011,8 +1223,9 @@ public class MainInterface extends JFrame implements ActionListener {
             try {
                 f = XMLLoader.open();
                 this.documents.add(f);
-                //this.refresh(documents); //Por quê 2 vezes?
-                if (isSyntaticMerge) {
+                this.refresh(documents);
+                if (isSyntaticMerge || isSemanticMerge) {
+
                     tabbedPaneMerge.setSelectedIndex(0);
                 } else {
                     if (documents.getSize() >= 2) {

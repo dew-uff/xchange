@@ -21,7 +21,7 @@ import javax.swing.JPanel;
  * areas de texto e os ComboBoxes que servirão para selecionar qual arquivo XML 
  * será mostrado em cada Text Area definidas em DocumentsPane
  */
-public class DocumentsTabMerge extends JPanel implements ActionListener{
+public class DocumentsTabMerge extends JPanel implements ActionListener, IDocumentsTab{
     private DocumentsPaneMerge docPane;
     private JComboBox leftCB, centerCB, rightCB;
     private Documents documents;
@@ -245,5 +245,21 @@ public class DocumentsTabMerge extends JPanel implements ActionListener{
     public String getPathDocRight(){
         int rightCBIndex = rightCB.getSelectedIndex();
         return documents.getDocument(rightCBIndex+1).getPathWay();    
+    }
+    
+    public int getCenterCBIndex(){
+        return this.centerCB.getSelectedIndex();
+    }
+    
+    public int getLeftCBIndex(){
+        return this.leftCB.getSelectedIndex();
+    }
+    
+    public int getRightCBIndex(){
+        return this.rightCB.getSelectedIndex();
+    }
+    
+    public Documents getDocuments() {
+        return this.documents;
     }
 }

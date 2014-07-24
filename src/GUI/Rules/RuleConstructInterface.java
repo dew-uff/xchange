@@ -11,6 +11,7 @@ import GUI.FileManager.LastpathManager;
 import GUI.FileManager.TXTFileFilter;
 import GUI.FileManager.XMLFileFilter;
 import GUI.MainInterface.DocumentsTab;
+import GUI.MainInterface.IDocumentsTab;
 import GUI.MainInterface.InferenceFileChooser;
 import Rules.Condition;
 import Rules.Rule;
@@ -72,7 +73,7 @@ import org.xml.sax.SAXException;
 public class RuleConstructInterface extends JDialog implements ActionListener {
 
     //Variáveis utilizadas
-    private DocumentsTab documentsTab;
+    private IDocumentsTab documentsTab;
     private RulesModule rulesModule;
     private JButton btnAtributs;
     private static JPanel pnlConditions; //onde ficam os campos da regra em construção
@@ -117,7 +118,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
      * @param inferenceFileChooser
      * @param documentsTab
      */
-    public RuleConstructInterface(Manager manager, boolean isSimilarity, InferenceFileChooser inferenceFileChooser, DocumentsTab documentsTab) {
+    public RuleConstructInterface(Manager manager, boolean isSimilarity, InferenceFileChooser inferenceFileChooser, IDocumentsTab documentsTab) {
         succeeded = false;
         this.documentsTab = documentsTab;
         this.inferenceFileChooser = inferenceFileChooser;
