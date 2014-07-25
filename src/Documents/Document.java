@@ -1,11 +1,8 @@
 package Documents;
 
-import GUI.Util.ProgressHandler;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -87,18 +84,19 @@ public class Document {
      * @return content
      */
     public String getContent() {
-        String content = "";
-
+        StringBuilder content = new StringBuilder();
         BufferedReader br;
         try {
             br = new BufferedReader(new FileReader(this.document));
             while (br.ready()) {
-                content += br.readLine();
+                content.append(br.readLine());
             }
+            br.close();
         } catch (Exception ex) {
             Logger.getLogger(Document.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return XMLFormatter.format(content);
+        
+        return XMLFormatter.format(content.toString());
     }
 
     /**

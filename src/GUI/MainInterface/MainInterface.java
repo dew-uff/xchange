@@ -1218,7 +1218,6 @@ public class MainInterface extends JFrame implements ActionListener {
                 this.documents.add(f);
                 this.refresh(documents);
                 if (isSyntaticMerge || isSemanticMerge) {
-
                     tabbedPaneMerge.setSelectedIndex(0);
                 } else {
                     if (documents.getSize() >= 2) {

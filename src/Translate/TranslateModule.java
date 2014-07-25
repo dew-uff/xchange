@@ -1,10 +1,15 @@
 package Translate;
+import Documents.Document;
 import br.ufrj.ppgi.parser.XMLParser;
 import gems.ic.uff.br.modelo.XML;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 /**
  *
@@ -65,17 +70,20 @@ public abstract class TranslateModule {
         file.put("0",fileTranslate);//adciona o arquivo a se traduzir no hashmap com chave "0", a biblioteca só aceita HashMap
         parser.setClearData(true);//limpa o arquivo externo onde ficam armazenada a tradução
         parser.setResetLastId(TranslateModule.reset);//caso passado true, reseta as ids, caso false, mantém a incrementação
-        parser.executeParseSax(file);//Traduz os fatos usando o método SAX
-        try{//le o resultado da tradução do arquivo criado BaseFatos.pl
-            BufferedReader bf=new BufferedReader(new FileReader(new File("BaseFatos.pl")));
-            String line=bf.readLine();
-            this.facts = "";
-            while(line!=null){
-                this.facts +=line;
-                line=bf.readLine();
+        parser.executeParseSax(file);//Traduz os fatos usando o método SAX        
+
+        StringBuilder content = new StringBuilder();
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(new File("BaseFatos.pl")));
+            while (br.ready()) {
+                content.append(br.readLine());
             }
-        }catch(Exception error){
-            JOptionPane.showMessageDialog(null, "Error in reading file BaseFatos.pl.", "Error",JOptionPane.ERROR_MESSAGE);
+            
+            this.facts =  content.toString();
+            br.close();
+        } catch (Exception ex) {
+            Logger.getLogger(Document.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         this.facts=this.facts.replaceAll("\\. ", "\\.");//retira o espaço após o ponto final
@@ -87,7 +95,7 @@ public abstract class TranslateModule {
         this.facts=this.facts.replaceAll(",\\)",",''\\)");//coloca aspas simples em campos vazios
         this.facts = this.facts.replaceAll("\n\n", "\n");
         this.facts=this.facts.toLowerCase();//coloca todos os fatos em minusculo
-
+        
         if(TranslateModule.reset){//Na primeira execução, reseta as ids e inicializa elementName. Após, seta em false a variável reset.
             this.setElementName(fileTranslate);//Inicializa o valor da tag principal do xml
             TranslateModule.reset=!TranslateModule.reset;
