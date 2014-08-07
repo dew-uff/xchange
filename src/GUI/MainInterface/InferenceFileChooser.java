@@ -12,8 +12,15 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
@@ -23,13 +30,13 @@ import javax.swing.JTextPane;
  * @author Marcio Tadeu de Oliveira Júnior
  */
 public class InferenceFileChooser extends JPanel implements ActionListener{
-    public JButton showResultsBtn,selectionBtn;//Botões de mostrar resultados e (de)selecionar tudo
+    public JButton saveResultsBtn, showResultsBtn,selectionBtn;//Botões de mostrar resultados e (de)selecionar tudo
     private CheckBoxList cbList;//Lista de Chaeckboxes para seleção de quais documentos deseja-se fazer a inferencia
     private Manager manager = null;//manager
     private JTextPane resultsTextPane;//TextPane para mostrar os resultados
     private ArrayList<String> selectedRules = new ArrayList<String>();//Lista de regras selecionadas
     private Documents documents;
-    private String result;//String com os resultados
+    private String result, saveResult;//String com os resultados
 
     /**
      * Costrutor da classe.
@@ -51,6 +58,11 @@ public class InferenceFileChooser extends JPanel implements ActionListener{
 
         GridBagLayout btnGridBag = new GridBagLayout();
         btnPane.setLayout(btnGridBag);
+        
+        //Cria o botão de mostrar os resultados e associa evento
+        saveResultsBtn = new JButton("Save Results");
+        saveResultsBtn.addActionListener(this);
+        btnPane.add(saveResultsBtn);
 
         //Cria o botão de mostrar os resultados e associa evento
         showResultsBtn = new JButton("Show Results");
@@ -91,6 +103,11 @@ public class InferenceFileChooser extends JPanel implements ActionListener{
         constraints.fill=GridBagConstraints.HORIZONTAL;
         constraints.anchor=GridBagConstraints.SOUTH;
         btnGridBag.setConstraints(showResultsBtn, constraints);
+        
+        LayoutConstraints.setConstraints(constraints, 1, 1, 1, 1, 1, 1);
+        constraints.fill=GridBagConstraints.HORIZONTAL;
+        constraints.anchor=GridBagConstraints.SOUTH;
+        btnGridBag.setConstraints(saveResultsBtn, constraints);
     }
 
     /**
@@ -114,6 +131,20 @@ public class InferenceFileChooser extends JPanel implements ActionListener{
         //Evento para mostrar o resultado da inferência
         if (e.getSource().equals(showResultsBtn)) {
             showResults();
+        } else if (e.getSource().equals(saveResultsBtn)) {
+            if(saveResult == null || saveResult.length() < 1){
+                JOptionPane.showMessageDialog(this, "É preciso ter o resultado primeiro", "Salvo", JOptionPane.ERROR_MESSAGE);
+            }else{
+                try {
+                    BufferedWriter bw2 = new BufferedWriter(new FileWriter(new File("ResultText.txt")));
+                    bw2.write(saveResult);
+                    bw2.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(InferenceFileChooser.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                JOptionPane.showMessageDialog(this, "Arquivo salvo!", "Salvo", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }
 
@@ -133,6 +164,7 @@ public class InferenceFileChooser extends JPanel implements ActionListener{
      */
     public void showResults(){
         result="";
+        saveResult="";
         boolean isSimilarity = MainInterfaceHandler.getMainInterface().getSimilarity();
         
         boolean marked[] = new boolean[cbList.getCheckBoxes().size()];
@@ -172,6 +204,7 @@ public class InferenceFileChooser extends JPanel implements ActionListener{
                                         for (String ruleResult : results.getResultInference()) {//pega um resultado especifico de cada documentos para ver se ele faz parte das regras selecionadas
                                             for (String selectedRule : selectedRules) {//peg uma regra selecionada
                                                 if (ruleResult.toLowerCase().substring(0, ruleResult.indexOf(":")).equals(selectedRule.toLowerCase().substring(0, selectedRule.indexOf("(")))) {//se o resultado vier de uma regra selecionada
+                                                    saveResult += ruleResult.substring(ruleResult.indexOf("\n")+1);
                                                     result += ruleResult;//adciona o resultado à string de resultados
                                                     break;
                                                 }
