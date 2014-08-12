@@ -135,9 +135,23 @@ public class InferenceFileChooser extends JPanel implements ActionListener{
             if(saveResult == null || saveResult.length() < 1){
                 JOptionPane.showMessageDialog(this, "É preciso ter o resultado primeiro", "Salvo", JOptionPane.ERROR_MESSAGE);
             }else{
+                File saveFile;
+                String separator = System.getProperty("file.separator");
+                String workingPath = System.getProperty("user.dir");
+                File saveLocation = new File(workingPath + separator + "results" + separator);
+                if(!saveLocation.isDirectory())
+                    saveLocation.mkdir();
+                if(MainInterfaceHandler.getMainInterface().getSimilarity())
+                    saveFile = new File(saveLocation.getAbsolutePath()+separator+manager.getSimilarityRate()+".txt");
+                else
+                    saveFile = new File(saveLocation.getAbsolutePath()+separator+"Gabarito.txt");
+
                 try {
-                    BufferedWriter bw2 = new BufferedWriter(new FileWriter(new File("ResultText.txt")));
-                    bw2.write(saveResult);
+                    BufferedWriter bw2 = new BufferedWriter(new FileWriter(saveFile));
+                    if(saveResult.length() > 2)
+                        bw2.write(saveResult.substring(0, saveResult.length()-2));
+                    else
+                        bw2.write("");
                     bw2.close();
                 } catch (IOException ex) {
                     Logger.getLogger(InferenceFileChooser.class.getName()).log(Level.SEVERE, null, ex);
