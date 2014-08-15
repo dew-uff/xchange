@@ -48,7 +48,7 @@ public class MainInterface extends JFrame implements ActionListener {
     private PrologFactsMergeTab prologFactsMergeTab;
     private JTabbedPane tabbedPane, tabbedPaneMerge;
     private Documents documents;
-    private JButton newBtn, openBtn, addBtn, saveBtn, contextBtn, similarityBtn, managerBtn, mergeBtn, saveXMLDiffBtn, syntaticDiffBtn, semanticDiffBtn, syntaticMergeBtn, semanticMergeBtn, applyChoicesBtn, writeBtn, cancelBtn, reportBtn;
+    private JButton newBtn, openBtn, addBtn, saveBtn, contextBtn, similarityBtn, managerBtn, mergeBtn, saveXMLDiffBtn, syntaticDiffBtn, semanticDiffBtn, syntaticMergeBtn, semanticMergeBtn, applyChoicesBtn, writeBtn, cancelBtn, reportBtn, saveIntervalResultsBtn;
     private boolean isSimilarity;
     private float similarityRate;
     private Manager manager;
@@ -262,6 +262,7 @@ public class MainInterface extends JFrame implements ActionListener {
         ImageIcon cancelIcon = new ImageIcon(getClass().getResource("/GUI/icons/cancelMerge.png"));
         ImageIcon reportIcon = new ImageIcon(getClass().getResource("/GUI/icons/report.png"));
         ImageIcon saveXMLDiffIcon = new ImageIcon(getClass().getResource("/GUI/icons/saveXMLDiff.png"));
+        ImageIcon saveIntervalResultsIcon = new ImageIcon(getClass().getResource("/GUI/icons/saveXMLDiff.png"));
         
         //Cria os botões e seus eventos
         newBtn = new JButton(newIcon);
@@ -334,6 +335,12 @@ public class MainInterface extends JFrame implements ActionListener {
         reportBtn.addActionListener(this);
         reportBtn.setEnabled(false);
         reportBtn.setVisible(false);
+        
+        saveIntervalResultsBtn = new JButton(saveIntervalResultsIcon);
+        saveIntervalResultsBtn.setToolTipText("<html>Save Interval Results<br>(0.60 to 1.0)</html>");
+        saveIntervalResultsBtn.addActionListener(this);
+        saveIntervalResultsBtn.setEnabled(false);
+        saveIntervalResultsBtn.setVisible(false);
 
         //Adiciona os botões à barra de ferramentas
         tBar.add(newBtn);
@@ -349,6 +356,7 @@ public class MainInterface extends JFrame implements ActionListener {
         tBar.add(cancelBtn);
         tBar.add(saveXMLDiffBtn);
         tBar.add(reportBtn);
+        tBar.add(saveIntervalResultsBtn);
         tBar.setAlignmentX(0);
 
         tBar.setFloatable(false); //Fixa a barra de ferramentas à sua posição
@@ -508,6 +516,7 @@ public class MainInterface extends JFrame implements ActionListener {
         cancelBtn.setEnabled(false);
         cancelBtn.setVisible(true);
         saveXMLDiffBtn.setVisible(false);
+        saveIntervalResultsBtn.setVisible(false);
 
         documentsTabMerge = new DocumentsTabMerge();
         resultsTabSemanticMerge = new ResultsTabMerge();
@@ -598,6 +607,7 @@ public class MainInterface extends JFrame implements ActionListener {
             similarityBtn.setVisible(true);
             managerBtn.setVisible(true);
             reportBtn.setVisible(true);
+            saveIntervalResultsBtn.setVisible(true);
             miSettings.setEnabled(true);
 
             //cria a aba de Fatos Prolog
@@ -641,6 +651,7 @@ public class MainInterface extends JFrame implements ActionListener {
             saveXMLDiffBtn.setVisible(true);
             reportBtn.setVisible(false);
             miSettings.setEnabled(false);
+            saveIntervalResultsBtn.setVisible(false);
 
             //cria a aba Tree Diff
             sintaticDiff = new SintaticDiffTree(documents);
@@ -718,6 +729,7 @@ public class MainInterface extends JFrame implements ActionListener {
         cancelBtn.setEnabled(false);
         cancelBtn.setVisible(true);
         saveXMLDiffBtn.setVisible(false);
+        saveIntervalResultsBtn.setVisible(false);
 
         documentsTabMerge = new DocumentsTabMerge();
         resultsTabMerge = new JPanel();
@@ -894,6 +906,8 @@ public class MainInterface extends JFrame implements ActionListener {
             callManager();
             tabbedPane.setEnabledAt(2, true);
             reportBtn.setEnabled(true);
+            if(isSimilarity)
+                saveIntervalResultsBtn.setEnabled(true);
         } else if ((e.getSource().equals(managerBtn) || e.getSource().equals(miManager)) && isSemanticMerge) {//ação "MANAGER" para o merge semântico
             callManagerSemantic();
             tabbedPaneMerge.setEnabledAt(2, true);
@@ -934,6 +948,8 @@ public class MainInterface extends JFrame implements ActionListener {
             } catch (NoSelectedFileException ex) {
                 JOptionPane.showMessageDialog(null, "Diff saving failure!", "Error", JOptionPane.ERROR_MESSAGE);
             }
+        } else if(e.getSource().equals(saveIntervalResultsBtn)){ //ação salvar um intervalo de resultados usando similaridade
+            this.saveIntervalResults();
         }
     }
 
@@ -1160,6 +1176,7 @@ public class MainInterface extends JFrame implements ActionListener {
             managerBtn.setEnabled(false);
             saveXMLDiffBtn.setEnabled(false);
             reportBtn.setEnabled(false);
+            saveIntervalResultsBtn.setEnabled(false);
         }
         this.refresh(documents);
     }
@@ -1204,6 +1221,76 @@ public class MainInterface extends JFrame implements ActionListener {
         } else {
             JOptionPane.showMessageDialog(this, "There must be at least two XML documents loaded!", "Erro", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    /**
+     * Realiza a inferência por similaridade de maneira "automatizada" de 0.60 ate 1.0
+     * Condições:
+     *   Executar a primeira vez, definir os pesos, escolher uma taxa de similaridade (entre 0.60 e 1.0), carregar a regra desejada
+     */
+    private void saveIntervalResults(){
+        //Array com as taxas de similaridade - 0.6 ate 1.0 de 0.01 em 0.01 (add manualmente para evitar erros de calculo)
+        ArrayList<Float> arraySimilarityRate = new ArrayList<Float>();
+        arraySimilarityRate.add(Float.parseFloat("1.00"));
+        arraySimilarityRate.add(Float.parseFloat("0.99"));
+        arraySimilarityRate.add(Float.parseFloat("0.98"));
+        arraySimilarityRate.add(Float.parseFloat("0.97"));
+        arraySimilarityRate.add(Float.parseFloat("0.96"));
+        arraySimilarityRate.add(Float.parseFloat("0.95"));
+        arraySimilarityRate.add(Float.parseFloat("0.94"));
+        arraySimilarityRate.add(Float.parseFloat("0.93"));
+        arraySimilarityRate.add(Float.parseFloat("0.92"));
+        arraySimilarityRate.add(Float.parseFloat("0.91"));
+        arraySimilarityRate.add(Float.parseFloat("0.90"));
+        arraySimilarityRate.add(Float.parseFloat("0.89"));
+        arraySimilarityRate.add(Float.parseFloat("0.88"));
+        arraySimilarityRate.add(Float.parseFloat("0.87"));
+        arraySimilarityRate.add(Float.parseFloat("0.86"));
+        arraySimilarityRate.add(Float.parseFloat("0.85"));
+        arraySimilarityRate.add(Float.parseFloat("0.84"));
+        arraySimilarityRate.add(Float.parseFloat("0.83"));
+        arraySimilarityRate.add(Float.parseFloat("0.82"));
+        arraySimilarityRate.add(Float.parseFloat("0.81"));
+        arraySimilarityRate.add(Float.parseFloat("0.80"));
+        arraySimilarityRate.add(Float.parseFloat("0.79"));
+        arraySimilarityRate.add(Float.parseFloat("0.78"));
+        arraySimilarityRate.add(Float.parseFloat("0.77"));
+        arraySimilarityRate.add(Float.parseFloat("0.76"));
+        arraySimilarityRate.add(Float.parseFloat("0.75"));
+        arraySimilarityRate.add(Float.parseFloat("0.74"));
+        arraySimilarityRate.add(Float.parseFloat("0.73"));
+        arraySimilarityRate.add(Float.parseFloat("0.72"));
+        arraySimilarityRate.add(Float.parseFloat("0.71"));
+        arraySimilarityRate.add(Float.parseFloat("0.70"));
+        arraySimilarityRate.add(Float.parseFloat("0.69"));
+        arraySimilarityRate.add(Float.parseFloat("0.68"));
+        arraySimilarityRate.add(Float.parseFloat("0.67"));
+        arraySimilarityRate.add(Float.parseFloat("0.66"));
+        arraySimilarityRate.add(Float.parseFloat("0.65"));
+        arraySimilarityRate.add(Float.parseFloat("0.64"));
+        arraySimilarityRate.add(Float.parseFloat("0.63"));
+        arraySimilarityRate.add(Float.parseFloat("0.62"));
+        arraySimilarityRate.add(Float.parseFloat("0.61"));
+        arraySimilarityRate.add(Float.parseFloat("0.60"));
+        
+        //remove do arraySimilarityRate a atual similarityRate (evita refazer o calculo para esta taxa e não fixa ter sempre que colocar o mesmo valor(ex.1.0))
+        int i=0;
+        while(arraySimilarityRate.get(i) != this.similarityRate)
+            i++;
+        arraySimilarityRate.remove(i);
+        
+        //Salva o resultado para a taxa já iniciada
+        resultsTab.getInferenceFileChooser().getCheckBoxList().selectAll(); //seleciona os documentos caso não estejam selecionados
+        resultsTab.getInferenceFileChooser().showResults();
+        resultsTab.getInferenceFileChooser().saveIntervalResults();
+        for(float array : arraySimilarityRate){
+            this.similarityRate = array;
+            manager.getContextKey().clear();
+            manager.startSimilarity(documents);
+            resultsTab.getInferenceFileChooser().showResults();
+            resultsTab.getInferenceFileChooser().saveIntervalResults();
+        }
+        JOptionPane.showMessageDialog(this, "Intervalo de Resultados Salvos!", "Concluido", JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**
