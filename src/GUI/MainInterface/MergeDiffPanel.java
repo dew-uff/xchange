@@ -20,7 +20,7 @@ public class MergeDiffPanel {
         XML xmlFather = new XML(documentsContentFather);
 
         //Constroi o diff
-        LcsXML lcsXML = new LcsXML(xmlFather, xml1, xml2, true);
+        //LcsXML lcsXML = new LcsXML(xmlFather, xml1, xml2, true);
 
         /*
         System.out.println("\n\nInicio\n\n");
@@ -129,7 +129,7 @@ public class MergeDiffPanel {
         };
                 
         //Constroi a árvore
-        return new Tree(lcsXML, nodeLabeller, nodePaint).build();
+        return null;//new Tree(lcsXML, nodeLabeller, nodePaint).build();
     }
     
 }
