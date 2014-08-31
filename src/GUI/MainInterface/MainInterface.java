@@ -1284,6 +1284,7 @@ public class MainInterface extends JFrame implements ActionListener {
         resultsTab.getInferenceFileChooser().saveIntervalResults();
         for(float array : arraySimilarityRate){
             this.similarityRate = array;
+            SettingsHelper.setSimilarityThreshold(this.similarityRate);
             manager.getContextKey().clear();
             manager.startSimilarity(documents);
             resultsTab.getInferenceFileChooser().showResults();
