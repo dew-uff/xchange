@@ -219,7 +219,7 @@ public class Manager {
      */
     public void startResultsInferenciaSimilarity(Documents documents, boolean[] marked) {
 
-        if (getSimilarityFacts() == null || getSimilarityFacts().isEmpty() || this.similarityRate != main.getSimilarityRate() || PhoenixSettings.hasChange()) {
+        if (getSimilarityFacts() == null || getSimilarityFacts().isEmpty() || this.similarityRate != main.getSimilarityRate()){// || PhoenixSettings.hasChange()) {
             similarityFacts = new ArrayList<ArrayList<ArrayList<String>>>();
         }
 
