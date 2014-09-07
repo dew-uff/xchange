@@ -153,7 +153,7 @@ public class InferenceFileChooser extends JPanel implements ActionListener{
         if(!saveLocation.isDirectory())
             saveLocation.mkdir();
         if(MainInterfaceHandler.getMainInterface().getSimilarity())
-            saveFile = new File(saveLocation.getAbsolutePath()+separator+String.format("%.2f", manager.getSimilarityRate()).replaceAll(",", ".")+".txt");
+            saveFile = new File(saveLocation.getAbsolutePath()+separator+String.format("%.3f", manager.getSimilarityRate()).replaceAll(",", ".")+".txt");
         else
             saveFile = new File(saveLocation.getAbsolutePath()+separator+"Gabarito.txt");
 

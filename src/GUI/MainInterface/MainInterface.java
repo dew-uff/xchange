@@ -23,6 +23,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -1223,67 +1224,31 @@ public class MainInterface extends JFrame implements ActionListener {
     }
     
     /**
-     * Realiza a inferência por similaridade de maneira "automatizada" de 0.60 ate 1.0
+     * Realiza a inferência por similaridade de maneira "automatizada" de x1 ate x2
      * Condições:
-     *   Executar a primeira vez, definir os pesos, escolher uma taxa de similaridade (entre 0.60 e 1.0), carregar a regra desejada
+     *   Executar a primeira vez, definir os pesos, escolher uma taxa de similaridade (entre x1 e x2), carregar a regra desejada
      */
     private void saveIntervalResults(){
-        //Array com as taxas de similaridade - 0.6 ate 1.0 de 0.01 em 0.01 (add manualmente para evitar erros de calculo)
-        ArrayList<Float> arraySimilarityRate = new ArrayList<Float>();
-        arraySimilarityRate.add(Float.parseFloat("1.00"));
-        arraySimilarityRate.add(Float.parseFloat("0.99"));
-        arraySimilarityRate.add(Float.parseFloat("0.98"));
-        arraySimilarityRate.add(Float.parseFloat("0.97"));
-        arraySimilarityRate.add(Float.parseFloat("0.96"));
-        arraySimilarityRate.add(Float.parseFloat("0.95"));
-        arraySimilarityRate.add(Float.parseFloat("0.94"));
-        arraySimilarityRate.add(Float.parseFloat("0.93"));
-        arraySimilarityRate.add(Float.parseFloat("0.92"));
-        arraySimilarityRate.add(Float.parseFloat("0.91"));
-        arraySimilarityRate.add(Float.parseFloat("0.90"));
-        arraySimilarityRate.add(Float.parseFloat("0.89"));
-        arraySimilarityRate.add(Float.parseFloat("0.88"));
-        arraySimilarityRate.add(Float.parseFloat("0.87"));
-        arraySimilarityRate.add(Float.parseFloat("0.86"));
-        arraySimilarityRate.add(Float.parseFloat("0.85"));
-        arraySimilarityRate.add(Float.parseFloat("0.84"));
-        arraySimilarityRate.add(Float.parseFloat("0.83"));
-        arraySimilarityRate.add(Float.parseFloat("0.82"));
-        arraySimilarityRate.add(Float.parseFloat("0.81"));
-        arraySimilarityRate.add(Float.parseFloat("0.80"));
-        arraySimilarityRate.add(Float.parseFloat("0.79"));
-        arraySimilarityRate.add(Float.parseFloat("0.78"));
-        arraySimilarityRate.add(Float.parseFloat("0.77"));
-        arraySimilarityRate.add(Float.parseFloat("0.76"));
-        arraySimilarityRate.add(Float.parseFloat("0.75"));
-        arraySimilarityRate.add(Float.parseFloat("0.74"));
-        arraySimilarityRate.add(Float.parseFloat("0.73"));
-        arraySimilarityRate.add(Float.parseFloat("0.72"));
-        arraySimilarityRate.add(Float.parseFloat("0.71"));
-        arraySimilarityRate.add(Float.parseFloat("0.70"));
-        arraySimilarityRate.add(Float.parseFloat("0.69"));
-        arraySimilarityRate.add(Float.parseFloat("0.68"));
-        arraySimilarityRate.add(Float.parseFloat("0.67"));
-        arraySimilarityRate.add(Float.parseFloat("0.66"));
-        arraySimilarityRate.add(Float.parseFloat("0.65"));
-        arraySimilarityRate.add(Float.parseFloat("0.64"));
-        arraySimilarityRate.add(Float.parseFloat("0.63"));
-        arraySimilarityRate.add(Float.parseFloat("0.62"));
-        arraySimilarityRate.add(Float.parseFloat("0.61"));
-        arraySimilarityRate.add(Float.parseFloat("0.60"));
+        SaveIntervalResultsPane saveIntervalResultsPane = new SaveIntervalResultsPane();
+        ArrayList<BigDecimal> arraySimilarityRate = saveIntervalResultsPane.getIntervalArray();
         
-        //remove do arraySimilarityRate a atual similarityRate (evita refazer o calculo para esta taxa e não fixa ter sempre que colocar o mesmo valor(ex.1.0))
-        int i=0;
-        while(arraySimilarityRate.get(i) != this.similarityRate)
-            i++;
-        arraySimilarityRate.remove(i);
-        
-        //Salva o resultado para a taxa já iniciada
         resultsTab.getInferenceFileChooser().getCheckBoxList().selectAll(); //seleciona os documentos caso não estejam selecionados
-        resultsTab.getInferenceFileChooser().showResults();
-        resultsTab.getInferenceFileChooser().saveIntervalResults();
-        for(float array : arraySimilarityRate){
-            this.similarityRate = array;
+         
+        //remove do arraySimilarityRate a atual similarityRate (evita refazer o calculo para esta taxa e não fixa ter sempre que colocar o mesmo valor(ex.1.0))
+        if(this.similarityRate >= saveIntervalResultsPane.getTfMinimumInterval().floatValue() &&
+                this.similarityRate <= saveIntervalResultsPane.getTfMaximumInterval().floatValue()){
+            int i=0;
+            while(arraySimilarityRate.get(i).floatValue() != this.similarityRate)
+                i++;
+            arraySimilarityRate.remove(i);
+            
+            //Salva o resultado para a taxa já iniciada
+            resultsTab.getInferenceFileChooser().showResults();
+            resultsTab.getInferenceFileChooser().saveIntervalResults();
+        }     
+        
+        for(BigDecimal array : arraySimilarityRate){
+            this.similarityRate = array.floatValue();
             SettingsHelper.setSimilarityThreshold(this.similarityRate);
             manager.getContextKey().clear();
             manager.startSimilarity(documents);
