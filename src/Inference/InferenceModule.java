@@ -43,6 +43,7 @@ public class InferenceModule {
     private String inferenceRule(Prolog inference,Struct structRule){
         SolveInfo solution=inference.solve(structRule); //Atribui a variável solution o resultado da primeira aplicação da regra
         String result = structRule.getName().toUpperCase()+":\n"; //Atribui o nome da regra a string para identificação da regra ao apresentar o resultado
+        boolean loop = false;
         try{
             do{
                 if(solution.isSuccess()){ //Se a inferência obter sucesso
@@ -52,11 +53,13 @@ public class InferenceModule {
                 if (inference.hasOpenAlternatives()){ //Se houver soluções a serem exploradas (caso seja primeira execução)
                     try{
                         solution=inference.solveNext(); //Tenta encontrar uma outra solução aplicando a inferência da regra
+                        loop = true;
                     }catch(NoMoreSolutionException erro){
                             JOptionPane.showMessageDialog(null, "Error on theory", "Error",JOptionPane.ERROR_MESSAGE);
                     }
-                }
-            }while(inference.hasOpenAlternatives()); //Enquanto houverem soluções a serem exploradas
+                }else
+                    loop = false;
+            }while(loop); //Enquanto houverem soluções a serem exploradas
             inference.solveEnd(); //Finaliza a inferência da regra passada
         }catch(NoSolutionException ex){
             JOptionPane.showMessageDialog(null, "Error on theory", "Error",JOptionPane.ERROR_MESSAGE);

@@ -1,18 +1,20 @@
 @relation company
-@attribute 'name' {y}
-@attribute 'phone' {y}
-@attribute 'father' {y}
-@attribute 'mother' {y}
-@attribute 'salary' {y}
-@attribute 'job' {y}
+@attribute 'rsd' {y}
+@attribute 'employee' {y}
+@attribute 'hiredate' {y}
+@attribute 'lastname' {y}
+@attribute 'firstname' {y}
+@attribute 'jobtitle' {y}
 @attribute 'department' {y}
-@attribute 'branch' {y}
+@attribute 'unit' {y}
+@attribute 'regularsalary' {y}
+@attribute 'overtime' {y}
+@attribute 'cashout' {y}
+@attribute 'other' {y}
+@attribute 'totalwage' {y}
+@attribute 'ecmvd' {y}
+@attribute 'ecp' {y}
+@attribute 'ecepp' {y}
+@attribute 'ecdc' {y}
+@attribute 'eclltdam' {y}
 @data
-?,?,?,?,y,?,?,y
-?,?,?,?,y,y,?,?
-?,y,?,?,?,?,?,y
-?,?,?,?,?,y,?,?
-?,?,?,?,?,?,y,?
-?,y,?,?,y,y,?,y
-?,?,?,?,y,y,?,?
-?,?,?,?,?,?,?,?
