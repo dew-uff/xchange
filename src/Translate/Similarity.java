@@ -310,7 +310,7 @@ public class Similarity extends ContextKey {
     public boolean similarityCheck(Node node) {
 
         if (node.getNodeType() == Node.ELEMENT_NODE) {
-            NamedNodeMap attributes = (NamedNodeMap) node.getAttributes();
+            /*NamedNodeMap attributes = (NamedNodeMap) node.getAttributes();
             Attr attribute = (Attr) attributes.item(attributes.getLength() - 1);
 
             //Similaridade calculada
@@ -321,7 +321,8 @@ public class Similarity extends ContextKey {
                 return true;
             } else {
                 return false;
-            }
+            }*/
+            return true;
         }
         return false;
     }
