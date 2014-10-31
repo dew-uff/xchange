@@ -1209,7 +1209,11 @@ public class MainInterface extends JFrame implements ActionListener {
                 SettingsHelper.setSimilarityThreshold(this.similarityRate);
                 this.isSimilarity = true;
                 manager.getContextKey().clear();
+                long tempoInicio = System.currentTimeMillis();
                 manager.startSimilarity(documents);
+                long tempoTotal = System.currentTimeMillis() - tempoInicio;
+                System.out.println("\n---------Tempo Primeira Similaridade---------\n"+
+                        String.format( "-------------------%02d:%02d:%02d------------------", tempoTotal / 3600000, ( tempoTotal/ 60000 ) % 60 ,( tempoTotal / 1000 ) % 60 ));
                 JOptionPane.showMessageDialog(this, "Similarity successfully started!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 managerBtn.setEnabled(true);
                 miManager.setEnabled(true);
