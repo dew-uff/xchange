@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Admin
+ * @author Carlos
  */
 public class SaveIntervalResultsPane extends JDialog implements ActionListener{
     
@@ -33,20 +33,20 @@ public class SaveIntervalResultsPane extends JDialog implements ActionListener{
         
         //Inicia os componentes
         tfMaximumInterval = new JTextField("1.0", 5);
-        tfMinimumInterval = new JTextField("0.4", 5);
+        tfMinimumInterval = new JTextField("0.0", 5);
         tfStepInterval = new JTextField("0.01", 5);
         btnOk = new JButton("Ok");
         btnCancel = new JButton("Cancel");
         
         //Painel, Label, TextField para o valor Maximo.
         JPanel jpMaximumInterval = new JPanel();
-        jpMaximumInterval.add(new JLabel("Max Interval:", JLabel.TRAILING));
+        jpMaximumInterval.add(new JLabel("Max:", JLabel.TRAILING));
         jpMaximumInterval.add(tfMaximumInterval);
         this.getContentPane().add(jpMaximumInterval);
         
         //Painel, Label, TextField para o valor Minimo.
         JPanel jpMinimumInterval = new JPanel();
-        jpMinimumInterval.add(new JLabel("Min Interval:", JLabel.TRAILING));
+        jpMinimumInterval.add(new JLabel("Min:", JLabel.TRAILING));
         jpMinimumInterval.add(tfMinimumInterval);
         this.getContentPane().add(jpMinimumInterval);
         
@@ -68,7 +68,7 @@ public class SaveIntervalResultsPane extends JDialog implements ActionListener{
 
         //propriedades do JDialog
         this.getRootPane().setDefaultButton(btnOk);
-        this.setTitle("Save Interval Results");
+        this.setTitle("Save Interval");
         this.setLayout(new BoxLayout(this.getContentPane(), BoxLayout.Y_AXIS));
         this.setModal(true);
         this.setResizable(false);

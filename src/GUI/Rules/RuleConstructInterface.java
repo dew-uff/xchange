@@ -84,7 +84,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     private String factBase2v1, factBase2v2, factBase1v1, factBase1v2;
     private String factBase2, factBase1, baseRule;
     private final JLabel lblChoiceKey;
-    private JButton btnSaveRule, btnCancelRule, btnFinishBuilder, btnMineRules, btnFilesList; //Botões do rodapé
+    private JButton btnSaveRule, btnCancelRule, btnFinishBuilder, btnMineRules, btnFilesList, btnSelection; //Botões do rodapé
     private JButton btnOpen, btnSave, btnExport; //Botões da barra de ferramentas
     private JTextField nameRule;
     private JComboBox comboOutput;
@@ -204,6 +204,12 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnSaveRule) { //Valida as opções de selecionadas na construção da regra e a adiciona ao conjunto de regras
             finishRuleAndCreateNew();
+        } else if(e.getSource() == btnSelection){
+            if(btnSelection.getText().equals("Select All")){//se estiver como select all
+                selectAll();
+            }else{
+                unSelectAll();
+            }
         } else if (e.getSource() == btnFinishBuilder) {
             finish();
         } else if (e.getSource() == btnSave) {
@@ -221,7 +227,50 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             exportProlog();
         } else if (e.getSource() == btnCancelRule) {
             cancelRule();
+        } else{
+            btnSelection.removeActionListener(this);
+            btnSelection.setText("Unselect All");
+            btnSelection.addActionListener(this);
+            for (int i = 0; i < pResults.getComponentCount(); i++) { //percorre a lista de checkboxes, se um estiver deselecionado, troca o botão para selecionar todos
+            JCheckBox item = (JCheckBox) ((JPanel) pResults.getComponents()[i]).getComponents()[0];
+                if(!item.isSelected()){
+                    btnSelection.removeActionListener(this);
+                    btnSelection.setText("Select All");
+                    btnSelection.addActionListener(this);
+                    break;
+                }
+            }
         }
+    }
+    
+    /**
+     * Seleciona todos os checboxes
+     */
+    public void selectAll(){
+        for (int i = 0; i < pResults.getComponentCount(); i++) { //Verifica quais regras foram selecionadas pelo usuário
+            JCheckBox item = (JCheckBox) ((JPanel) pResults.getComponents()[i]).getComponents()[0];
+            item.removeActionListener(this);
+            item.setSelected(true);
+            item.addActionListener(this);
+        }
+        btnSelection.removeActionListener(this);
+        btnSelection.setText("Unselect All");
+        btnSelection.addActionListener(this);
+    }
+    
+    /**
+     * Deseleciona todos os checkboxes
+     */
+    public void unSelectAll(){
+        for (int i = 0; i < pResults.getComponentCount(); i++) { //Verifica quais regras foram selecionadas pelo usuário
+            JCheckBox item = (JCheckBox) ((JPanel) pResults.getComponents()[i]).getComponents()[0];
+            item.removeActionListener(this);
+            item.setSelected(false);
+            item.addActionListener(this);
+        }
+        btnSelection.removeActionListener(this);
+        btnSelection.setText("Select All");
+        btnSelection.addActionListener(this);
     }
 
     /**
@@ -452,7 +501,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             } else {
                 regraConst = ruleName + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + "" + regraConst + ".";
             }
-
+            
             Rule rule = new Rule(ruleName, comboOutput.getSelectedItem().toString().toLowerCase(), conditions, regraConst);
             if (!rulesModule.checkExists(rule, selectedRuleIndex)) {
                 if (selectedRuleIndex == -1) {
@@ -463,7 +512,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 }
 
                 results = formatSetTextPane(rulesModule.getRulesString()); //Formata as regras que serão exibidas na tela
-
+                
                 if (!results.isEmpty()) {
                     String[] partRules = rulesModule.partRules(results); //Pega o cabeçalho das regras (ex: salary(NAME))
                     buildRulesPanel(partRules, null);
@@ -471,7 +520,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                     //"Limpa" o construtor
                     comboOutput.setSelectedItem("");
                     nameRule.setText("");
-
+                    
                     btnSaveRule.setEnabled(true);
                     pnlConditions.removeAll();
                     lineConditions.clear();
@@ -530,6 +579,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
 
             JCheckBox chk = pnlRule.getCheckbox();
             chk.setName(rulesHeads[i]);
+            chk.addActionListener(this);
             if (enabledList != null) {
                 chk.setSelected(enabledList.get(i));
             } else if (buildedRules != null) {
@@ -873,13 +923,25 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         constraints.anchor = GridBagConstraints.NORTHWEST;
         pnlResults.add(btnFinishBuilderPanel, constraints);
 
+        btnSelection = new JButton("Select All");
+        btnSelection.setVisible(true);
+        btnSelection.setEnabled(false);
+        btnSelection.setPreferredSize(new Dimension(110,26));
+        btnSelection.addActionListener(this);
+        
+        LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1);
+        constraints.insets = new Insets(5, 5, 5, 5);
+        constraints.anchor = GridBagConstraints.CENTER;
+        constraints.fill = GridBagConstraints.NONE;
+        btnFinishBuilderPanel.add(btnSelection, constraints);
+        
         btnFinishBuilder = new JButton("Show results");
         btnFinishBuilder.setVisible(true);
         btnFinishBuilder.setEnabled(false);
-        btnFinishBuilder.setMinimumSize(new Dimension(350, 25));
+        btnFinishBuilder.setPreferredSize(new Dimension(110,26));
         btnFinishBuilder.addActionListener(this);
 
-        LayoutConstraints.setConstraints(constraints, 0, 0, 1, 1, 1, 1);
+        LayoutConstraints.setConstraints(constraints, 0, 1, 1, 1, 1, 1);
         constraints.insets = new Insets(5, 5, 5, 5);
         constraints.anchor = GridBagConstraints.CENTER;
         constraints.fill = GridBagConstraints.NONE;
