@@ -144,7 +144,7 @@ public class Manager {
 
                             getSimilarityFacts().get(i).add(new ArrayList<String>());
 
-                            getSimilarity().get(i).documentsWithIDs(documents.getDocuments().get(i).getPathWay(), documents.getDocuments().get(j).getPathWay(), this.similarityRate);
+                            getSimilarity().get(i).documentsWithIDs(documents.getDocuments().get(i).getPathWay(), documents.getDocuments().get(j).getPathWay());
 
                             ProgressHandler.setLabel("Translating Temporary Files into Prolog facts");
                             getSimilarity().get(i).translateFactsID(new File(getSimilarity().get(i).getPathID1())); //Gera os fatos do primeiro documento

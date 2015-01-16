@@ -5,9 +5,8 @@
  */
 package GUI.MainInterface;
 
+import Phoenix.PhoenixWrapper;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
-import gems.ic.uff.br.modelo.LcsXML;
-import gems.ic.uff.br.modelo.XML;
 import java.awt.Color;
 import java.awt.Paint;
 import org.apache.commons.collections15.Transformer;
@@ -20,14 +19,11 @@ import org.w3c.dom.Node;
 public class DiffTreePanel {
 
     public static VisualizationViewer<Node, String> build(String documentFrom, String documentTo) {
-        XML xml1 = new XML(documentFrom);
-        XML xml2 = new XML(documentTo);
-
-        //Constroi o diff
-        LcsXML lcsXML = new LcsXML(xml1, xml2);
+        
+        String lcsXML = PhoenixWrapper.doSimilarity(documentFrom, documentTo);
 
         System.out.println("\n\nInicio\n\n");
-        System.out.println(lcsXML.getDiffXML().toString());
+        System.out.println(lcsXML);
         System.out.println("\n\nFinal\n\n");
 
         //Responável por colorir os nós da árvore

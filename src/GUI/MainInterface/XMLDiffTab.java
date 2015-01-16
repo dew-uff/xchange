@@ -5,8 +5,7 @@ import Documents.XMLFormatter;
 import Exception.NoSelectedFileException;
 import GUI.FileManager.SingleDiffSaver;
 import GUI.Layout.LayoutConstraints;
-import gems.ic.uff.br.modelo.LcsXML;
-import gems.ic.uff.br.modelo.XML;
+import Phoenix.PhoenixWrapper;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -214,10 +213,8 @@ public class XMLDiffTab extends JPanel implements ActionListener{
     }
     
     public void showXMLDiff(){
-        XML xml1 = new XML(documents.getContent(leftCB.getSelectedIndex()));
-        XML xml2 = new XML(documents.getContent(rightCB.getSelectedIndex()));
-        LcsXML lcsxml = new LcsXML(xml1, xml2);
-        this.textarea.setText(XMLFormatter.format(lcsxml.getDiffXML().toString()));
+        String similarityDiff = PhoenixWrapper.doSimilarity(documents.getContent(leftCB.getSelectedIndex()), documents.getContent(rightCB.getSelectedIndex()));
+        this.textarea.setText(XMLFormatter.format(similarityDiff));
         this.textarea.setCaretPosition(0);
     }
 }

@@ -3,8 +3,7 @@ package GUI.FileManager;
 import Exception.NoSelectedFileException;
 import Documents.Documents;
 import Documents.XMLFormatter;
-import gems.ic.uff.br.modelo.LcsXML;
-import gems.ic.uff.br.modelo.XML;
+import Phoenix.PhoenixWrapper;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -67,8 +66,8 @@ public abstract class MultiDiffSaver {
                 }
                 file = new File(name); // o +".txt" é para ele salvar como txt . Para outro tipo de arquivo, mude a extensao final. se você nao mudar a extensao, ele vai criar como ".bin"
                 try {
-                    LcsXML lcsxml = new LcsXML(new XML(documents.getContent(i-1)), new XML(documents.getContent(i)));
-                    String[] lines = XMLFormatter.format(lcsxml.getDiffXML().toString()).split("\n");
+                    String lcsxml = PhoenixWrapper.doSimilarity(documents.getContent(i-1), documents.getContent(i));
+                    String[] lines = XMLFormatter.format(lcsxml).split("\n");
                     BufferedWriter out = new BufferedWriter(new FileWriter(file.getAbsolutePath()));
                     for (int j = 0; j < lines.length; j++) {
                         out.write(lines[j]);

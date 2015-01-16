@@ -1,8 +1,6 @@
 package GUI.MainInterface;
 
 import edu.uci.ics.jung.visualization.VisualizationViewer;
-import gems.ic.uff.br.modelo.LcsXML;
-import gems.ic.uff.br.modelo.XML;
 import java.awt.Color;
 import java.awt.Paint;
 import org.apache.commons.collections15.Transformer;
@@ -15,9 +13,9 @@ import org.w3c.dom.Node;
 public class MergeDiffPanel {
 
     public static VisualizationViewer<Node, String> build(String documentsContent1, String documentsContent2, String documentsContentFather) {
-        XML xml1 = new XML(documentsContent1);
-        XML xml2 = new XML(documentsContent2);
-        XML xmlFather = new XML(documentsContentFather);
+        //XML xml1 = new XML(documentsContent1);
+        //XML xml2 = new XML(documentsContent2);
+        //XML xmlFather = new XML(documentsContentFather);
 
         //Constroi o diff
         //LcsXML lcsXML = new LcsXML(xmlFather, xml1, xml2, true);

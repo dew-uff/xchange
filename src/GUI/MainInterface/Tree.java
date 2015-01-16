@@ -1,5 +1,6 @@
 package GUI.MainInterface;
 
+import Phoenix.PhoenixWrapper;
 import edu.uci.ics.jung.algorithms.layout.Layout;
 import edu.uci.ics.jung.algorithms.layout.TreeLayout;
 import edu.uci.ics.jung.graph.DelegateTree;
@@ -11,12 +12,11 @@ import edu.uci.ics.jung.visualization.control.ScalingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.control.TranslatingGraphMousePlugin;
 import edu.uci.ics.jung.visualization.decorators.EdgeShape;
 import edu.uci.ics.jung.visualization.renderers.Renderer;
-import gems.ic.uff.br.modelo.LcsXML;
-import gems.ic.uff.br.modelo.XML;
 import java.awt.event.MouseEvent;
 import org.apache.commons.collections15.Factory;
 import org.apache.commons.collections15.Transformer;
 import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -34,17 +34,17 @@ public class Tree {
             return "" + tam++;
         }
     };
-    private final XML xml;
+    private final Document xml;
     private Transformer nodePaint;
     private Transformer nodeLabeller;
 
-    public Tree(LcsXML lcsXML, Transformer nodeLabeller, Transformer nodePaint) {
-        xml = new XML(lcsXML.getDiffXML().toString());
+    public Tree(String lcsXML, Transformer nodeLabeller, Transformer nodePaint) {
+        xml = PhoenixWrapper.createDOMDocument(lcsXML);
         this.nodeLabeller = nodeLabeller;
         this.nodePaint = nodePaint;
     }
 
-    public Tree(XML xml, Transformer nodeLabeller, Transformer nodePaint) {
+    public Tree(Document xml, Transformer nodeLabeller, Transformer nodePaint) {
         this.xml = xml;
         this.nodeLabeller = nodeLabeller;
         this.nodePaint = nodePaint;
@@ -56,9 +56,9 @@ public class Tree {
         tree = new DelegateTree<Node, String>() {
         };
         //Insere a raiz
-        tree.addVertex(xml.getDocument().getDocumentElement());
+        tree.addVertex(xml.getDocumentElement());
         //Insere os nós filhos
-        insertChildren(xml.getDocument().getDocumentElement());
+        insertChildren(xml.getDocumentElement());
         
         //-- Final da construção da estrutura --//
         //-- Início da construção do componente visual --//

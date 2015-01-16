@@ -1,7 +1,6 @@
 package Translate;
-import Documents.Document;
+import Phoenix.PhoenixWrapper;
 import br.ufrj.ppgi.parser.XMLParser;
-import gems.ic.uff.br.modelo.XML;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,6 +10,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import org.w3c.dom.Document;
 /**
  *
  * @author Celio H. N. Larcher Junior e Guilherme Martins
@@ -55,8 +55,8 @@ public abstract class TranslateModule {
      * Obtem o nome do elemento que é a tag principal do XML
      */
     protected void setElementName(File fileTranslate){
-        XML xml = new XML(fileTranslate.getAbsolutePath());
-        TranslateModule.elementName = xml.getDocument().getDocumentElement().getFirstChild().getNodeName();
+        Document xml = PhoenixWrapper.createDOMDocument(fileTranslate.getAbsolutePath());
+        TranslateModule.elementName = xml.getDocumentElement().getFirstChild().getNodeName();
     }
 
     /**

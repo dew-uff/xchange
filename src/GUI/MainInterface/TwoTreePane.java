@@ -1,7 +1,7 @@
 package GUI.MainInterface;
 
+import Phoenix.PhoenixWrapper;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
-import gems.ic.uff.br.modelo.XML;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -53,8 +53,8 @@ public class TwoTreePane {
         };
 
         //Constroi as árvores
-        VisualizationViewer<Node, String> left = new Tree(new XML(document1Content), nodeLabeller, nodePaint0).build();
-        VisualizationViewer<Node, String> right = new Tree(new XML(document2Content), nodeLabeller, nodePaint1).build();
+        VisualizationViewer<Node, String> left = new Tree(PhoenixWrapper.createDOMDocument(document1Content), nodeLabeller, nodePaint0).build();
+        VisualizationViewer<Node, String> right = new Tree(PhoenixWrapper.createDOMDocument(document2Content), nodeLabeller, nodePaint1).build();
 
         //altera as propriedades de expansão e de ancoragem, e a posição
         constraints.fill = GridBagConstraints.BOTH;
