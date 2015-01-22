@@ -5,8 +5,11 @@ import Phoenix.PhoenixWrapper;
 import br.uff.ic.gems.phoenix.SettingsHelper;
 import br.uff.ic.gems.phoenix.XmlParser;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -114,8 +117,6 @@ public class Similarity extends ContextKey {
         String similarityDiff = PhoenixWrapper.doSimilarity(pathDocument1, pathDocument2);
         ProgressHandler.increase();
 
-        System.out.println(SettingsHelper.getSimilarityThreshold());
-        
         ProgressHandler.setLabel("Working on similarity diff");
         Document xml3 = PhoenixWrapper.createDOMDocument(similarityDiff);
         Node rootXML = xml3.getDocumentElement().getFirstChild();
@@ -132,9 +133,9 @@ public class Similarity extends ContextKey {
         ProgressHandler.increase();
 
         ProgressHandler.setLabel("Creating temporary XML files");
-        removeEmptyIDs(toString(XMLwithID1), toString(XMLwithID2));
+        //removeEmptyIDs(toString(XMLwithID1), toString(XMLwithID2)); //Para que serve isso?!
+        salvaXmlComId(toString(XMLwithID1), toString(XMLwithID2));
 
-        salvaXmlComId(documentID1, documentID2);
         ProgressHandler.increase();
 
     }
