@@ -1,5 +1,6 @@
 package GUI.MainInterface;
 
+import AutomaticRules.WekaParser;
 import Documents.Document;
 import Documents.Documents;
 import GUI.FileManager.ReportUtil;
@@ -16,9 +17,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -39,6 +39,7 @@ public class InferenceFileChooser extends JPanel implements ActionListener{
     private ArrayList<String> selectedRules = new ArrayList<String>();//Lista de regras selecionadas
     private Documents documents;
     private String result, saveResult;//String com os resultados
+    private int qtdCasamentosCorretos;
 
     /**
      * Costrutor da classe.
@@ -147,23 +148,38 @@ public class InferenceFileChooser extends JPanel implements ActionListener{
      */
     public void saveIntervalResults(){
         File saveFile;
+        File saveFileGraoFino;
         String separator = System.getProperty("file.separator");
         String workingPath = System.getProperty("user.dir");
         File saveLocation = new File(workingPath + separator + "results" + separator);
+        
+        List<String> tags = new WekaParser().getTags(this.documents.getDocuments().get(0).getPathWay());
+        
         if(!saveLocation.isDirectory())
             saveLocation.mkdir();
-        if(MainInterfaceHandler.getMainInterface().getSimilarity())
+        if(MainInterfaceHandler.getMainInterface().getSimilarity()){
             saveFile = new File(saveLocation.getAbsolutePath()+separator+String.format("%.3f", manager.getSimilarityRate()).replaceAll(",", ".")+".txt");
-        else
+            saveFileGraoFino = new File(saveLocation.getAbsolutePath()+separator+String.format("%.3f", manager.getSimilarityRate()).replaceAll(",", ".")+"_GraoFino.txt");
+        }else{
             saveFile = new File(saveLocation.getAbsolutePath()+separator+"Gabarito.txt");
-
+            saveFileGraoFino = new File(saveLocation.getAbsolutePath()+separator+"Gabarito_GraoFino.txt");
+        }
+        
         try {
             BufferedWriter bw2 = new BufferedWriter(new FileWriter(saveFile));
+            BufferedWriter bwGraoFino = new BufferedWriter(new FileWriter(saveFileGraoFino));
+            if(qtdCasamentosCorretos==0){
+                bwGraoFino.write(qtdCasamentosCorretos+" Casamentos");
+            }else{
+                bwGraoFino.write(((tags.size()-1)*qtdCasamentosCorretos)+" Casamentos");
+            }
+            
             if(saveResult.length() > 2)
                 bw2.write(saveResult.substring(0, saveResult.length()-2));
             else
                 bw2.write("");
             bw2.close();
+            bwGraoFino.close();
         } catch (IOException ex) {
             Logger.getLogger(InferenceFileChooser.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -186,6 +202,7 @@ public class InferenceFileChooser extends JPanel implements ActionListener{
     public void showResults(){
         result="";
         saveResult="";
+        qtdCasamentosCorretos=-1;
         boolean isSimilarity = MainInterfaceHandler.getMainInterface().getSimilarity();
         
         boolean marked[] = new boolean[cbList.getCheckBoxes().size()];
@@ -226,6 +243,8 @@ public class InferenceFileChooser extends JPanel implements ActionListener{
                                             for (String selectedRule : selectedRules) {//peg uma regra selecionada
                                                 if (ruleResult.toLowerCase().substring(0, ruleResult.indexOf(":")).equals(selectedRule.toLowerCase().substring(0, selectedRule.indexOf("(")))) {//se o resultado vier de uma regra selecionada
                                                     saveResult += ruleResult.substring(ruleResult.indexOf("\n")+1);
+                                                    if(qtdCasamentosCorretos==-1)
+                                                        qtdCasamentosCorretos = saveResult.split("\n").length;
                                                     result += ruleResult;//adciona o resultado à string de resultados
                                                     break;
                                                 }
