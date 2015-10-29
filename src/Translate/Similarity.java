@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -141,6 +142,55 @@ public class Similarity extends ContextKey {
     }
     
     /**
+     * Only For Test
+     * @param similarityDiff
+     * @return 
+     */
+    public HashMap<String, String> documentWithIDsTEST(String similarityDiff){
+        HashMap<String, String> output = new HashMap<String, String>();
+        
+        Document XMLwithID1 = createDomDocument();
+        Document XMLwithID2 = createDomDocument();
+        
+        Document xml3 = PhoenixWrapper.createDOMDocument(similarityDiff);
+        Node rootXML = xml3.getDocumentElement().getFirstChild();
+        
+        Element element1 = XMLwithID1.createElement(rootXML.getNodeName());
+        XMLwithID1.appendChild(element1);
+
+        Element element2 = XMLwithID2.createElement(rootXML.getNodeName());
+        XMLwithID2.appendChild(element2);
+
+        createXMLwithIDsNEWWWW(rootXML, XMLwithID1, XMLwithID2, element1, element2, true);
+        
+        output.put("left", toString(XMLwithID1));
+        output.put("right", toString(XMLwithID2));
+        
+        return output;
+    }
+    
+    private Element creatElementFromSide(Node no, Document doc, String side){
+        Element newNode = doc.createElement(no.getNodeName());
+        NamedNodeMap nodeAttrs = no.getAttributes();
+        
+        for(int i = 0; i < nodeAttrs.getLength(); i++){
+            String attrName = nodeAttrs.item(i).getNodeName();
+            if(side.equalsIgnoreCase("left")){
+                if(attrName.startsWith("left:"))
+                    newNode.setAttribute(attrName.replace("left:", ""), nodeAttrs.item(i).getNodeValue());
+                else if(!attrName.startsWith("diff:") && !attrName.startsWith("right:"))
+                    newNode.setAttribute(attrName, nodeAttrs.item(i).getNodeValue());
+            } else {
+                if(attrName.startsWith("right:") && side.equalsIgnoreCase("right"))
+                    newNode.setAttribute(attrName.replace("right:", ""), nodeAttrs.item(i).getNodeValue());
+                else if(!attrName.startsWith("diff:") && !attrName.startsWith("left:"))
+                    newNode.setAttribute(attrName, nodeAttrs.item(i).getNodeValue());
+            }
+        }
+        
+        return newNode;
+    }
+    /**
      * Cria os documentos XML com IDs de acordo com a similaridade entre os
      * elementos.
      *
@@ -156,13 +206,13 @@ public class Similarity extends ContextKey {
             Attr version1 = (Attr) attributes.getNamedItem("diff:left");
             Attr version2 = (Attr) attributes.getNamedItem("diff:right");
 
-            Element newNode1 = doc1.createElement(no.getNodeName());
+            Element newNode1 = creatElementFromSide(no, doc1, "left");
             e1.appendChild(newNode1);
             if (version1 != null) {
                 newNode1.appendChild(doc1.createTextNode(version1.getValue()));
             }
 
-            Element newNode2 = doc2.createElement(no.getNodeName());
+            Element newNode2 = creatElementFromSide(no, doc2, "right");
             e2.appendChild(newNode2);
             if (version2 != null) {
                 newNode2.appendChild(doc2.createTextNode(version2.getValue()));
@@ -178,25 +228,25 @@ public class Similarity extends ContextKey {
                     if(first) this.ID++;
 
                     if(nodeAttr.getNamedItem("diff:side").getNodeValue().equalsIgnoreCase("left")) {
-                        copyToSide(node, doc1, e1, first);
+                        copyToSide(node, doc1, e1, "left", first);
                     } else {
-                        copyToSide(node, doc2, e2, first);
+                        copyToSide(node, doc2, e2, "right", first);
                     }
                 } else if(sim == 1.0){
                     if(first) this.ID++;
-                    copyToSide(node, doc1, e1, first);
-                    copyToSide(node, doc2, e2, first);
+                    copyToSide(node, doc1, e1, "left", first);
+                    copyToSide(node, doc2, e2, "right", first);
                 } else {
                     if(first) {
                         this.ID++;
-                        Element newE1 = doc1.createElement(node.getNodeName());
+                        Element newE1 = creatElementFromSide(node, doc1, "left");
                         e1.appendChild(newE1);
                         
                         Element newId1 = doc1.createElement("id");
                         e1.getLastChild().appendChild(newId1);
                         newId1.appendChild(doc1.createTextNode(Integer.toString(this.ID)));
                         
-                        Element newE2 = doc2.createElement(node.getNodeName());
+                        Element newE2 = creatElementFromSide(node, doc2, "right");
                         e2.appendChild(newE2);
                         
                         Element newId2 = doc2.createElement("id");
@@ -210,23 +260,23 @@ public class Similarity extends ContextKey {
             }
         }
     }
-    private void copyToSide(Node no, Document doc, Element e, boolean first) {
+    private void copyToSide(Node no, Document doc, Element e, String side, boolean first) {
         if (first){
-            Element newE = doc.createElement(no.getNodeName());
+            Element newE = creatElementFromSide(no, doc, side);
             e.appendChild(newE);
         
             Element newId = doc.createElement("id");
             e.getLastChild().appendChild(newId);
             newId.appendChild(doc.createTextNode(Integer.toString(this.ID)));
             
-            copyRecursive(no, doc, newE);
+            copyRecursive(no, doc, newE, side);
         } else
-            copyRecursive(no, doc, e);
+            copyRecursive(no, doc, e, side);
     }
     
-    private void copyRecursive(Node no, Document doc, Element e) {
+    private void copyRecursive(Node no, Document doc, Element e, String side) {
         if (!no.hasChildNodes() && no.getNodeType() == Node.TEXT_NODE) {
-            Element novoNo = doc.createElement(no.getParentNode().getNodeName());
+            Element novoNo = creatElementFromSide(no.getParentNode(), doc, side);
             e.appendChild(novoNo);
             novoNo.appendChild(doc.createTextNode(no.getNodeValue()));
         } else {
@@ -236,12 +286,12 @@ public class Similarity extends ContextKey {
                 if (listChildren.item(i).hasChildNodes()
                         && listChildren.item(i).getFirstChild().getNodeType() != Node.TEXT_NODE) {
                     
-                    Element novoNo = doc.createElement(listChildren.item(i).getNodeName());
+                    Element novoNo = creatElementFromSide(listChildren.item(i), doc, side);
                     e.appendChild(novoNo);
                 
-                    copyRecursive(listChildren.item(i), doc, novoNo);
+                    copyRecursive(listChildren.item(i), doc, novoNo, side);
                 } else
-                    copyRecursive(listChildren.item(i), doc, e);
+                    copyRecursive(listChildren.item(i), doc, e, side);
             }
         }
     }
