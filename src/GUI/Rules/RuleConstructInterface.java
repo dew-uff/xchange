@@ -1,33 +1,19 @@
 package GUI.Rules;
 
-import GUI.FileManager.LineFile;
-import GUI.Layout.LayoutConstraints;
-import Manager.Manager;
-import Rules.RulesModule;
-import AutomaticRules.WekaParser;
-import Documents.Document;
-import Exception.NoSelectedFileException;
-import GUI.FileManager.LastpathManager;
-import GUI.FileManager.TXTFileFilter;
-import GUI.FileManager.XMLFileFilter;
-import GUI.MainInterface.DocumentsTab;
-import GUI.MainInterface.IDocumentsTab;
-import GUI.MainInterface.InferenceFileChooser;
-import Rules.Condition;
-import Rules.Rule;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import static java.awt.image.ImageObserver.WIDTH;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,6 +25,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -55,14 +42,36 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
-import javax.xml.parsers.*;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.*;
-import javax.xml.transform.stream.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import AutomaticRules.WekaParser;
+import Documents.Document;
+import Exception.NoSelectedFileException;
+import GUI.FileManager.LastpathManager;
+import GUI.FileManager.LineFile;
+import GUI.FileManager.TXTFileFilter;
+import GUI.FileManager.XMLFileFilter;
+import GUI.Layout.LayoutConstraints;
+import GUI.MainInterface.IDocumentsTab;
+import GUI.MainInterface.InferenceFileChooser;
+import Manager.Manager;
+import Rules.Condition;
+import Rules.Rule;
+import Rules.RulesModule;
+import static java.awt.image.ImageObserver.WIDTH;
 
 /**
  * Interface onde o usuário monta as regras para a realização de inferencia
@@ -108,6 +117,8 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     private JPanel pnlFiles;
     private final static int MOVE_UP = 1, MOVE_DOWN = -1; //utilizadas para controlar a lista de documentos
     public static boolean succeeded;
+    private List<Document> documentsToMine = new ArrayList<Document>();
+    private JDialog metricas = new JDialog(this);
 
     /**
      * Exibe a janela para construção das regras.
@@ -227,7 +238,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             exportProlog();
         } else if (e.getSource() == btnCancelRule) {
             cancelRule();
-        } else{
+        } else {
             btnSelection.removeActionListener(this);
             btnSelection.setText("Unselect All");
             btnSelection.addActionListener(this);
@@ -272,7 +283,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         btnSelection.setText("Select All");
         btnSelection.addActionListener(this);
     }
-
+    
     /**
      * Minera as regras com base nas tags e nos documentos selecionados
      */
@@ -286,7 +297,6 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
         }
 
         //Seleciona os documentos a minerar
-        List<Document> documentsToMine = new ArrayList<Document>();
         for (LineFile lf : lineFiles) {
             if (lf.getCheckbox().isSelected()) {
                 documentsToMine.add(lf.getDocument());
@@ -298,10 +308,76 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             JOptionPane.showMessageDialog(this, "Please select at least two documents to mine rules", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
-        //Gera as regras e as mostra
-        List<Set> listRules = new WekaParser().generateRules(documentsToMine, chosenTags, keyChoice);
-        showMinedRules(listRules);
+        
+        //Pega do usuario as metricas desejadas
+        //JFrame metricas = new JFrame("Metrics Values");        
+    	Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension dim = tk.getScreenSize();
+        dim.setSize(250,210);
+        metricas.setMinimumSize(dim);
+        metricas.setLocationRelativeTo(null);
+            	
+        JPanel tudo = new JPanel();        
+        GridLayout gridBag = new GridLayout(4,1);
+        tudo.setLayout(gridBag);
+        metricas.add(tudo);
+        tudo.setSize(50, 50);
+        
+        JLabel support = new JLabel("Minimum Support: ");
+        JLabel metric = new JLabel("Metric:                      ");
+        JLabel metValue = new JLabel("Metric Value:          ");
+        
+        final JTextField valueSup = new JTextField(10);
+        final JTextField valueMet = new JTextField(10);
+        
+        valueSup.setText("0.0");
+        valueMet.setText("0.0");
+        
+        final JComboBox<String> combo = new JComboBox<String>();
+        combo.addItem("Confidence");
+        combo.addItem("Lift");
+        combo.addItem("Leverage");
+        combo.addItem("Conviction");
+        
+        combo.setPreferredSize(new Dimension(112,25));
+        
+       
+        
+        JPanel vSup = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel met = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel vMet = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel bot = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        
+        vSup.add(support);
+        vSup.add(valueSup);
+        
+        met.add(metric);
+        met.add(combo);
+        
+        vMet.add(metValue);
+        vMet.add(valueMet);
+        
+        tudo.add(vSup);
+        tudo.add(met);
+        tudo.add(vMet);
+        
+        JButton botao = new JButton("Mine Rules");
+        botao.setEnabled(true);
+        botao.setPreferredSize(new Dimension(100, 25));        
+        bot.add(botao);
+        tudo.add(bot);
+        metricas.setVisible(true);  
+        metricas.repaint();
+                
+        botao.addActionListener(new ActionListener() {
+	        
+        	public void actionPerformed(ActionEvent e) {	            
+        		//Gera as regras e as mostra
+                List<Set<String>> listRules = new WekaParser().generateRules(documentsToMine, chosenTags, keyChoice, Float.parseFloat(valueSup.getText()), Float.parseFloat(valueMet.getText()), combo.getSelectedIndex());
+                showMinedRules(listRules);
+                metricas.setVisible(false);
+	        }
+	    }); 
     }
 
     /**
@@ -476,8 +552,10 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 if ((!condition.getFirstTerm().equals("") && !condition.getSecondTerm().equals("") && !condition.getOperator().equals("")) || (condition.getOperator().equals("new_element") || (condition.getOperator().equals("deleted_element")))) {
                     conditions.add(condition);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Your " + (i + 1) + "º condition is not valid.", "Invalid condition encoutered", JOptionPane.ERROR_MESSAGE);
-                    return;
+                    
+                   //JOptionPane.showMessageDialog(this, "Your " + (i + 1) + "º condition is not valid.", "Invalid condition encoutered", JOptionPane.ERROR_MESSAGE);
+                   //return;
+                    
                 }
             }
 
@@ -501,7 +579,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
             } else {
                 regraConst = ruleName + "(" + comboOutput.getSelectedItem().toString().toUpperCase() + "):-" + "" + regraConst + ".";
             }
-            
+
             Rule rule = new Rule(ruleName, comboOutput.getSelectedItem().toString().toLowerCase(), conditions, regraConst);
             if (!rulesModule.checkExists(rule, selectedRuleIndex)) {
                 if (selectedRuleIndex == -1) {
@@ -512,7 +590,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                 }
 
                 results = formatSetTextPane(rulesModule.getRulesString()); //Formata as regras que serão exibidas na tela
-                
+
                 if (!results.isEmpty()) {
                     String[] partRules = rulesModule.partRules(results); //Pega o cabeçalho das regras (ex: salary(NAME))
                     buildRulesPanel(partRules, null);
@@ -520,7 +598,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                     //"Limpa" o construtor
                     comboOutput.setSelectedItem("");
                     nameRule.setText("");
-                    
+
                     btnSaveRule.setEnabled(true);
                     pnlConditions.removeAll();
                     lineConditions.clear();
@@ -1182,7 +1260,7 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
     /**
      * Constroi o painel de regras mineradas
      */
-    private void showMinedRules(List<Set> listTags) {
+    private void showMinedRules(List<Set<String>> listTags) {
         pnlMining.removeAll();
         pnlMining.setBorder(javax.swing.BorderFactory.createTitledBorder("Mined rules"));
 
@@ -1212,18 +1290,38 @@ public class RuleConstructInterface extends JDialog implements ActionListener {
                     lineConditions.removeAll(lineConditions);
                     pnlConditions.revalidate();
                     pnlConditions.updateUI();
-
+                  
                     for (String tag : tags) {
+                     
+                        
                         LineCondition aux = new LineCondition();
                         pnlConditions.add(aux);
-
+                       
+                        if(tag.contains("↑")){
+                            aux.getComboOperator().setSelectedItem("<");
+                            String str = "↑";
+                            int l =(tag.length() - str.length())-1;
+                            tag = (tag.substring(0,l));
+                            
+                    }
+                        else{
+                            if(tag.contains("↓")){
+                                aux.getComboOperator().setSelectedItem(">");
+                                String str = "↓";
+                                int l =(tag.length() - str.length())-1;
+                                tag = (tag.substring(0,l));
+                            
+                            }
+                            else{
                         aux.getComboOperator().setSelectedItem("!=");
+                            }
+                    }
                         aux.getComboOperator().setEnabled(false);
 
                         aux.getComboTerm1().setSelectedItem(tag + " - v. Before");
                         aux.getComboTerm1().setEnabled(false);
 
-                        aux.getComboTerm2().setSelectedItem(tag + " - v. After");
+                        aux.getComboTerm2().setSelectedItem(tag+ " - v. After");
                         aux.getComboTerm2().setEnabled(false);
 
                         aux.getBtnAddCondition().setEnabled(false);
