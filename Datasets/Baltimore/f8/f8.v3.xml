@@ -1,0 +1,6480 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<government>
+	<employee>
+		<name>La Cruze,Angela M</name>
+		<jobtitle>Waste Water Opns Tech II Sanit</jobtitle>
+		<agencyid>A50208</agencyid>
+		<agency>DPW-Water and Waste Water (208)</agency>
+		<hiredate>32260</hiredate>
+		<annualsalary>42853</annualsalary>
+		<grosspay>46734.63</grosspay>
+	</employee>
+	<employee>
+		<name>La Hatte,Steve W</name>
+		<jobtitle>FIRE CAPTAIN</jobtitle>
+		<agencyid>A64156</agencyid>
+		<agency>Fire Department (156)</agency>
+		<hiredate>30963</hiredate>
+		<annualsalary>82256</annualsalary>
+		<grosspay>99843.95</grosspay>
+	</employee>
+	<employee>
+		<name>La Prade,Angelo</name>
+		<jobtitle>HEAVY EQUIPMENT OPERATOR I</jobtitle>
+		<agencyid>A50550</agencyid>
+		<agency>DPW-Water and Waste Water (550)</agency>
+		<hiredate>38145</hiredate>
+		<annualsalary>33337</annualsalary>
+		<grosspay>41603.98</grosspay>
+	</employee>
+	<employee>
+		<name>La Prade,Lawrence</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99190</agencyid>
+		<agency>Police Department (190)</agency>
+		<hiredate>34891</hiredate>
+		<annualsalary>65816</annualsalary>
+		<grosspay>91384.53</grosspay>
+	</employee>
+	<employee>
+		<name>La Tova,Daniel G</name>
+		<jobtitle>OPERATIONS ENGINEER</jobtitle>
+		<agencyid>A50207</agencyid>
+		<agency>DPW-Water and Waste Water (207)</agency>
+		<hiredate>31383</hiredate>
+		<annualsalary>68700</annualsalary>
+		<grosspay>69891.63</grosspay>
+	</employee>
+	<employee>
+		<name>La Valley,Ray L</name>
+		<jobtitle>OFFICE ASSISTANT III</jobtitle>
+		<agencyid>A14009</agencyid>
+		<agency>FIN-Collections (009)</agency>
+		<hiredate>36776</hiredate>
+		<annualsalary>33208</annualsalary>
+		<grosspay>33339.09</grosspay>
+	</employee>
+	<employee>
+		<name>La Viola,Angelo D</name>
+		<jobtitle>POLICE SERGEANT</jobtitle>
+		<agencyid>A99422</agencyid>
+		<agency>Police Department (422)</agency>
+		<hiredate>31434</hiredate>
+		<annualsalary>81082</annualsalary>
+		<grosspay>108759.97</grosspay>
+	</employee>
+	<employee>
+		<name>LaBua,Michael</name>
+		<jobtitle>ADM ASST</jobtitle>
+		<agencyid>A08004</agencyid>
+		<agency>M-R Human Services (004)</agency>
+		<hiredate>40091</hiredate>
+		<annualsalary>50856</annualsalary>
+		<grosspay>50925.36</grosspay>
+	</employee>
+	<employee>
+		<name>LaCour,Valorie L</name>
+		<jobtitle>CITY PLANNER III</jobtitle>
+		<agencyid>A49100</agencyid>
+		<agency>TRANS-Highways (100)</agency>
+		<hiredate>40035</hiredate>
+		<annualsalary>62200</annualsalary>
+		<grosspay>62826.73</grosspay>
+	</employee>
+	<employee>
+		<name>LaRicci,Louis V</name>
+		<jobtitle>EXECUTIVE LEVEL II</jobtitle>
+		<agencyid>A83002</agencyid>
+		<agency>HR-Human Resources (002)</agency>
+		<hiredate>40917</hiredate>
+		<annualsalary>105000</annualsalary>
+		<grosspay>105962.8</grosspay>
+	</employee>
+	<employee>
+		<name>LaRonde,Timothy P</name>
+		<jobtitle>PROGRAM COMPLIANCE OFFICER II</jobtitle>
+		<agencyid>A08010</agencyid>
+		<agency>M-R Human Services (010)</agency>
+		<hiredate>40469</hiredate>
+		<annualsalary>41700</annualsalary>
+		<grosspay>42216.72</grosspay>
+	</employee>
+	<employee>
+		<name>Labar,Robert A</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99162</agencyid>
+		<agency>Police Department (162)</agency>
+		<hiredate>40800</hiredate>
+		<annualsalary>43239</annualsalary>
+		<grosspay>50523.29</grosspay>
+	</employee>
+	<employee>
+		<name>Labbe,Teri J</name>
+		<jobtitle>CRIMINALIST II</jobtitle>
+		<agencyid>A99386</agencyid>
+		<agency>Police Department (386)</agency>
+		<hiredate>37228</hiredate>
+		<annualsalary>60600</annualsalary>
+		<grosspay>73286.22</grosspay>
+	</employee>
+	<employee>
+		<name>Laboy,Jahaziel</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99164</agencyid>
+		<agency>Police Department (164)</agency>
+		<hiredate>39197</hiredate>
+		<annualsalary>58827</annualsalary>
+		<grosspay>63836.34</grosspay>
+	</employee>
+	<employee>
+		<name>Laboy,Luis</name>
+		<jobtitle>COMMUNITY HEALTH EDUCATOR I</jobtitle>
+		<agencyid>A65026</agencyid>
+		<agency>HLTH-Health Department (026)</agency>
+		<hiredate>39569</hiredate>
+		<annualsalary>36343</annualsalary>
+		<grosspay>39533.53</grosspay>
+	</employee>
+	<employee>
+		<name>Labuz,Susan M</name>
+		<jobtitle>MASTER'S LAW CLERK (GRADUATE)</jobtitle>
+		<agencyid>A31001</agencyid>
+		<agency>Circuit Court (001)</agency>
+		<hiredate>41240</hiredate>
+		<annualsalary>36766</annualsalary>
+		<grosspay>20786.82</grosspay>
+	</employee>
+	<employee>
+		<name>Lacher Jr,Raymond J</name>
+		<jobtitle>AUTOMOTIVE MAINT SUPV I</jobtitle>
+		<agencyid>A85302</agencyid>
+		<agency>General Services (302)</agency>
+		<hiredate>28222</hiredate>
+		<annualsalary>59076</annualsalary>
+		<grosspay>76209.45</grosspay>
+	</employee>
+	<employee>
+		<name>Lachica,Eric M</name>
+		<jobtitle>COMPUTER OPERATOR IV</jobtitle>
+		<agencyid>A40001</agencyid>
+		<agency>M-R Info Technology (001)</agency>
+		<hiredate>31747</hiredate>
+		<annualsalary>52836</annualsalary>
+		<grosspay>53695.67</grosspay>
+	</employee>
+	<employee>
+		<name>Lacks,Brandon D</name>
+		<jobtitle>TIRE MAINTENANCE WORKER I</jobtitle>
+		<agencyid>A85301</agencyid>
+		<agency>General Services (301)</agency>
+		<hiredate>39926</hiredate>
+		<annualsalary>29254</annualsalary>
+		<grosspay>30221.75</grosspay>
+	</employee>
+	<employee>
+		<name>Lacks,Renee B</name>
+		<jobtitle>ANALYST/PROGRAMMER II</jobtitle>
+		<agencyid>A85301</agencyid>
+		<agency>General Services (301)</agency>
+		<hiredate>31876</hiredate>
+		<annualsalary>62724</annualsalary>
+		<grosspay>93092.32</grosspay>
+	</employee>
+	<employee>
+		<name>Lacy,Jillian C</name>
+		<jobtitle>CRIME LABORATORY TECHNICIAN II</jobtitle>
+		<agencyid>A99386</agencyid>
+		<agency>Police Department (386)</agency>
+		<hiredate>40259</hiredate>
+		<annualsalary>44084</annualsalary>
+		<grosspay>47199.19</grosspay>
+	</employee>
+	<employee>
+		<name>Ladson Gillis,Paula</name>
+		<jobtitle>HEALTH PROJECT DIRECTOR</jobtitle>
+		<agencyid>A65012</agencyid>
+		<agency>HLTH-Health Department (012)</agency>
+		<hiredate>30956</hiredate>
+		<annualsalary>77168</annualsalary>
+		<grosspay>77967.37</grosspay>
+	</employee>
+	<employee>
+		<name>Ladson,Courtney N</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02224</agencyid>
+		<agency>Youth Summer  (224)</agency>
+		<hiredate>40701</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1051.25</grosspay>
+	</employee>
+	<employee>
+		<name>Ladson,Norman N</name>
+		<jobtitle>DEPUTY SHERIFF</jobtitle>
+		<agencyid>A38001</agencyid>
+		<agency>Sheriff's Office (001)</agency>
+		<hiredate>35579</hiredate>
+		<annualsalary>47705</annualsalary>
+		<grosspay>52048.97</grosspay>
+	</employee>
+	<employee>
+		<name>Ladson,Woodrow</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>B70358</agencyid>
+		<agency>DPW-Solid Waste (wkly) (358)</agency>
+		<hiredate>35059</hiredate>
+		<annualsalary>30368</annualsalary>
+		<grosspay>33159.3</grosspay>
+	</employee>
+	<employee>
+		<name>Lafex II,Francis J</name>
+		<jobtitle>MOTOR VEHICLE DRIVER I</jobtitle>
+		<agencyid>A50306</agencyid>
+		<agency>DPW-Water and Waste Water (306)</agency>
+		<hiredate>38691</hiredate>
+		<annualsalary>29952</annualsalary>
+		<grosspay>29587.06</grosspay>
+	</employee>
+	<employee>
+		<name>Lafferty,Michael A</name>
+		<jobtitle>DIVISION CHIEF II</jobtitle>
+		<agencyid>A06073</agencyid>
+		<agency>Housing and Community Dev (073)</agency>
+		<hiredate>39965</hiredate>
+		<annualsalary>80000</annualsalary>
+		<grosspay>75976.39</grosspay>
+	</employee>
+	<employee>
+		<name>Lago,Louis R</name>
+		<jobtitle>BATTALION FIRE CHIEF</jobtitle>
+		<agencyid>A64141</agencyid>
+		<agency>Fire Department (141)</agency>
+		<hiredate>31390</hiredate>
+		<annualsalary>94851</annualsalary>
+		<grosspay>106567.65</grosspay>
+	</employee>
+	<employee>
+		<name>Lahey,Dennis</name>
+		<jobtitle>FIRE PUMP OPERATOR</jobtitle>
+		<agencyid>A64156</agencyid>
+		<agency>Fire Department (156)</agency>
+		<hiredate>26829</hiredate>
+		<annualsalary>65131</annualsalary>
+		<grosspay>72418.79</grosspay>
+	</employee>
+	<employee>
+		<name>Lair,Larry</name>
+		<jobtitle>LABORER CREW LEADER I</jobtitle>
+		<agencyid>A50582</agencyid>
+		<agency>DPW-Water and Waste Water (582)</agency>
+		<hiredate>28738</hiredate>
+		<annualsalary>34590</annualsalary>
+		<grosspay>36410.64</grosspay>
+	</employee>
+	<employee>
+		<name>Lake,Augustus H</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99170</agencyid>
+		<agency>Police Department (170)</agency>
+		<hiredate>39135</hiredate>
+		<annualsalary>61740</annualsalary>
+		<grosspay>64864.36</grosspay>
+	</employee>
+	<employee>
+		<name>Lake,Terresa L</name>
+		<jobtitle>COMMUNITY SERVICE OFFICER</jobtitle>
+		<agencyid>A99297</agencyid>
+		<agency>Police Department (297)</agency>
+		<hiredate>35646</hiredate>
+		<annualsalary>36590</annualsalary>
+		<grosspay>37867.71</grosspay>
+	</employee>
+	<employee>
+		<name>Lake,Thomas S</name>
+		<jobtitle>FIRE CAPTAIN</jobtitle>
+		<agencyid>A64121</agencyid>
+		<agency>Fire Department (121)</agency>
+		<hiredate>34960</hiredate>
+		<annualsalary>76584</annualsalary>
+		<grosspay>77580.21</grosspay>
+	</employee>
+	<employee>
+		<name>Lakeisha,Harvin N</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02371</agencyid>
+		<agency>Youth Summer  (371)</agency>
+		<hiredate>41092</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>703.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lalmansingh,Ann Marie</name>
+		<jobtitle>LIBRARIAN SUPV I</jobtitle>
+		<agencyid>A75009</agencyid>
+		<agency>Enoch Pratt Free Library (009)</agency>
+		<hiredate>35499</hiredate>
+		<annualsalary>59300</annualsalary>
+		<grosspay>59976.75</grosspay>
+	</employee>
+	<employee>
+		<name>Lam,Moussa A</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99201</agencyid>
+		<agency>Police Department (201)</agency>
+		<hiredate>39636</hiredate>
+		<annualsalary>55208</annualsalary>
+		<grosspay>101075.8</grosspay>
+	</employee>
+	<employee>
+		<name>Lamadrid,Ada I</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99006</agencyid>
+		<agency>Police Department (006)</agency>
+		<hiredate>40868</hiredate>
+		<annualsalary>43239</annualsalary>
+		<grosspay>46177.02</grosspay>
+	</employee>
+	<employee>
+		<name>Lamartina,James M</name>
+		<jobtitle>FIRE EMERG VEHICLE DRIVER,ALS</jobtitle>
+		<agencyid>A64223</agencyid>
+		<agency>Fire Department (223)</agency>
+		<hiredate>36908</hiredate>
+		<annualsalary>59914</annualsalary>
+		<grosspay>67012.17</grosspay>
+	</employee>
+	<employee>
+		<name>Lamb,Asia T</name>
+		<jobtitle>SWIMMING POOL ATTENDENT</jobtitle>
+		<agencyid>P04002</agencyid>
+		<agency>R and P-Recreation (part-time) (</agency>
+		<hiredate>40702</hiredate>
+		<annualsalary>15080</annualsalary>
+		<grosspay>337.13</grosspay>
+	</employee>
+	<employee>
+		<name>Lamb,Champagne M</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02403</agencyid>
+		<agency>Youth Summer  (403)</agency>
+		<hiredate>40332</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1051.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lamb,Sharon P</name>
+		<jobtitle>POLICE OFFICER (EID)</jobtitle>
+		<agencyid>A99125</agencyid>
+		<agency>Police Department (125)</agency>
+		<hiredate>39757</hiredate>
+		<annualsalary>56664</annualsalary>
+		<grosspay>66162.05</grosspay>
+	</employee>
+	<employee>
+		<name>Lambert Brown,Tamar S</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02421</agencyid>
+		<agency>Youth Summer  (421)</agency>
+		<hiredate>39975</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1047.63</grosspay>
+	</employee>
+	<employee>
+		<name>Lambert,Autumn C</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02142</agencyid>
+		<agency>Youth Summer  (142)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lambert,Britani N</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02606</agencyid>
+		<agency>Youth Summer (606)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lambert,Jasmine B</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02284</agencyid>
+		<agency>Youth Summer  (284)</agency>
+		<hiredate>41072</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1051.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lambert,Lewis</name>
+		<jobtitle>RECREATION ARTS INSTRUCTOR</jobtitle>
+		<agencyid>A67005</agencyid>
+		<agency>R and P-Administration (005)</agency>
+		<hiredate>40067</hiredate>
+		<annualsalary>41600</annualsalary>
+		<grosspay>25060.4</grosspay>
+	</employee>
+	<employee>
+		<name>Lambert,Malik R</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02307</agencyid>
+		<agency>Youth Summer  (307)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lambert,Michele B</name>
+		<jobtitle>ASSISTANT STATE'S ATTORNEY</jobtitle>
+		<agencyid>A29008</agencyid>
+		<agency>States Attorneys Office (008)</agency>
+		<hiredate>38971</hiredate>
+		<annualsalary>62000</annualsalary>
+		<grosspay>61421.63</grosspay>
+	</employee>
+	<employee>
+		<name>Lambert,Shawn B</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02112</agencyid>
+		<agency>Youth Summer  (112)</agency>
+		<hiredate>40332</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lambert,Tonya M</name>
+		<jobtitle>CROSSING GUARD</jobtitle>
+		<agencyid>C90786</agencyid>
+		<agency>TRANS-Crossing Guards (786)</agency>
+		<hiredate>40073</hiredate>
+		<annualsalary>9601</annualsalary>
+		<grosspay>9190.66</grosspay>
+	</employee>
+	<employee>
+		<name>Lambropoulos,A S</name>
+		<jobtitle>DIR BUREAU OF DISEASE CONTROL</jobtitle>
+		<agencyid>A65014</agencyid>
+		<agency>HLTH-Health Department (014)</agency>
+		<hiredate>27453</hiredate>
+		<annualsalary>87500</annualsalary>
+		<grosspay>87665.68</grosspay>
+	</employee>
+	<employee>
+		<name>Lambrow,Don T</name>
+		<jobtitle>CONSTRUCTION PROJECT SUPV I</jobtitle>
+		<agencyid>A50803</agencyid>
+		<agency>DPW-Water and Waste Water (803)</agency>
+		<hiredate>38171</hiredate>
+		<annualsalary>62200</annualsalary>
+		<grosspay>62905.26</grosspay>
+	</employee>
+	<employee>
+		<name>Lamont Jr,Leon H</name>
+		<jobtitle>SOLID WASTE SUPERVISOR</jobtitle>
+		<agencyid>A70410</agencyid>
+		<agency>DPW-Solid Waste (410)</agency>
+		<hiredate>40911</hiredate>
+		<annualsalary>40540</annualsalary>
+		<grosspay>41099.07</grosspay>
+	</employee>
+	<employee>
+		<name>Lamont,Daniel C</name>
+		<jobtitle>FIREARMS EXAMINER</jobtitle>
+		<agencyid>A99386</agencyid>
+		<agency>Police Department (386)</agency>
+		<hiredate>38510</hiredate>
+		<annualsalary>68500</annualsalary>
+		<grosspay>76554.78</grosspay>
+	</employee>
+	<employee>
+		<name>Lamoureux,John R</name>
+		<jobtitle>IMMUNIZATION REGISTRY COORDINA</jobtitle>
+		<agencyid>A65527</agencyid>
+		<agency>HLTH-Health Department (527)</agency>
+		<hiredate>34683</hiredate>
+		<annualsalary>59300</annualsalary>
+		<grosspay>59828.57</grosspay>
+	</employee>
+	<employee>
+		<name>Lampkin,Janae T</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02250</agencyid>
+		<agency>Youth Summer  (250)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lampkin,Mary T</name>
+		<jobtitle>CROSSING GUARD</jobtitle>
+		<agencyid>C90910</agencyid>
+		<agency>TRANS-Crossing Guards (910)</agency>
+		<hiredate>41029</hiredate>
+		<annualsalary>8926</annualsalary>
+		<grosspay>5844.75</grosspay>
+	</employee>
+	<employee>
+		<name>Lamptey,Lila</name>
+		<jobtitle>SENIOR SOCIAL SERVICES COORDIN</jobtitle>
+		<agencyid>A65201</agencyid>
+		<agency>HLTH-Health Department (201)</agency>
+		<hiredate>41417</hiredate>
+		<annualsalary>35947</annualsalary>
+		<grosspay>2764.97</grosspay>
+	</employee>
+	<employee>
+		<name>Lanasa,Marcia A</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02264</agencyid>
+		<agency>Youth Summer  (264)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lancaster,Constance J</name>
+		<jobtitle>CROSSING GUARD</jobtitle>
+		<agencyid>C90786</agencyid>
+		<agency>TRANS-Crossing Guards (786)</agency>
+		<hiredate>33297</hiredate>
+		<annualsalary>10620</annualsalary>
+		<grosspay>11028.61</grosspay>
+	</employee>
+	<employee>
+		<name>Lancaster,Constance J</name>
+		<jobtitle>Crossing Guard</jobtitle>
+		<agencyid>C90SUM</agencyid>
+		<agency>TRANS-Cross Guard-Summer</agency>
+		<hiredate>39622</hiredate>
+		<annualsalary>23462</annualsalary>
+		<grosspay>1262.88</grosspay>
+	</employee>
+	<employee>
+		<name>Lancaster,Rosemary</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>A50209</agencyid>
+		<agency>DPW-Water and Waste Water (209)</agency>
+		<hiredate>35695</hiredate>
+		<annualsalary>30368</annualsalary>
+		<grosspay>30443.05</grosspay>
+	</employee>
+	<employee>
+		<name>Lance,Robert C</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99034</agencyid>
+		<agency>Police Department (034)</agency>
+		<hiredate>40773</hiredate>
+		<annualsalary>43239</annualsalary>
+		<grosspay>48401.94</grosspay>
+	</employee>
+	<employee>
+		<name>Lancellotti Jr,Harry J</name>
+		<jobtitle>FIRE LIEUTENANT ALS</jobtitle>
+		<agencyid>A64136</agencyid>
+		<agency>Fire Department (136)</agency>
+		<hiredate>35732</hiredate>
+		<annualsalary>69238</annualsalary>
+		<grosspay>76016.22</grosspay>
+	</employee>
+	<employee>
+		<name>Lancetta,Nicholas G</name>
+		<jobtitle>POLICE OFFICER TRAINEE</jobtitle>
+		<agencyid>A99416</agencyid>
+		<agency>Police Department (416)</agency>
+		<hiredate>41281</hiredate>
+		<annualsalary>43136</annualsalary>
+		<grosspay>18750.59</grosspay>
+	</employee>
+	<employee>
+		<name>Land Jr,Kareem M</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02414</agencyid>
+		<agency>Youth Summer  (414)</agency>
+		<hiredate>41438</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Land,Evelyn V</name>
+		<jobtitle>FIRE DISPATCHER</jobtitle>
+		<agencyid>A64603</agencyid>
+		<agency>Fire Department (603)</agency>
+		<hiredate>37627</hiredate>
+		<annualsalary>47476</annualsalary>
+		<grosspay>52990.56</grosspay>
+	</employee>
+	<employee>
+		<name>Land,Mason</name>
+		<jobtitle>POLICE LIEUTENANT</jobtitle>
+		<agencyid>A99303</agencyid>
+		<agency>Police Department (303)</agency>
+		<hiredate>28669</hiredate>
+		<annualsalary>92172</annualsalary>
+		<grosspay>99497.37</grosspay>
+	</employee>
+	<employee>
+		<name>Land,Quintin D</name>
+		<jobtitle>POLICE INFORMATION TECHNICIAN</jobtitle>
+		<agencyid>A99362</agencyid>
+		<agency>Police Department (362)</agency>
+		<hiredate>39769</hiredate>
+		<annualsalary>29343</annualsalary>
+		<grosspay>11750.29</grosspay>
+	</employee>
+	<employee>
+		<name>Landers,Cecilia B</name>
+		<jobtitle>COMMUNITY HEALTH NURSE II (10</jobtitle>
+		<agencyid>A65104</agencyid>
+		<agency>HLTH-Health Department (104)</agency>
+		<hiredate>34652</hiredate>
+		<annualsalary>57176</annualsalary>
+		<grosspay>57443.49</grosspay>
+	</employee>
+	<employee>
+		<name>Landers,Dawn P</name>
+		<jobtitle>MOTOR VEHICLE DRIVER I</jobtitle>
+		<agencyid>A50303</agencyid>
+		<agency>DPW-Water and Waste Water (303)</agency>
+		<hiredate>31915</hiredate>
+		<annualsalary>34403</annualsalary>
+		<grosspay>35137.16</grosspay>
+	</employee>
+	<employee>
+		<name>Landers,Michelle P</name>
+		<jobtitle>LICENSED CLINICAL SOCIAL WORKE</jobtitle>
+		<agencyid>A31003</agencyid>
+		<agency>Circuit Court (003)</agency>
+		<hiredate>40745</hiredate>
+		<annualsalary>57555</annualsalary>
+		<grosspay>53296.87</grosspay>
+	</employee>
+	<employee>
+		<name>Landis,Mary J</name>
+		<jobtitle>CONTRACT SERV SPEC II</jobtitle>
+		<agencyid>A30001</agencyid>
+		<agency>Law Department (001)</agency>
+		<hiredate>41415</hiredate>
+		<annualsalary>73840</annualsalary>
+		<grosspay>3401.97</grosspay>
+	</employee>
+	<employee>
+		<name>Landsman,Joseph C</name>
+		<jobtitle>POLICE SERGEANT</jobtitle>
+		<agencyid>A99201</agencyid>
+		<agency>Police Department (201)</agency>
+		<hiredate>37073</hiredate>
+		<annualsalary>71574</annualsalary>
+		<grosspay>90049.8</grosspay>
+	</employee>
+	<employee>
+		<name>Lane Sr,Cornelius C</name>
+		<jobtitle>SERV ASST LBRY</jobtitle>
+		<agencyid>A75082</agencyid>
+		<agency>Enoch Pratt Free Library (082)</agency>
+		<hiredate>36815</hiredate>
+		<annualsalary>21424</annualsalary>
+		<grosspay>0</grosspay>
+	</employee>
+	<employee>
+		<name>Lane,Akire K</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02253</agencyid>
+		<agency>Youth Summer  (253)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lane,Antonio</name>
+		<jobtitle>RECREATION ARTS INSTRUCTOR</jobtitle>
+		<agencyid>P04001</agencyid>
+		<agency>R and P-Recreation (part-time) (</agency>
+		<hiredate>39265</hiredate>
+		<annualsalary>20800</annualsalary>
+		<grosspay>10250</grosspay>
+	</employee>
+	<employee>
+		<name>Lane,Arrit J</name>
+		<jobtitle>EMERGENCY DISPATCHER</jobtitle>
+		<agencyid>A40302</agencyid>
+		<agency>M-R Info Technology (302)</agency>
+		<hiredate>40864</hiredate>
+		<annualsalary>39122</annualsalary>
+		<grosspay>41094.53</grosspay>
+	</employee>
+	<employee>
+		<name>Lane,Ashley K</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02614</agencyid>
+		<agency>Youth Summer (614)</agency>
+		<hiredate>41072</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1051.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lane,Charles R</name>
+		<jobtitle>DRIVER LIBRARY</jobtitle>
+		<agencyid>A75081</agencyid>
+		<agency>Enoch Pratt Free Library (081)</agency>
+		<hiredate>34351</hiredate>
+		<annualsalary>31707</annualsalary>
+		<grosspay>42094.57</grosspay>
+	</employee>
+	<employee>
+		<name>Lane,Craig K</name>
+		<jobtitle>MECHANICAL MAINT TECH SUPV I</jobtitle>
+		<agencyid>A50304</agencyid>
+		<agency>DPW-Water and Waste Water (304)</agency>
+		<hiredate>32685</hiredate>
+		<annualsalary>50653</annualsalary>
+		<grosspay>62910.59</grosspay>
+	</employee>
+	<employee>
+		<name>Lane,Demon L</name>
+		<jobtitle>JTPA TRAINEE A MOMR</jobtitle>
+		<agencyid>A65019</agencyid>
+		<agency>HLTH-Health Department (019)</agency>
+		<hiredate>40332</hiredate>
+		<annualsalary>6240</annualsalary>
+		<grosspay>0</grosspay>
+	</employee>
+	<employee>
+		<name>Lane,Edwin</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99226</agencyid>
+		<agency>Police Department (226)</agency>
+		<hiredate>37467</hiredate>
+		<annualsalary>61157</annualsalary>
+		<grosspay>69586.88</grosspay>
+	</employee>
+	<employee>
+		<name>Lane,Farrell</name>
+		<jobtitle>COMMUNITY AIDE</jobtitle>
+		<agencyid>B68060</agencyid>
+		<agency>R and P-Parks (wkly) (060)</agency>
+		<hiredate>41379</hiredate>
+		<annualsalary>15080</annualsalary>
+		<grosspay>2594.38</grosspay>
+	</employee>
+	<employee>
+		<name>Lane,James W</name>
+		<jobtitle>DEPUTY SHERIFF</jobtitle>
+		<agencyid>A38001</agencyid>
+		<agency>Sheriff's Office (001)</agency>
+		<hiredate>37651</hiredate>
+		<annualsalary>45976</annualsalary>
+		<grosspay>38830.53</grosspay>
+	</employee>
+	<employee>
+		<name>Lane,Jonathan F</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99195</agencyid>
+		<agency>Police Department (195)</agency>
+		<hiredate>40602</hiredate>
+		<annualsalary>43895</annualsalary>
+		<grosspay>51467.56</grosspay>
+	</employee>
+	<employee>
+		<name>Lane,Justin S</name>
+		<jobtitle>COUNCIL ASSISTANT</jobtitle>
+		<agencyid>A02002</agencyid>
+		<agency>City Council (002)</agency>
+		<hiredate>41351</hiredate>
+		<annualsalary>33510</annualsalary>
+		<grosspay>7891.08</grosspay>
+	</employee>
+	<employee>
+		<name>Lane,Kieron C</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02159</agencyid>
+		<agency>Youth Summer  (159)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lane,Reginald M</name>
+		<jobtitle>MOTOR VEHICLE DRIVER II (Hrly)</jobtitle>
+		<agencyid>A50502</agencyid>
+		<agency>DPW-Water and Waste Water (502)</agency>
+		<hiredate>36578</hiredate>
+		<annualsalary>34486</annualsalary>
+		<grosspay>52049.51</grosspay>
+	</employee>
+	<employee>
+		<name>Lane,Sandra K</name>
+		<jobtitle>OFFICE ASSISTANT III</jobtitle>
+		<agencyid>A52002</agencyid>
+		<agency>ERS/EOS Admin (002)</agency>
+		<hiredate>32753</hiredate>
+		<annualsalary>35142</annualsalary>
+		<grosspay>35045.05</grosspay>
+	</employee>
+	<employee>
+		<name>Lane,Tiffany E</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02550</agencyid>
+		<agency>Youth Summer  (550)</agency>
+		<hiredate>41438</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Laney,Brenda C</name>
+		<jobtitle>LEGAL ASSISTANT I</jobtitle>
+		<agencyid>A65508</agencyid>
+		<agency>HLTH-Health Department (508)</agency>
+		<hiredate>38897</hiredate>
+		<annualsalary>39994</annualsalary>
+		<grosspay>39647.9</grosspay>
+	</employee>
+	<employee>
+		<name>Lang,Ernest G</name>
+		<jobtitle>AUTOMOTIVE MECHANIC</jobtitle>
+		<agencyid>A85301</agencyid>
+		<agency>General Services (301)</agency>
+		<hiredate>34337</hiredate>
+		<annualsalary>42133</annualsalary>
+		<grosspay>47685.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lang,Michael J</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99124</agencyid>
+		<agency>Police Department (124)</agency>
+		<hiredate>34477</hiredate>
+		<annualsalary>66400</annualsalary>
+		<grosspay>101621.79</grosspay>
+	</employee>
+	<employee>
+		<name>Lang,Oliver F</name>
+		<jobtitle>Facilities/Office Services II</jobtitle>
+		<agencyid>A03064</agencyid>
+		<agency>OED-Employment Dev (064)</agency>
+		<hiredate>33805</hiredate>
+		<annualsalary>48952</annualsalary>
+		<grosspay>49317.08</grosspay>
+	</employee>
+	<employee>
+		<name>Lang,Susan D</name>
+		<jobtitle>STAFF ASSOC. PRES CITY COUNCIL</jobtitle>
+		<agencyid>A02003</agencyid>
+		<agency>City Council (003)</agency>
+		<hiredate>38495</hiredate>
+		<annualsalary>42767</annualsalary>
+		<grosspay>41353.49</grosspay>
+	</employee>
+	<employee>
+		<name>Langan,Nicholas J</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99093</agencyid>
+		<agency>Police Department (093)</agency>
+		<hiredate>40890</hiredate>
+		<annualsalary>43239</annualsalary>
+		<grosspay>45427.5</grosspay>
+	</employee>
+	<employee>
+		<name>Langan,Robert G</name>
+		<jobtitle>FIREFIGHTER</jobtitle>
+		<agencyid>A64133</agencyid>
+		<agency>Fire Department (133)</agency>
+		<hiredate>31418</hiredate>
+		<annualsalary>63299</annualsalary>
+		<grosspay>65329.49</grosspay>
+	</employee>
+	<employee>
+		<name>Langford Jr,Gary M</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64123</agencyid>
+		<agency>Fire Department (123)</agency>
+		<hiredate>39678</hiredate>
+		<annualsalary>54725</annualsalary>
+		<grosspay>73327.32</grosspay>
+	</employee>
+	<employee>
+		<name>Langford,Richard F</name>
+		<jobtitle>FIREFIGHTER/PARAMEDIC</jobtitle>
+		<agencyid>A64203</agencyid>
+		<agency>Fire Department (203)</agency>
+		<hiredate>37263</hiredate>
+		<annualsalary>58618</annualsalary>
+		<grosspay>71390.82</grosspay>
+	</employee>
+	<employee>
+		<name>Langhorn,Kevin M</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>A50608</agencyid>
+		<agency>DPW-Water and Waste Water (608)</agency>
+		<hiredate>36729</hiredate>
+		<annualsalary>29515</annualsalary>
+		<grosspay>30255.14</grosspay>
+	</employee>
+	<employee>
+		<name>Langis,Paul A</name>
+		<jobtitle>POLICE SERGEANT EID</jobtitle>
+		<agencyid>A99226</agencyid>
+		<agency>Police Department (226)</agency>
+		<hiredate>34057</hiredate>
+		<annualsalary>78746</annualsalary>
+		<grosspay>74865.41</grosspay>
+	</employee>
+	<employee>
+		<name>Langjahr,Steven F</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99093</agencyid>
+		<agency>Police Department (093)</agency>
+		<hiredate>40294</hiredate>
+		<annualsalary>51937</annualsalary>
+		<grosspay>58525.03</grosspay>
+	</employee>
+	<employee>
+		<name>Langley,Joshua W</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02548</agencyid>
+		<agency>Youth Summer  (548)</agency>
+		<hiredate>41072</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1051.25</grosspay>
+	</employee>
+	<employee>
+		<name>Langohr,Mee Soon</name>
+		<jobtitle>ASSISTANT STATE'S ATTORNEY</jobtitle>
+		<agencyid>A29006</agencyid>
+		<agency>States Attorneys Office (006)</agency>
+		<hiredate>39870</hiredate>
+		<annualsalary>57000</annualsalary>
+		<grosspay>56437.8</grosspay>
+	</employee>
+	<employee>
+		<name>Langrehr,Franklin D</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>A50212</agencyid>
+		<agency>DPW-Water and Waste Water (212)</agency>
+		<hiredate>32335</hiredate>
+		<annualsalary>31220</annualsalary>
+		<grosspay>31638.19</grosspay>
+	</employee>
+	<employee>
+		<name>Langs,Beulah</name>
+		<jobtitle>CROSSING GUARD</jobtitle>
+		<agencyid>C90786</agencyid>
+		<agency>TRANS-Crossing Guards (786)</agency>
+		<hiredate>38426</hiredate>
+		<annualsalary>9744</annualsalary>
+		<grosspay>9809.39</grosspay>
+	</employee>
+	<employee>
+		<name>Langston Jr,Walter R</name>
+		<jobtitle>Waste Water Tech Supv I Pump</jobtitle>
+		<agencyid>A50206</agencyid>
+		<agency>DPW-Water and Waste Water (206)</agency>
+		<hiredate>27352</hiredate>
+		<annualsalary>52003</annualsalary>
+		<grosspay>59710.33</grosspay>
+	</employee>
+	<employee>
+		<name>Langston,Chawanta R</name>
+		<jobtitle>RADIO DISPATCHER SUPV</jobtitle>
+		<agencyid>A41116</agencyid>
+		<agency>DPW-Administration (116)</agency>
+		<hiredate>27729</hiredate>
+		<annualsalary>47890</annualsalary>
+		<grosspay>50990.56</grosspay>
+	</employee>
+	<employee>
+		<name>Lanier,Jason A</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02456</agencyid>
+		<agency>Youth Summer  (456)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lankford Jr,James E</name>
+		<jobtitle>FIRE EMERG VEHICLE DRIVER,ALS</jobtitle>
+		<agencyid>A64212</agencyid>
+		<agency>Fire Department (212)</agency>
+		<hiredate>36122</hiredate>
+		<annualsalary>59914</annualsalary>
+		<grosspay>71715.09</grosspay>
+	</employee>
+	<employee>
+		<name>Lann,Bernadette L</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>A50618</agencyid>
+		<agency>DPW-Water and Waste Water (618)</agency>
+		<hiredate>35846</hiredate>
+		<annualsalary>30368</annualsalary>
+		<grosspay>31397.45</grosspay>
+	</employee>
+	<employee>
+		<name>Lansey,Anne R</name>
+		<jobtitle>ADMINISTRATIVE ANALYST II</jobtitle>
+		<agencyid>A90201</agencyid>
+		<agency>TRANS-Traffic (201)</agency>
+		<hiredate>32325</hiredate>
+		<annualsalary>51400</annualsalary>
+		<grosspay>50614.43</grosspay>
+	</employee>
+	<employee>
+		<name>Lansey,Anthony D</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99330</agencyid>
+		<agency>Police Department (330)</agency>
+		<hiredate>34022</hiredate>
+		<annualsalary>66982</annualsalary>
+		<grosspay>96276.43</grosspay>
+	</employee>
+	<employee>
+		<name>Lansey,Frank W</name>
+		<jobtitle>TRANSPORTATION ASSOC I</jobtitle>
+		<agencyid>A49102</agencyid>
+		<agency>TRANS-Highways (102)</agency>
+		<hiredate>29649</hiredate>
+		<annualsalary>44088</annualsalary>
+		<grosspay>58688.88</grosspay>
+	</employee>
+	<employee>
+		<name>Lansey,Lorraine P</name>
+		<jobtitle>LATENT PRINT EXAMINER</jobtitle>
+		<agencyid>A99386</agencyid>
+		<agency>Police Department (386)</agency>
+		<hiredate>30550</hiredate>
+		<annualsalary>86700</annualsalary>
+		<grosspay>89813.8</grosspay>
+	</employee>
+	<employee>
+		<name>Lansey,Stephanie C</name>
+		<jobtitle>POLICE SERGEANT EID</jobtitle>
+		<agencyid>A99296</agencyid>
+		<agency>Police Department (296)</agency>
+		<hiredate>36678</hiredate>
+		<annualsalary>73456</annualsalary>
+		<grosspay>81408.05</grosspay>
+	</employee>
+	<employee>
+		<name>Lansey,Wallis H</name>
+		<jobtitle>COMMUNITY AIDE</jobtitle>
+		<agencyid>A84402</agencyid>
+		<agency>TRANS-Towing (402)</agency>
+		<hiredate>41340</hiredate>
+		<annualsalary>20800</annualsalary>
+		<grosspay>4766.5</grosspay>
+	</employee>
+	<employee>
+		<name>Lapolla,Tonya M</name>
+		<jobtitle>CHIEF STATE'S ATTORNEY</jobtitle>
+		<agencyid>A29017</agencyid>
+		<agency>States Attorneys Office (017)</agency>
+		<hiredate>35353</hiredate>
+		<annualsalary>98100</annualsalary>
+		<grosspay>98009.08</grosspay>
+	</employee>
+	<employee>
+		<name>Laracuente,Eddie J</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99124</agencyid>
+		<agency>Police Department (124)</agency>
+		<hiredate>39310</hiredate>
+		<annualsalary>58244</annualsalary>
+		<grosspay>82242.47</grosspay>
+	</employee>
+	<employee>
+		<name>Laracuente,Jesse S</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99162</agencyid>
+		<agency>Police Department (162)</agency>
+		<hiredate>39741</hiredate>
+		<annualsalary>55208</annualsalary>
+		<grosspay>59907.38</grosspay>
+	</employee>
+	<employee>
+		<name>Larbi,Manuel J</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99264</agencyid>
+		<agency>Police Department (264)</agency>
+		<hiredate>39126</hiredate>
+		<annualsalary>58827</annualsalary>
+		<grosspay>109008.26</grosspay>
+	</employee>
+	<employee>
+		<name>Larkins Jr,Kevin E</name>
+		<jobtitle>FIRE EMERGENCY VEHICLE DRIVER</jobtitle>
+		<agencyid>A64208</agencyid>
+		<agency>Fire Department (208)</agency>
+		<hiredate>39034</hiredate>
+		<annualsalary>56367</annualsalary>
+		<grosspay>60949.06</grosspay>
+	</employee>
+	<employee>
+		<name>Larkins,Ayesha A M</name>
+		<jobtitle>CRIMINALIST II</jobtitle>
+		<agencyid>A99386</agencyid>
+		<agency>Police Department (386)</agency>
+		<hiredate>34596</hiredate>
+		<annualsalary>62100</annualsalary>
+		<grosspay>66604.7</grosspay>
+	</employee>
+	<employee>
+		<name>Larkins,Michael R</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99337</agencyid>
+		<agency>Police Department (337)</agency>
+		<hiredate>34285</hiredate>
+		<annualsalary>66400</annualsalary>
+		<grosspay>84373.42</grosspay>
+	</employee>
+	<employee>
+		<name>Larkins-Lucas,Angela</name>
+		<jobtitle>Human Services</jobtitle>
+		<agencyid>A03027</agencyid>
+		<agency>OED-Employment Dev (027)</agency>
+		<hiredate>39846</hiredate>
+		<annualsalary>32136</annualsalary>
+		<grosspay>32506.8</grosspay>
+	</employee>
+	<employee>
+		<name>Larmore,Kevin B</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64113</agencyid>
+		<agency>Fire Department (113)</agency>
+		<hiredate>40492</hiredate>
+		<annualsalary>40650</annualsalary>
+		<grosspay>41930.02</grosspay>
+	</employee>
+	<employee>
+		<name>Laronde,Fabien W</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99226</agencyid>
+		<agency>Police Department (226)</agency>
+		<hiredate>37123</hiredate>
+		<annualsalary>61740</annualsalary>
+		<grosspay>91807</grosspay>
+	</employee>
+	<employee>
+		<name>Larsen,Laura L</name>
+		<jobtitle>BUDGET/MANAGEMENT ANALYST II</jobtitle>
+		<agencyid>A23001</agencyid>
+		<agency>FIN-Admin and Budgets (001)</agency>
+		<hiredate>40789</hiredate>
+		<annualsalary>58800</annualsalary>
+		<grosspay>55742.1</grosspay>
+	</employee>
+	<employee>
+		<name>Larson,Amy</name>
+		<jobtitle>SPECIAL AIDE II</jobtitle>
+		<agencyid>A31009</agencyid>
+		<agency>Circuit Court (009)</agency>
+		<hiredate>41226</hiredate>
+		<annualsalary>49578</annualsalary>
+		<grosspay>17933.02</grosspay>
+	</employee>
+	<employee>
+		<name>Larson,Kari L</name>
+		<jobtitle>POLICE OFFICER TRAINEE</jobtitle>
+		<agencyid>A99416</agencyid>
+		<agency>Police Department (416)</agency>
+		<hiredate>41381</hiredate>
+		<annualsalary>43136</annualsalary>
+		<grosspay>6802.11</grosspay>
+	</employee>
+	<employee>
+		<name>Lash,Michael V</name>
+		<jobtitle>POLICE OFFICER (EID)</jobtitle>
+		<agencyid>A99323</agencyid>
+		<agency>Police Department (323)</agency>
+		<hiredate>36485</hiredate>
+		<annualsalary>64422</annualsalary>
+		<grosspay>86732.18</grosspay>
+	</employee>
+	<employee>
+		<name>Lash,Vincent M</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99200</agencyid>
+		<agency>Police Department (200)</agency>
+		<hiredate>36485</hiredate>
+		<annualsalary>62905</annualsalary>
+		<grosspay>93517.02</grosspay>
+	</employee>
+	<employee>
+		<name>Lashley,Abadaya</name>
+		<jobtitle>Professional Services</jobtitle>
+		<agencyid>A03020</agencyid>
+		<agency>OED-Employment Dev (020)</agency>
+		<hiredate>39617</hiredate>
+		<annualsalary>47444</annualsalary>
+		<grosspay>46959.28</grosspay>
+	</employee>
+	<employee>
+		<name>Lashley,Andrew L</name>
+		<jobtitle>CROSSING GUARD</jobtitle>
+		<agencyid>C90786</agencyid>
+		<agency>TRANS-Crossing Guards (786)</agency>
+		<hiredate>38661</hiredate>
+		<annualsalary>9744</annualsalary>
+		<grosspay>9856.78</grosspay>
+	</employee>
+	<employee>
+		<name>Lashley,Leonoid R</name>
+		<jobtitle>TRAINING OFFICER I</jobtitle>
+		<agencyid>A06011</agencyid>
+		<agency>Housing and Community Dev (011)</agency>
+		<hiredate>41141</hiredate>
+		<annualsalary>52200</annualsalary>
+		<grosspay>44169.18</grosspay>
+	</employee>
+	<employee>
+		<name>Lashley,Nichelle J</name>
+		<jobtitle>RETIREMENT BENEFITS ANALYST SU</jobtitle>
+		<agencyid>A52003</agencyid>
+		<agency>ERS/EOS Admin (003)</agency>
+		<hiredate>38579</hiredate>
+		<annualsalary>57900</annualsalary>
+		<grosspay>57110.99</grosspay>
+	</employee>
+	<employee>
+		<name>Lasky,Lee</name>
+		<jobtitle>COMMUNITY AIDE</jobtitle>
+		<agencyid>P04001</agencyid>
+		<agency>R and P-Recreation (part-time) (</agency>
+		<hiredate>40571</hiredate>
+		<annualsalary>22880</annualsalary>
+		<grosspay>12178.87</grosspay>
+	</employee>
+	<employee>
+		<name>Lassahn,Philip K</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99335</agencyid>
+		<agency>Police Department (335)</agency>
+		<hiredate>34316</hiredate>
+		<annualsalary>66400</annualsalary>
+		<grosspay>77544.46</grosspay>
+	</employee>
+	<employee>
+		<name>Lassiter,Annette L</name>
+		<jobtitle>OFFICE ASSISTANT III</jobtitle>
+		<agencyid>A99333</agencyid>
+		<agency>Police Department (333)</agency>
+		<hiredate>31083</hiredate>
+		<annualsalary>36109</annualsalary>
+		<grosspay>40252.95</grosspay>
+	</employee>
+	<employee>
+		<name>Lassiter,Carl L</name>
+		<jobtitle>AUDITOR II</jobtitle>
+		<agencyid>A24001</agencyid>
+		<agency>COMP-Audits (001)</agency>
+		<hiredate>39139</hiredate>
+		<annualsalary>56500</annualsalary>
+		<grosspay>35202.04</grosspay>
+	</employee>
+	<employee>
+		<name>Lassiter,Carleene</name>
+		<jobtitle>BINDERY WORKER III</jobtitle>
+		<agencyid>A17002</agencyid>
+		<agency>FIN-Purchasing (002)</agency>
+		<hiredate>37476</hiredate>
+		<annualsalary>38042</annualsalary>
+		<grosspay>37907.94</grosspay>
+	</employee>
+	<employee>
+		<name>Lassiter,Sherrea D</name>
+		<jobtitle>FISCAL TECHNICIAN</jobtitle>
+		<agencyid>A67008</agencyid>
+		<agency>R and P-Administration (008)</agency>
+		<hiredate>41372</hiredate>
+		<annualsalary>38939</annualsalary>
+		<grosspay>8237.08</grosspay>
+	</employee>
+	<employee>
+		<name>Laster,Theodore</name>
+		<jobtitle>REAL ESTATE AGENT III</jobtitle>
+		<agencyid>A15001</agencyid>
+		<agency>COMP-Real Estate (001)</agency>
+		<hiredate>39169</hiredate>
+		<annualsalary>51000</annualsalary>
+		<grosspay>50833.91</grosspay>
+	</employee>
+	<employee>
+		<name>Latham Jr,Roy R</name>
+		<jobtitle>HOUSING INSPECTOR SENIOR</jobtitle>
+		<agencyid>A06083</agencyid>
+		<agency>Housing and Community Dev (083)</agency>
+		<hiredate>35513</hiredate>
+		<annualsalary>54453</annualsalary>
+		<grosspay>55714.18</grosspay>
+	</employee>
+	<employee>
+		<name>Lathan,Vanessa M</name>
+		<jobtitle>COMMUNITY AIDE</jobtitle>
+		<agencyid>A65012</agencyid>
+		<agency>HLTH-Health Department (012)</agency>
+		<hiredate>41302</hiredate>
+		<annualsalary>24066</annualsalary>
+		<grosspay>4886.43</grosspay>
+	</employee>
+	<employee>
+		<name>Latimer,Jo Anne</name>
+		<jobtitle>OFFICE ASSISTANT II</jobtitle>
+		<agencyid>A90041</agencyid>
+		<agency>TRANS-Traffic (041)</agency>
+		<hiredate>34947</hiredate>
+		<annualsalary>31707</annualsalary>
+		<grosspay>33593.47</grosspay>
+	</employee>
+	<employee>
+		<name>Latimer,Linda</name>
+		<jobtitle>HUMAN RESOURCES SPECIALIST II</jobtitle>
+		<agencyid>A83002</agencyid>
+		<agency>HR-Human Resources (002)</agency>
+		<hiredate>31883</hiredate>
+		<annualsalary>62300</annualsalary>
+		<grosspay>62333.71</grosspay>
+	</employee>
+	<employee>
+		<name>Latimer,Nicole Y</name>
+		<jobtitle>PARKING CONTROL AGENT I</jobtitle>
+		<agencyid>A90201</agencyid>
+		<agency>TRANS-Traffic (201)</agency>
+		<hiredate>38967</hiredate>
+		<annualsalary>30506</annualsalary>
+		<grosspay>31074.36</grosspay>
+	</employee>
+	<employee>
+		<name>Latiolais,Sarah R</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99125</agencyid>
+		<agency>Police Department (125)</agency>
+		<hiredate>40862</hiredate>
+		<annualsalary>43239</annualsalary>
+		<grosspay>48592.39</grosspay>
+	</employee>
+	<employee>
+		<name>Latney,Carla L</name>
+		<jobtitle>HEALTH PROGRAM ADMINISTRATOR I</jobtitle>
+		<agencyid>A65026</agencyid>
+		<agency>HLTH-Health Department (026)</agency>
+		<hiredate>34333</hiredate>
+		<annualsalary>60500</annualsalary>
+		<grosspay>60408.42</grosspay>
+	</employee>
+	<employee>
+		<name>Lattanzi,Adam E</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99034</agencyid>
+		<agency>Police Department (034)</agency>
+		<hiredate>38328</hiredate>
+		<annualsalary>58827</annualsalary>
+		<grosspay>62965.57</grosspay>
+	</employee>
+	<employee>
+		<name>Lattimore,Genara M</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99124</agencyid>
+		<agency>Police Department (124)</agency>
+		<hiredate>39681</hiredate>
+		<annualsalary>43895</annualsalary>
+		<grosspay>45005.12</grosspay>
+	</employee>
+	<employee>
+		<name>Lauer,Pamela J</name>
+		<jobtitle>PROFESSIONAL ASST LBRY</jobtitle>
+		<agencyid>A75017</agencyid>
+		<agency>Enoch Pratt Free Library (017)</agency>
+		<hiredate>40231</hiredate>
+		<annualsalary>25709</annualsalary>
+		<grosspay>4171.51</grosspay>
+	</employee>
+	<employee>
+		<name>Laughlin,Blair F</name>
+		<jobtitle>Criminalist III Drug Analysis</jobtitle>
+		<agencyid>A99386</agencyid>
+		<agency>Police Department (386)</agency>
+		<hiredate>27554</hiredate>
+		<annualsalary>72200</annualsalary>
+		<grosspay>83692.17</grosspay>
+	</employee>
+	<employee>
+		<name>Lauman,David L</name>
+		<jobtitle>POLLUTION CONTROL ANALYST SUPV</jobtitle>
+		<agencyid>A50603</agencyid>
+		<agency>DPW-Water and Waste Water (603)</agency>
+		<hiredate>29099</hiredate>
+		<annualsalary>70400</annualsalary>
+		<grosspay>69467.11</grosspay>
+	</employee>
+	<employee>
+		<name>Laumann,Vernon W</name>
+		<jobtitle>COMMUNITY SERVICE OFFICER</jobtitle>
+		<agencyid>A99370</agencyid>
+		<agency>Police Department (370)</agency>
+		<hiredate>35646</hiredate>
+		<annualsalary>36590</annualsalary>
+		<grosspay>37454.69</grosspay>
+	</employee>
+	<employee>
+		<name>Laurenceau,Danielle A</name>
+		<jobtitle>STAFF ASSOC. PRES CITY COUNCIL</jobtitle>
+		<agencyid>A02003</agencyid>
+		<agency>City Council (003)</agency>
+		<hiredate>38664</hiredate>
+		<annualsalary>44100</annualsalary>
+		<grosspay>42914.99</grosspay>
+	</employee>
+	<employee>
+		<name>Laury,Lakeisha S</name>
+		<jobtitle>SECRETARY II</jobtitle>
+		<agencyid>A50100</agencyid>
+		<agency>DPW-Water and Waste Water (100)</agency>
+		<hiredate>39693</hiredate>
+		<annualsalary>31741</annualsalary>
+		<grosspay>29290.15</grosspay>
+	</employee>
+	<employee>
+		<name>Laury,Maria</name>
+		<jobtitle>WORD PROCESSING OPERATOR III</jobtitle>
+		<agencyid>A65041</agencyid>
+		<agency>HLTH-Health Department (041)</agency>
+		<hiredate>39317</hiredate>
+		<annualsalary>32241</annualsalary>
+		<grosspay>32150.1</grosspay>
+	</employee>
+	<employee>
+		<name>Lavery,Michael J</name>
+		<jobtitle>POLICE OFFICER (EID)</jobtitle>
+		<agencyid>A99300</agencyid>
+		<agency>Police Department (300)</agency>
+		<hiredate>35998</hiredate>
+		<annualsalary>65020</annualsalary>
+		<grosspay>66035.27</grosspay>
+	</employee>
+	<employee>
+		<name>Lawler,David W</name>
+		<jobtitle>MECHANICAL MAINT TECH SUPV I</jobtitle>
+		<agencyid>A50212</agencyid>
+		<agency>DPW-Water and Waste Water (212)</agency>
+		<hiredate>29892</hiredate>
+		<annualsalary>54251</annualsalary>
+		<grosspay>56025.16</grosspay>
+	</employee>
+	<employee>
+		<name>Lawlor,Richard D</name>
+		<jobtitle>MASTER</jobtitle>
+		<agencyid>A31009</agencyid>
+		<agency>Circuit Court (009)</agency>
+		<hiredate>29063</hiredate>
+		<annualsalary>112060</annualsalary>
+		<grosspay>112053.65</grosspay>
+	</employee>
+	<employee>
+		<name>Lawrence,Bridget T</name>
+		<jobtitle>DATA ENTRY OPERATOR  III</jobtitle>
+		<agencyid>A14006</agencyid>
+		<agency>FIN-Collections (006)</agency>
+		<hiredate>35390</hiredate>
+		<annualsalary>37954</annualsalary>
+		<grosspay>46297.64</grosspay>
+	</employee>
+	<employee>
+		<name>Lawrence,Brittney D</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02253</agencyid>
+		<agency>Youth Summer  (253)</agency>
+		<hiredate>41438</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lawrence,Dejouir D</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02550</agencyid>
+		<agency>Youth Summer  (550)</agency>
+		<hiredate>41438</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lawrence,Jepthah B</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02301</agencyid>
+		<agency>Youth Summer  (301)</agency>
+		<hiredate>41072</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1377.5</grosspay>
+	</employee>
+	<employee>
+		<name>Lawrence,Scott J</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99262</agencyid>
+		<agency>Police Department (262)</agency>
+		<hiredate>39126</hiredate>
+		<annualsalary>58827</annualsalary>
+		<grosspay>92115.3</grosspay>
+	</employee>
+	<employee>
+		<name>Lawrence,Sean E</name>
+		<jobtitle>POLICE SERGEANT</jobtitle>
+		<agencyid>A99261</agencyid>
+		<agency>Police Department (261)</agency>
+		<hiredate>34016</hiredate>
+		<annualsalary>76985</annualsalary>
+		<grosspay>86812.29</grosspay>
+	</employee>
+	<employee>
+		<name>Lawrence,Sherry M</name>
+		<jobtitle>CUSTODIAL WORKER</jobtitle>
+		<agencyid>A91013</agencyid>
+		<agency>M-R Convention Center (013)</agency>
+		<hiredate>36664</hiredate>
+		<annualsalary>28148</annualsalary>
+		<grosspay>28766.81</grosspay>
+	</employee>
+	<employee>
+		<name>Laws,Allan A</name>
+		<jobtitle>CROSSING GUARD</jobtitle>
+		<agencyid>C90786</agencyid>
+		<agency>TRANS-Crossing Guards (786)</agency>
+		<hiredate>39247</hiredate>
+		<annualsalary>9744</annualsalary>
+		<grosspay>10420.71</grosspay>
+	</employee>
+	<employee>
+		<name>Laws,Allan A</name>
+		<jobtitle>Crossing Guard</jobtitle>
+		<agencyid>C90SUM</agencyid>
+		<agency>TRANS-Cross Guard-Summer</agency>
+		<hiredate>39258</hiredate>
+		<annualsalary>23462</annualsalary>
+		<grosspay>1782.21</grosspay>
+	</employee>
+	<employee>
+		<name>Laws,Keith V</name>
+		<jobtitle>UTILITIES INSTALLER REPAIR II</jobtitle>
+		<agencyid>A50580</agencyid>
+		<agency>DPW-Water and Waste Water (580)</agency>
+		<hiredate>39111</hiredate>
+		<annualsalary>29682</annualsalary>
+		<grosspay>30305.45</grosspay>
+	</employee>
+	<employee>
+		<name>Laws,Montez K</name>
+		<jobtitle>COMMUNITY AIDE</jobtitle>
+		<agencyid>A68005</agencyid>
+		<agency>R and P-Parks (005)</agency>
+		<hiredate>40777</hiredate>
+		<annualsalary>20800</annualsalary>
+		<grosspay>5053.2</grosspay>
+	</employee>
+	<employee>
+		<name>Lawson,Ahlora</name>
+		<jobtitle>COMMUNITY AIDE</jobtitle>
+		<agencyid>A85605</agencyid>
+		<agency>General Services (605)</agency>
+		<hiredate>41340</hiredate>
+		<annualsalary>26832</annualsalary>
+		<grosspay>6024.18</grosspay>
+	</employee>
+	<employee>
+		<name>Lawson,Carolyn B</name>
+		<jobtitle>OFFICE ASSISTANT III</jobtitle>
+		<agencyid>A85301</agencyid>
+		<agency>General Services (301)</agency>
+		<hiredate>27381</hiredate>
+		<annualsalary>37076</annualsalary>
+		<grosspay>43923.52</grosspay>
+	</employee>
+	<employee>
+		<name>Lawson,Christine</name>
+		<jobtitle>CROSSING GUARD</jobtitle>
+		<agencyid>C90910</agencyid>
+		<agency>TRANS-Crossing Guards (910)</agency>
+		<hiredate>40546</hiredate>
+		<annualsalary>9040</annualsalary>
+		<grosspay>6408.16</grosspay>
+	</employee>
+	<employee>
+		<name>Lawson,Danielle</name>
+		<jobtitle>RECREATION LEADER II</jobtitle>
+		<agencyid>A04001</agencyid>
+		<agency>R and P-Recreation (001)</agency>
+		<hiredate>38034</hiredate>
+		<annualsalary>33306</annualsalary>
+		<grosspay>33905.12</grosspay>
+	</employee>
+	<employee>
+		<name>Lawson,Darren E</name>
+		<jobtitle>UTILITIES INSTALLER REPAIR III</jobtitle>
+		<agencyid>A50553</agencyid>
+		<agency>DPW-Water and Waste Water (553)</agency>
+		<hiredate>32342</hiredate>
+		<annualsalary>35171</annualsalary>
+		<grosspay>48812.47</grosspay>
+	</employee>
+	<employee>
+		<name>Lawson,James B</name>
+		<jobtitle>MECHANICAL MAINTENANCE TECH II</jobtitle>
+		<agencyid>A50212</agencyid>
+		<agency>DPW-Water and Waste Water (212)</agency>
+		<hiredate>34631</hiredate>
+		<annualsalary>39062</annualsalary>
+		<grosspay>41233.87</grosspay>
+	</employee>
+	<employee>
+		<name>Lawson,Janet R</name>
+		<jobtitle>PURCHASING ASSISTANT</jobtitle>
+		<agencyid>A12001</agencyid>
+		<agency>FIN-Acct and Payroll (001)</agency>
+		<hiredate>41386</hiredate>
+		<annualsalary>30223</annualsalary>
+		<grosspay>5468.64</grosspay>
+	</employee>
+	<employee>
+		<name>Lawson,Maliq T</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02187</agencyid>
+		<agency>Youth Summer  (187)</agency>
+		<hiredate>40701</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1015</grosspay>
+	</employee>
+	<employee>
+		<name>Lawson,Maxwell K</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02264</agencyid>
+		<agency>Youth Summer  (264)</agency>
+		<hiredate>41072</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>833.75</grosspay>
+	</employee>
+	<employee>
+		<name>Lawson,Nicole J</name>
+		<jobtitle>OFFICER COURT SECURITY</jobtitle>
+		<agencyid>A38002</agencyid>
+		<agency>Sheriff's Office (002)</agency>
+		<hiredate>37425</hiredate>
+		<annualsalary>40975</annualsalary>
+		<grosspay>45450.46</grosspay>
+	</employee>
+	<employee>
+		<name>Lawson,Paulette</name>
+		<jobtitle>OFFICE ASSISTANT II</jobtitle>
+		<agencyid>A49300</agencyid>
+		<agency>TRANS-Highways (300)</agency>
+		<hiredate>39069</hiredate>
+		<annualsalary>29913</annualsalary>
+		<grosspay>30820.38</grosspay>
+	</employee>
+	<employee>
+		<name>Lawson,Thomas L</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02421</agencyid>
+		<agency>Youth Summer  (421)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lawson,Tyriq J</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02548</agencyid>
+		<agency>Youth Summer  (548)</agency>
+		<hiredate>41438</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lay,Donnell P</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>B49330</agencyid>
+		<agency>TRANS-Highways (wkly) (330)</agency>
+		<hiredate>32314</hiredate>
+		<annualsalary>32073</annualsalary>
+		<grosspay>40662.59</grosspay>
+	</employee>
+	<employee>
+		<name>Laycock,Joshua D</name>
+		<jobtitle>POLICE OFFICER (EID)</jobtitle>
+		<agencyid>A99125</agencyid>
+		<agency>Police Department (125)</agency>
+		<hiredate>36485</hiredate>
+		<annualsalary>64422</annualsalary>
+		<grosspay>67997.67</grosspay>
+	</employee>
+	<employee>
+		<name>Layman,Jenifer A</name>
+		<jobtitle>CHIEF STATE'S ATTORNEY</jobtitle>
+		<agencyid>A29016</agencyid>
+		<agency>States Attorneys Office (016)</agency>
+		<hiredate>35695</hiredate>
+		<annualsalary>94400</annualsalary>
+		<grosspay>94309.04</grosspay>
+	</employee>
+	<employee>
+		<name>Layne,Jasmin</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02156</agencyid>
+		<agency>Youth Summer  (156)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Layne,Sean A</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02156</agencyid>
+		<agency>Youth Summer  (156)</agency>
+		<hiredate>41072</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1051.25</grosspay>
+	</employee>
+	<employee>
+		<name>Layne,Tashome L</name>
+		<jobtitle>SOLID WASTE WORKER</jobtitle>
+		<agencyid>B70410</agencyid>
+		<agency>DPW-Solid Waste (wkly) (410)</agency>
+		<hiredate>40801</hiredate>
+		<annualsalary>28600</annualsalary>
+		<grosspay>23329.66</grosspay>
+	</employee>
+	<employee>
+		<name>Layton,Derrick S</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99165</agencyid>
+		<agency>Police Department (165)</agency>
+		<hiredate>32314</hiredate>
+		<annualsalary>69893</annualsalary>
+		<grosspay>74759.5</grosspay>
+	</employee>
+	<employee>
+		<name>Lazan,Helen J</name>
+		<jobtitle>OFFICE ASSISTANT II</jobtitle>
+		<agencyid>A99030</agencyid>
+		<agency>Police Department (030)</agency>
+		<hiredate>34498</hiredate>
+		<annualsalary>31707</annualsalary>
+		<grosspay>29916.97</grosspay>
+	</employee>
+	<employee>
+		<name>Lazzelle,Charles J</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64223</agencyid>
+		<agency>Fire Department (223)</agency>
+		<hiredate>38042</hiredate>
+		<annualsalary>55113</annualsalary>
+		<grosspay>61902.9</grosspay>
+	</employee>
+	<employee>
+		<name>LeMaitre,Christopher J</name>
+		<jobtitle>POLICE OFFICER TRAINEE</jobtitle>
+		<agencyid>A99416</agencyid>
+		<agency>Police Department (416)</agency>
+		<hiredate>41381</hiredate>
+		<annualsalary>43136</annualsalary>
+		<grosspay>6802.11</grosspay>
+	</employee>
+	<employee>
+		<name>Leach Jr,Kevin T</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02229</agencyid>
+		<agency>Youth Summer  (229)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Leach,Alaysia N</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02215</agencyid>
+		<agency>Youth Summer  (215)</agency>
+		<hiredate>41438</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Leach,Ashanti I</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02716</agencyid>
+		<agency>Youth Summer (716)</agency>
+		<hiredate>41444</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Leach,Bernard W</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64146</agencyid>
+		<agency>Fire Department (146)</agency>
+		<hiredate>40730</hiredate>
+		<annualsalary>40650</annualsalary>
+		<grosspay>42433.78</grosspay>
+	</employee>
+	<employee>
+		<name>Leach,Kevin M</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>B70105</agencyid>
+		<agency>DPW-Solid Waste (wkly) (105)</agency>
+		<hiredate>40990</hiredate>
+		<annualsalary>27747</annualsalary>
+		<grosspay>23912.1</grosspay>
+	</employee>
+	<employee>
+		<name>Leahy,Cynthia M</name>
+		<jobtitle>COUNCIL TECHNICIAN</jobtitle>
+		<agencyid>A02002</agencyid>
+		<agency>City Council (002)</agency>
+		<hiredate>39176</hiredate>
+		<annualsalary>58508</annualsalary>
+		<grosspay>58985.24</grosspay>
+	</employee>
+	<employee>
+		<name>Leak II,Matthew T</name>
+		<jobtitle>FIREFIGHTER/PARAMEDIC</jobtitle>
+		<agencyid>A64152</agencyid>
+		<agency>Fire Department (152)</agency>
+		<hiredate>37536</hiredate>
+		<annualsalary>58618</annualsalary>
+		<grosspay>69232.25</grosspay>
+	</employee>
+	<employee>
+		<name>Leak,Kelly S</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02404</agencyid>
+		<agency>Youth Summer  (404)</agency>
+		<hiredate>40332</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Leak,Shantell S</name>
+		<jobtitle>PARKING CONTROL AGENT I</jobtitle>
+		<agencyid>A90201</agencyid>
+		<agency>TRANS-Traffic (201)</agency>
+		<hiredate>41361</hiredate>
+		<annualsalary>26797</annualsalary>
+		<grosspay>6063.76</grosspay>
+	</employee>
+	<employee>
+		<name>Leake,Nicole D</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99330</agencyid>
+		<agency>Police Department (330)</agency>
+		<hiredate>33786</hiredate>
+		<annualsalary>67564</annualsalary>
+		<grosspay>92383.85</grosspay>
+	</employee>
+	<employee>
+		<name>Leamon,Edmond</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99223</agencyid>
+		<agency>Police Department (223)</agency>
+		<hiredate>39252</hiredate>
+		<annualsalary>58827</annualsalary>
+		<grosspay>61139.45</grosspay>
+	</employee>
+	<employee>
+		<name>Leary,Glenda A</name>
+		<jobtitle>SPECIAL ASSISTANT</jobtitle>
+		<agencyid>A85100</agencyid>
+		<agency>General Services (100)</agency>
+		<hiredate>27071</hiredate>
+		<annualsalary>56607</annualsalary>
+		<grosspay>57016.05</grosspay>
+	</employee>
+	<employee>
+		<name>Leary,Keven R</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99063</agencyid>
+		<agency>Police Department (063)</agency>
+		<hiredate>37069</hiredate>
+		<annualsalary>62324</annualsalary>
+		<grosspay>74339.23</grosspay>
+	</employee>
+	<employee>
+		<name>Leas,Diamond L</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02625</agencyid>
+		<agency>Youth Summer (625)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Leath,Lasha L</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02151</agencyid>
+		<agency>Youth Summer  (151)</agency>
+		<hiredate>40701</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>964.25</grosspay>
+	</employee>
+	<employee>
+		<name>Leaverton,Christopher M</name>
+		<jobtitle>POLICE SERGEANT EID</jobtitle>
+		<agencyid>A99260</agencyid>
+		<agency>Police Department (260)</agency>
+		<hiredate>34876</hiredate>
+		<annualsalary>77350</annualsalary>
+		<grosspay>94215.12</grosspay>
+	</employee>
+	<employee>
+		<name>Leavy,Gregory L</name>
+		<jobtitle>UTILITY INVESTIGATOR</jobtitle>
+		<agencyid>A50603</agencyid>
+		<agency>DPW-Water and Waste Water (603)</agency>
+		<hiredate>36552</hiredate>
+		<annualsalary>46575</annualsalary>
+		<grosspay>56322.7</grosspay>
+	</employee>
+	<employee>
+		<name>Lebed,Andrew A</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64113</agencyid>
+		<agency>Fire Department (113)</agency>
+		<hiredate>40632</hiredate>
+		<annualsalary>40650</annualsalary>
+		<grosspay>45696.77</grosspay>
+	</employee>
+	<employee>
+		<name>Lebrun,John L</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99095</agencyid>
+		<agency>Police Department (095)</agency>
+		<hiredate>40087</hiredate>
+		<annualsalary>51937</annualsalary>
+		<grosspay>56609.45</grosspay>
+	</employee>
+	<employee>
+		<name>Lebrun,Robert L</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99310</agencyid>
+		<agency>Police Department (310)</agency>
+		<hiredate>35996</hiredate>
+		<annualsalary>63487</annualsalary>
+		<grosspay>69525.09</grosspay>
+	</employee>
+	<employee>
+		<name>Lecato,Camille R</name>
+		<jobtitle>CALL CENTER AGENT I</jobtitle>
+		<agencyid>A40002</agencyid>
+		<agency>M-R Info Technology (002)</agency>
+		<hiredate>38538</hiredate>
+		<annualsalary>34518</annualsalary>
+		<grosspay>36853.24</grosspay>
+	</employee>
+	<employee>
+		<name>Lecato,Teresa A</name>
+		<jobtitle>LIBRARY PAGE</jobtitle>
+		<agencyid>A75079</agencyid>
+		<agency>Enoch Pratt Free Library (079)</agency>
+		<hiredate>29227</hiredate>
+		<annualsalary>30754</annualsalary>
+		<grosspay>34727.85</grosspay>
+	</employee>
+	<employee>
+		<name>Lecount,Morlynne E</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02613</agencyid>
+		<agency>Youth Summer (613)</agency>
+		<hiredate>40701</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1051.25</grosspay>
+	</employee>
+	<employee>
+		<name>Ledbetter,Daquan F</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02394</agencyid>
+		<agency>Youth Summer  (394)</agency>
+		<hiredate>41438</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lee Jr,Aaron L</name>
+		<jobtitle>AUTOMOTIVE MECHANIC</jobtitle>
+		<agencyid>A85301</agencyid>
+		<agency>General Services (301)</agency>
+		<hiredate>37789</hiredate>
+		<annualsalary>40941</annualsalary>
+		<grosspay>47987.29</grosspay>
+	</employee>
+	<employee>
+		<name>Lee Jr,Alfred E</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02301</agencyid>
+		<agency>Youth Summer  (301)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lee Jr,Charles H</name>
+		<jobtitle>ZONING ENFORCEMENT OFFICER</jobtitle>
+		<agencyid>A06041</agencyid>
+		<agency>Housing and Community Dev (041)</agency>
+		<hiredate>34947</hiredate>
+		<annualsalary>59300</annualsalary>
+		<grosspay>59893.23</grosspay>
+	</employee>
+	<employee>
+		<name>Lee Jr,Kenard J</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02570</agencyid>
+		<agency>Youth Summer  (570)</agency>
+		<hiredate>41438</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lee, Di Amore J</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02142</agencyid>
+		<agency>Youth Summer  (142)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lee,Ajee B</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02129</agencyid>
+		<agency>Youth Summer  (129)</agency>
+		<hiredate>40701</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lee,Alexander C</name>
+		<jobtitle>POLICE SERGEANT EID</jobtitle>
+		<agencyid>A99162</agencyid>
+		<agency>Police Department (162)</agency>
+		<hiredate>35318</hiredate>
+		<annualsalary>76043</annualsalary>
+		<grosspay>83297.77</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Alexander J</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99034</agencyid>
+		<agency>Police Department (034)</agency>
+		<hiredate>39421</hiredate>
+		<annualsalary>58244</annualsalary>
+		<grosspay>100629.05</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Aliza D</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02300</agencyid>
+		<agency>Youth Summer  (300)</agency>
+		<hiredate>40332</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>870</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Alvin</name>
+		<jobtitle>COMMUNITY AIDE</jobtitle>
+		<agencyid>A68005</agencyid>
+		<agency>R and P-Parks (005)</agency>
+		<hiredate>40746</hiredate>
+		<annualsalary>20800</annualsalary>
+		<grosspay>9828.3</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Anthony C</name>
+		<jobtitle>SEASONAL MAINT AIDE</jobtitle>
+		<agencyid>A70360</agencyid>
+		<agency>DPW-Solid Waste (360)</agency>
+		<hiredate>41064</hiredate>
+		<annualsalary>22318</annualsalary>
+		<grosspay>18469.57</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,April B</name>
+		<jobtitle>OFFICE ASSISTANT III</jobtitle>
+		<agencyid>A99329</agencyid>
+		<agency>Police Department (329)</agency>
+		<hiredate>37301</hiredate>
+		<annualsalary>33208</annualsalary>
+		<grosspay>39894.48</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Ashley R</name>
+		<jobtitle>JTPA TRAINEE A MOMR</jobtitle>
+		<agencyid>A65019</agencyid>
+		<agency>HLTH-Health Department (019)</agency>
+		<hiredate>40889</hiredate>
+		<annualsalary>6240</annualsalary>
+		<grosspay>0</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Brenda OLIVIA</name>
+		<jobtitle>COMMUNITY AIDE</jobtitle>
+		<agencyid>P04002</agencyid>
+		<agency>R and P-Recreation (part-time) (</agency>
+		<hiredate>40712</hiredate>
+		<annualsalary>20800</annualsalary>
+		<grosspay>3435</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Cameron D</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02176</agencyid>
+		<agency>Youth Summer  (176)</agency>
+		<hiredate>40701</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>960.63</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Carla V</name>
+		<jobtitle>CROSSING GUARD</jobtitle>
+		<agencyid>C90786</agencyid>
+		<agency>TRANS-Crossing Guards (786)</agency>
+		<hiredate>38426</hiredate>
+		<annualsalary>9744</annualsalary>
+		<grosspay>9834.2</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Carolyn E</name>
+		<jobtitle>SECRETARY I</jobtitle>
+		<agencyid>A75075</agencyid>
+		<agency>Enoch Pratt Free Library (075)</agency>
+		<hiredate>25084</hiredate>
+		<annualsalary>34398</annualsalary>
+		<grosspay>34652.8</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Cederic T</name>
+		<jobtitle>AUTOMOTIVE LEAD MECH</jobtitle>
+		<agencyid>A85301</agencyid>
+		<agency>General Services (301)</agency>
+		<hiredate>29034</hiredate>
+		<annualsalary>51392</annualsalary>
+		<grosspay>69013.69</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Charles A</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>A50606</agencyid>
+		<agency>DPW-Water and Waste Water (606)</agency>
+		<hiredate>31866</hiredate>
+		<annualsalary>32073</annualsalary>
+		<grosspay>48443.33</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Charles E</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99005</agencyid>
+		<agency>Police Department (005)</agency>
+		<hiredate>34256</hiredate>
+		<annualsalary>66982</annualsalary>
+		<grosspay>111996.67</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Charles J</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02302</agencyid>
+		<agency>Youth Summer  (302)</agency>
+		<hiredate>41438</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lee,Craig D</name>
+		<jobtitle>LIBRARY CUSTODIAL WORKER I</jobtitle>
+		<agencyid>A75081</agencyid>
+		<agency>Enoch Pratt Free Library (081)</agency>
+		<hiredate>41226</hiredate>
+		<annualsalary>24361</annualsalary>
+		<grosspay>15318.82</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Damon</name>
+		<jobtitle>COACH</jobtitle>
+		<agencyid>P04001</agencyid>
+		<agency>R and P-Recreation (part-time) (</agency>
+		<hiredate>41085</hiredate>
+		<annualsalary>20800</annualsalary>
+		<grosspay>10160</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Darrick J</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99005</agencyid>
+		<agency>Police Department (005)</agency>
+		<hiredate>33309</hiredate>
+		<annualsalary>68146</annualsalary>
+		<grosspay>73354.19</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Davontaye L</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02329</agencyid>
+		<agency>Youth Summer  (329)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lee,Demetrius D</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02331</agencyid>
+		<agency>Youth Summer  (331)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lee,Denard K</name>
+		<jobtitle>SWIMMING POOL ATTENDENT</jobtitle>
+		<agencyid>P04002</agencyid>
+		<agency>R and P-Recreation (part-time) (</agency>
+		<hiredate>40332</hiredate>
+		<annualsalary>15080</annualsalary>
+		<grosspay>326.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Denard K</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02711</agencyid>
+		<agency>Youth Summer (711)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lee,Deron M</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02253</agencyid>
+		<agency>Youth Summer  (253)</agency>
+		<hiredate>39975</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>576.39</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Donelle B</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02187</agencyid>
+		<agency>Youth Summer  (187)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lee,Earl L</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02484</agencyid>
+		<agency>Youth Summer  (484)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lee,Ebony M</name>
+		<jobtitle>POLICE SERGEANT</jobtitle>
+		<agencyid>A99338</agencyid>
+		<agency>Police Department (338)</agency>
+		<hiredate>34760</hiredate>
+		<annualsalary>74992</annualsalary>
+		<grosspay>95011.92</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Edward</name>
+		<jobtitle>TRANSPORTATION ASSOC II</jobtitle>
+		<agencyid>A49102</agencyid>
+		<agency>TRANS-Highways (102)</agency>
+		<hiredate>27418</hiredate>
+		<annualsalary>56607</annualsalary>
+		<grosspay>95371.32</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Elaine V</name>
+		<jobtitle>Facilities/Office Services I</jobtitle>
+		<agencyid>A03064</agencyid>
+		<agency>OED-Employment Dev (064)</agency>
+		<hiredate>36031</hiredate>
+		<annualsalary>33776</annualsalary>
+		<grosspay>33959.62</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Eric A</name>
+		<jobtitle>UTILITIES INSTALLER REPAIR II</jobtitle>
+		<agencyid>A50582</agencyid>
+		<agency>DPW-Water and Waste Water (582)</agency>
+		<hiredate>39685</hiredate>
+		<annualsalary>29682</annualsalary>
+		<grosspay>36049.74</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Eric C</name>
+		<jobtitle>UTILITIES INSTALLER REPAIR III</jobtitle>
+		<agencyid>A50702</agencyid>
+		<agency>DPW-Water and Waste Water (702)</agency>
+		<hiredate>34211</hiredate>
+		<annualsalary>34203</annualsalary>
+		<grosspay>38796.56</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Janice</name>
+		<jobtitle>MEDICAL OFFICE ASSISTANT (10 M</jobtitle>
+		<agencyid>A65016</agencyid>
+		<agency>HLTH-Health Department (016)</agency>
+		<hiredate>26549</hiredate>
+		<annualsalary>31091</annualsalary>
+		<grosspay>30774.86</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Jason T</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99123</agencyid>
+		<agency>Police Department (123)</agency>
+		<hiredate>37173</hiredate>
+		<annualsalary>61740</annualsalary>
+		<grosspay>67433.8</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Kenard D</name>
+		<jobtitle>SWIMMING POOL ATTENDENT</jobtitle>
+		<agencyid>P04002</agencyid>
+		<agency>R and P-Recreation (part-time) (</agency>
+		<hiredate>40332</hiredate>
+		<annualsalary>15080</annualsalary>
+		<grosspay>2958.02</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Kevin E</name>
+		<jobtitle>FIREFIGHTER</jobtitle>
+		<agencyid>A64220</agencyid>
+		<agency>Fire Department (220)</agency>
+		<hiredate>34387</hiredate>
+		<annualsalary>58933</annualsalary>
+		<grosspay>63771.47</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Kevin T</name>
+		<jobtitle>ELECTRICAL MAINT TECH III</jobtitle>
+		<agencyid>A50209</agencyid>
+		<agency>DPW-Water and Waste Water (209)</agency>
+		<hiredate>31461</hiredate>
+		<annualsalary>46257</annualsalary>
+		<grosspay>49237.27</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Kiry H</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02192</agencyid>
+		<agency>Youth Summer  (192)</agency>
+		<hiredate>40332</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1051.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Kristen E</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>A49504</agencyid>
+		<agency>TRANS-Highways (504)</agency>
+		<hiredate>39193</hiredate>
+		<annualsalary>28662</annualsalary>
+		<grosspay>25637.13</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Lakea I</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99416</agencyid>
+		<agency>Police Department (416)</agency>
+		<hiredate>38892</hiredate>
+		<annualsalary>43239</annualsalary>
+		<grosspay>44888.65</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Latreese N</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99094</agencyid>
+		<agency>Police Department (094)</agency>
+		<hiredate>39589</hiredate>
+		<annualsalary>51937</annualsalary>
+		<grosspay>48344.59</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Lolita M</name>
+		<jobtitle>LABORER CREW LEADER I</jobtitle>
+		<agencyid>B49308</agencyid>
+		<agency>TRANS-Highways (wkly) (308)</agency>
+		<hiredate>33476</hiredate>
+		<annualsalary>32801</annualsalary>
+		<grosspay>39961.24</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Maria S</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02484</agencyid>
+		<agency>Youth Summer  (484)</agency>
+		<hiredate>41453</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lee,Martina</name>
+		<jobtitle>DATA ENTRY OPERATOR  III</jobtitle>
+		<agencyid>A14007</agencyid>
+		<agency>FIN-Collections (007)</agency>
+		<hiredate>25755</hiredate>
+		<annualsalary>41176</annualsalary>
+		<grosspay>42186.43</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Nicole D</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02625</agencyid>
+		<agency>Youth Summer (625)</agency>
+		<hiredate>39256</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lee,Nicole P</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64150</agencyid>
+		<agency>Fire Department (150)</agency>
+		<hiredate>38370</hiredate>
+		<annualsalary>55113</annualsalary>
+		<grosspay>63020.81</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Nygel M</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02204</agencyid>
+		<agency>Youth Summer  (204)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lee,Othea</name>
+		<jobtitle>RECREATION LEADER I</jobtitle>
+		<agencyid>A04003</agencyid>
+		<agency>R and P-Recreation (003)</agency>
+		<hiredate>39620</hiredate>
+		<annualsalary>26316</annualsalary>
+		<grosspay>27236.35</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Pervis C</name>
+		<jobtitle>ASSISTANT SOLICITOR</jobtitle>
+		<agencyid>A30002</agencyid>
+		<agency>Law Department (002)</agency>
+		<hiredate>40280</hiredate>
+		<annualsalary>77000</annualsalary>
+		<grosspay>75968.54</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Phyllis T</name>
+		<jobtitle>PERSONNEL GENERALIST II</jobtitle>
+		<agencyid>A65005</agencyid>
+		<agency>HLTH-Health Department (005)</agency>
+		<hiredate>38313</hiredate>
+		<annualsalary>56200</annualsalary>
+		<grosspay>55933.5</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Ranesha B</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02249</agencyid>
+		<agency>Youth Summer  (249)</agency>
+		<hiredate>41438</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lee,Regina</name>
+		<jobtitle>POLICE INFORMATION LEAD TECH</jobtitle>
+		<agencyid>A99362</agencyid>
+		<agency>Police Department (362)</agency>
+		<hiredate>38232</hiredate>
+		<annualsalary>37814</annualsalary>
+		<grosspay>45607.07</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Richard D</name>
+		<jobtitle>SOLID WASTE SUPERVISOR</jobtitle>
+		<agencyid>A70410</agencyid>
+		<agency>DPW-Solid Waste (410)</agency>
+		<hiredate>38565</hiredate>
+		<annualsalary>42466</annualsalary>
+		<grosspay>41169.3</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Rodney D</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02550</agencyid>
+		<agency>Youth Summer  (550)</agency>
+		<hiredate>39620</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1051.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Romaine</name>
+		<jobtitle>SCHOOL HEALTH AIDE (10 MONTHS)</jobtitle>
+		<agencyid>A65099</agencyid>
+		<agency>HLTH-Health Department (099)</agency>
+		<hiredate>40861</hiredate>
+		<annualsalary>23995</annualsalary>
+		<grosspay>23619.1</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Ron H</name>
+		<jobtitle>WATER TREATMENT TECHNICIAN II</jobtitle>
+		<agencyid>A50307</agencyid>
+		<agency>DPW-Water and Waste Water (307)</agency>
+		<hiredate>37711</hiredate>
+		<annualsalary>39409</annualsalary>
+		<grosspay>48968.69</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Ryan A</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02173</agencyid>
+		<agency>Youth Summer  (173)</agency>
+		<hiredate>41072</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1015</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Sean O</name>
+		<jobtitle>SEASONAL MAINT AIDE</jobtitle>
+		<agencyid>A70320</agencyid>
+		<agency>DPW-Solid Waste (320)</agency>
+		<hiredate>40806</hiredate>
+		<annualsalary>22318</annualsalary>
+		<grosspay>25300.39</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Shantel M</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02454</agencyid>
+		<agency>Youth Summer  (454)</agency>
+		<hiredate>40332</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lee,Shira' A</name>
+		<jobtitle>WORD PROCESSING OPERATOR II</jobtitle>
+		<agencyid>A64001</agencyid>
+		<agency>Fire Department (001)</agency>
+		<hiredate>39839</hiredate>
+		<annualsalary>29453</annualsalary>
+		<grosspay>29491.93</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Sidney</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>A50606</agencyid>
+		<agency>DPW-Water and Waste Water (606)</agency>
+		<hiredate>29985</hiredate>
+		<annualsalary>32926</annualsalary>
+		<grosspay>42394.7</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Storm K</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02526</agencyid>
+		<agency>Youth Summer  (526)</agency>
+		<hiredate>41232</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>326.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Talaija T</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02142</agencyid>
+		<agency>Youth Summer  (142)</agency>
+		<hiredate>40332</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lee,Tarnisha</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64154</agencyid>
+		<agency>Fire Department (154)</agency>
+		<hiredate>36418</hiredate>
+		<annualsalary>57023</annualsalary>
+		<grosspay>65694.45</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Tiffany T</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02503</agencyid>
+		<agency>Youth Summer  (503)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lee,Tyjae M</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02223</agencyid>
+		<agency>Youth Summer  (223)</agency>
+		<hiredate>40332</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1047.63</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Tynikia L</name>
+		<jobtitle>ACCOUNTANT I</jobtitle>
+		<agencyid>A12002</agencyid>
+		<agency>FIN-Acct and Payroll (002)</agency>
+		<hiredate>40360</hiredate>
+		<annualsalary>46408</annualsalary>
+		<grosspay>55557.64</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Tytus R</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02397</agencyid>
+		<agency>Youth Summer  (397)</agency>
+		<hiredate>41438</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lee,Vanessa E</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02181</agencyid>
+		<agency>Youth Summer  (181)</agency>
+		<hiredate>41072</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1051.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Vermont B</name>
+		<jobtitle>ACCOUNTANT II</jobtitle>
+		<agencyid>A08002</agencyid>
+		<agency>M-R Human Services (002)</agency>
+		<hiredate>34660</hiredate>
+		<annualsalary>52700</annualsalary>
+		<grosspay>52764.31</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,William X</name>
+		<jobtitle>CROSSING GUARD</jobtitle>
+		<agencyid>C90786</agencyid>
+		<agency>TRANS-Crossing Guards (786)</agency>
+		<hiredate>39002</hiredate>
+		<annualsalary>9744</annualsalary>
+		<grosspay>9743.98</grosspay>
+	</employee>
+	<employee>
+		<name>Lee,Xavier J</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02204</agencyid>
+		<agency>Youth Summer  (204)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Leeds,Sharon L</name>
+		<jobtitle>Human Services</jobtitle>
+		<agencyid>A03027</agencyid>
+		<agency>OED-Employment Dev (027)</agency>
+		<hiredate>33885</hiredate>
+		<annualsalary>49285</annualsalary>
+		<grosspay>49277.47</grosspay>
+	</employee>
+	<employee>
+		<name>Leedy,Michael E</name>
+		<jobtitle>CHIEF STATE'S ATTORNEY</jobtitle>
+		<agencyid>A29003</agencyid>
+		<agency>States Attorneys Office (003)</agency>
+		<hiredate>36935</hiredate>
+		<annualsalary>77200</annualsalary>
+		<grosspay>77108.98</grosspay>
+	</employee>
+	<employee>
+		<name>Leepa,Robert C</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99312</agencyid>
+		<agency>Police Department (312)</agency>
+		<hiredate>31506</hiredate>
+		<annualsalary>69893</annualsalary>
+		<grosspay>95067.31</grosspay>
+	</employee>
+	<employee>
+		<name>Leftwich,Gregory D</name>
+		<jobtitle>FIRE EMERGENCY VEHICLE DRIVER</jobtitle>
+		<agencyid>A64201</agencyid>
+		<agency>Fire Department (201)</agency>
+		<hiredate>39678</hiredate>
+		<annualsalary>54448</annualsalary>
+		<grosspay>56191.4</grosspay>
+	</employee>
+	<employee>
+		<name>Leggett,Elizabeth A</name>
+		<jobtitle>SR COMPANION STIPEND HLTH</jobtitle>
+		<agencyid>A65072</agencyid>
+		<agency>HLTH-Health Department (072)</agency>
+		<hiredate>39008</hiredate>
+		<annualsalary>4576</annualsalary>
+		<grosspay>914</grosspay>
+	</employee>
+	<employee>
+		<name>Leggett,Malcolm W</name>
+		<jobtitle>EXECUTIVE LEVEL II</jobtitle>
+		<agencyid>A03092</agencyid>
+		<agency>OED-Employment Dev (092)</agency>
+		<hiredate>36738</hiredate>
+		<annualsalary>125823</annualsalary>
+		<grosspay>126136.11</grosspay>
+	</employee>
+	<employee>
+		<name>Leggette,Jason J</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64152</agencyid>
+		<agency>Fire Department (152)</agency>
+		<hiredate>39034</hiredate>
+		<annualsalary>56602</annualsalary>
+		<grosspay>70603.03</grosspay>
+	</employee>
+	<employee>
+		<name>Leggs Lawson,Karen Y</name>
+		<jobtitle>CROSSING GUARD</jobtitle>
+		<agencyid>C90786</agencyid>
+		<agency>TRANS-Crossing Guards (786)</agency>
+		<hiredate>32389</hiredate>
+		<annualsalary>10620</annualsalary>
+		<grosspay>10918.13</grosspay>
+	</employee>
+	<employee>
+		<name>Leggs,Kyle B</name>
+		<jobtitle>CITY PLANNER II</jobtitle>
+		<agencyid>A19103</agencyid>
+		<agency>Planning Department (103)</agency>
+		<hiredate>35513</hiredate>
+		<annualsalary>63900</annualsalary>
+		<grosspay>62890.54</grosspay>
+	</employee>
+	<employee>
+		<name>Legrand,Kanesha L</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02334</agencyid>
+		<agency>Youth Summer  (334)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Legrand,Terrell C</name>
+		<jobtitle>MOTOR VEHICLE DRIVER I</jobtitle>
+		<agencyid>B70354</agencyid>
+		<agency>DPW-Solid Waste (wkly) (354)</agency>
+		<hiredate>39057</hiredate>
+		<annualsalary>30742</annualsalary>
+		<grosspay>27807.04</grosspay>
+	</employee>
+	<employee>
+		<name>Lehman,Christopher M</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99034</agencyid>
+		<agency>Police Department (034)</agency>
+		<hiredate>38708</hiredate>
+		<annualsalary>59410</annualsalary>
+		<grosspay>66564.9</grosspay>
+	</employee>
+	<employee>
+		<name>Leigh,Travis D</name>
+		<jobtitle>OFFICER COURT SECURITY</jobtitle>
+		<agencyid>A38002</agencyid>
+		<agency>Sheriff's Office (002)</agency>
+		<hiredate>41333</hiredate>
+		<annualsalary>34562</annualsalary>
+		<grosspay>10631.94</grosspay>
+	</employee>
+	<employee>
+		<name>Leik,Elizabeth S</name>
+		<jobtitle>RECREATION ARTS INSTRUCTOR</jobtitle>
+		<agencyid>A68005</agencyid>
+		<agency>R and P-Parks (005)</agency>
+		<hiredate>39207</hiredate>
+		<annualsalary>33280</annualsalary>
+		<grosspay>0</grosspay>
+	</employee>
+	<employee>
+		<name>Leisher II,Jerome L</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99061</agencyid>
+		<agency>Police Department (061)</agency>
+		<hiredate>35731</hiredate>
+		<annualsalary>64070</annualsalary>
+		<grosspay>89905.99</grosspay>
+	</employee>
+	<employee>
+		<name>Leisher,Christopher R</name>
+		<jobtitle>POLICE SERGEANT</jobtitle>
+		<agencyid>A99310</agencyid>
+		<agency>Police Department (310)</agency>
+		<hiredate>36062</hiredate>
+		<annualsalary>73812</annualsalary>
+		<grosspay>78822.93</grosspay>
+	</employee>
+	<employee>
+		<name>Leist,Patricia O</name>
+		<jobtitle>SYSTEMS ANALYST II</jobtitle>
+		<agencyid>A40001</agencyid>
+		<agency>M-R Info Technology (001)</agency>
+		<hiredate>30929</hiredate>
+		<annualsalary>79400</annualsalary>
+		<grosspay>80475.22</grosspay>
+	</employee>
+	<employee>
+		<name>Leitch,Eric R</name>
+		<jobtitle>POLICE SERGEANT</jobtitle>
+		<agencyid>A99264</agencyid>
+		<agency>Police Department (264)</agency>
+		<hiredate>36566</hiredate>
+		<annualsalary>73141</annualsalary>
+		<grosspay>121163.58</grosspay>
+	</employee>
+	<employee>
+		<name>Leitch,Nancy L</name>
+		<jobtitle>OFFICE ASSISTANT III</jobtitle>
+		<agencyid>A99030</agencyid>
+		<agency>Police Department (030)</agency>
+		<hiredate>28171</hiredate>
+		<annualsalary>37076</annualsalary>
+		<grosspay>40642.3</grosspay>
+	</employee>
+	<employee>
+		<name>Leith,Kim</name>
+		<jobtitle>LIBRARIAN I</jobtitle>
+		<agencyid>A75075</agencyid>
+		<agency>Enoch Pratt Free Library (075)</agency>
+		<hiredate>37165</hiredate>
+		<annualsalary>46575</annualsalary>
+		<grosspay>46483.95</grosspay>
+	</employee>
+	<employee>
+		<name>Leitner,Daniel R</name>
+		<jobtitle>MARINE ENGINEER FIRE DEPT</jobtitle>
+		<agencyid>A64139</agencyid>
+		<agency>Fire Department (139)</agency>
+		<hiredate>33133</hiredate>
+		<annualsalary>69667</annualsalary>
+		<grosspay>91341.04</grosspay>
+	</employee>
+	<employee>
+		<name>Lemke,Jill M</name>
+		<jobtitle>CITY PLANNER III</jobtitle>
+		<agencyid>A19105</agencyid>
+		<agency>Planning Department (105)</agency>
+		<hiredate>38852</hiredate>
+		<annualsalary>65400</annualsalary>
+		<grosspay>66740.71</grosspay>
+	</employee>
+	<employee>
+		<name>Lemmon,James L</name>
+		<jobtitle>SOLID WASTE WORKER</jobtitle>
+		<agencyid>B70413</agencyid>
+		<agency>DPW-Solid Waste (wkly) (413)</agency>
+		<hiredate>29192</hiredate>
+		<annualsalary>34154</annualsalary>
+		<grosspay>37122.74</grosspay>
+	</employee>
+	<employee>
+		<name>Lemmon,Mark S</name>
+		<jobtitle>FIRE CAPTAIN</jobtitle>
+		<agencyid>A64104</agencyid>
+		<agency>Fire Department (104)</agency>
+		<hiredate>32958</hiredate>
+		<annualsalary>79420</annualsalary>
+		<grosspay>94938.49</grosspay>
+	</employee>
+	<employee>
+		<name>Lemmon,Michael</name>
+		<jobtitle>COMMUNITY AIDE</jobtitle>
+		<agencyid>B68040</agencyid>
+		<agency>R and P-Parks (wkly) (040)</agency>
+		<hiredate>40000</hiredate>
+		<annualsalary>22880</annualsalary>
+		<grosspay>23574.75</grosspay>
+	</employee>
+	<employee>
+		<name>Lemmon,Shawniece</name>
+		<jobtitle>RECREATION ARTS INSTRUCTOR</jobtitle>
+		<agencyid>P04001</agencyid>
+		<agency>R and P-Recreation (part-time) (</agency>
+		<hiredate>40350</hiredate>
+		<annualsalary>20800</annualsalary>
+		<grosspay>0</grosspay>
+	</employee>
+	<employee>
+		<name>Lemon Jr,Bruce B</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>B70371</agencyid>
+		<agency>DPW-Solid Waste (wkly) (371)</agency>
+		<hiredate>38892</hiredate>
+		<annualsalary>27747</annualsalary>
+		<grosspay>22642.18</grosspay>
+	</employee>
+	<employee>
+		<name>Lemon,Teon</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02352</agencyid>
+		<agency>Youth Summer  (352)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lennon,Derrick K</name>
+		<jobtitle>CONTRACT SERV SPEC II</jobtitle>
+		<agencyid>A09001</agencyid>
+		<agency>Liquor License Board (001)</agency>
+		<hiredate>40875</hiredate>
+		<annualsalary>28603</annualsalary>
+		<grosspay>2337.7</grosspay>
+	</employee>
+	<employee>
+		<name>Lentz,Waverly L</name>
+		<jobtitle>RECREATION LEADER II</jobtitle>
+		<agencyid>A04002</agencyid>
+		<agency>R and P-Recreation (002)</agency>
+		<hiredate>28929</hiredate>
+		<annualsalary>38301</annualsalary>
+		<grosspay>40464.4</grosspay>
+	</employee>
+	<employee>
+		<name>Leon,Jamal R</name>
+		<jobtitle>OPERATIONS AIDE</jobtitle>
+		<agencyid>A91013</agencyid>
+		<agency>M-R Convention Center (013)</agency>
+		<hiredate>39030</hiredate>
+		<annualsalary>28745</annualsalary>
+		<grosspay>28732.04</grosspay>
+	</employee>
+	<employee>
+		<name>Leon,Jordan A</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02176</agencyid>
+		<agency>Youth Summer  (176)</agency>
+		<hiredate>40701</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Leon,Walter E</name>
+		<jobtitle>CITY PLANNER III CHAP</jobtitle>
+		<agencyid>A19104</agencyid>
+		<agency>Planning Department (104)</agency>
+		<hiredate>34629</hiredate>
+		<annualsalary>65400</annualsalary>
+		<grosspay>64509.06</grosspay>
+	</employee>
+	<employee>
+		<name>Leonard III,Rudolph L</name>
+		<jobtitle>FIREFIGHTER/PARAMEDIC</jobtitle>
+		<agencyid>A64225</agencyid>
+		<agency>Fire Department (225)</agency>
+		<hiredate>36353</hiredate>
+		<annualsalary>58618</annualsalary>
+		<grosspay>73390.94</grosspay>
+	</employee>
+	<employee>
+		<name>Leonard Jr,Ernest C</name>
+		<jobtitle>COMMUNITY AIDE</jobtitle>
+		<agencyid>A50804</agencyid>
+		<agency>DPW-Water and Waste Water (804)</agency>
+		<hiredate>41442</hiredate>
+		<annualsalary>24960</annualsalary>
+		<grosspay>436.8</grosspay>
+	</employee>
+	<employee>
+		<name>Leonard,John</name>
+		<jobtitle>CROSSING GUARD</jobtitle>
+		<agencyid>C90786</agencyid>
+		<agency>TRANS-Crossing Guards (786)</agency>
+		<hiredate>38281</hiredate>
+		<annualsalary>9744</annualsalary>
+		<grosspay>11909.71</grosspay>
+	</employee>
+	<employee>
+		<name>Leonard,John</name>
+		<jobtitle>Crossing Guard</jobtitle>
+		<agencyid>C90SUM</agencyid>
+		<agency>TRANS-Cross Guard-Summer</agency>
+		<hiredate>39258</hiredate>
+		<annualsalary>23462</annualsalary>
+	</employee>
+	<employee>
+		<name>Leonard,Michael G</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02159</agencyid>
+		<agency>Youth Summer  (159)</agency>
+		<hiredate>41232</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>304.5</grosspay>
+	</employee>
+	<employee>
+		<name>Leonard,Percy L</name>
+		<jobtitle>POLICE CADET</jobtitle>
+		<agencyid>A99362</agencyid>
+		<agency>Police Department (362)</agency>
+		<hiredate>41206</hiredate>
+		<annualsalary>27870</annualsalary>
+		<grosspay>18353.02</grosspay>
+	</employee>
+	<employee>
+		<name>Leone,Alisa</name>
+		<jobtitle>COMMUNITY AIDE</jobtitle>
+		<agencyid>A06031</agencyid>
+		<agency>Housing and Community Dev (031)</agency>
+		<hiredate>39384</hiredate>
+		<annualsalary>26832</annualsalary>
+		<grosspay>16685.27</grosspay>
+	</employee>
+	<employee>
+		<name>Leone,Jason M</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64223</agencyid>
+		<agency>Fire Department (223)</agency>
+		<hiredate>40492</hiredate>
+		<annualsalary>40650</annualsalary>
+		<grosspay>46191.93</grosspay>
+	</employee>
+	<employee>
+		<name>Leone,Vincent J</name>
+		<jobtitle>DIVISION CHIEF I</jobtitle>
+		<agencyid>A06031</agencyid>
+		<agency>Housing and Community Dev (031)</agency>
+		<hiredate>40875</hiredate>
+		<annualsalary>76440</annualsalary>
+		<grosspay>76937.02</grosspay>
+	</employee>
+	<employee>
+		<name>Leopold,Vernetta R</name>
+		<jobtitle>STOREKEEPER I</jobtitle>
+		<agencyid>A99356</agencyid>
+		<agency>Police Department (356)</agency>
+		<hiredate>32394</hiredate>
+		<annualsalary>34160</annualsalary>
+		<grosspay>35315.32</grosspay>
+	</employee>
+	<employee>
+		<name>Lepus,Walter A</name>
+		<jobtitle>Waste Water Opns Tech II Sanit</jobtitle>
+		<agencyid>A50206</agencyid>
+		<agency>DPW-Water and Waste Water (206)</agency>
+		<hiredate>32167</hiredate>
+		<annualsalary>42853</annualsalary>
+		<grosspay>51850.04</grosspay>
+	</employee>
+	<employee>
+		<name>Lesane,Edward S</name>
+		<jobtitle>EMERGENCY DISPATCHER</jobtitle>
+		<agencyid>A40302</agencyid>
+		<agency>M-R Info Technology (302)</agency>
+		<hiredate>31097</hiredate>
+		<annualsalary>50646</annualsalary>
+		<grosspay>53196.07</grosspay>
+	</employee>
+	<employee>
+		<name>Lesane,Shanita R</name>
+		<jobtitle>OFFICE SUPERVISOR SAO</jobtitle>
+		<agencyid>A29001</agencyid>
+		<agency>States Attorneys Office (001)</agency>
+		<hiredate>33518</hiredate>
+		<annualsalary>47264</annualsalary>
+		<grosspay>47414.81</grosspay>
+	</employee>
+	<employee>
+		<name>Lesesane,Sharon S</name>
+		<jobtitle>TEMP SUMMER EMP MOMR</jobtitle>
+		<agencyid>W07900</agencyid>
+		<agency>Youth Temp Adult (900)</agency>
+		<hiredate>40350</hiredate>
+		<annualsalary>24960</annualsalary>
+		<grosspay>3360</grosspay>
+	</employee>
+	<employee>
+		<name>Lesher,David M</name>
+		<jobtitle>POLICE OFFICER (EID)</jobtitle>
+		<agencyid>A99224</agencyid>
+		<agency>Police Department (224)</agency>
+		<hiredate>34057</hiredate>
+		<annualsalary>68597</annualsalary>
+		<grosspay>76475.51</grosspay>
+	</employee>
+	<employee>
+		<name>Lesniewski,Denise M</name>
+		<jobtitle>CONTRACT SERVICES SPEC. I</jobtitle>
+		<agencyid>A29003</agencyid>
+		<agency>States Attorneys Office (003)</agency>
+		<hiredate>29860</hiredate>
+		<annualsalary>54038</annualsalary>
+		<grosspay>32424.73</grosspay>
+	</employee>
+	<employee>
+		<name>Lessane,Mariah E</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02228</agencyid>
+		<agency>Youth Summer  (228)</agency>
+		<hiredate>40701</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1000.5</grosspay>
+	</employee>
+	<employee>
+		<name>Lessane,Tianna E</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02371</agencyid>
+		<agency>Youth Summer  (371)</agency>
+		<hiredate>41438</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lesser,Mary G</name>
+		<jobtitle>CONTRACT SERVICES SPEC. I</jobtitle>
+		<agencyid>A64001</agencyid>
+		<agency>Fire Department (001)</agency>
+		<hiredate>39128</hiredate>
+		<annualsalary>31158</annualsalary>
+		<grosspay>3827.39</grosspay>
+	</employee>
+	<employee>
+		<name>Lester,Christine K</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02133</agencyid>
+		<agency>Youth Summer  (133)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lester,Christopher S</name>
+		<jobtitle>POLICE OFFICER (EID)</jobtitle>
+		<agencyid>A99124</agencyid>
+		<agency>Police Department (124)</agency>
+		<hiredate>38629</hiredate>
+		<annualsalary>61439</annualsalary>
+		<grosspay>31795.07</grosspay>
+	</employee>
+	<employee>
+		<name>Letteron,Gary</name>
+		<jobtitle>Urban Forester</jobtitle>
+		<agencyid>A68001</agencyid>
+		<agency>R and P-Parks (001)</agency>
+		<hiredate>38707</hiredate>
+		<annualsalary>51371</annualsalary>
+		<grosspay>48364.1</grosspay>
+	</employee>
+	<employee>
+		<name>Lettman,Dawn S</name>
+		<jobtitle>ASSISTANT SOLICITOR</jobtitle>
+		<agencyid>A30001</agencyid>
+		<agency>Law Department (001)</agency>
+		<hiredate>33045</hiredate>
+		<annualsalary>82784</annualsalary>
+		<grosspay>83011.37</grosspay>
+	</employee>
+	<employee>
+		<name>Leuschner,Gregory B</name>
+		<jobtitle>ELECTRICAL MECHANIC I</jobtitle>
+		<agencyid>A85001</agencyid>
+		<agency>General Services (001)</agency>
+		<hiredate>38565</hiredate>
+		<annualsalary>33337</annualsalary>
+		<grosspay>32835.18</grosspay>
+	</employee>
+	<employee>
+		<name>Leuschner,Steven B</name>
+		<jobtitle>PUBLIC WORKS INSPECTOR II</jobtitle>
+		<agencyid>A49104</agencyid>
+		<agency>TRANS-Highways (104)</agency>
+		<hiredate>31859</hiredate>
+		<annualsalary>50646</annualsalary>
+		<grosspay>55216.17</grosspay>
+	</employee>
+	<employee>
+		<name>Levendosky,Edward A</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64121</agencyid>
+		<agency>Fire Department (121)</agency>
+		<hiredate>40492</hiredate>
+		<annualsalary>40650</annualsalary>
+		<grosspay>40954.78</grosspay>
+	</employee>
+	<employee>
+		<name>Leventhall,Jason M</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99305</agencyid>
+		<agency>Police Department (305)</agency>
+		<hiredate>40721</hiredate>
+		<annualsalary>43895</annualsalary>
+		<grosspay>48039.21</grosspay>
+	</employee>
+	<employee>
+		<name>Levere,Queen E</name>
+		<jobtitle>FIRE DISPATCHER</jobtitle>
+		<agencyid>A64603</agencyid>
+		<agency>Fire Department (603)</agency>
+		<hiredate>37627</hiredate>
+		<annualsalary>47476</annualsalary>
+		<grosspay>54574.86</grosspay>
+	</employee>
+	<employee>
+		<name>Leverett,Taie C</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02557</agencyid>
+		<agency>Youth Summer  (557)</agency>
+		<hiredate>41072</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Levi,Selma K</name>
+		<jobtitle>LIBRARIAN SUPV II</jobtitle>
+		<agencyid>A75068</agencyid>
+		<agency>Enoch Pratt Free Library (068)</agency>
+		<hiredate>28671</hiredate>
+		<annualsalary>70400</annualsalary>
+		<grosspay>69987.45</grosspay>
+	</employee>
+	<employee>
+		<name>Levin,JoAnn E</name>
+		<jobtitle>CHIEF SOLICITOR</jobtitle>
+		<agencyid>A30001</agencyid>
+		<agency>Law Department (001)</agency>
+		<hiredate>39482</hiredate>
+		<annualsalary>98368</annualsalary>
+		<grosspay>99033.54</grosspay>
+	</employee>
+	<employee>
+		<name>Levine,Adam S</name>
+		<jobtitle>ASSISTANT SOLICITOR</jobtitle>
+		<agencyid>A30001</agencyid>
+		<agency>Law Department (001)</agency>
+		<hiredate>35415</hiredate>
+		<annualsalary>80353</annualsalary>
+		<grosspay>80571.1</grosspay>
+	</employee>
+	<employee>
+		<name>Levinson,Jay I</name>
+		<jobtitle>MEDICAL PSYCHIATRIST COURTS (P</jobtitle>
+		<agencyid>A31003</agencyid>
+		<agency>Circuit Court (003)</agency>
+		<hiredate>34149</hiredate>
+		<annualsalary>72200</annualsalary>
+		<grosspay>72595.07</grosspay>
+	</employee>
+	<employee>
+		<name>Levy Jr,Victor M</name>
+		<jobtitle>DEPUTY SHERIFF</jobtitle>
+		<agencyid>A38001</agencyid>
+		<agency>Sheriff's Office (001)</agency>
+		<hiredate>37805</hiredate>
+		<annualsalary>45140</annualsalary>
+		<grosspay>52936.15</grosspay>
+	</employee>
+	<employee>
+		<name>Lewellen,Adam A</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99070</agencyid>
+		<agency>Police Department (070)</agency>
+		<hiredate>39435</hiredate>
+		<annualsalary>58244</annualsalary>
+		<grosspay>46897.79</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis III,Elgene</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>B49330</agencyid>
+		<agency>TRANS-Highways (wkly) (330)</agency>
+		<hiredate>38980</hiredate>
+		<annualsalary>28662</annualsalary>
+		<grosspay>34485.63</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis Jr,Clarence A</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>B70404</agencyid>
+		<agency>DPW-Solid Waste (wkly) (404)</agency>
+		<hiredate>39239</hiredate>
+		<annualsalary>28662</annualsalary>
+		<grosspay>26729.83</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis Jr,Jose R</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02191</agencyid>
+		<agency>Youth Summer  (191)</agency>
+		<hiredate>40730</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lewis Jr,Nathaniel A</name>
+		<jobtitle>HEAVY EQUIPMENT OPERATOR II</jobtitle>
+		<agencyid>A50309</agencyid>
+		<agency>DPW-Water and Waste Water (309)</agency>
+		<hiredate>29346</hiredate>
+		<annualsalary>44001</annualsalary>
+		<grosspay>45954.01</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis Jr,Thomas O</name>
+		<jobtitle>CONSTRUCTION BLDG INSPECTOR II</jobtitle>
+		<agencyid>A06034</agencyid>
+		<agency>Housing and Community Dev (034)</agency>
+		<hiredate>35004</hiredate>
+		<annualsalary>54453</annualsalary>
+		<grosspay>55094.76</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Andrea N</name>
+		<jobtitle>CALL CENTER AGENT I</jobtitle>
+		<agencyid>A40002</agencyid>
+		<agency>M-R Info Technology (002)</agency>
+		<hiredate>38538</hiredate>
+		<annualsalary>34518</annualsalary>
+		<grosspay>37658.69</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Angelica M</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02417</agencyid>
+		<agency>Youth Summer  (417)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lewis,Angelo S</name>
+		<jobtitle>MECHANICAL SWEEPER OPERATOR</jobtitle>
+		<agencyid>B70403</agencyid>
+		<agency>DPW-Solid Waste (wkly) (403)</agency>
+		<hiredate>38292</hiredate>
+		<annualsalary>34653</annualsalary>
+		<grosspay>35789.19</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Anthony L</name>
+		<jobtitle>MAINTENANCE MECHANIC</jobtitle>
+		<agencyid>A91014</agencyid>
+		<agency>M-R Convention Center (014)</agency>
+		<hiredate>35740</hiredate>
+		<annualsalary>43779</annualsalary>
+		<grosspay>46565.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Antione J</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99195</agencyid>
+		<agency>Police Department (195)</agency>
+		<hiredate>39622</hiredate>
+		<annualsalary>55208</annualsalary>
+		<grosspay>69564.27</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Bernard T</name>
+		<jobtitle>FIRE PREVENTION INSPECTOR I</jobtitle>
+		<agencyid>A64004</agencyid>
+		<agency>Fire Department (004)</agency>
+		<hiredate>32958</hiredate>
+		<annualsalary>66742</annualsalary>
+		<grosspay>69103.37</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Brian C</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99322</agencyid>
+		<agency>Police Department (322)</agency>
+		<hiredate>35905</hiredate>
+		<annualsalary>64070</annualsalary>
+		<grosspay>100274.78</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Brionna T</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02138</agencyid>
+		<agency>Youth Summer  (138)</agency>
+		<hiredate>41438</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lewis,Cara Y</name>
+		<jobtitle>ASSISTANT STATE'S ATTORNEY</jobtitle>
+		<agencyid>A29004</agencyid>
+		<agency>States Attorneys Office (004)</agency>
+		<hiredate>41099</hiredate>
+		<annualsalary>53900</annualsalary>
+		<grosspay>51826.96</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Carlos E</name>
+		<jobtitle>CARPENTER II</jobtitle>
+		<agencyid>A50212</agencyid>
+		<agency>DPW-Water and Waste Water (212)</agency>
+		<hiredate>34183</hiredate>
+		<annualsalary>35337</annualsalary>
+		<grosspay>37388.39</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Cierra T</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02456</agencyid>
+		<agency>Youth Summer  (456)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lewis,Craig B</name>
+		<jobtitle>EXECUTIVE LEVEL I</jobtitle>
+		<agencyid>A03084</agencyid>
+		<agency>OED-Employment Dev (084)</agency>
+		<hiredate>36913</hiredate>
+		<annualsalary>81200</annualsalary>
+		<grosspay>80874.37</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Danice H</name>
+		<jobtitle>EXECUTIVE LEVEL I</jobtitle>
+		<agencyid>A16001</agencyid>
+		<agency>COMP-Comptroller's Office</agency>
+		<hiredate>35047</hiredate>
+		<annualsalary>84960</annualsalary>
+		<grosspay>84789.24</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Danielle A</name>
+		<jobtitle>POLICE OFFICER TRAINEE</jobtitle>
+		<agencyid>A99416</agencyid>
+		<agency>Police Department (416)</agency>
+		<hiredate>41212</hiredate>
+		<annualsalary>43136</annualsalary>
+		<grosspay>26876.78</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Dariues A</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02209</agencyid>
+		<agency>Youth Summer  (209)</agency>
+		<hiredate>39620</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lewis,Darryl K</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64130</agencyid>
+		<agency>Fire Department (130)</agency>
+		<hiredate>39428</hiredate>
+		<annualsalary>55113</annualsalary>
+		<grosspay>61901.5</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Davon C</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02542</agencyid>
+		<agency>Youth Summer  (542)</agency>
+		<hiredate>41444</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lewis,Deasia M</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02463</agencyid>
+		<agency>Youth Summer  (463)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lewis,Eric D</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99305</agencyid>
+		<agency>Police Department (305)</agency>
+		<hiredate>40751</hiredate>
+		<annualsalary>43239</annualsalary>
+		<grosspay>56107.87</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Everett T</name>
+		<jobtitle>FIREFIGHTER/PARAMEDIC</jobtitle>
+		<agencyid>A64227</agencyid>
+		<agency>Fire Department (227)</agency>
+		<hiredate>32181</hiredate>
+		<annualsalary>65069</annualsalary>
+		<grosspay>66108.23</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Fabian S</name>
+		<jobtitle>Superintendent Parking Enforce</jobtitle>
+		<agencyid>A90201</agencyid>
+		<agency>TRANS-Traffic (201)</agency>
+		<hiredate>41193</hiredate>
+		<annualsalary>59100</annualsalary>
+		<grosspay>41290.44</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Florence</name>
+		<jobtitle>CROSSING GUARD</jobtitle>
+		<agencyid>C90786</agencyid>
+		<agency>TRANS-Crossing Guards (786)</agency>
+		<hiredate>37851</hiredate>
+		<annualsalary>9744</annualsalary>
+		<grosspay>9789.09</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Hassan R</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02301</agencyid>
+		<agency>Youth Summer  (301)</agency>
+		<hiredate>41438</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lewis,Jane H</name>
+		<jobtitle>STAFF ASSISTANT MAYOR'S OFFICE</jobtitle>
+		<agencyid>A01001</agencyid>
+		<agency>Mayors Office (001)</agency>
+		<hiredate>40973</hiredate>
+		<annualsalary>55000</annualsalary>
+		<grosspay>55211.44</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Jeremiah G</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02410</agencyid>
+		<agency>Youth Summer  (410)</agency>
+		<hiredate>41072</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1051.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Jessica</name>
+		<jobtitle>CONSTRUCTION PROJECT SUPV I</jobtitle>
+		<agencyid>A49104</agencyid>
+		<agency>TRANS-Highways (104)</agency>
+		<hiredate>40868</hiredate>
+		<annualsalary>62200</annualsalary>
+		<grosspay>61723.46</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Jose R</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>A50208</agencyid>
+		<agency>DPW-Water and Waste Water (208)</agency>
+		<hiredate>34312</hiredate>
+		<annualsalary>30368</annualsalary>
+		<grosspay>32072.84</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Josie M</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99356</agencyid>
+		<agency>Police Department (356)</agency>
+		<hiredate>39281</hiredate>
+		<annualsalary>58244</annualsalary>
+		<grosspay>74483.75</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Julaya A</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02441</agencyid>
+		<agency>Youth Summer  (441)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lewis,Katrina L</name>
+		<jobtitle>SWIMMING POOL MANAGER</jobtitle>
+		<agencyid>P04002</agencyid>
+		<agency>R and P-Recreation (part-time) (</agency>
+		<hiredate>40716</hiredate>
+		<annualsalary>27082</annualsalary>
+		<grosspay>5890</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Kendra P</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02410</agencyid>
+		<agency>Youth Summer  (410)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lewis,Kenneth A</name>
+		<jobtitle>SPECIAL TRAFFIC ENFRCMNT SUPI</jobtitle>
+		<agencyid>A49102</agencyid>
+		<agency>TRANS-Highways (102)</agency>
+		<hiredate>34095</hiredate>
+		<annualsalary>43594</annualsalary>
+		<grosspay>57667.63</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Kenneth L</name>
+		<jobtitle>MOTOR VEHICLE DRIVER I</jobtitle>
+		<agencyid>A50502</agencyid>
+		<agency>DPW-Water and Waste Water (502)</agency>
+		<hiredate>37347</hiredate>
+		<annualsalary>31657</annualsalary>
+		<grosspay>31864.36</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Kenshawna K</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02286</agencyid>
+		<agency>Youth Summer  (286)</agency>
+		<hiredate>40701</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1015</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Lakay K</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02550</agencyid>
+		<agency>Youth Summer  (550)</agency>
+		<hiredate>41438</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lewis,Lakesia D</name>
+		<jobtitle>RECREATION LEADER II</jobtitle>
+		<agencyid>A04001</agencyid>
+		<agency>R and P-Recreation (001)</agency>
+		<hiredate>39737</hiredate>
+		<annualsalary>33306</annualsalary>
+		<grosspay>33516.24</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Latonya D</name>
+		<jobtitle>OFFICE ASSISTANT III</jobtitle>
+		<agencyid>A06016</agencyid>
+		<agency>Housing and Community Dev (016)</agency>
+		<hiredate>31719</hiredate>
+		<annualsalary>36109</annualsalary>
+		<grosspay>36759.54</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Latonya N</name>
+		<jobtitle>POLICE LIEUTENANT EID</jobtitle>
+		<agencyid>A99349</agencyid>
+		<agency>Police Department (349)</agency>
+		<hiredate>34424</hiredate>
+		<annualsalary>86300</annualsalary>
+		<grosspay>95441.46</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Lloyd U</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99415</agencyid>
+		<agency>Police Department (415)</agency>
+		<hiredate>32777</hiredate>
+		<annualsalary>68729</annualsalary>
+		<grosspay>84528.02</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Michael L</name>
+		<jobtitle>AUTOMOTIVE LEAD MECH</jobtitle>
+		<agencyid>A85302</agencyid>
+		<agency>General Services (302)</agency>
+		<hiredate>39702</hiredate>
+		<annualsalary>40244</annualsalary>
+		<grosspay>53818.94</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Millicent R</name>
+		<jobtitle>DATA ENTRY OPERATOR II</jobtitle>
+		<agencyid>A99365</agencyid>
+		<agency>Police Department (365)</agency>
+		<hiredate>38862</hiredate>
+		<annualsalary>32241</annualsalary>
+		<grosspay>34119.78</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Mira A</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02159</agencyid>
+		<agency>Youth Summer  (159)</agency>
+		<hiredate>40332</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lewis,Montrez D</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02249</agencyid>
+		<agency>Youth Summer  (249)</agency>
+		<hiredate>41447</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lewis,Montrice L</name>
+		<jobtitle>MOTOR VEHICLE DRIVER I</jobtitle>
+		<agencyid>B49350</agencyid>
+		<agency>TRANS-Highways (wkly) (350)</agency>
+		<hiredate>36689</hiredate>
+		<annualsalary>31657</annualsalary>
+		<grosspay>43358.42</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Regina M</name>
+		<jobtitle>CROSSING GUARD</jobtitle>
+		<agencyid>C90786</agencyid>
+		<agency>TRANS-Crossing Guards (786)</agency>
+		<hiredate>39177</hiredate>
+		<annualsalary>9744</annualsalary>
+		<grosspay>9834.22</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Renee D</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02451</agencyid>
+		<agency>Youth Summer  (451)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lewis,Roscoe</name>
+		<jobtitle>OFFICER COURT SECURITY</jobtitle>
+		<agencyid>A38006</agencyid>
+		<agency>Sheriff's Office (006)</agency>
+		<hiredate>32267</hiredate>
+		<annualsalary>40975</annualsalary>
+		<grosspay>110986.18</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Sean S</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64153</agencyid>
+		<agency>Fire Department (153)</agency>
+		<hiredate>40492</hiredate>
+		<annualsalary>40650</annualsalary>
+		<grosspay>47745.46</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Shanika D</name>
+		<jobtitle>POLICE REPORT REVIEWER</jobtitle>
+		<agencyid>A99361</agencyid>
+		<agency>Police Department (361)</agency>
+		<hiredate>38582</hiredate>
+		<annualsalary>35806</annualsalary>
+		<grosspay>36149.99</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Taikwan N</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02252</agencyid>
+		<agency>Youth Summer  (252)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lewis,Terrance T</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64152</agencyid>
+		<agency>Fire Department (152)</agency>
+		<hiredate>35717</hiredate>
+		<annualsalary>58933</annualsalary>
+		<grosspay>71565.9</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Trina D</name>
+		<jobtitle>OFFICE SERVICES ASSISTANT II S</jobtitle>
+		<agencyid>A29004</agencyid>
+		<agency>States Attorneys Office (004)</agency>
+		<hiredate>36983</hiredate>
+		<annualsalary>35554</annualsalary>
+		<grosspay>35462.96</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Tykiera R</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02105</agencyid>
+		<agency>Youth Summer  (105)</agency>
+		<hiredate>40332</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>181.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Victoria E</name>
+		<jobtitle>SR COMPANION STIPEND HLTH</jobtitle>
+		<agencyid>A65072</agencyid>
+		<agency>HLTH-Health Department (072)</agency>
+		<hiredate>40017</hiredate>
+		<annualsalary>4576</annualsalary>
+		<grosspay>2339.2</grosspay>
+	</employee>
+	<employee>
+		<name>Lewis,Zoe S</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02172</agencyid>
+		<agency>Youth Summer  (172)</agency>
+		<hiredate>39975</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lewis-Ott,Henrietta Y</name>
+		<jobtitle>FIRE LIEUTENANT ALS</jobtitle>
+		<agencyid>A64158</agencyid>
+		<agency>Fire Department (158)</agency>
+		<hiredate>36122</hiredate>
+		<annualsalary>66994</annualsalary>
+		<grosspay>79871.9</grosspay>
+	</employee>
+	<employee>
+		<name>Liberto,John T</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64113</agencyid>
+		<agency>Fire Department (113)</agency>
+		<hiredate>39678</hiredate>
+		<annualsalary>53236</annualsalary>
+		<grosspay>61296.7</grosspay>
+	</employee>
+	<employee>
+		<name>Lichtenberg,Benjamin B</name>
+		<jobtitle>FIREFIGHTER/PARAMEDIC</jobtitle>
+		<agencyid>A64206</agencyid>
+		<agency>Fire Department (206)</agency>
+		<hiredate>39034</hiredate>
+		<annualsalary>56655</annualsalary>
+		<grosspay>69902.34</grosspay>
+	</employee>
+	<employee>
+		<name>Lichtenberg,Russell W</name>
+		<jobtitle>FIRE EMERGENCY VEHICLE DRIVER</jobtitle>
+		<agencyid>A64206</agencyid>
+		<agency>Fire Department (206)</agency>
+		<hiredate>31649</hiredate>
+		<annualsalary>64737</annualsalary>
+		<grosspay>73777.5</grosspay>
+	</employee>
+	<employee>
+		<name>Lichtner,Thomas P</name>
+		<jobtitle>AUTOMOTIVE MECHANIC</jobtitle>
+		<agencyid>A85301</agencyid>
+		<agency>General Services (301)</agency>
+		<hiredate>35779</hiredate>
+		<annualsalary>42133</annualsalary>
+		<grosspay>42746.34</grosspay>
+	</employee>
+	<employee>
+		<name>Licorish,Cassandra E</name>
+		<jobtitle>EMERGENCY DISPATCHER</jobtitle>
+		<agencyid>A40302</agencyid>
+		<agency>M-R Info Technology (302)</agency>
+		<hiredate>38120</hiredate>
+		<annualsalary>45218</annualsalary>
+		<grosspay>59850</grosspay>
+	</employee>
+	<employee>
+		<name>Lievers,Ernest A</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02653</agencyid>
+		<agency>Youth Summer (653)</agency>
+		<hiredate>41072</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>870</grosspay>
+	</employee>
+	<employee>
+		<name>Lievers,Michael V</name>
+		<jobtitle>Waste Water Techn Supv I Sanit</jobtitle>
+		<agencyid>A50207</agencyid>
+		<agency>DPW-Water and Waste Water (207)</agency>
+		<hiredate>32489</hiredate>
+		<annualsalary>49289</annualsalary>
+		<grosspay>67640.36</grosspay>
+	</employee>
+	<employee>
+		<name>Lievers,Nicholas M</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02461</agencyid>
+		<agency>Youth Summer  (461)</agency>
+		<hiredate>39975</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1051.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lifsey,James R</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99161</agencyid>
+		<agency>Police Department (161)</agency>
+		<hiredate>36383</hiredate>
+		<annualsalary>62905</annualsalary>
+		<grosspay>64780.81</grosspay>
+	</employee>
+	<employee>
+		<name>Lifson,Randi S</name>
+		<jobtitle>ASSISTANT STATE'S ATTORNEY</jobtitle>
+		<agencyid>A29004</agencyid>
+		<agency>States Attorneys Office (004)</agency>
+		<hiredate>33196</hiredate>
+		<annualsalary>88200</annualsalary>
+		<grosspay>88108.96</grosspay>
+	</employee>
+	<employee>
+		<name>Liggins,Danielle S</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02146</agencyid>
+		<agency>Youth Summer  (146)</agency>
+		<hiredate>41444</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lightfoot III,James E</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02200</agencyid>
+		<agency>Youth Summer  (200)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lightfoot,Jordan E</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02200</agencyid>
+		<agency>Youth Summer  (200)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lightning,Elizabeth C</name>
+		<jobtitle>PARAMEDIC EMT-P</jobtitle>
+		<agencyid>A64465</agencyid>
+		<agency>Fire Department (465)</agency>
+		<hiredate>40926</hiredate>
+		<annualsalary>41992</annualsalary>
+		<grosspay>45631.86</grosspay>
+	</employee>
+	<employee>
+		<name>Lightsey,Carla P</name>
+		<jobtitle>DEPUTY SHERIFF LIEUTENANT</jobtitle>
+		<agencyid>A38001</agencyid>
+		<agency>Sheriff's Office (001)</agency>
+		<hiredate>32961</hiredate>
+		<annualsalary>74783</annualsalary>
+		<grosspay>74285.8</grosspay>
+	</employee>
+	<employee>
+		<name>Ligon,Deon M</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02427</agencyid>
+		<agency>Youth Summer  (427)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lila,Khusmanie</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02264</agencyid>
+		<agency>Youth Summer  (264)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lilley,Carroll B</name>
+		<jobtitle>Waste Water Opns Tech II Sanit</jobtitle>
+		<agencyid>A50207</agencyid>
+		<agency>DPW-Water and Waste Water (207)</agency>
+		<hiredate>30249</hiredate>
+		<annualsalary>44001</annualsalary>
+		<grosspay>46489.18</grosspay>
+	</employee>
+	<employee>
+		<name>Lilli,Michael J</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64127</agencyid>
+		<agency>Fire Department (127)</agency>
+		<hiredate>40632</hiredate>
+		<annualsalary>40650</annualsalary>
+		<grosspay>47595.38</grosspay>
+	</employee>
+	<employee>
+		<name>Lilly,Darrell</name>
+		<jobtitle>MAINTENANCE MECHANIC</jobtitle>
+		<agencyid>A91014</agencyid>
+		<agency>M-R Convention Center (014)</agency>
+		<hiredate>35824</hiredate>
+		<annualsalary>43779</annualsalary>
+		<grosspay>44966.08</grosspay>
+	</employee>
+	<employee>
+		<name>Lilly,James A</name>
+		<jobtitle>COMMUNITY AIDE</jobtitle>
+		<agencyid>A50804</agencyid>
+		<agency>DPW-Water and Waste Water (804)</agency>
+		<hiredate>41449</hiredate>
+		<annualsalary>24960</annualsalary>
+	</employee>
+	<employee>
+		<name>Lilly,Jeffrey J</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99201</agencyid>
+		<agency>Police Department (201)</agency>
+		<hiredate>38309</hiredate>
+		<annualsalary>58827</annualsalary>
+		<grosspay>74608.57</grosspay>
+	</employee>
+	<employee>
+		<name>Lim,Joseph C</name>
+		<jobtitle>ASSISTANT STATE'S ATTORNEY</jobtitle>
+		<agencyid>A29011</agencyid>
+		<agency>States Attorneys Office (011)</agency>
+		<hiredate>36531</hiredate>
+		<annualsalary>70600</annualsalary>
+		<grosspay>70545.3</grosspay>
+	</employee>
+	<employee>
+		<name>Lima,Babila R</name>
+		<jobtitle>WORK STUDY STUDENT</jobtitle>
+		<agencyid>A85100</agencyid>
+		<agency>General Services (100)</agency>
+		<hiredate>39111</hiredate>
+		<annualsalary>31200</annualsalary>
+		<grosspay>7153.65</grosspay>
+	</employee>
+	<employee>
+		<name>Lin,Tsunghsuan</name>
+		<jobtitle>SPORTS COORDINATOR</jobtitle>
+		<agencyid>P04001</agencyid>
+		<agency>R and P-Recreation (part-time) (</agency>
+		<hiredate>39407</hiredate>
+		<annualsalary>17680</annualsalary>
+		<grosspay>0</grosspay>
+	</employee>
+	<employee>
+		<name>Lind,Michael J</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99197</agencyid>
+		<agency>Police Department (197)</agency>
+		<hiredate>35523</hiredate>
+		<annualsalary>64652</annualsalary>
+		<grosspay>76428.82</grosspay>
+	</employee>
+	<employee>
+		<name>Lindbeck,John D</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64210</agencyid>
+		<agency>Fire Department (210)</agency>
+		<hiredate>39428</hiredate>
+		<annualsalary>55113</annualsalary>
+		<grosspay>57126.04</grosspay>
+	</employee>
+	<employee>
+		<name>Lindemann,Adolph J</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>A70104</agencyid>
+		<agency>DPW-Solid Waste (104)</agency>
+		<hiredate>30222</hiredate>
+		<annualsalary>32926</annualsalary>
+		<grosspay>33255.85</grosspay>
+	</employee>
+	<employee>
+		<name>Lindenbaum,Glenda</name>
+		<jobtitle>FISCAL TECH</jobtitle>
+		<agencyid>A75052</agencyid>
+		<agency>Enoch Pratt Free Library (052)</agency>
+		<hiredate>41156</hiredate>
+		<annualsalary>47985</annualsalary>
+		<grosspay>36726.89</grosspay>
+	</employee>
+	<employee>
+		<name>Lindsay,Brandon I</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02258</agencyid>
+		<agency>Youth Summer  (258)</agency>
+		<hiredate>41072</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1341.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lindsay,Brandon V</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02262</agencyid>
+		<agency>Youth Summer  (262)</agency>
+		<hiredate>40701</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lindsay,Damontae V</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02263</agencyid>
+		<agency>Youth Summer  (263)</agency>
+		<hiredate>41453</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lindsay,Lauren M</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02374</agencyid>
+		<agency>Youth Summer  (374)</agency>
+		<hiredate>41072</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lindsay,Ronald W</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02329</agencyid>
+		<agency>Youth Summer  (329)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lindsey,Kerney S</name>
+		<jobtitle>HEAVY EQUIPMENT OPERATOR I</jobtitle>
+		<agencyid>A50608</agencyid>
+		<agency>DPW-Water and Waste Water (608)</agency>
+		<hiredate>33945</hiredate>
+		<annualsalary>36337</annualsalary>
+		<grosspay>47049.89</grosspay>
+	</employee>
+	<employee>
+		<name>Linen,Joyce</name>
+		<jobtitle>SCHOOL HEALTH AIDE (10 MONTHS)</jobtitle>
+		<agencyid>A65096</agencyid>
+		<agency>HLTH-Health Department (096)</agency>
+		<hiredate>38899</hiredate>
+		<annualsalary>25141</annualsalary>
+		<grosspay>24336.02</grosspay>
+	</employee>
+	<employee>
+		<name>Linhard,Rachel M</name>
+		<jobtitle>ASSISTANT STATE'S ATTORNEY</jobtitle>
+		<agencyid>A29006</agencyid>
+		<agency>States Attorneys Office (006)</agency>
+		<hiredate>38761</hiredate>
+		<annualsalary>64000</annualsalary>
+		<grosspay>62732.07</grosspay>
+	</employee>
+	<employee>
+		<name>Linthicum,Amanda D</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99006</agencyid>
+		<agency>Police Department (006)</agency>
+		<hiredate>32399</hiredate>
+		<annualsalary>69312</annualsalary>
+		<grosspay>73047.58</grosspay>
+	</employee>
+	<employee>
+		<name>Linton,Larry L</name>
+		<jobtitle>RADIO DISPATCHER II</jobtitle>
+		<agencyid>A41116</agencyid>
+		<agency>DPW-Administration (116)</agency>
+		<hiredate>35345</hiredate>
+		<annualsalary>39150</annualsalary>
+		<grosspay>43147.54</grosspay>
+	</employee>
+	<employee>
+		<name>Linton,Makayla M</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02335</agencyid>
+		<agency>Youth Summer  (335)</agency>
+		<hiredate>41453</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Linton,Shabazz K</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02286</agencyid>
+		<agency>Youth Summer  (286)</agency>
+		<hiredate>39975</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1051.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lioi,Dan A</name>
+		<jobtitle>POLICE COMMAND STAFF I</jobtitle>
+		<agencyid>A99308</agencyid>
+		<agency>Police Department (308)</agency>
+		<hiredate>34449</hiredate>
+		<annualsalary>98000</annualsalary>
+		<grosspay>96377.04</grosspay>
+	</employee>
+	<employee>
+		<name>Lipka Jr,Joseph E</name>
+		<jobtitle>FIRE LIEUTENANT</jobtitle>
+		<agencyid>A64130</agencyid>
+		<agency>Fire Department (130)</agency>
+		<hiredate>35520</hiredate>
+		<annualsalary>67588</annualsalary>
+		<grosspay>79365.53</grosspay>
+	</employee>
+	<employee>
+		<name>Lipka,Kenneth</name>
+		<jobtitle>TRAFFIC MAINT WORKER II</jobtitle>
+		<agencyid>A90002</agencyid>
+		<agency>TRANS-Traffic (002)</agency>
+		<hiredate>31141</hiredate>
+		<annualsalary>36109</annualsalary>
+		<grosspay>45366.88</grosspay>
+	</employee>
+	<employee>
+		<name>Lipka,Thomas R</name>
+		<jobtitle>TRAFFIC ELECTRONICS MAINT TECH</jobtitle>
+		<agencyid>A49505</agencyid>
+		<agency>TRANS-Highways (505)</agency>
+		<hiredate>31453</hiredate>
+		<annualsalary>57600</annualsalary>
+		<grosspay>64030.19</grosspay>
+	</employee>
+	<employee>
+		<name>Lippincott,Samuel</name>
+		<jobtitle>COMMUNITY AIDE</jobtitle>
+		<agencyid>A68005</agencyid>
+		<agency>R and P-Parks (005)</agency>
+		<hiredate>40739</hiredate>
+		<annualsalary>20800</annualsalary>
+		<grosspay>4088.35</grosspay>
+	</employee>
+	<employee>
+		<name>Lipscomb,Davon</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02435</agencyid>
+		<agency>Youth Summer  (435)</agency>
+		<hiredate>41072</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1051.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lipscomb,Frank D</name>
+		<jobtitle>CONTRACT SERVICES SPEC. I</jobtitle>
+		<agencyid>A67002</agencyid>
+		<agency>R and P-Administration (002)</agency>
+		<hiredate>39272</hiredate>
+		<annualsalary>56160</annualsalary>
+		<grosspay>30253.5</grosspay>
+	</employee>
+	<employee>
+		<name>Lipscomb,Lauren R</name>
+		<jobtitle>ASSISTANT STATE'S ATTORNEY</jobtitle>
+		<agencyid>A29003</agencyid>
+		<agency>States Attorneys Office (003)</agency>
+		<hiredate>37935</hiredate>
+		<annualsalary>65000</annualsalary>
+		<grosspay>40014.48</grosspay>
+	</employee>
+	<employee>
+		<name>Lipski,Karin S</name>
+		<jobtitle>FIREARMS EXAMINER</jobtitle>
+		<agencyid>A99386</agencyid>
+		<agency>Police Department (386)</agency>
+		<hiredate>32251</hiredate>
+		<annualsalary>86700</annualsalary>
+		<grosspay>52596.11</grosspay>
+	</employee>
+	<employee>
+		<name>Lipsky,Elizabeth</name>
+		<jobtitle>SYSTEMS ANALYST I</jobtitle>
+		<agencyid>A40001</agencyid>
+		<agency>M-R Info Technology (001)</agency>
+		<hiredate>32840</hiredate>
+		<annualsalary>68600</annualsalary>
+		<grosspay>68382.79</grosspay>
+	</employee>
+	<employee>
+		<name>Lisbon,Nakishia S</name>
+		<jobtitle>PARAMEDIC CRT</jobtitle>
+		<agencyid>A64464</agencyid>
+		<agency>Fire Department (464)</agency>
+		<hiredate>39049</hiredate>
+		<annualsalary>61727</annualsalary>
+		<grosspay>69135.97</grosspay>
+	</employee>
+	<employee>
+		<name>Lisle,Karen A</name>
+		<jobtitle>VICTIM/WITNESS COORDINATOR SAO</jobtitle>
+		<agencyid>A29008</agencyid>
+		<agency>States Attorneys Office (008)</agency>
+		<hiredate>35556</hiredate>
+		<annualsalary>54453</annualsalary>
+		<grosspay>54362.09</grosspay>
+	</employee>
+	<employee>
+		<name>Little,Bridget S</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02550</agencyid>
+		<agency>Youth Summer  (550)</agency>
+		<hiredate>41438</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Little,Darcell</name>
+		<jobtitle>LIBRARIAN SUPV I</jobtitle>
+		<agencyid>A75084</agencyid>
+		<agency>Enoch Pratt Free Library (084)</agency>
+		<hiredate>36087</hiredate>
+		<annualsalary>57900</annualsalary>
+		<grosspay>58802.16</grosspay>
+	</employee>
+	<employee>
+		<name>Little,Ericka L</name>
+		<jobtitle>SEASONAL MAINT AIDE</jobtitle>
+		<agencyid>A84402</agencyid>
+		<agency>TRANS-Towing (402)</agency>
+		<hiredate>41452</hiredate>
+		<annualsalary>20800</annualsalary>
+	</employee>
+	<employee>
+		<name>Little,Nyjae D</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02147</agencyid>
+		<agency>Youth Summer  (147)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Little,Rachelle L</name>
+		<jobtitle>SCHOOL HEALTH AIDE (10 MONTHS)</jobtitle>
+		<agencyid>A65096</agencyid>
+		<agency>HLTH-Health Department (096)</agency>
+		<hiredate>38899</hiredate>
+		<annualsalary>25141</annualsalary>
+		<grosspay>24852.27</grosspay>
+	</employee>
+	<employee>
+		<name>Little,Rachelle L</name>
+		<jobtitle>School Health Aide</jobtitle>
+		<agencyid>A65196</agencyid>
+		<agency>HLTH-Health Dept. Location 196</agency>
+		<hiredate>41445</hiredate>
+		<annualsalary>30264</annualsalary>
+	</employee>
+	<employee>
+		<name>Little,Reginald A</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02361</agencyid>
+		<agency>Youth Summer  (361)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Little,Shawn P</name>
+		<jobtitle>FIRE EMERGENCY VEHICLE DRIVER</jobtitle>
+		<agencyid>A64210</agencyid>
+		<agency>Fire Department (210)</agency>
+		<hiredate>34960</hiredate>
+		<annualsalary>60273</annualsalary>
+		<grosspay>64359.2</grosspay>
+	</employee>
+	<employee>
+		<name>Little,Sonya M</name>
+		<jobtitle>CALL CENTER AGENT I</jobtitle>
+		<agencyid>A40002</agencyid>
+		<agency>M-R Info Technology (002)</agency>
+		<hiredate>37544</hiredate>
+		<annualsalary>35554</annualsalary>
+		<grosspay>37182.82</grosspay>
+	</employee>
+	<employee>
+		<name>Little,Taleyah J</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02550</agencyid>
+		<agency>Youth Summer  (550)</agency>
+		<hiredate>41438</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Little,Vonda V</name>
+		<jobtitle>CROSSING GUARD</jobtitle>
+		<agencyid>C90786</agencyid>
+		<agency>TRANS-Crossing Guards (786)</agency>
+		<hiredate>36643</hiredate>
+		<annualsalary>10036</annualsalary>
+		<grosspay>10035.99</grosspay>
+	</employee>
+	<employee>
+		<name>Little,Vonda V</name>
+		<jobtitle>Crossing Guard</jobtitle>
+		<agencyid>C90SUM</agencyid>
+		<agency>TRANS-Cross Guard-Summer</agency>
+		<hiredate>39258</hiredate>
+		<annualsalary>23462</annualsalary>
+	</employee>
+	<employee>
+		<name>Little,Wayne A</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>B70371</agencyid>
+		<agency>DPW-Solid Waste (wkly) (371)</agency>
+		<hiredate>40350</hiredate>
+		<annualsalary>28163</annualsalary>
+		<grosspay>29719.75</grosspay>
+	</employee>
+	<employee>
+		<name>Little,Wendell</name>
+		<jobtitle>BUILDING REPAIRER I</jobtitle>
+		<agencyid>A85001</agencyid>
+		<agency>General Services (001)</agency>
+		<hiredate>36809</hiredate>
+		<annualsalary>34337</annualsalary>
+		<grosspay>37358.34</grosspay>
+	</employee>
+	<employee>
+		<name>Little-Staten,Lolita B</name>
+		<jobtitle>SERV ASST LBRY</jobtitle>
+		<agencyid>A75082</agencyid>
+		<agency>Enoch Pratt Free Library (082)</agency>
+		<hiredate>40945</hiredate>
+		<annualsalary>21424</annualsalary>
+		<grosspay>13375.1</grosspay>
+	</employee>
+	<employee>
+		<name>Littlejohn,Cinder L</name>
+		<jobtitle>CROSSING GUARD</jobtitle>
+		<agencyid>C90786</agencyid>
+		<agency>TRANS-Crossing Guards (786)</agency>
+		<hiredate>34972</hiredate>
+		<annualsalary>10328</annualsalary>
+		<grosspay>10275.52</grosspay>
+	</employee>
+	<employee>
+		<name>Littlejohn,Cinder L</name>
+		<jobtitle>Crossing Guard</jobtitle>
+		<agencyid>C90SUM</agencyid>
+		<agency>TRANS-Cross Guard-Summer</agency>
+		<hiredate>39258</hiredate>
+		<annualsalary>23462</annualsalary>
+		<grosspay>1274.04</grosspay>
+	</employee>
+	<employee>
+		<name>Littlejohn,Yvetta</name>
+		<jobtitle>PUBLIC SAFETY OFFICER</jobtitle>
+		<agencyid>A91015</agencyid>
+		<agency>M-R Convention Center (015)</agency>
+		<hiredate>39562</hiredate>
+		<annualsalary>38431</annualsalary>
+		<grosspay>39470.33</grosspay>
+	</employee>
+	<employee>
+		<name>Litz,Kathy L</name>
+		<jobtitle>EXECUTIVE LEVEL I</jobtitle>
+		<agencyid>A49100</agencyid>
+		<agency>TRANS-Highways (100)</agency>
+		<hiredate>29325</hiredate>
+		<annualsalary>84270</annualsalary>
+		<grosspay>85242.61</grosspay>
+	</employee>
+	<employee>
+		<name>Litzenberger,Stephen T</name>
+		<jobtitle>EDP COMMUNICATIONS COOR II</jobtitle>
+		<agencyid>A65001</agencyid>
+		<agency>HLTH-Health Department (001)</agency>
+		<hiredate>34983</hiredate>
+		<annualsalary>59364</annualsalary>
+		<grosspay>60041.44</grosspay>
+	</employee>
+	<employee>
+		<name>Liu,Meng Ching</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99006</agencyid>
+		<agency>Police Department (006)</agency>
+		<hiredate>34801</hiredate>
+		<annualsalary>65816</annualsalary>
+		<grosspay>69780.93</grosspay>
+	</employee>
+	<employee>
+		<name>Liu,Victor L</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99124</agencyid>
+		<agency>Police Department (124)</agency>
+		<hiredate>40059</hiredate>
+		<annualsalary>51937</annualsalary>
+		<grosspay>59500.61</grosspay>
+	</employee>
+	<employee>
+		<name>Liu,Xiaoyan</name>
+		<jobtitle>ENVIRONMENTAL SANITARIAN II</jobtitle>
+		<agencyid>A65041</agencyid>
+		<agency>HLTH-Health Department (041)</agency>
+		<hiredate>38225</hiredate>
+		<annualsalary>53638</annualsalary>
+		<grosspay>53630.69</grosspay>
+	</employee>
+	<employee>
+		<name>Lively,Kai M</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02606</agencyid>
+		<agency>Youth Summer (606)</agency>
+		<hiredate>41072</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1011.38</grosspay>
+	</employee>
+	<employee>
+		<name>Liverman,Antonio</name>
+		<jobtitle>COMMUNITY AIDE</jobtitle>
+		<agencyid>B68010</agencyid>
+		<agency>R and P-Parks (wkly) (010)</agency>
+		<hiredate>40792</hiredate>
+		<annualsalary>15080</annualsalary>
+		<grosspay>13442.86</grosspay>
+	</employee>
+	<employee>
+		<name>Liverpool,Glendora V</name>
+		<jobtitle>SOCIAL SERVICES COORDINATOR</jobtitle>
+		<agencyid>A65201</agencyid>
+		<agency>HLTH-Health Department (201)</agency>
+		<hiredate>41309</hiredate>
+		<annualsalary>33510</annualsalary>
+		<grosspay>11681</grosspay>
+	</employee>
+	<employee>
+		<name>Livers,Delores B</name>
+		<jobtitle>TEACHER'S ASST II PRESCHOOL</jobtitle>
+		<agencyid>A06076</agencyid>
+		<agency>Housing and Community Dev (076)</agency>
+		<hiredate>28467</hiredate>
+		<annualsalary>32344</annualsalary>
+		<grosspay>32377.39</grosspay>
+	</employee>
+	<employee>
+		<name>Livesay Jr,Ricky A</name>
+		<jobtitle>POLICE SERGEANT</jobtitle>
+		<agencyid>A99225</agencyid>
+		<agency>Police Department (225)</agency>
+		<hiredate>36412</hiredate>
+		<annualsalary>73141</annualsalary>
+		<grosspay>82420.67</grosspay>
+	</employee>
+	<employee>
+		<name>Livezey,Joan</name>
+		<jobtitle>PROFESSIONAL ASST LBRY</jobtitle>
+		<agencyid>A75088</agencyid>
+		<agency>Enoch Pratt Free Library (088)</agency>
+		<hiredate>36424</hiredate>
+		<annualsalary>25709</annualsalary>
+		<grosspay>14083.25</grosspay>
+	</employee>
+	<employee>
+		<name>Livingston Jr,Kevin C</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02382</agencyid>
+		<agency>Youth Summer  (382)</agency>
+		<hiredate>40701</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>942.5</grosspay>
+	</employee>
+	<employee>
+		<name>Livingston,Dakea L</name>
+		<jobtitle>PUBLIC SAFETY OFFICER</jobtitle>
+		<agencyid>A91015</agencyid>
+		<agency>M-R Convention Center (015)</agency>
+		<hiredate>39256</hiredate>
+		<annualsalary>32315</annualsalary>
+		<grosspay>3231.02</grosspay>
+	</employee>
+	<employee>
+		<name>Livingston,Kabrea T</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02206</agencyid>
+		<agency>Youth Summer  (206)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Livingston,Kevin C</name>
+		<jobtitle>ENGINEERING ASSOCIATE III</jobtitle>
+		<agencyid>A49103</agencyid>
+		<agency>TRANS-Highways (103)</agency>
+		<hiredate>33091</hiredate>
+		<annualsalary>61044</annualsalary>
+		<grosspay>56973.83</grosspay>
+	</employee>
+	<employee>
+		<name>Lizardo,Volmy</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99093</agencyid>
+		<agency>Police Department (093)</agency>
+		<hiredate>36895</hiredate>
+		<annualsalary>62324</annualsalary>
+		<grosspay>71527.18</grosspay>
+	</employee>
+	<employee>
+		<name>Lizer,Allen J</name>
+		<jobtitle>HEAVY EQUIPMENT OPERATOR II</jobtitle>
+		<agencyid>A50606</agencyid>
+		<agency>DPW-Water and Waste Water (606)</agency>
+		<hiredate>29122</hiredate>
+		<annualsalary>44001</annualsalary>
+		<grosspay>73841.37</grosspay>
+	</employee>
+	<employee>
+		<name>Lloyd,Anthony</name>
+		<jobtitle>FIRE LT INVSTGTN and PREVNTN SVC</jobtitle>
+		<agencyid>A64004</agencyid>
+		<agency>Fire Department (004)</agency>
+		<hiredate>29864</hiredate>
+		<annualsalary>72594</annualsalary>
+		<grosspay>84811.3</grosspay>
+	</employee>
+	<employee>
+		<name>Lloyd,James A</name>
+		<jobtitle>POLICE SERGEANT</jobtitle>
+		<agencyid>A99194</agencyid>
+		<agency>Police Department (194)</agency>
+		<hiredate>36703</hiredate>
+		<annualsalary>72406</annualsalary>
+		<grosspay>104356.19</grosspay>
+	</employee>
+	<employee>
+		<name>Lloyd,Pierre A</name>
+		<jobtitle>SEASONAL MAINT AIDE</jobtitle>
+		<agencyid>A49320</agencyid>
+		<agency>TRANS-Highways (320)</agency>
+		<hiredate>40742</hiredate>
+		<annualsalary>16432</annualsalary>
+		<grosspay>14700.68</grosspay>
+	</employee>
+	<employee>
+		<name>Lloyd,Raymond</name>
+		<jobtitle>POLICE OFFICER (EID)</jobtitle>
+		<agencyid>A99349</agencyid>
+		<agency>Police Department (349)</agency>
+		<hiredate>37607</hiredate>
+		<annualsalary>62634</annualsalary>
+		<grosspay>80248.14</grosspay>
+	</employee>
+	<employee>
+		<name>Lloyd,Summer</name>
+		<jobtitle>PARAMEDIC CRT</jobtitle>
+		<agencyid>A64464</agencyid>
+		<agency>Fire Department (464)</agency>
+		<hiredate>37636</hiredate>
+		<annualsalary>63866</annualsalary>
+		<grosspay>75277.13</grosspay>
+	</employee>
+	<employee>
+		<name>Lloyd,Zylil</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02215</agencyid>
+		<agency>Youth Summer  (215)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>LoBianco,Krystine L</name>
+		<jobtitle>SALES MANAGER</jobtitle>
+		<agencyid>A91012</agencyid>
+		<agency>M-R Convention Center (012)</agency>
+		<hiredate>37000</hiredate>
+		<annualsalary>57900</annualsalary>
+		<grosspay>58477.15</grosspay>
+	</employee>
+	<employee>
+		<name>Lockett,Phillip E</name>
+		<jobtitle>MOTOR POOL WORKER II</jobtitle>
+		<agencyid>A99353</agencyid>
+		<agency>Police Department (353)</agency>
+		<hiredate>29746</hiredate>
+		<annualsalary>36009</annualsalary>
+		<grosspay>36333.44</grosspay>
+	</employee>
+	<employee>
+		<name>Lockett,Ray N</name>
+		<jobtitle>FIRE EMERGENCY VEHICLE DRIVER</jobtitle>
+		<agencyid>A64205</agencyid>
+		<agency>Fire Department (205)</agency>
+		<hiredate>33049</hiredate>
+		<annualsalary>62505</annualsalary>
+		<grosspay>73414.96</grosspay>
+	</employee>
+	<employee>
+		<name>Lockett,Steven M</name>
+		<jobtitle>FIREFIGHTER</jobtitle>
+		<agencyid>A64113</agencyid>
+		<agency>Fire Department (113)</agency>
+		<hiredate>34960</hiredate>
+		<annualsalary>58933</annualsalary>
+		<grosspay>69718.08</grosspay>
+	</employee>
+	<employee>
+		<name>Lockett,William D</name>
+		<jobtitle>SEWERLINE VIDEO INSPECTOR TECH</jobtitle>
+		<agencyid>A50580</agencyid>
+		<agency>DPW-Water and Waste Water (580)</agency>
+		<hiredate>39559</hiredate>
+		<annualsalary>36934</annualsalary>
+		<grosspay>37957.05</grosspay>
+	</employee>
+	<employee>
+		<name>Locklear,Carl</name>
+		<jobtitle>SR COMPANION STIPEND HLTH</jobtitle>
+		<agencyid>A65072</agencyid>
+		<agency>HLTH-Health Department (072)</agency>
+		<hiredate>40431</hiredate>
+		<annualsalary>4576</annualsalary>
+		<grosspay>0</grosspay>
+	</employee>
+	<employee>
+		<name>Locklear,George H</name>
+		<jobtitle>TRAFFIC MAINT WORKER II</jobtitle>
+		<agencyid>A49506</agencyid>
+		<agency>TRANS-Highways (506)</agency>
+		<hiredate>38952</hiredate>
+		<annualsalary>32241</annualsalary>
+		<grosspay>39802.02</grosspay>
+	</employee>
+	<employee>
+		<name>Locklear,Jason</name>
+		<jobtitle>LABORER</jobtitle>
+		<agencyid>A50582</agencyid>
+		<agency>DPW-Water and Waste Water (582)</agency>
+		<hiredate>39546</hiredate>
+		<annualsalary>28662</annualsalary>
+		<grosspay>33914.02</grosspay>
+	</employee>
+	<employee>
+		<name>Locklear,John M</name>
+		<jobtitle>MECHANICAL MAINT TECH III</jobtitle>
+		<agencyid>A50212</agencyid>
+		<agency>DPW-Water and Waste Water (212)</agency>
+		<hiredate>30970</hiredate>
+		<annualsalary>46257</annualsalary>
+		<grosspay>46675.81</grosspay>
+	</employee>
+	<employee>
+		<name>Locklear,Phillip</name>
+		<jobtitle>AUTOMOTIVE MAINT SUPV I</jobtitle>
+		<agencyid>A85301</agencyid>
+		<agency>General Services (301)</agency>
+		<hiredate>29094</hiredate>
+		<annualsalary>59076</annualsalary>
+		<grosspay>92742.43</grosspay>
+	</employee>
+	<employee>
+		<name>Locklear,Tony V</name>
+		<jobtitle>AUTOMOTIVE MECHANIC</jobtitle>
+		<agencyid>A85302</agencyid>
+		<agency>General Services (302)</agency>
+		<hiredate>40304</hiredate>
+		<annualsalary>36167</annualsalary>
+		<grosspay>48340.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lockley,Sharon A</name>
+		<jobtitle>AUDITOR SUPERVISOR (CPA)</jobtitle>
+		<agencyid>A24002</agencyid>
+		<agency>COMP-Audits (002)</agency>
+		<hiredate>29248</hiredate>
+		<annualsalary>93400</annualsalary>
+		<grosspay>92059.07</grosspay>
+	</employee>
+	<employee>
+		<name>Lockwood,Elliot P</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02133</agencyid>
+		<agency>Youth Summer  (133)</agency>
+		<hiredate>41072</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1268.75</grosspay>
+	</employee>
+	<employee>
+		<name>Lockwood,Kenneth E</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02727</agencyid>
+		<agency>Youth Summer (727)</agency>
+		<hiredate>40332</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1051.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lockwood,Shannon E</name>
+		<jobtitle>PROJECT COORDINATOR</jobtitle>
+		<agencyid>A91012</agencyid>
+		<agency>M-R Convention Center (012)</agency>
+		<hiredate>41073</hiredate>
+		<annualsalary>38939</annualsalary>
+		<grosspay>38085.67</grosspay>
+	</employee>
+	<employee>
+		<name>Loeffler,Derek J</name>
+		<jobtitle>POLICE SERGEANT</jobtitle>
+		<agencyid>A99335</agencyid>
+		<agency>Police Department (335)</agency>
+		<hiredate>39049</hiredate>
+		<annualsalary>68847</annualsalary>
+		<grosspay>81972.59</grosspay>
+	</employee>
+	<employee>
+		<name>Loewenthal,Michele E</name>
+		<jobtitle>ASSOCIATE JUDGE ORPHANS' COURT</jobtitle>
+		<agencyid>A37001</agencyid>
+		<agency>Orphan's Court (001)</agency>
+		<hiredate>40749</hiredate>
+		<annualsalary>62500</annualsalary>
+		<grosspay>62666.01</grosspay>
+	</employee>
+	<employee>
+		<name>Lofton,Aryne P</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99263</agencyid>
+		<agency>Police Department (263)</agency>
+		<hiredate>35831</hiredate>
+		<annualsalary>62324</annualsalary>
+		<grosspay>64254.9</grosspay>
+	</employee>
+	<employee>
+		<name>Lofton,Osiris</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99396</agencyid>
+		<agency>Police Department (396)</agency>
+		<hiredate>37119</hiredate>
+		<annualsalary>61740</annualsalary>
+		<grosspay>67917.31</grosspay>
+	</employee>
+	<employee>
+		<name>Loftus,Martin D</name>
+		<jobtitle>FIRE EMERGENCY VEHICLE DRIVER</jobtitle>
+		<agencyid>A64230</agencyid>
+		<agency>Fire Department (230)</agency>
+		<hiredate>29773</hiredate>
+		<annualsalary>64737</annualsalary>
+		<grosspay>74068.35</grosspay>
+	</employee>
+	<employee>
+		<name>Logan Bell,Chantel L</name>
+		<jobtitle>OFFICE ASST II</jobtitle>
+		<agencyid>A75072</agencyid>
+		<agency>Enoch Pratt Free Library (072)</agency>
+		<hiredate>33233</hiredate>
+		<annualsalary>32604</annualsalary>
+		<grosspay>34657.45</grosspay>
+	</employee>
+	<employee>
+		<name>Logan Jr,Cedric G</name>
+		<jobtitle>INSTRUMENTATION TECH APPRENTIC</jobtitle>
+		<agencyid>A50209</agencyid>
+		<agency>DPW-Water and Waste Water (209)</agency>
+		<hiredate>35961</hiredate>
+		<annualsalary>31073</annualsalary>
+		<grosspay>23277.18</grosspay>
+	</employee>
+	<employee>
+		<name>Logan,Billy</name>
+		<jobtitle>DRIVER I</jobtitle>
+		<agencyid>A49300</agencyid>
+		<agency>TRANS-Highways (300)</agency>
+		<hiredate>36871</hiredate>
+		<annualsalary>30256</annualsalary>
+		<grosspay>37681.36</grosspay>
+	</employee>
+	<employee>
+		<name>Logan,Cameron</name>
+		<jobtitle>SWIMMING POOL ATTENDENT</jobtitle>
+		<agencyid>P04002</agencyid>
+		<agency>R and P-Recreation (part-time) (</agency>
+		<hiredate>41419</hiredate>
+		<annualsalary>15080</annualsalary>
+		<grosspay>311.75</grosspay>
+	</employee>
+	<employee>
+		<name>Logan,Denise E</name>
+		<jobtitle>POLICE INFORMATION TECHNICIAN</jobtitle>
+		<agencyid>A99362</agencyid>
+		<agency>Police Department (362)</agency>
+		<hiredate>39380</hiredate>
+		<annualsalary>34518</annualsalary>
+		<grosspay>37068.48</grosspay>
+	</employee>
+	<employee>
+		<name>Logan,Dineka M</name>
+		<jobtitle>PARKING CONTROL AGENT I</jobtitle>
+		<agencyid>A90201</agencyid>
+		<agency>TRANS-Traffic (201)</agency>
+		<hiredate>38264</hiredate>
+		<annualsalary>30506</annualsalary>
+		<grosspay>30000.84</grosspay>
+	</employee>
+	<employee>
+		<name>Logan,Kelson P</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99123</agencyid>
+		<agency>Police Department (123)</agency>
+		<hiredate>40800</hiredate>
+		<annualsalary>43239</annualsalary>
+		<grosspay>47600.74</grosspay>
+	</employee>
+	<employee>
+		<name>Logan,Kevin N</name>
+		<jobtitle>ACCOUNTING SYSTEMS ANALYST I</jobtitle>
+		<agencyid>A12003</agencyid>
+		<agency>FIN-Acct and Payroll (003)</agency>
+		<hiredate>39048</hiredate>
+		<annualsalary>56500</annualsalary>
+		<grosspay>57060.97</grosspay>
+	</employee>
+	<employee>
+		<name>Logan,Marian C</name>
+		<jobtitle>911 OPERATOR SUPERVISOR</jobtitle>
+		<agencyid>A40301</agencyid>
+		<agency>M-R Info Technology (301)</agency>
+		<hiredate>32204</hiredate>
+		<annualsalary>52836</annualsalary>
+		<grosspay>60013.36</grosspay>
+	</employee>
+	<employee>
+		<name>Logan,Princess D</name>
+		<jobtitle>FIREFIGHTER/PARAMEDIC</jobtitle>
+		<agencyid>A64120</agencyid>
+		<agency>Fire Department (120)</agency>
+		<hiredate>38796</hiredate>
+		<annualsalary>56655</annualsalary>
+		<grosspay>64430.97</grosspay>
+	</employee>
+	<employee>
+		<name>Logan,Virginia L</name>
+		<jobtitle>ANALYST/PROGRAMMER II</jobtitle>
+		<agencyid>A41103</agencyid>
+		<agency>DPW-Administration (103)</agency>
+		<hiredate>26004</hiredate>
+		<annualsalary>64404</annualsalary>
+		<grosspay>64313.07</grosspay>
+	</employee>
+	<employee>
+		<name>Logue,Matthew S</name>
+		<jobtitle>POLICE OFFICER (EID)</jobtitle>
+		<agencyid>A99097</agencyid>
+		<agency>Police Department (097)</agency>
+		<hiredate>36485</hiredate>
+		<annualsalary>64422</annualsalary>
+		<grosspay>85532.52</grosspay>
+	</employee>
+	<employee>
+		<name>Lohr,David E</name>
+		<jobtitle>FIRE LIEUTENANT</jobtitle>
+		<agencyid>A64229</agencyid>
+		<agency>Fire Department (229)</agency>
+		<hiredate>34387</hiredate>
+		<annualsalary>67588</annualsalary>
+		<grosspay>78981.55</grosspay>
+	</employee>
+	<employee>
+		<name>Loiero,Brian C</name>
+		<jobtitle>POLICE OFFICER (EID)</jobtitle>
+		<agencyid>A99091</agencyid>
+		<agency>Police Department (091)</agency>
+		<hiredate>40296</hiredate>
+		<annualsalary>53395</annualsalary>
+		<grosspay>61648.96</grosspay>
+	</employee>
+	<employee>
+		<name>Lokinski,Patricia V</name>
+		<jobtitle>TRAFFIC INVESTIGATOR II</jobtitle>
+		<agencyid>A49102</agencyid>
+		<agency>TRANS-Highways (102)</agency>
+		<hiredate>30343</hiredate>
+		<annualsalary>38301</annualsalary>
+		<grosspay>37601.9</grosspay>
+	</employee>
+	<employee>
+		<name>Lomartire,Nicole C</name>
+		<jobtitle>ASSISTANT STATE'S ATTORNEY</jobtitle>
+		<agencyid>A29005</agencyid>
+		<agency>States Attorneys Office (005)</agency>
+		<hiredate>37473</hiredate>
+		<annualsalary>85000</annualsalary>
+		<grosspay>82597.47</grosspay>
+	</employee>
+	<employee>
+		<name>Lomax Bey,Ronald W</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>B49308</agencyid>
+		<agency>TRANS-Highways (wkly) (308)</agency>
+		<hiredate>37236</hiredate>
+		<annualsalary>29515</annualsalary>
+		<grosspay>29808.44</grosspay>
+	</employee>
+	<employee>
+		<name>Lomax,Cindy C</name>
+		<jobtitle>OFFICE ASSISTANT III</jobtitle>
+		<agencyid>A40300</agencyid>
+		<agency>M-R Info Technology (300)</agency>
+		<hiredate>31084</hiredate>
+		<annualsalary>36109</annualsalary>
+		<grosspay>37453.88</grosspay>
+	</employee>
+	<employee>
+		<name>Lomax,Shayquanna L</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02181</agencyid>
+		<agency>Youth Summer  (181)</agency>
+		<hiredate>39975</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lombardi,Robert S</name>
+		<jobtitle>POLLUTION CONTROL ANALYST II</jobtitle>
+		<agencyid>A50208</agencyid>
+		<agency>DPW-Water and Waste Water (208)</agency>
+		<hiredate>34491</hiredate>
+		<annualsalary>52176</annualsalary>
+		<grosspay>53044.7</grosspay>
+	</employee>
+	<employee>
+		<name>London,Darrell T</name>
+		<jobtitle>RADIO DISPATCHER II</jobtitle>
+		<agencyid>A50609</agencyid>
+		<agency>DPW-Water and Waste Water (609)</agency>
+		<hiredate>36871</hiredate>
+		<annualsalary>38042</annualsalary>
+		<grosspay>42027.69</grosspay>
+	</employee>
+	<employee>
+		<name>London,Darrell T</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99095</agencyid>
+		<agency>Police Department (095)</agency>
+		<hiredate>39576</hiredate>
+		<annualsalary>43895</annualsalary>
+		<grosspay>56954.23</grosspay>
+	</employee>
+	<employee>
+		<name>Loney,Vanessa J</name>
+		<jobtitle>Waste Water Opns Tech II Sanit</jobtitle>
+		<agencyid>A50208</agencyid>
+		<agency>DPW-Water and Waste Water (208)</agency>
+		<hiredate>35471</hiredate>
+		<annualsalary>40557</annualsalary>
+		<grosspay>40790.41</grosspay>
+	</employee>
+	<employee>
+		<name>Long Sr,Jeffrey</name>
+		<jobtitle>COMMUNITY HEALTH EDUCATOR III</jobtitle>
+		<agencyid>A65026</agencyid>
+		<agency>HLTH-Health Department (026)</agency>
+		<hiredate>38534</hiredate>
+		<annualsalary>47176</annualsalary>
+		<grosspay>48588</grosspay>
+	</employee>
+	<employee>
+		<name>Long,Aaron A</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02565</agencyid>
+		<agency>Youth Summer  (565)</agency>
+		<hiredate>41453</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Long,Adam K</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99415</agencyid>
+		<agency>Police Department (415)</agency>
+		<hiredate>34764</hiredate>
+		<annualsalary>65816</annualsalary>
+		<grosspay>67137.44</grosspay>
+	</employee>
+	<employee>
+		<name>Long,Brooke K</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02226</agencyid>
+		<agency>Youth Summer  (226)</agency>
+		<hiredate>40332</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Long,Christopher W</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99004</agencyid>
+		<agency>Police Department (004)</agency>
+		<hiredate>39630</hiredate>
+		<annualsalary>58244</annualsalary>
+		<grosspay>60528.92</grosspay>
+	</employee>
+	<employee>
+		<name>Long,Daniel</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>A50306</agencyid>
+		<agency>DPW-Water and Waste Water (306)</agency>
+		<hiredate>37571</hiredate>
+		<annualsalary>29515</annualsalary>
+		<grosspay>28940.19</grosspay>
+	</employee>
+	<employee>
+		<name>Long,Donte D</name>
+		<jobtitle>CEMENT FINISHER</jobtitle>
+		<agencyid>B49330</agencyid>
+		<agency>TRANS-Highways (wkly) (330)</agency>
+		<hiredate>37515</hiredate>
+		<annualsalary>31657</annualsalary>
+		<grosspay>33949.93</grosspay>
+	</employee>
+	<employee>
+		<name>Long,Dorothy M</name>
+		<jobtitle>CROSSING GUARD</jobtitle>
+		<agencyid>C90786</agencyid>
+		<agency>TRANS-Crossing Guards (786)</agency>
+		<hiredate>33026</hiredate>
+		<annualsalary>10620</annualsalary>
+		<grosspay>10669.17</grosspay>
+	</employee>
+	<employee>
+		<name>Long,Ebony B</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02454</agencyid>
+		<agency>Youth Summer  (454)</agency>
+		<hiredate>41444</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Long,James</name>
+		<jobtitle>COMMUNITY AIDE</jobtitle>
+		<agencyid>P04001</agencyid>
+		<agency>R and P-Recreation (part-time) (</agency>
+		<hiredate>38892</hiredate>
+		<annualsalary>20800</annualsalary>
+		<grosspay>6745</grosspay>
+	</employee>
+	<employee>
+		<name>Long,Katrina R</name>
+		<jobtitle>DATA ENTRY OPERATOR  I</jobtitle>
+		<agencyid>A06032</agencyid>
+		<agency>Housing and Community Dev (032)</agency>
+		<hiredate>39811</hiredate>
+		<annualsalary>29913</annualsalary>
+		<grosspay>29362.04</grosspay>
+	</employee>
+	<employee>
+		<name>Long,Kristen M</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02371</agencyid>
+		<agency>Youth Summer  (371)</agency>
+		<hiredate>39975</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Long,Michael</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99034</agencyid>
+		<agency>Police Department (034)</agency>
+		<hiredate>37006</hiredate>
+		<annualsalary>62324</annualsalary>
+		<grosspay>65223.36</grosspay>
+	</employee>
+	<employee>
+		<name>Long,Patricia A</name>
+		<jobtitle>TEACHER'S ASST II PRESCHOOL</jobtitle>
+		<agencyid>A06076</agencyid>
+		<agency>Housing and Community Dev (076)</agency>
+		<hiredate>37599</hiredate>
+		<annualsalary>28968</annualsalary>
+		<grosspay>28570.9</grosspay>
+	</employee>
+	<employee>
+		<name>Long,Rakuan T</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02361</agencyid>
+		<agency>Youth Summer  (361)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Long,Sharon D</name>
+		<jobtitle>SIGN PAINTER I</jobtitle>
+		<agencyid>A90002</agencyid>
+		<agency>TRANS-Traffic (002)</agency>
+		<hiredate>31306</hiredate>
+		<annualsalary>39528</annualsalary>
+		<grosspay>39407.21</grosspay>
+	</employee>
+	<employee>
+		<name>Long,Sherina</name>
+		<jobtitle>POLICE LIEUTENANT EID</jobtitle>
+		<agencyid>A99422</agencyid>
+		<agency>Police Department (422)</agency>
+		<hiredate>30946</hiredate>
+		<annualsalary>93223</annualsalary>
+		<grosspay>102519.82</grosspay>
+	</employee>
+	<employee>
+		<name>Long,Steven M</name>
+		<jobtitle>AUTOMOTIVE MECHANIC</jobtitle>
+		<agencyid>A85301</agencyid>
+		<agency>General Services (301)</agency>
+		<hiredate>40990</hiredate>
+		<annualsalary>39749</annualsalary>
+		<grosspay>59898.49</grosspay>
+	</employee>
+	<employee>
+		<name>Long,Terry E</name>
+		<jobtitle>COMMUNITY SERVICE OFFICER</jobtitle>
+		<agencyid>A99409</agencyid>
+		<agency>Police Department (409)</agency>
+		<hiredate>35479</hiredate>
+		<annualsalary>36590</annualsalary>
+		<grosspay>36766.96</grosspay>
+	</employee>
+	<employee>
+		<name>Long,Tina R</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02548</agencyid>
+		<agency>Youth Summer  (548)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Long,Tyrell A</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02224</agencyid>
+		<agency>Youth Summer  (224)</agency>
+		<hiredate>40332</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1044</grosspay>
+	</employee>
+	<employee>
+		<name>Longmire,Colette</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99002</agencyid>
+		<agency>Police Department (002)</agency>
+		<hiredate>37265</hiredate>
+		<annualsalary>61740</annualsalary>
+		<grosspay>69638.95</grosspay>
+	</employee>
+	<employee>
+		<name>Longo,Patricia P</name>
+		<jobtitle>SOCIAL SERVICES COORDINATION S</jobtitle>
+		<agencyid>A65006</agencyid>
+		<agency>HLTH-Health Department (006)</agency>
+		<hiredate>38897</hiredate>
+		<annualsalary>54800</annualsalary>
+		<grosspay>55341.21</grosspay>
+	</employee>
+	<employee>
+		<name>Longshore,Mobutu A</name>
+		<jobtitle>EMERGENCY DISPATCHER</jobtitle>
+		<agencyid>A40302</agencyid>
+		<agency>M-R Info Technology (302)</agency>
+		<hiredate>38131</hiredate>
+		<annualsalary>45218</annualsalary>
+		<grosspay>60415.18</grosspay>
+	</employee>
+	<employee>
+		<name>Longworth,Alison K</name>
+		<jobtitle>RECREATION LEADER II</jobtitle>
+		<agencyid>A04004</agencyid>
+		<agency>R and P-Recreation (004)</agency>
+		<hiredate>40904</hiredate>
+		<annualsalary>29476</annualsalary>
+		<grosspay>29614.79</grosspay>
+	</employee>
+	<employee>
+		<name>Lonon III,Leroy</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>B70104</agencyid>
+		<agency>DPW-Solid Waste (wkly) (104)</agency>
+		<hiredate>38859</hiredate>
+		<annualsalary>28662</annualsalary>
+		<grosspay>29731.08</grosspay>
+	</employee>
+	<employee>
+		<name>Lonon,Leroy</name>
+		<jobtitle>HEAVY EQUIPMENT OPERATOR I</jobtitle>
+		<agencyid>A50212</agencyid>
+		<agency>DPW-Water and Waste Water (212)</agency>
+		<hiredate>38299</hiredate>
+		<annualsalary>33337</annualsalary>
+		<grosspay>35847.45</grosspay>
+	</employee>
+	<employee>
+		<name>Lopatin,Eli A</name>
+		<jobtitle>EXECUTIVE LEVEL I</jobtitle>
+		<agencyid>A52001</agencyid>
+		<agency>ERS/EOS Admin (001)</agency>
+		<hiredate>40931</hiredate>
+		<annualsalary>55200</annualsalary>
+		<grosspay>15245.47</grosspay>
+	</employee>
+	<employee>
+		<name>Lopez,Bruce W</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64129</agencyid>
+		<agency>Fire Department (129)</agency>
+		<hiredate>40562</hiredate>
+		<annualsalary>40650</annualsalary>
+		<grosspay>47210.5</grosspay>
+	</employee>
+	<employee>
+		<name>Lopez,Christopher R</name>
+		<jobtitle>POLICE OFFICER TRAINEE</jobtitle>
+		<agencyid>A99416</agencyid>
+		<agency>Police Department (416)</agency>
+		<hiredate>41150</hiredate>
+		<annualsalary>43136</annualsalary>
+		<grosspay>34600.4</grosspay>
+	</employee>
+	<employee>
+		<name>Lopez,Deairra D</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02190</agencyid>
+		<agency>Youth Summer  (190)</agency>
+		<hiredate>40701</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>964.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lopez,Edward R</name>
+		<jobtitle>EXECUTIVE LEVEL I</jobtitle>
+		<agencyid>A83007</agencyid>
+		<agency>HR-Human Resources (007)</agency>
+		<hiredate>37882</hiredate>
+		<annualsalary>67568</annualsalary>
+		<grosspay>68126.87</grosspay>
+	</employee>
+	<employee>
+		<name>Lopez,Israel I</name>
+		<jobtitle>POLICE OFFICER TRAINEE</jobtitle>
+		<agencyid>A99416</agencyid>
+		<agency>Police Department (416)</agency>
+		<hiredate>41242</hiredate>
+		<annualsalary>43136</annualsalary>
+		<grosspay>23226.98</grosspay>
+	</employee>
+	<employee>
+		<name>Lopez,Mark A</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64216</agencyid>
+		<agency>Fire Department (216)</agency>
+		<hiredate>37846</hiredate>
+		<annualsalary>55113</annualsalary>
+		<grosspay>66434.01</grosspay>
+	</employee>
+	<employee>
+		<name>Lopez,Olga</name>
+		<jobtitle>OFFICE ASSISTANT III</jobtitle>
+		<agencyid>A08008</agencyid>
+		<agency>M-R Human Services (008)</agency>
+		<hiredate>33105</hiredate>
+		<annualsalary>35142</annualsalary>
+		<grosspay>35290</grosspay>
+	</employee>
+	<employee>
+		<name>Lorenz,John C</name>
+		<jobtitle>FIRE PUMP OPERATOR</jobtitle>
+		<agencyid>A64106</agencyid>
+		<agency>Fire Department (106)</agency>
+		<hiredate>29045</hiredate>
+		<annualsalary>65131</annualsalary>
+		<grosspay>71738.48</grosspay>
+	</employee>
+	<employee>
+		<name>Lorenzo,Berta D</name>
+		<jobtitle>AUDITOR II</jobtitle>
+		<agencyid>A24002</agencyid>
+		<agency>COMP-Audits (002)</agency>
+		<hiredate>39174</hiredate>
+		<annualsalary>56500</annualsalary>
+		<grosspay>57093.68</grosspay>
+	</employee>
+	<employee>
+		<name>Loskarn,Charles G</name>
+		<jobtitle>Manager Level</jobtitle>
+		<agencyid>A03093</agencyid>
+		<agency>OED-Employment Dev (093)</agency>
+		<hiredate>28481</hiredate>
+		<annualsalary>71292</annualsalary>
+		<grosspay>71160.14</grosspay>
+	</employee>
+	<employee>
+		<name>Lott,Jamea S</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02463</agencyid>
+		<agency>Youth Summer  (463)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lotz,John M</name>
+		<jobtitle>FIRE EMERGENCY BOAT OPERATOR</jobtitle>
+		<agencyid>A64139</agencyid>
+		<agency>Fire Department (139)</agency>
+		<hiredate>29514</hiredate>
+		<annualsalary>65131</annualsalary>
+		<grosspay>76036.52</grosspay>
+	</employee>
+	<employee>
+		<name>Louden,Brooks G</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64127</agencyid>
+		<agency>Fire Department (127)</agency>
+		<hiredate>39428</hiredate>
+		<annualsalary>55113</annualsalary>
+		<grosspay>60312.21</grosspay>
+	</employee>
+	<employee>
+		<name>Louden,Kevin A</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>A50702</agencyid>
+		<agency>DPW-Water and Waste Water (702)</agency>
+		<hiredate>37205</hiredate>
+		<annualsalary>29515</annualsalary>
+		<grosspay>31289.8</grosspay>
+	</employee>
+	<employee>
+		<name>Louis,Akeem A</name>
+		<jobtitle>SEASONAL MAINT AIDE</jobtitle>
+		<agencyid>A70320</agencyid>
+		<agency>DPW-Solid Waste (320)</agency>
+		<hiredate>41064</hiredate>
+		<annualsalary>22880</annualsalary>
+		<grosspay>31204.25</grosspay>
+	</employee>
+	<employee>
+		<name>Louis,Christopher D</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>A50602</agencyid>
+		<agency>DPW-Water and Waste Water (602)</agency>
+		<hiredate>36636</hiredate>
+		<annualsalary>29515</annualsalary>
+		<grosspay>33495.29</grosspay>
+	</employee>
+	<employee>
+		<name>Louvado,Ivo M</name>
+		<jobtitle>POLICE OFFICER (EID)</jobtitle>
+		<agencyid>A99295</agencyid>
+		<agency>Police Department (295)</agency>
+		<hiredate>36485</hiredate>
+		<annualsalary>64422</annualsalary>
+		<grosspay>120151.49</grosspay>
+	</employee>
+	<employee>
+		<name>Love Jr,Terry W</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99324</agencyid>
+		<agency>Police Department (324)</agency>
+		<hiredate>36458</hiredate>
+		<annualsalary>62905</annualsalary>
+		<grosspay>65763.12</grosspay>
+	</employee>
+	<employee>
+		<name>Love,Cheyanne D</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02370</agencyid>
+		<agency>Youth Summer  (370)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Love,David M</name>
+		<jobtitle>COMMUNITY AIDE</jobtitle>
+		<agencyid>P04002</agencyid>
+		<agency>R and P-Recreation (part-time) (</agency>
+		<hiredate>40348</hiredate>
+		<annualsalary>20800</annualsalary>
+		<grosspay>14101.13</grosspay>
+	</employee>
+	<employee>
+		<name>Love,Dayvon P</name>
+		<jobtitle>COUNCIL ASSISTANT</jobtitle>
+		<agencyid>A02002</agencyid>
+		<agency>City Council (002)</agency>
+		<hiredate>41324</hiredate>
+		<annualsalary>33510</annualsalary>
+		<grosspay>1247.73</grosspay>
+	</employee>
+	<employee>
+		<name>Love,Pamela M</name>
+		<jobtitle>RECREATION CENTER DIRECTOR II</jobtitle>
+		<agencyid>A04003</agencyid>
+		<agency>R and P-Recreation (003)</agency>
+		<hiredate>28929</hiredate>
+		<annualsalary>45994</annualsalary>
+		<grosspay>48105.92</grosspay>
+	</employee>
+	<employee>
+		<name>Love,Ronnie M</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99223</agencyid>
+		<agency>Police Department (223)</agency>
+		<hiredate>37005</hiredate>
+		<annualsalary>62324</annualsalary>
+		<grosspay>64627.93</grosspay>
+	</employee>
+	<employee>
+		<name>Love,Terry W</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99308</agencyid>
+		<agency>Police Department (308)</agency>
+		<hiredate>30665</hiredate>
+		<annualsalary>69893</annualsalary>
+		<grosspay>71374.52</grosspay>
+	</employee>
+	<employee>
+		<name>Love,Tracey T</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02102</agencyid>
+		<agency>Youth Summer  (102)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lovelace,John Z</name>
+		<jobtitle>FIRE EMERG VEHICLE DRIVER,ALS</jobtitle>
+		<agencyid>A64226</agencyid>
+		<agency>Fire Department (226)</agency>
+		<hiredate>36207</hiredate>
+		<annualsalary>59914</annualsalary>
+		<grosspay>74103.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lovelist,Alex</name>
+		<jobtitle>CASHIER I</jobtitle>
+		<agencyid>A14005</agencyid>
+		<agency>FIN-Collections (005)</agency>
+		<hiredate>39867</hiredate>
+		<annualsalary>31741</annualsalary>
+		<grosspay>31063.54</grosspay>
+	</employee>
+	<employee>
+		<name>Lovelist,Teneria L</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02375</agencyid>
+		<agency>Youth Summer  (375)</agency>
+		<hiredate>41438</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lovelist,Thomas L</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64463</agencyid>
+		<agency>Fire Department (463)</agency>
+		<hiredate>38796</hiredate>
+		<annualsalary>55113</annualsalary>
+		<grosspay>62459.17</grosspay>
+	</employee>
+	<employee>
+		<name>Lovett III,Thomas H</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99311</agencyid>
+		<agency>Police Department (311)</agency>
+		<hiredate>34022</hiredate>
+		<annualsalary>66982</annualsalary>
+		<grosspay>101037.68</grosspay>
+	</employee>
+	<employee>
+		<name>Lovett,Kristine M</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99407</agencyid>
+		<agency>Police Department (407)</agency>
+		<hiredate>34241</hiredate>
+		<annualsalary>66400</annualsalary>
+		<grosspay>67038.57</grosspay>
+	</employee>
+	<employee>
+		<name>Lovette,Lynda G</name>
+		<jobtitle>POLICE INFORMATION TECH SUPV</jobtitle>
+		<agencyid>A99362</agencyid>
+		<agency>Police Department (362)</agency>
+		<hiredate>38666</hiredate>
+		<annualsalary>43361</annualsalary>
+		<grosspay>44282.92</grosspay>
+	</employee>
+	<employee>
+		<name>Lovings,Theresa M</name>
+		<jobtitle>HIGHWAY MAINTENANCE SUPERVISOR</jobtitle>
+		<agencyid>A49320</agencyid>
+		<agency>TRANS-Highways (320)</agency>
+		<hiredate>32783</hiredate>
+		<annualsalary>49289</annualsalary>
+		<grosspay>60324.48</grosspay>
+	</employee>
+	<employee>
+		<name>Lowder,Christopher</name>
+		<jobtitle>TEACHER PRESCHOOL</jobtitle>
+		<agencyid>A06076</agencyid>
+		<agency>Housing and Community Dev (076)</agency>
+		<hiredate>39986</hiredate>
+		<annualsalary>37814</annualsalary>
+		<grosspay>38013.79</grosspay>
+	</employee>
+	<employee>
+		<name>Lowe,Brandi F</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02136</agencyid>
+		<agency>Youth Summer  (136)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lowery - Martin,Sonya D</name>
+		<jobtitle>ACCOUNTING ASST I</jobtitle>
+		<agencyid>A41102</agencyid>
+		<agency>DPW-Administration (102)</agency>
+		<hiredate>36907</hiredate>
+		<annualsalary>30810</annualsalary>
+		<grosspay>31361.41</grosspay>
+	</employee>
+	<employee>
+		<name>Lowery,Antoine P</name>
+		<jobtitle>SOLID WASTE WORKER</jobtitle>
+		<agencyid>B70410</agencyid>
+		<agency>DPW-Solid Waste (wkly) (410)</agency>
+		<hiredate>40799</hiredate>
+		<annualsalary>28600</annualsalary>
+		<grosspay>28363.72</grosspay>
+	</employee>
+	<employee>
+		<name>Lowery,Emiijah S</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02378</agencyid>
+		<agency>Youth Summer  (378)</agency>
+		<hiredate>40701</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1051.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lowery,Lovina M</name>
+		<jobtitle>CROSSING GUARD</jobtitle>
+		<agencyid>C90786</agencyid>
+		<agency>TRANS-Crossing Guards (786)</agency>
+		<hiredate>38281</hiredate>
+		<annualsalary>9744</annualsalary>
+		<grosspay>9744.01</grosspay>
+	</employee>
+	<employee>
+		<name>Lowery,Lovina M</name>
+		<jobtitle>Crossing Guard</jobtitle>
+		<agencyid>C90SUM</agencyid>
+		<agency>TRANS-Cross Guard-Summer</agency>
+		<hiredate>39258</hiredate>
+		<annualsalary>23462</annualsalary>
+		<grosspay>970.06</grosspay>
+	</employee>
+	<employee>
+		<name>Lowery,Nicole D</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02436</agencyid>
+		<agency>Youth Summer  (436)</agency>
+		<hiredate>39975</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>993.25</grosspay>
+	</employee>
+	<employee>
+		<name>Lowery,Shirley</name>
+		<jobtitle>CONTRACT SERV SPEC II</jobtitle>
+		<agencyid>A65200</agencyid>
+		<agency>HLTH-Health Department (200)</agency>
+		<hiredate>39630</hiredate>
+		<annualsalary>15392</annualsalary>
+		<grosspay>8197.94</grosspay>
+	</employee>
+	<employee>
+		<name>Lowery,Tiffany</name>
+		<jobtitle>SEASONAL MAINT AIDE</jobtitle>
+		<agencyid>A70350</agencyid>
+		<agency>DPW-Solid Waste (350)</agency>
+		<hiredate>40876</hiredate>
+		<annualsalary>22318</annualsalary>
+		<grosspay>22977.08</grosspay>
+	</employee>
+	<employee>
+		<name>Lowery,Tiffany T</name>
+		<jobtitle>SECRETARY III</jobtitle>
+		<agencyid>A19101</agencyid>
+		<agency>Planning Department (101)</agency>
+		<hiredate>35688</hiredate>
+		<annualsalary>42394</annualsalary>
+		<grosspay>42824.41</grosspay>
+	</employee>
+	<employee>
+		<name>Lowndes,Joseph A</name>
+		<jobtitle>DEPUTY SHERIFF</jobtitle>
+		<agencyid>A38001</agencyid>
+		<agency>Sheriff's Office (001)</agency>
+		<hiredate>39401</hiredate>
+		<annualsalary>41220</annualsalary>
+		<grosspay>45848.14</grosspay>
+	</employee>
+	<employee>
+		<name>Lowry III,Bernard J</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99397</agencyid>
+		<agency>Police Department (397)</agency>
+		<hiredate>34795</hiredate>
+		<annualsalary>65816</annualsalary>
+		<grosspay>69359.99</grosspay>
+	</employee>
+	<employee>
+		<name>Lowry Jr,Donald J</name>
+		<jobtitle>MOTOR VEHICLE DRIVER I</jobtitle>
+		<agencyid>A67010</agencyid>
+		<agency>R and P-Administration (010)</agency>
+		<hiredate>28324</hiredate>
+		<annualsalary>36009</annualsalary>
+		<grosspay>36333.44</grosspay>
+	</employee>
+	<employee>
+		<name>Lowry,Angela S</name>
+		<jobtitle>CONTRACT SERV SPEC II</jobtitle>
+		<agencyid>A31001</agencyid>
+		<agency>Circuit Court (001)</agency>
+		<hiredate>39513</hiredate>
+		<annualsalary>72322</annualsalary>
+		<grosspay>69361.56</grosspay>
+	</employee>
+	<employee>
+		<name>Loyal,Chanelle D</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02138</agencyid>
+		<agency>Youth Summer  (138)</agency>
+		<hiredate>39975</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>1051.25</grosspay>
+	</employee>
+	<employee>
+		<name>Loyal,Melvin T</name>
+		<jobtitle>INSTRUMENTATION TECH I</jobtitle>
+		<agencyid>A50303</agencyid>
+		<agency>DPW-Water and Waste Water (303)</agency>
+		<hiredate>39098</hiredate>
+		<annualsalary>37463</annualsalary>
+		<grosspay>38757.97</grosspay>
+	</employee>
+	<employee>
+		<name>Lozano,Alvaro</name>
+		<jobtitle>ENGINEER III (PE)</jobtitle>
+		<agencyid>A49103</agencyid>
+		<agency>TRANS-Highways (103)</agency>
+		<hiredate>37193</hiredate>
+		<annualsalary>72000</annualsalary>
+		<grosspay>71701.29</grosspay>
+	</employee>
+	<employee>
+		<name>Luallen,Taylor M</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02176</agencyid>
+		<agency>Youth Summer  (176)</agency>
+		<hiredate>41072</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>870</grosspay>
+	</employee>
+	<employee>
+		<name>Luangraj,Jai</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02421</agencyid>
+		<agency>Youth Summer  (421)</agency>
+		<hiredate>41453</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Luard,Ann K</name>
+		<jobtitle>SYSTEMS SUPERVISOR</jobtitle>
+		<agencyid>A40001</agencyid>
+		<agency>M-R Info Technology (001)</agency>
+		<hiredate>40457</hiredate>
+		<annualsalary>78500</annualsalary>
+		<grosspay>77680.72</grosspay>
+	</employee>
+	<employee>
+		<name>Luby Jr.,Joseph</name>
+		<jobtitle>TRAFFIC INVESTIGATOR II</jobtitle>
+		<agencyid>A49102</agencyid>
+		<agency>TRANS-Highways (102)</agency>
+		<hiredate>40833</hiredate>
+		<annualsalary>29476</annualsalary>
+		<grosspay>44770.2</grosspay>
+	</employee>
+	<employee>
+		<name>Lucas Jr,Micheal</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02200</agencyid>
+		<agency>Youth Summer  (200)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lucas,Calvin</name>
+		<jobtitle>PC SUPPORT TECHNICIAN</jobtitle>
+		<agencyid>A75063</agencyid>
+		<agency>Enoch Pratt Free Library (063)</agency>
+		<hiredate>39391</hiredate>
+		<annualsalary>44486</annualsalary>
+		<grosspay>46062.9</grosspay>
+	</employee>
+	<employee>
+		<name>Lucas,Cassandra E</name>
+		<jobtitle>SOCIAL WORK ASSOC II</jobtitle>
+		<agencyid>A65201</agencyid>
+		<agency>HLTH-Health Department (201)</agency>
+		<hiredate>34644</hiredate>
+		<annualsalary>52176</annualsalary>
+		<grosspay>52085</grosspay>
+	</employee>
+	<employee>
+		<name>Lucas,Darnell A</name>
+		<jobtitle>AUTOMOTIVE MECHANIC</jobtitle>
+		<agencyid>A85302</agencyid>
+		<agency>General Services (302)</agency>
+		<hiredate>39702</hiredate>
+		<annualsalary>39749</annualsalary>
+		<grosspay>55331.09</grosspay>
+	</employee>
+	<employee>
+		<name>Lucas,Dashawn J</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02565</agencyid>
+		<agency>Youth Summer  (565)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lucas,Douglas T</name>
+		<jobtitle>PUBLIC WORKS INSPECTOR III</jobtitle>
+		<agencyid>A85605</agencyid>
+		<agency>General Services (605)</agency>
+		<hiredate>33042</hiredate>
+		<annualsalary>61044</annualsalary>
+		<grosspay>61422.62</grosspay>
+	</employee>
+	<employee>
+		<name>Lucas,Jakob A</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02606</agencyid>
+		<agency>Youth Summer (606)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lucas,Kenyona N</name>
+		<jobtitle>SCHOOL HEALTH AIDE (10 MONTHS)</jobtitle>
+		<agencyid>A65103</agencyid>
+		<agency>HLTH-Health Department (103)</agency>
+		<hiredate>39951</hiredate>
+		<annualsalary>25141</annualsalary>
+		<grosspay>24593.1</grosspay>
+	</employee>
+	<employee>
+		<name>Lucas,Marquiese D</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02318</agencyid>
+		<agency>Youth Summer  (318)</agency>
+		<hiredate>41072</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>884.5</grosspay>
+	</employee>
+	<employee>
+		<name>Lucas,Michael</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02133</agencyid>
+		<agency>Youth Summer  (133)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lucas,Micheal</name>
+		<jobtitle>SOLID WASTE SUPERINTENDENT</jobtitle>
+		<agencyid>A70104</agencyid>
+		<agency>DPW-Solid Waste (104)</agency>
+		<hiredate>36731</hiredate>
+		<annualsalary>63800</annualsalary>
+		<grosspay>62999.62</grosspay>
+	</employee>
+	<employee>
+		<name>Lucas,Paulette V</name>
+		<jobtitle>Waste Water Opns Tech II Sanit</jobtitle>
+		<agencyid>A50208</agencyid>
+		<agency>DPW-Water and Waste Water (208)</agency>
+		<hiredate>30613</hiredate>
+		<annualsalary>42853</annualsalary>
+		<grosspay>51629.13</grosspay>
+	</employee>
+	<employee>
+		<name>Lucas,Rachel A D</name>
+		<jobtitle>CRIMINALIST II</jobtitle>
+		<agencyid>A99386</agencyid>
+		<agency>Police Department (386)</agency>
+		<hiredate>37658</hiredate>
+		<annualsalary>62100</annualsalary>
+		<grosspay>33873.17</grosspay>
+	</employee>
+	<employee>
+		<name>Lucas,Ronald K</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02168</agencyid>
+		<agency>Youth Summer  (168)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lucas,Thomas</name>
+		<jobtitle>MOTOR VEHICLE DRIVER I</jobtitle>
+		<agencyid>B68010</agencyid>
+		<agency>R and P-Parks (wkly) (010)</agency>
+		<hiredate>25832</hiredate>
+		<annualsalary>35318</annualsalary>
+		<grosspay>38414.79</grosspay>
+	</employee>
+	<employee>
+		<name>Lucas,Valerie C</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>B70357</agencyid>
+		<agency>DPW-Solid Waste (wkly) (357)</agency>
+		<hiredate>38538</hiredate>
+		<annualsalary>28662</annualsalary>
+		<grosspay>29002.19</grosspay>
+	</employee>
+	<employee>
+		<name>Luchinsky,Ellen A</name>
+		<jobtitle>LIBRARIAN SUPV II</jobtitle>
+		<agencyid>A75075</agencyid>
+		<agency>Enoch Pratt Free Library (075)</agency>
+		<hiredate>28422</hiredate>
+		<annualsalary>70400</annualsalary>
+		<grosspay>69458.97</grosspay>
+	</employee>
+	<employee>
+		<name>Lucien,Monique N</name>
+		<jobtitle>POLICE OFFICER (EID)</jobtitle>
+		<agencyid>A99162</agencyid>
+		<agency>Police Department (162)</agency>
+		<hiredate>38314</hiredate>
+		<annualsalary>61439</annualsalary>
+		<grosspay>78053.03</grosspay>
+	</employee>
+	<employee>
+		<name>Luck,Elaine</name>
+		<jobtitle>SR COMPANION STIPEND HLTH</jobtitle>
+		<agencyid>A65072</agencyid>
+		<agency>HLTH-Health Department (072)</agency>
+		<hiredate>40457</hiredate>
+		<annualsalary>4576</annualsalary>
+		<grosspay>2970.5</grosspay>
+	</employee>
+	<employee>
+		<name>Luck,Shenquia T</name>
+		<jobtitle>OPERATIONS AIDE</jobtitle>
+		<agencyid>A91013</agencyid>
+		<agency>M-R Convention Center (013)</agency>
+		<hiredate>38288</hiredate>
+		<annualsalary>28745</annualsalary>
+		<grosspay>30080.9</grosspay>
+	</employee>
+	<employee>
+		<name>Luckart,Crystal D</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02101</agencyid>
+		<agency>Youth Summer  (101)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Luckenbill,Andrew M</name>
+		<jobtitle>POLICE OFFICER TRAINEE</jobtitle>
+		<agencyid>A99416</agencyid>
+		<agency>Police Department (416)</agency>
+		<hiredate>41072</hiredate>
+		<annualsalary>43239</annualsalary>
+		<grosspay>43493.31</grosspay>
+	</employee>
+	<employee>
+		<name>Luckett,Carl R</name>
+		<jobtitle>SURVEY TECHNICIAN II</jobtitle>
+		<agencyid>A49106</agencyid>
+		<agency>TRANS-Highways (106)</agency>
+		<hiredate>39559</hiredate>
+		<annualsalary>31368</annualsalary>
+		<grosspay>31242.59</grosspay>
+	</employee>
+	<employee>
+		<name>Luckett,Reginald</name>
+		<jobtitle>CONTRACT SERVICES SPEC. I</jobtitle>
+		<agencyid>A29036</agencyid>
+		<agency>States Attorneys Office (036)</agency>
+		<hiredate>40819</hiredate>
+		<annualsalary>46114</annualsalary>
+		<grosspay>39060.45</grosspay>
+	</employee>
+	<employee>
+		<name>Luckhardt,Ross</name>
+		<jobtitle>SR COMPANION STIPEND HLTH</jobtitle>
+		<agencyid>A65072</agencyid>
+		<agency>HLTH-Health Department (072)</agency>
+		<hiredate>39357</hiredate>
+		<annualsalary>4576</annualsalary>
+		<grosspay>2815</grosspay>
+	</employee>
+	<employee>
+		<name>Luckhardt,Samantha L</name>
+		<jobtitle>GIS SUPERVISOR</jobtitle>
+		<agencyid>A40001</agencyid>
+		<agency>M-R Info Technology (001)</agency>
+		<hiredate>39403</hiredate>
+		<annualsalary>72300</annualsalary>
+		<grosspay>72216.22</grosspay>
+	</employee>
+	<employee>
+		<name>Ludd,Jack</name>
+		<jobtitle>LABORER</jobtitle>
+		<agencyid>A50702</agencyid>
+		<agency>DPW-Water and Waste Water (702)</agency>
+		<hiredate>39566</hiredate>
+		<annualsalary>28662</annualsalary>
+		<grosspay>27364.74</grosspay>
+	</employee>
+	<employee>
+		<name>Luddy,Cathal A</name>
+		<jobtitle>POLICE OFFICER TRAINEE</jobtitle>
+		<agencyid>A99416</agencyid>
+		<agency>Police Department (416)</agency>
+		<hiredate>41141</hiredate>
+		<annualsalary>43136</annualsalary>
+		<grosspay>36316.48</grosspay>
+	</employee>
+	<employee>
+		<name>Ludwig,Cory</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02411</agencyid>
+		<agency>Youth Summer  (411)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Ludwig,Jennifer</name>
+		<jobtitle>EXECUTIVE LEVEL I</jobtitle>
+		<agencyid>A41102</agencyid>
+		<agency>DPW-Administration (102)</agency>
+		<hiredate>40987</hiredate>
+		<annualsalary>75000</annualsalary>
+		<grosspay>65041.57</grosspay>
+	</employee>
+	<employee>
+		<name>Lufadeju,Evert A</name>
+		<jobtitle>POLICE OFFICER (EID)</jobtitle>
+		<agencyid>A99035</agencyid>
+		<agency>Police Department (035)</agency>
+		<hiredate>36301</hiredate>
+		<annualsalary>65020</annualsalary>
+		<grosspay>70674.82</grosspay>
+	</employee>
+	<employee>
+		<name>Lugo Jr,Ramon</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99222</agencyid>
+		<agency>Police Department (222)</agency>
+		<hiredate>37053</hiredate>
+		<annualsalary>62324</annualsalary>
+		<grosspay>87019.11</grosspay>
+	</employee>
+	<employee>
+		<name>Luh,Michael D</name>
+		<jobtitle>POLLUTION CONTROL ANALYST SUPV</jobtitle>
+		<agencyid>A50306</agencyid>
+		<agency>DPW-Water and Waste Water (306)</agency>
+		<hiredate>28968</hiredate>
+		<annualsalary>70400</annualsalary>
+		<grosspay>69939.8</grosspay>
+	</employee>
+	<employee>
+		<name>Lukiewski,John</name>
+		<jobtitle>FIRE LIEUTENANT</jobtitle>
+		<agencyid>A64102</agencyid>
+		<agency>Fire Department (102)</agency>
+		<hiredate>31887</hiredate>
+		<annualsalary>72594</annualsalary>
+		<grosspay>87113.78</grosspay>
+	</employee>
+	<employee>
+		<name>Lukiewski,Kara A</name>
+		<jobtitle>PARAMEDIC CRT</jobtitle>
+		<agencyid>A64465</agencyid>
+		<agency>Fire Department (465)</agency>
+		<hiredate>37636</hiredate>
+		<annualsalary>63866</annualsalary>
+		<grosspay>71659.27</grosspay>
+	</employee>
+	<employee>
+		<name>Lukiewski,Robert</name>
+		<jobtitle>ANIMAL ENFORCEMENT OFFICER</jobtitle>
+		<agencyid>A65042</agencyid>
+		<agency>HLTH-Health Department (042)</agency>
+		<hiredate>41011</hiredate>
+		<annualsalary>35194</annualsalary>
+		<grosspay>39980.58</grosspay>
+	</employee>
+	<employee>
+		<name>Lull,Colleen</name>
+		<jobtitle>Fire Lieutenant EMS EMT-P</jobtitle>
+		<agencyid>A64462</agencyid>
+		<agency>Fire Department (462)</agency>
+		<hiredate>38796</hiredate>
+		<annualsalary>67205</annualsalary>
+		<grosspay>77662.45</grosspay>
+	</employee>
+	<employee>
+		<name>Lumpkin,Joyce R</name>
+		<jobtitle>CROSSING GUARD</jobtitle>
+		<agencyid>C90786</agencyid>
+		<agency>TRANS-Crossing Guards (786)</agency>
+		<hiredate>37132</hiredate>
+		<annualsalary>10036</annualsalary>
+		<grosspay>10036</grosspay>
+	</employee>
+	<employee>
+		<name>Lundy,Abdul M</name>
+		<jobtitle>POLICE LIEUTENANT EID</jobtitle>
+		<agencyid>A99297</agencyid>
+		<agency>Police Department (297)</agency>
+		<hiredate>32029</hiredate>
+		<annualsalary>93223</annualsalary>
+		<grosspay>95869.84</grosspay>
+	</employee>
+	<employee>
+		<name>Lundy,Christopher R</name>
+		<jobtitle>ASSISTANT SOLICITOR</jobtitle>
+		<agencyid>A30001</agencyid>
+		<agency>Law Department (001)</agency>
+		<hiredate>40483</hiredate>
+		<annualsalary>59000</annualsalary>
+		<grosspay>55484.63</grosspay>
+	</employee>
+	<employee>
+		<name>Lundy,Tia L</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99406</agencyid>
+		<agency>Police Department (406)</agency>
+		<hiredate>36459</hiredate>
+		<annualsalary>62905</annualsalary>
+		<grosspay>88254.84</grosspay>
+	</employee>
+	<employee>
+		<name>Lunis,Mary G</name>
+		<jobtitle>ASSISTANT SOLICITOR</jobtitle>
+		<agencyid>A30001</agencyid>
+		<agency>Law Department (001)</agency>
+		<hiredate>36871</hiredate>
+		<annualsalary>76500</annualsalary>
+		<grosspay>76409.03</grosspay>
+	</employee>
+	<employee>
+		<name>Lunn,Cache M</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02491</agencyid>
+		<agency>Youth Summer  (491)</agency>
+		<hiredate>39975</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lunsford,David C</name>
+		<jobtitle>PARAMEDIC EMT-P</jobtitle>
+		<agencyid>A64463</agencyid>
+		<agency>Fire Department (463)</agency>
+		<hiredate>37636</hiredate>
+		<annualsalary>66598</annualsalary>
+		<grosspay>96472.67</grosspay>
+	</employee>
+	<employee>
+		<name>Lunsford,Kevin D</name>
+		<jobtitle>PROCUREMENT SPECIALIST I</jobtitle>
+		<agencyid>A17001</agencyid>
+		<agency>FIN-Purchasing (001)</agency>
+		<hiredate>40542</hiredate>
+		<annualsalary>46209</annualsalary>
+		<grosspay>46127.29</grosspay>
+	</employee>
+	<employee>
+		<name>Lunsford,William M</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>A50509</agencyid>
+		<agency>DPW-Water and Waste Water (509)</agency>
+		<hiredate>37529</hiredate>
+		<annualsalary>29515</annualsalary>
+		<grosspay>27372.68</grosspay>
+	</employee>
+	<employee>
+		<name>Lurry,Brandon A</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64156</agencyid>
+		<agency>Fire Department (156)</agency>
+		<hiredate>40835</hiredate>
+		<annualsalary>40650</annualsalary>
+		<grosspay>41553.01</grosspay>
+	</employee>
+	<employee>
+		<name>Lust,Bradley</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64230</agencyid>
+		<agency>Fire Department (230)</agency>
+		<hiredate>40835</hiredate>
+		<annualsalary>40650</annualsalary>
+		<grosspay>40367.39</grosspay>
+	</employee>
+	<employee>
+		<name>Luy,Chantha</name>
+		<jobtitle>LIBRARY BINDERY WORKER</jobtitle>
+		<agencyid>A75059</agencyid>
+		<agency>Enoch Pratt Free Library (059)</agency>
+		<hiredate>39377</hiredate>
+		<annualsalary>29913</annualsalary>
+		<grosspay>30472</grosspay>
+	</employee>
+	<employee>
+		<name>Lybarger,Jeffrey M</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99305</agencyid>
+		<agency>Police Department (305)</agency>
+		<hiredate>40722</hiredate>
+		<annualsalary>43895</annualsalary>
+		<grosspay>58286.06</grosspay>
+	</employee>
+	<employee>
+		<name>Lyde,Antoine G</name>
+		<jobtitle>LABORER (Hourly)</jobtitle>
+		<agencyid>B70370</agencyid>
+		<agency>DPW-Solid Waste (wkly) (370)</agency>
+		<hiredate>40122</hiredate>
+		<annualsalary>28163</annualsalary>
+		<grosspay>29124.84</grosspay>
+	</employee>
+	<employee>
+		<name>Lyden Jr,Robert J</name>
+		<jobtitle>WATER TREATMENT TECHNICIAN II</jobtitle>
+		<agencyid>A50307</agencyid>
+		<agency>DPW-Water and Waste Water (307)</agency>
+		<hiredate>32783</hiredate>
+		<annualsalary>41705</annualsalary>
+		<grosspay>49491.38</grosspay>
+	</employee>
+	<employee>
+		<name>Lyell,Jennifer</name>
+		<jobtitle>DATA ENTRY OPERATOR  I</jobtitle>
+		<agencyid>A49102</agencyid>
+		<agency>TRANS-Highways (102)</agency>
+		<hiredate>38687</hiredate>
+		<annualsalary>29913</annualsalary>
+		<grosspay>30103.86</grosspay>
+	</employee>
+	<employee>
+		<name>Lyle,Keona S</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02138</agencyid>
+		<agency>Youth Summer  (138)</agency>
+		<hiredate>39975</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lyles,Elizabeth J</name>
+		<jobtitle>911 OPERATOR</jobtitle>
+		<agencyid>A40301</agencyid>
+		<agency>M-R Info Technology (301)</agency>
+		<hiredate>35467</hiredate>
+		<annualsalary>44143</annualsalary>
+		<grosspay>49813.12</grosspay>
+	</employee>
+	<employee>
+		<name>Lyles,Kayla L</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02676</agencyid>
+		<agency>Youth Summer (676)</agency>
+		<hiredate>40332</hiredate>
+		<annualsalary>11310</annualsalary>
+		<grosspay>833.75</grosspay>
+	</employee>
+	<employee>
+		<name>Lyles,Latisha</name>
+		<jobtitle>OFFICE ASSISTANT II</jobtitle>
+		<agencyid>A49300</agencyid>
+		<agency>TRANS-Highways (300)</agency>
+		<hiredate>39041</hiredate>
+		<annualsalary>29913</annualsalary>
+		<grosspay>30378.46</grosspay>
+	</employee>
+	<employee>
+		<name>Lyles,Michele D</name>
+		<jobtitle>Waste Water Opns Tech II Sanit</jobtitle>
+		<agencyid>A50208</agencyid>
+		<agency>DPW-Water and Waste Water (208)</agency>
+		<hiredate>35471</hiredate>
+		<annualsalary>40557</annualsalary>
+		<grosspay>44067.47</grosspay>
+	</employee>
+	<employee>
+		<name>Lyles,Richard S</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99164</agencyid>
+		<agency>Police Department (164)</agency>
+		<hiredate>34204</hiredate>
+		<annualsalary>64652</annualsalary>
+		<grosspay>107811.76</grosspay>
+	</employee>
+	<employee>
+		<name>Lyles,Terrell G</name>
+		<jobtitle>RECREATION LEADER II</jobtitle>
+		<agencyid>A04005</agencyid>
+		<agency>R and P-Recreation (005)</agency>
+		<hiredate>41095</hiredate>
+		<annualsalary>29476</annualsalary>
+		<grosspay>28609.16</grosspay>
+	</employee>
+	<employee>
+		<name>Lyles,Timothy</name>
+		<jobtitle>SOLID WASTE SUPERVISOR</jobtitle>
+		<agencyid>A70410</agencyid>
+		<agency>DPW-Solid Waste (410)</agency>
+		<hiredate>34988</hiredate>
+		<annualsalary>43494</annualsalary>
+		<grosspay>48836.7</grosspay>
+	</employee>
+	<employee>
+		<name>Lynch III,Stanley A</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99409</agencyid>
+		<agency>Police Department (409)</agency>
+		<hiredate>34437</hiredate>
+		<annualsalary>66400</annualsalary>
+		<grosspay>73865.41</grosspay>
+	</employee>
+	<employee>
+		<name>Lynch,Algie A</name>
+		<jobtitle>RADIO DISPATCHER II</jobtitle>
+		<agencyid>A41116</agencyid>
+		<agency>DPW-Administration (116)</agency>
+		<hiredate>31353</hiredate>
+		<annualsalary>41366</annualsalary>
+		<grosspay>43407.59</grosspay>
+	</employee>
+	<employee>
+		<name>Lynch,Carolyn</name>
+		<jobtitle>CROSSING GUARD</jobtitle>
+		<agencyid>C90786</agencyid>
+		<agency>TRANS-Crossing Guards (786)</agency>
+		<hiredate>37567</hiredate>
+		<annualsalary>10036</annualsalary>
+		<grosspay>10318.53</grosspay>
+	</employee>
+	<employee>
+		<name>Lynch,Carolyn</name>
+		<jobtitle>Crossing Guard</jobtitle>
+		<agencyid>C90SUM</agencyid>
+		<agency>TRANS-Cross Guard-Summer</agency>
+		<hiredate>39258</hiredate>
+		<annualsalary>23462</annualsalary>
+		<grosspay>1331.02</grosspay>
+	</employee>
+	<employee>
+		<name>Lynch,Isaiah D</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02454</agencyid>
+		<agency>Youth Summer  (454)</agency>
+		<hiredate>41435</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lynch,Kara K</name>
+		<jobtitle>ASSISTANT SOLICITOR</jobtitle>
+		<agencyid>A30001</agencyid>
+		<agency>Law Department (001)</agency>
+		<hiredate>41055</hiredate>
+		<annualsalary>64500</annualsalary>
+		<grosspay>62216.17</grosspay>
+	</employee>
+	<employee>
+		<name>Lynch,Latia O</name>
+		<jobtitle>PARKING CONTROL AGENT II</jobtitle>
+		<agencyid>A90201</agencyid>
+		<agency>TRANS-Traffic (201)</agency>
+		<hiredate>38012</hiredate>
+		<annualsalary>32241</annualsalary>
+		<grosspay>39061.34</grosspay>
+	</employee>
+	<employee>
+		<name>Lynch,Lia E</name>
+		<jobtitle>OFFICE ASST III</jobtitle>
+		<agencyid>A02003</agencyid>
+		<agency>City Council (003)</agency>
+		<hiredate>41239</hiredate>
+		<annualsalary>31741</annualsalary>
+		<grosspay>17694.6</grosspay>
+	</employee>
+	<employee>
+		<name>Lynch,Maxine</name>
+		<jobtitle>MEDICAL CLAIMS EXAMINER</jobtitle>
+		<agencyid>A65105</agencyid>
+		<agency>HLTH-Health Department (105)</agency>
+		<hiredate>32020</hiredate>
+		<annualsalary>38662</annualsalary>
+		<grosspay>38557.12</grosspay>
+	</employee>
+	<employee>
+		<name>Lynch,Sean M</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99124</agencyid>
+		<agency>Police Department (124)</agency>
+		<hiredate>40868</hiredate>
+		<annualsalary>43239</annualsalary>
+		<grosspay>46925.06</grosspay>
+	</employee>
+	<employee>
+		<name>Lynch,Stanley</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02164</agencyid>
+		<agency>Youth Summer  (164)</agency>
+		<hiredate>41453</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lynch,Tynisha S</name>
+		<jobtitle>PARKING CONTROL AGENT I</jobtitle>
+		<agencyid>A90201</agencyid>
+		<agency>TRANS-Traffic (201)</agency>
+		<hiredate>39261</hiredate>
+		<annualsalary>30506</annualsalary>
+		<grosspay>37989.14</grosspay>
+	</employee>
+	<employee>
+		<name>Lynch,Wayne J</name>
+		<jobtitle>POLICE OFFICER</jobtitle>
+		<agencyid>A99161</agencyid>
+		<agency>Police Department (161)</agency>
+		<hiredate>40801</hiredate>
+		<annualsalary>43239</annualsalary>
+		<grosspay>51494.95</grosspay>
+	</employee>
+	<employee>
+		<name>Lynn,Joshua A</name>
+		<jobtitle>UTILITY METER READER I</jobtitle>
+		<agencyid>A50804</agencyid>
+		<agency>DPW-Water and Waste Water (804)</agency>
+		<hiredate>39391</hiredate>
+		<annualsalary>28653</annualsalary>
+		<grosspay>17370.75</grosspay>
+	</employee>
+	<employee>
+		<name>Lynn,Michael L</name>
+		<jobtitle>FIRE PUMP OPERATOR, ALS</jobtitle>
+		<agencyid>A64154</agencyid>
+		<agency>Fire Department (154)</agency>
+		<hiredate>37636</hiredate>
+		<annualsalary>60270</annualsalary>
+		<grosspay>73362.67</grosspay>
+	</employee>
+	<employee>
+		<name>Lyon,Jennifer</name>
+		<jobtitle>HOUSING REHABILITATION TECH II</jobtitle>
+		<agencyid>A06015</agencyid>
+		<agency>Housing and Community Dev (015)</agency>
+		<hiredate>40497</hiredate>
+		<annualsalary>40730</annualsalary>
+		<grosspay>40639.04</grosspay>
+	</employee>
+	<employee>
+		<name>Lyons,Clifton M</name>
+		<jobtitle>CROSSING GUARD</jobtitle>
+		<agencyid>C90910</agencyid>
+		<agency>TRANS-Crossing Guards (910)</agency>
+		<hiredate>40647</hiredate>
+		<annualsalary>9040</annualsalary>
+		<grosspay>7309.04</grosspay>
+	</employee>
+	<employee>
+		<name>Lyons,Marlene M</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02329</agencyid>
+		<agency>Youth Summer  (329)</agency>
+		<hiredate>41453</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lyons,Matthew C</name>
+		<jobtitle>AVIATION MECHANIC</jobtitle>
+		<agencyid>A99302</agencyid>
+		<agency>Police Department (302)</agency>
+		<hiredate>41302</hiredate>
+		<annualsalary>50096</annualsalary>
+		<grosspay>25742.51</grosspay>
+	</employee>
+	<employee>
+		<name>Lyons,Matthew D</name>
+		<jobtitle>DIVISION CHIEF I</jobtitle>
+		<agencyid>A06073</agencyid>
+		<agency>Housing and Community Dev (073)</agency>
+		<hiredate>40065</hiredate>
+		<annualsalary>60000</annualsalary>
+		<grosspay>49543.62</grosspay>
+	</employee>
+	<employee>
+		<name>Lyons,Michael P</name>
+		<jobtitle>EMT FIREFIGHTER</jobtitle>
+		<agencyid>A64227</agencyid>
+		<agency>Fire Department (227)</agency>
+		<hiredate>40492</hiredate>
+		<annualsalary>40650</annualsalary>
+		<grosspay>41729.11</grosspay>
+	</employee>
+	<employee>
+		<name>Lyons,Natasha N</name>
+		<jobtitle>ENGINEER I</jobtitle>
+		<agencyid>A49104</agencyid>
+		<agency>TRANS-Highways (104)</agency>
+		<hiredate>40889</hiredate>
+		<annualsalary>48900</annualsalary>
+		<grosspay>42195.08</grosspay>
+	</employee>
+	<employee>
+		<name>Lyons,Quinton R</name>
+		<jobtitle>SECURITY GUARD CONV. CENTER</jobtitle>
+		<agencyid>A91018</agencyid>
+		<agency>M-R Convention Center (018)</agency>
+		<hiredate>40309</hiredate>
+		<annualsalary>19760</annualsalary>
+		<grosspay>3096.19</grosspay>
+	</employee>
+	<employee>
+		<name>Lyttle Jr,George A</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02267</agencyid>
+		<agency>Youth Summer  (267)</agency>
+		<hiredate>40701</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+	<employee>
+		<name>Lyttle,Dominick T</name>
+		<jobtitle>AIDE BLUE CHIP</jobtitle>
+		<agencyid>W02271</agencyid>
+		<agency>Youth Summer  (271)</agency>
+		<hiredate>40730</hiredate>
+		<annualsalary>11310</annualsalary>
+	</employee>
+</government>
