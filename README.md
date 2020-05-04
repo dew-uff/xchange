@@ -13,7 +13,7 @@ The experimental results show that XChange was able to provide equivalent precis
 
 # Dataset
 
-[Baltimore](https://github.com/dew-uff/xchange/tree/master/Datasets/Baltimore)
+- [Baltimore](https://github.com/dew-uff/xchange/tree/master/Datasets/Baltimore)
 
 
 # Publications
