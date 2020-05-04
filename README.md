@@ -17,9 +17,9 @@ The experimental results show that XChange was able to provide equivalent precis
 
 
 # Publications
-[Thesis](http://www.ic.uff.br/PosGraduacao/frontend-tesesdissertacoes/download.php?id=746.pdf&tipo=trabalho)
+- [Thesis](http://www.ic.uff.br/PosGraduacao/frontend-tesesdissertacoes/download.php?id=746.pdf&tipo=trabalho)
 
-[OLIVEIRA, ALESSANDREIA; TESSAROLLI, GABRIEL ; GHIOTTO, GLEIPH ; PINTO, BRUNO ; CAMPELLO, FERNANDO ; MARQUES, MATHEUS ; OLIVEIRA, CARLOS ; RODRIGUES, IGOR ; KALINOWSKI, MARCOS ; SOUZA, UÉVERTON ; MURTA, Leonardo ; BRAGANHOLO, VANESSA . An efficient similarity-based approach for comparing XML documents. INFORMATION SYSTEMS, v. 78, p. 40-57, 2018.](https://www.sciencedirect.com/science/article/abs/pii/S0306437916304926)
+- [OLIVEIRA, ALESSANDREIA; TESSAROLLI, GABRIEL ; GHIOTTO, GLEIPH ; PINTO, BRUNO ; CAMPELLO, FERNANDO ; MARQUES, MATHEUS ; OLIVEIRA, CARLOS ; RODRIGUES, IGOR ; KALINOWSKI, MARCOS ; SOUZA, UÉVERTON ; MURTA, Leonardo ; BRAGANHOLO, VANESSA . An efficient similarity-based approach for comparing XML documents. INFORMATION SYSTEMS, v. 78, p. 40-57, 2018.](https://www.sciencedirect.com/science/article/abs/pii/S0306437916304926)
 
 # License Terms
 
