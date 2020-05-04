@@ -11,7 +11,7 @@ The experimental results show that XChange was able to provide equivalent precis
 - Leonardo Gresta Paulino Murta (UFF)
 - Vanessa Braganholo Murta (UFF)
 
-# Dataset
+# Datasets
 
 - [Baltimore](https://github.com/dew-uff/xchange/tree/master/Datasets/Baltimore)
 
