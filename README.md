@@ -1,4 +1,4 @@
-# XChange: A Semantic Diff Approach for XML Documents
+# XChange
 
 XML documents are increasingly being used to allow data interchange among sys-tems. A related problem is that XML documents evolve over time, so identifying and under-standing these changes becomes fundamental. However, existing approaches related to under-standing changes (diff) in XML documents are focused only on syntactic changes. This means that these approaches compare XML documents based on their structures, without considering the associated semantics. For large XML documents, which have undergone many changes from a version to the next, fewer semantic changes might encompass many syntactic changes. This feature has the potential to ease the understanding of changes in XML documents. 
 
