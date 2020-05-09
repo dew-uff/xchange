@@ -17,9 +17,9 @@ The experimental results show that XChange was able to provide equivalent precis
 
 # Experiments
 
-- RQ1 - Effectiveness - Does XChange's semantic change identification allow users to be more effective in understanding the XML document evolution when compared to using X-Diff's syntactic changes identification?
+- [RQ1 - Effectiveness](https://github.com/dew-uff/xchange/tree/master/Experiments/Effectiveness/) - Does XChange's semantic change identification allow users to be more effective in understanding the XML document evolution when compared to using X-Diff's syntactic changes identification?
 
-- RQ2 - Efficiency - Does XChange’s semantic change identification allow users to be more efficient in understanding the XML document evolution when compared to using X-Diff’s syntactic changes identification?
+- [RQ2 - Efficiency](https://github.com/dew-uff/xchange/tree/master/Experiments/Efficiency/) - Does XChange’s semantic change identification allow users to be more efficient in understanding the XML document evolution when compared to using X-Diff’s syntactic changes identification?
 
 # Publications
 - [Thesis](http://www.ic.uff.br/PosGraduacao/frontend-tesesdissertacoes/download.php?id=746.pdf&tipo=trabalho)
